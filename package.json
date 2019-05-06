@@ -73,5 +73,8 @@
     "lint-watch": "esw src/ -w",
     "build": "NODE_ENV=dev rimraf ./docs && NODE_ENV=dev parcel build index.html --public-url '.' --out-dir docs && copyfiles -f CNAME ./docs/",
     "publish": "yarn build && git add . && git commit -am \"publish\" && git push"
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
