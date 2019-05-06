@@ -1,71 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="452123ae-9b7c-447e-b50d-80d7df3b47c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env.dev" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env.prod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vgs.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CNAME" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emailJS.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/animations.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/colors.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/device/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/device/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/device/device.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/device/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/device/reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/device/selectors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/device/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dimentions.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/elements/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/fonts.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/sansation/Sansation_Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/sansation/Sansation_Bold_Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/sansation/Sansation_Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/sansation/Sansation_Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/sansation/Sansation_Light_Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/sansation/Sansation_Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/globals.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/home/home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/home/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/root-reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/components/redux-routes/redux-routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/routes-map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/selectors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/audio.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/ball-triangle.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/bars.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/circles.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/grid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/hearts.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/oval.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/puff.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/rings.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/spinning-circles.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/tail-spin.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/svg-loaders/three-dots.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="452123ae-9b7c-447e-b50d-80d7df3b47c9" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -150,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/.env.dev">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -171,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
+              <caret column="26" selection-start-column="26" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -180,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/src/routes/components/redux-routes/redux-routes.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="594">
-              <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+              <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -265,11 +201,11 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1680" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1681" />
     <option name="y" value="-527" />
     <option name="width" value="2560" />
-    <option name="height" value="1577" />
+    <option name="height" value="1447" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -286,32 +222,6 @@
             <path>
               <item name="vgs" type="b2602c69:ProjectViewProjectNode" />
               <item name="vgs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vgs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vgs" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vgs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vgs" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vgs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vgs" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vgs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vgs" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="redux-routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -420,20 +330,19 @@
       <option name="presentableId" value="Default" />
       <updated>1557149384634</updated>
       <workItem from="1557149385876" duration="2449000" />
-      <workItem from="1557151851897" duration="1274000" />
+      <workItem from="1557151851897" duration="1433000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3723000" />
+    <option name="totallyTimeSpent" value="3882000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1681" y="-527" width="2560" height="1577" extended-state="6" />
-    <editor active="true" />
+    <frame x="1681" y="-527" width="2560" height="1447" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6379487" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.63619405" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" sideWeight="0.36205128" side_tool="true" visible="true" weight="0.25" />
+      <window_info id="npm" order="2" sideWeight="0.36380598" side_tool="true" visible="true" weight="0.25" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -441,7 +350,7 @@
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.3298969" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.5954717" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -599,7 +508,7 @@
     <entry file="file://$PROJECT_DIR$/.env.dev">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -623,14 +532,14 @@
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/routes/components/redux-routes/redux-routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
-          <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
