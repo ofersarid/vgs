@@ -13,6 +13,54 @@
   font-weight: bold; }
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+.my-transition-forward-enter {
+  opacity: 0;
+  transition: .3s ease-out; }
+
+.my-transition-forward-enter-active {
+  opacity: 1;
+  transition: .3s ease-out; }
+
+.my-transition-forward-enter-done {
+  opacity: 1;
+  transition: .3s ease-out; }
+
+.my-transition-reverse-enter {
+  opacity: 0;
+  transition: .3s ease-out; }
+
+.my-transition-reverse-enter-active {
+  opacity: 1;
+  transition: .3s ease-out; }
+
+.my-transition-reverse-enter-done {
+  opacity: 1;
+  transition: .3s ease-out; }
+
+.my-transition-forward-exit {
+  opacity: 1;
+  transition: .3s ease-out; }
+
+.my-transition-forward-exit-active {
+  opacity: 0;
+  transition: .3s ease-out; }
+
+.my-transition-forward-exit-done {
+  opacity: 0;
+  transition: .3s ease-out; }
+
+.my-transition-reverse-exit {
+  opacity: 1;
+  transition: .3s ease-out; }
+
+.my-transition-reverse-exit-active {
+  opacity: 0;
+  transition: .3s ease-out; }
+
+.my-transition-reverse-exit-done {
+  opacity: 0;
+  transition: .3s ease-out; }
+
 body {
   overflow: hidden;
   font-weight: 100;
@@ -63,6 +111,9 @@ ul {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #bcbcbc; }
+
+h1 {
+  margin: 0; }
 
 
 /*# sourceMappingURL=/src.a2b27638.css.map */

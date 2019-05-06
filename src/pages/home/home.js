@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import ReactSnapScroll from 'react-snap-scroll';
 import Device from '/src/device/index';
 import types from '../types';
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -8,9 +9,26 @@ import types from '../types';
 const Home = props => {
   console.log(props.contacts);
   return (
-    <Fragment >
-      <h1 >Welcome VGS</h1 >
-    </Fragment >
+    <ReactSnapScroll customTransition="my-transition" customDuration={{
+      enter: 900,
+      exit: 900,
+    }}>
+      <div style={{
+        backgroundColor: 'red',
+      }}>
+        <h1 >Welcome VGS</h1 >
+      </div >
+      <div style={{
+        backgroundColor: 'green',
+      }}>
+        <h1 >Frame 1.1</h1 >
+      </div >
+      <div style={{
+        backgroundColor: 'yellow',
+      }}>
+        <h1 >Frame 1.2</h1 >
+      </div >
+    </ReactSnapScroll>
   );
 };
 

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 @import 'colors';
+@import 'sanp-animation.scss';
 
 body {
   overflow: hidden;
@@ -56,4 +57,8 @@ $placeholderColor: #9f9b9b;
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #bcbcbc;
+}
+
+h1 {
+  margin: 0;
 }
