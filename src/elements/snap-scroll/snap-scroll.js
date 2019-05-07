@@ -248,10 +248,6 @@ class SnapScroll extends React.Component {
             classNames={`${customTransition || transition}-${direction}`}
             mountOnEnter
             unmountOnExit
-            onEnter={() => {
-            }}
-            onExited={() => {
-            }}
           >
             <Wrapper >{child}</Wrapper >
           </CSSTransition >
