@@ -1,4 +1,5 @@
 import React from 'react';
+import inertia from 'wheel-inertia';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import { CSSTransition } from 'react-transition-group';
@@ -8,11 +9,6 @@ import './styles.scss';
 const DIRECTION = {
   FORWARD: 'forward',
   REVERSE: 'reverse',
-};
-
-const SETTINGS = {
-  WHEEL_THRESHOLD: 1, // The higher the number, the more aggressive a scroll required to trigger an index change.
-  SWIPE_THRESHOLD: 1, // The higher the number, the more aggressive a swipe required to trigger an index change.,
 };
 
 const TRANSITIONS = [
@@ -81,15 +77,13 @@ class SnapScroll extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
-    // this.mouseScrollHandlerThrottled = debounce(this.mouseScrollHandler, 500, { leading: true, trailing: false });
     this.xDown = null;
-    this.yDown = null;
-    this.locked = false;
     this.state = {
       index: this.getStartIndex(),
       direction: DIRECTION.FORWARD,
     };
     this.timer = null;
+    inertia.addCallback(this.snap);
   }
 
   componentDidMount() {
@@ -107,42 +101,23 @@ class SnapScroll extends React.Component {
     this.$node.removeEventListener('touchmove', this.touchMoveHandler, false);
   }
 
+  snap(direction) {
+    switch (true) {
+      case (direction === -1):
+        console.log('trigger next');
+        this.next();
+        break;
+      case (direction === 1):
+        this.prev();
+        break;
+      default:
+        break;
+    }
+  }
+
   mouseScrollHandler(e) {
-    // Don't trigger another index change if we're still animating.
-    if (this.timer !== null) {
-      console.log('clearing timer');
-      clearTimeout(this.timer);
-    }
-    console.log('setting timer');
-    this.timer = setTimeout(() => {
-      console.log('timer end');
-      this.unlock();
-    }, 40);
-
-    if (this.locked) return;
-
-    this.lock();
-    e.preventDefault();
-
-    if (this.props.children.length) {
-      const isVertical = (this.props.orientation === 'vertical');
-      const delta = isVertical ? e.deltaY : e.deltaX;
-
-      switch (true) {
-        case (delta > 0):
-          console.log('trigger next');
-          this.next();
-          break;
-        case (delta < 0):
-          this.prev();
-          break;
-        default:
-          break;
-        // this.unlock(0);
-      }
-    } else {
-      // this.unlock(0);
-    }
+    const delta = e.wheelDelta;
+    inertia.update(delta);
   };
 
   touchStartHandler(e) {
@@ -151,82 +126,32 @@ class SnapScroll extends React.Component {
   };
 
   touchMoveHandler(e) {
-    // Don't trigger another index change if we're still animating.
-    if (this.locked) return;
-
-    this.lock();
     e.preventDefault();
-
-    if (!this.xDown || !this.yDown) {
-      this.unlock(0);
-      return;
-    }
-
     let xUp = e.touches[0].clientX;
-    let yUp = e.touches[0].clientY;
-
-    let xDiff = (this.xDown - xUp);
-    let yDiff = (this.yDown - yUp);
-
-    const isVertical = (this.props.orientation === 'vertical');
-
-    switch (true) {
-      case ((isVertical ? yDiff : xDiff) > SETTINGS.SWIPE_THRESHOLD):
-        this.next();
-        break;
-      case ((isVertical ? yDiff : xDiff) < -SETTINGS.SWIPE_THRESHOLD):
-        this.prev();
-        break;
-      default:
-        this.unlock(0);
-        break;
-    }
-
+    let delta = (this.xDown - xUp);
+    inertia.update(delta);
     this.xDown = null;
     this.yDown = null;
   };
 
   next() {
     const index = Math.min(this.state.index + 1, this.props.children.length - 1);
-
     this.setState({
       index,
       direction: DIRECTION.FORWARD,
     }, () => {
-      // this.unlock();
       this.props.indexChanged(index);
     });
   };
 
   prev() {
     const index = Math.max(0, this.state.index - 1);
-
     this.setState({
       index,
       direction: DIRECTION.REVERSE,
     }, () => {
-      // this.unlock();
       this.props.indexChanged(index);
     });
-  };
-
-  getUnlockDelay() {
-    const { customTransition, customDuration } = this.props;
-
-    return customTransition
-      ? Math.max(customDuration.enter, customDuration.exit)
-      : Math.max(TRANSITION_SETTINGS[this.props.transition].DURATION.ENTER, TRANSITION_SETTINGS[this.props.transition].DURATION.EXIT);
-  };
-
-  lock() {
-    this.locked = true;
-  };
-
-  unlock(delay = this.getUnlockDelay()) {
-    this.locked = false;
-    // setTimeout(() => {
-    //   this.locked = false;
-    // }, delay);
   };
 
   renderPages() {

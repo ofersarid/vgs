@@ -10827,6 +10827,10 @@ whatwg-url@^7.0.0:
     tr46 "^1.0.1"
     webidl-conversions "^4.0.2"
 
+wheel-inertia@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/wheel-inertia/-/wheel-inertia-0.0.2.tgz#d34f6d35cc6e78d6ae7933897a36dfaca64cac52"
+
 which-module@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/which-module/-/which-module-1.0.0.tgz#bba63ca861948994ff307736089e3b96026c2a4f"
