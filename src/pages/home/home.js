@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { SnapScroll } from '/src/elements';
 import Device from '/src/device/index';
 import types from '../types';
+import './styles.scss';
 // import { firestoreConnect } from 'react-redux-firebase';
 
 const Home = props => {
@@ -16,19 +17,24 @@ const Home = props => {
       }}
     >
       <div style={{
-        backgroundColor: 'red',
+        backgroundColor: 'transparent',
       }} >
-        <h1 >Welcome VGS</h1 >
+        <h1 className="page-header">Welcome VGS</h1 >
       </div >
       <div style={{
-        backgroundColor: 'green',
+        backgroundColor: 'transparent',
       }} >
-        <h1 >Frame 1.1</h1 >
+        <h1 className="page-header">Frame 1.1</h1 >
       </div >
       <div style={{
-        backgroundColor: 'yellow',
+        backgroundColor: 'transparent',
       }} >
-        <h1 >Frame 1.2</h1 >
+        <h1 className="page-header">Frame 1.2</h1 >
+      </div >
+      <div style={{
+        backgroundColor: 'transparent',
+      }} >
+        <h1 className="page-header">Frame 1.3</h1 >
       </div >
     </SnapScroll >
   );

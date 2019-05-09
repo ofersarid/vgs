@@ -1,0 +1,76 @@
+.my-transition-forward-enter .page-header {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: .3s ease-out;
+}
+
+.my-transition-forward-enter-active .page-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition: .3s ease-out;
+}
+
+.my-transition-forward-enter-done .page-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition: .3s ease-out;
+}
+
+.my-transition-reverse-enter .page-header {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: .3s ease-out;
+}
+
+.my-transition-reverse-enter-active .page-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition: .3s ease-out;
+}
+
+.my-transition-reverse-enter-done .page-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition: .3s ease-out;
+}
+
+
+
+
+
+
+.my-transition-forward-exit .page-header {
+  opacity: 0;
+  transform: translateY(0);
+  transition: .3s ease-out;
+}
+
+.my-transition-forward-exit-active .page-header {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: .3s ease-out;
+}
+
+.my-transition-forward-exit-done .page-header {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: .3s ease-out;
+}
+
+.my-transition-reverse-exit .page-header {
+  opacity: 0;
+  transform: translateY(0);
+  transition: .3s ease-out;
+}
+
+.my-transition-reverse-exit-active .page-header {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: .3s ease-out;
+}
+
+.my-transition-reverse-exit-done .page-header {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: .3s ease-out;
+}

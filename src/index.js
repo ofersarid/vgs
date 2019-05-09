@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { Router, hashHistory } from 'react-router';
-import rootReducer from './root-reducers';
+import rootReducer from './root-reducer';
 import Routes from '/src/routes';
 import Waves from 'node-waves';
 import firebase from 'firebase/app';

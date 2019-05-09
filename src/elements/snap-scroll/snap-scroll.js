@@ -1,8 +1,10 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import inertia from 'wheel-inertia';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
-import { CSSTransition } from 'react-transition-group';
+import actions from './actions';
 
 import './styles.scss';
 
@@ -19,15 +21,6 @@ const TRANSITIONS = [
   'fold-top-bottom',
   'cube-top-bottom'
 ];
-
-const TRANSITION_SETTINGS = {
-  'move-top-bottom': { DURATION: { ENTER: 1000, EXIT: 1000 } },
-  'move-top-bottom-stagger': { DURATION: { ENTER: 750, EXIT: 1000 } },
-  'scale-down-top-bottom': { DURATION: { ENTER: 1000, EXIT: 1000 } },
-  'scale-down-up': { DURATION: { ENTER: 1000, EXIT: 500 } },
-  'fold-top-bottom': { DURATION: { ENTER: 1000, EXIT: 1000 } },
-  'cube-top-bottom': { DURATION: { ENTER: 1000, EXIT: 1000 } },
-};
 
 const Wrapper = ({ children }) => (
   <div className="wrapper" >
@@ -50,6 +43,7 @@ class SnapScroll extends React.Component {
       ]).isRequired,
       start: PropTypes.number,
       indexChanged: PropTypes.func,
+      updateFrameIndex: PropTypes.func.isRequired,
       transition: PropTypes.oneOf(TRANSITIONS),
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       customTransition: PropTypes.string,
@@ -93,6 +87,7 @@ class SnapScroll extends React.Component {
 
     // Fire initial indexChanged();
     this.props.indexChanged(this.state.index);
+    this.props.updateFrameIndex(this.state.index);
   }
 
   componentWillUnmount() {
@@ -141,6 +136,7 @@ class SnapScroll extends React.Component {
       direction: DIRECTION.FORWARD,
     }, () => {
       this.props.indexChanged(index);
+      this.props.updateFrameIndex(index);
     });
   };
 
@@ -151,31 +147,19 @@ class SnapScroll extends React.Component {
       direction: DIRECTION.REVERSE,
     }, () => {
       this.props.indexChanged(index);
+      this.props.updateFrameIndex(index);
     });
   };
 
   renderPages() {
-    const { children, transition, customTransition, customDuration } = this.props;
-    const { index, direction } = this.state;
+    const { children } = this.props;
 
     const isArray = Array.isArray(children);
-    const timeout = customTransition
-      ? customDuration
-      : { enter: TRANSITION_SETTINGS[transition].DURATION.ENTER, exit: TRANSITION_SETTINGS[transition].DURATION.EXIT };
 
     return isArray
       ? children.map((child, key) => {
         return (
-          <CSSTransition
-            key={key}
-            in={key === index}
-            timeout={timeout}
-            classNames={`${customTransition || transition}-${direction}`}
-            mountOnEnter
-            unmountOnExit
-          >
-            <Wrapper >{child}</Wrapper >
-          </CSSTransition >
+          <Wrapper key={key} >{child}</Wrapper >
         );
       }) : <Wrapper >{children}</Wrapper >;
   }
@@ -191,4 +175,19 @@ class SnapScroll extends React.Component {
   }
 }
 
-export default SnapScroll;
+const mapDispatchToProps = dispatch => ({
+  updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
+});
+
+export default compose(
+  connect(() => ({}), mapDispatchToProps),
+  // firestoreConnect(() => ([{
+  //   collection: 'collections',
+  //   doc: 'xB6QKYKm7tnXl2QNjjfF',
+  //   subcollections: [{
+  //     collection: 'data',
+  //     // where: [['active', '==', true]],
+  //     // orderBy: ['name', 'desc'],
+  //   }],
+  // }])),
+)(SnapScroll);

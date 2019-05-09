@@ -1,4 +1,4 @@
-import reducers from './reducers';
+import reducers from './reducer';
 import * as selectors from './selectors';
 import * as actions from './actions';
 import Device from './device';
