@@ -67,13 +67,14 @@ class SnapScroll extends React.Component {
       index: this.getStartIndex(),
       direction: DIRECTION.FORWARD,
     };
-    this.timer = null;
+    this.moving = false;
     inertia.addCallback(this.snap);
   }
 
   componentDidMount() {
     this.$node.addEventListener('wheel', this.mouseScrollHandler, false);
     this.$node.addEventListener('touchstart', this.touchStartHandler, false);
+    this.$node.addEventListener('touchend', this.touchEndHandler, false);
     this.$node.addEventListener('touchmove', this.touchMoveHandler, false);
 
     // Fire initial indexChanged();
@@ -84,6 +85,7 @@ class SnapScroll extends React.Component {
   componentWillUnmount() {
     this.$node.removeEventListener('wheel', this.mouseScrollHandler, false);
     this.$node.removeEventListener('touchstart', this.touchStartHandler, false);
+    this.$node.removeEventListener('touchend', this.touchEndHandler, false);
     this.$node.removeEventListener('touchmove', this.touchMoveHandler, false);
   }
 
@@ -107,16 +109,22 @@ class SnapScroll extends React.Component {
   };
 
   touchStartHandler(e) {
-    this.xDown = e.touches[0].clientX;
     this.yDown = e.touches[0].clientY;
   };
 
+  touchEndHandler(e) {
+    this.moving = false;
+  }
+
   touchMoveHandler(e) {
     e.preventDefault();
-    let xUp = e.touches[0].clientX;
-    let delta = (this.xDown - xUp);
-    this.snap(delta < 0);
-    this.xDown = null;
+    if (this.moving) return;
+    let yUp = e.touches[0].clientY;
+    let delta = (this.yDown - yUp);
+    if (delta !== 0) {
+      this.moving = true;
+      this.snap(delta > 0 ? -1 : 1);
+    }
     this.yDown = null;
   };
 
