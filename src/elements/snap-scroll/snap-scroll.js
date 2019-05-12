@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import inertia from 'wheel-inertia';
@@ -13,17 +14,8 @@ const DIRECTION = {
   REVERSE: 'reverse',
 };
 
-const TRANSITIONS = [
-  'move-top-bottom',
-  'move-top-bottom-stagger',
-  'scale-down-top-bottom',
-  'scale-down-up',
-  'fold-top-bottom',
-  'cube-top-bottom'
-];
-
-const Wrapper = ({ children }) => (
-  <div className="wrapper" >
+const Wrapper = ({ children, className }) => (
+  <div className={cx('wrapper', className)} >
     <div className="inner" >
       {children}
     </div >
@@ -32,6 +24,7 @@ const Wrapper = ({ children }) => (
 
 Wrapper.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 class SnapScroll extends React.Component {
@@ -44,7 +37,6 @@ class SnapScroll extends React.Component {
       start: PropTypes.number,
       indexChanged: PropTypes.func,
       updateFrameIndex: PropTypes.func.isRequired,
-      transition: PropTypes.oneOf(TRANSITIONS),
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       customTransition: PropTypes.string,
       customDuration: PropTypes.object,
@@ -55,7 +47,6 @@ class SnapScroll extends React.Component {
     return {
       start: 0,
       indexChanged: f => f,
-      transition: TRANSITIONS[0],
       orientation: 'vertical',
       customTransition: null,
       customDuration: { enter: 1000, exit: 1000 },
@@ -153,15 +144,16 @@ class SnapScroll extends React.Component {
 
   renderPages() {
     const { children } = this.props;
+    const { index } = this.state;
 
     const isArray = Array.isArray(children);
 
     return isArray
       ? children.map((child, key) => {
         return (
-          <Wrapper key={key} >{child}</Wrapper >
+          <Wrapper key={key} className={cx({ show: key === index })} >{child}</Wrapper >
         );
-      }) : <Wrapper >{children}</Wrapper >;
+      }) : <Wrapper className="show" >{children}</Wrapper >;
   }
 
   render() {
@@ -181,13 +173,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
   connect(() => ({}), mapDispatchToProps),
-  // firestoreConnect(() => ([{
-  //   collection: 'collections',
-  //   doc: 'xB6QKYKm7tnXl2QNjjfF',
-  //   subcollections: [{
-  //     collection: 'data',
-  //     // where: [['active', '==', true]],
-  //     // orderBy: ['name', 'desc'],
-  //   }],
-  // }])),
 )(SnapScroll);
