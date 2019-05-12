@@ -27,6 +27,7 @@
     "react-router-dom": "^4.3.1",
     "react-select": "^2.4.3",
     "react-snap-scroll": "^0.0.5",
+    "react-spring": "^8.0.20",
     "react-tiny-popover": "^3.4.2",
     "react-tippy": "^1.2.3",
     "react-transition-group": "^4.0.0",
@@ -45,7 +46,7 @@
   "main": "src/index.js",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^9.3.1",
+    "autoprefixer": "^9.5.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
     "copyfiles": "^2.1.0",

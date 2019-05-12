@@ -1,7 +1,0 @@
-const ACTIONS = {
-  UPDATE_FRAME_INDEX: 'SNAP_SCROLL:UPDATE_FRAME_INDEX',
-};
-
-export default {
-  ACTIONS,
-};

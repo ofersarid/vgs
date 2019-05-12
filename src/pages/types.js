@@ -1,7 +1,11 @@
-import { deviceTypes } from '/src/device/types';
+import PropTypes from 'prop-types';
+import { deviceTypes } from '/src/components/device/types';
 
-const types = {
-  ...deviceTypes
+const page = {
+  ...deviceTypes,
+  frame: PropTypes.number.isRequired,
 };
 
-export default types;
+export default {
+  page,
+};
