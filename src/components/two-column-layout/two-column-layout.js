@@ -46,7 +46,6 @@ TwoColumnLayout.propTypes = {
   header: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
-  prevFrame: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
