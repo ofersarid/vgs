@@ -115,7 +115,7 @@ class SnapScroll extends React.Component {
     e.preventDefault();
     let xUp = e.touches[0].clientX;
     let delta = (this.xDown - xUp);
-    inertia.update(delta);
+    this.snap(delta < 0);
     this.xDown = null;
     this.yDown = null;
   };
