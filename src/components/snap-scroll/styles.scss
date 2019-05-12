@@ -16,13 +16,13 @@
     width: inherit;
     height: inherit;
     scroll-behavior: auto;
-    opacity: 0;
+    //opacity: 0;
     transition: .3s ease-out;
     will-change: opacity;
 }
 
 .show {
-    opacity: 1;
+    //opacity: 1;
 }
 
 .inner {

@@ -15,10 +15,10 @@ const Home = ({ frame }) => {
         exit: 300,
       }}
     >
-      <TwoColumnLayout header="Welcome VGS" enter={frame === 0} exit={frame === 1} />
-      <TwoColumnLayout header="Frame 1.1" enter={frame === 1} exit={frame === 2} />
-      <TwoColumnLayout header="Frame 1.2" enter={frame === 2} exit={frame === 3} />
-      <TwoColumnLayout header="Frame 1.3" enter={frame === 3} exit={frame === 4} />
+      <TwoColumnLayout header="Welcome VGS" index={0}/>
+      <TwoColumnLayout header="Frame 1.1" index={1} />
+      <TwoColumnLayout header="Frame 1.2" index={2} />
+      <TwoColumnLayout header="Frame 1.3" index={3} />
     </SnapScroll >
   );
 };
