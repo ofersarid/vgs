@@ -14,8 +14,8 @@ const DIRECTION = {
   REVERSE: 'reverse',
 };
 
-const Wrapper = ({ children, className }) => (
-  <div className={cx(styles.wrapper, className)} >
+const Wrapper = ({ children }) => (
+  <div className={cx(styles.wrapper)} >
     <div className={styles.inner} >
       {children}
     </div >
@@ -159,16 +159,16 @@ class SnapScroll extends React.Component {
 
   renderPages() {
     const { children } = this.props;
-    const { index } = this.state;
+    // const { index } = this.state;
 
     const isArray = Array.isArray(children);
 
     return isArray
       ? children.map((child, key) => {
         return (
-          <Wrapper key={key} className={cx({ [styles.show]: key === index })} >{child}</Wrapper >
+          <Wrapper key={key}>{child}</Wrapper >
         );
-      }) : <Wrapper className={styles.show} >{children}</Wrapper >;
+      }) : <Wrapper >{children}</Wrapper >;
   }
 
   render() {

@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { deviceTypes } from '/src/components/device/types';
 
 const page = {
   ...deviceTypes,
-  frame: PropTypes.number.isRequired,
+  // frame: PropTypes.number.isRequired,
 };
 
 export default {

@@ -6,36 +6,50 @@ import Device from '/src/components/device';
 import { SnapScroll } from '/src/components/index';
 import styles from './styles.scss';
 
-const TwoColumnLayout = ({ index, frame, header, firstLook }) => {
+const TwoColumnLayout = ({ index, frame, header, footer, firstLook }) => {
   const forward = frame >= index;
 
   const resolveSpring = () => {
     return frame !== index ? useSpring({
       y: forward ? -100 : 100,
+      x: forward ? 300 : -300,
       o: 0,
       from: {
         y: 0,
+        x: 0,
         o: 1,
       },
     }) : useSpring({
       y: 0,
+      x: 0,
       o: 1,
       from: {
         y: forward ? 100 : -100,
+        x: forward ? -100 : 100,
         o: 0,
       },
     });
   };
 
-  const { o, y } = resolveSpring();
+  const { o, x } = resolveSpring();
 
-  return ((firstLook && index === 0) || (!firstLook)) ? (
+  return (frame > 0 || !firstLook) ? (
     <div className={styles.twoColumnLayout} >
       <div className={styles.inner} >
-        <animated.h1 className={styles.header} style={{
-          opacity: o,
-          transform: y.interpolate(y => `translateY(${y}%)`),
-        }} >{header}</animated.h1 >
+        <h2 className={styles.header} >
+          <animated.span className={styles.index} style={{
+            opacity: o,
+            transform: x.interpolate(x => `translateX(${x}%)`),
+          }} >0{index}</animated.span >
+          <animated.span className={styles.label} style={{
+            opacity: o,
+            // transform: y.interpolate(y => `translateY(${y}%)`),
+          }} >{header}</animated.span >
+        </h2 >
+        <animated.section
+          className={styles.footer} style={{ opacity: o }}
+          dangerouslySetInnerHTML={{ __html: footer }}
+        />
       </div >
     </div >
   ) : null;
@@ -43,6 +57,7 @@ const TwoColumnLayout = ({ index, frame, header, firstLook }) => {
 
 TwoColumnLayout.propTypes = {
   header: PropTypes.string.isRequired,
+  footer: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
   firstLook: PropTypes.bool.isRequired,

@@ -1,3 +1,5 @@
+@import "/src/media-query-mixins";
+
 .twoColumnLayout {
   position: absolute;
   top: 0;
@@ -5,26 +7,68 @@
   bottom: 0;
   right: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 .inner {
-  width: 800px;
-  height: 80%;
+  width: 66vw;
+  height: 59vh;
+  transform: translateY(27vh);
+  position: relative;
+
+  :global {
+    @include for-tablet {
+      width: 58vw;
+      height: 76vh;
+      transform: translateY(15vh);
+    }
+
+    @include for-desktop {
+      width: 74vw;
+      height: 65vh;
+      transform: translateY(23vh);
+    }
+
+    @include for-wide-screen {
+      width: 60vw;
+      height: 50vh;
+      transform: translateY(35vh);
+    }
+  }
 }
 
 .header {
-  //transform: translateY(150%);
-  //transition: .2s ease-out;
-  //will-change: trasnform;
-  //opacity: 0;
+  color: #0272BA;
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 15px;
+  margin: 0;
 }
 
-.enter {
-  //transform: translateY(0);
+.spacer {
+  height: 11px;
+
+  :global {
+    @include for-tablet {
+      display: none;
+    }
+  }
 }
 
-.exit {
-  //transform: translateY(-150%);
+.index {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.label {
+  position: absolute;
+  top: 26px;
+  left: 0;
+}
+
+.footer {
+  height: 120px;
+  position: absolute;
+  bottom: 0;
 }

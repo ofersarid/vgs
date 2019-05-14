@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll, TwoColumnLayout } from '/src/components/index';
 import Device from '/src/components/device/index';
+import FirstLook from './first-look';
 import types from '../types';
 
 // import { firestoreConnect } from 'react-redux-firebase';
+
+const footer = '<ol><li>item - 1</li><li>item - 2</li></ol>';
 
 class Home extends PureComponent {
   constructor(props) {
@@ -20,10 +23,11 @@ class Home extends PureComponent {
   render() {
     return (
       <SnapScroll >
-        <TwoColumnLayout header="Welcome VGS" index={0} />
-        <TwoColumnLayout header="Frame 1.1" index={1} />
-        <TwoColumnLayout header="Frame 1.2" index={2} />
-        <TwoColumnLayout header="Frame 1.3" index={3} />
+        <FirstLook />
+        <TwoColumnLayout header="Frame 1" index={1} footer={footer} />
+        <TwoColumnLayout header="Frame 2" index={2} footer={footer} />
+        <TwoColumnLayout header="Frame 3" index={3} footer={footer} />
+        <TwoColumnLayout header="Frame 4" index={4} footer={footer} />
       </SnapScroll >
     );
   }
