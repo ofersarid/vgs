@@ -1,34 +1,39 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll, TwoColumnLayout } from '/src/components/index';
 import Device from '/src/components/device/index';
 import types from '../types';
+
 // import { firestoreConnect } from 'react-redux-firebase';
 
-const Home = ({ frame }) => {
-  return (
-    <SnapScroll
-      customTransition="my-transition"
-      customDuration={{
-        enter: 300,
-        exit: 300,
-      }}
-    >
-      <TwoColumnLayout header="Welcome VGS" index={0}/>
-      <TwoColumnLayout header="Frame 1.1" index={1} />
-      <TwoColumnLayout header="Frame 1.2" index={2} />
-      <TwoColumnLayout header="Frame 1.3" index={3} />
-    </SnapScroll >
-  );
-};
+class Home extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.didMount = false;
+  }
+
+  componentDidMount() {
+    this.didMount = true;
+  }
+
+  render() {
+    return (
+      <SnapScroll >
+        <TwoColumnLayout header="Welcome VGS" index={0} />
+        <TwoColumnLayout header="Frame 1.1" index={1} />
+        <TwoColumnLayout header="Frame 1.2" index={2} />
+        <TwoColumnLayout header="Frame 1.3" index={3} />
+      </SnapScroll >
+    );
+  }
+}
 
 Home.propTypes = types.page;
 
 const mapStateToProps = state => ({
   deviceType: Device.selectors.deviceType(state),
   deviceOrientation: Device.selectors.deviceOrientation(state),
-  frame: SnapScroll.selectors.frame(state),
   // contacts: Collections.selectors.collection(state, '8gFxx830klmI0HDeOIEU'),
 });
 

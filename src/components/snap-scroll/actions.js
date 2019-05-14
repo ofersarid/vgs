@@ -5,6 +5,12 @@ const updateFrameIndex = index => ({
   index,
 });
 
+const firstLook = isFirstLook => ({
+  type: C.ACTIONS.FIRST_LOOK,
+  isFirstLook,
+});
+
 export default {
   updateFrameIndex,
+  firstLook
 };

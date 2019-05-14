@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import Device from '/src/components/device';
 import { SnapScroll } from '/src/components/index';
 import styles from './styles.scss';
-// import spring from './spring-config';
 
-const TwoColumnLayout = ({ index, frame, header }) => {
-  const forward = frame > index;
+const TwoColumnLayout = ({ index, frame, header, firstLook }) => {
+  const forward = frame >= index;
 
   const resolveSpring = () => {
     return frame !== index ? useSpring({
@@ -30,7 +29,7 @@ const TwoColumnLayout = ({ index, frame, header }) => {
 
   const { o, y } = resolveSpring();
 
-  return (
+  return ((firstLook && index === 0) || (!firstLook)) ? (
     <div className={styles.twoColumnLayout} >
       <div className={styles.inner} >
         <animated.h1 className={styles.header} style={{
@@ -39,19 +38,21 @@ const TwoColumnLayout = ({ index, frame, header }) => {
         }} >{header}</animated.h1 >
       </div >
     </div >
-  );
+  ) : null;
 };
 
 TwoColumnLayout.propTypes = {
   header: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
+  firstLook: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   deviceType: Device.selectors.deviceType(state),
   deviceOrientation: Device.selectors.deviceOrientation(state),
   frame: SnapScroll.selectors.frame(state),
+  firstLook: SnapScroll.selectors.firstLook(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

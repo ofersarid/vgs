@@ -39,7 +39,7 @@ class SnapScroll extends React.Component {
       updateFrameIndex: PropTypes.func.isRequired,
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       customTransition: PropTypes.string,
-      customDuration: PropTypes.object,
+      firstLook: PropTypes.func.isRequired,
     };
   }
 
@@ -49,7 +49,6 @@ class SnapScroll extends React.Component {
       indexChanged: f => f,
       orientation: 'vertical',
       customTransition: null,
-      customDuration: { enter: 1000, exit: 1000 },
     };
   }
 
@@ -67,7 +66,7 @@ class SnapScroll extends React.Component {
       index: this.getStartIndex(),
       direction: DIRECTION.FORWARD,
     };
-    this.moving = false;
+    this.lock = false;
     inertia.addCallback(this.snap);
   }
 
@@ -80,6 +79,7 @@ class SnapScroll extends React.Component {
     // Fire initial indexChanged();
     this.props.indexChanged(this.state.index);
     this.props.updateFrameIndex(this.state.index);
+    this.props.firstLook(true);
   }
 
   componentWillUnmount() {
@@ -90,9 +90,13 @@ class SnapScroll extends React.Component {
   }
 
   snap(direction) {
+    this.lock = true;
+    this.props.firstLook(false);
+    if (this.to) {
+      clearTimeout(this.to);
+    }
     switch (true) {
       case (direction === -1):
-        console.log('trigger next');
         this.next();
         break;
       case (direction === 1):
@@ -101,10 +105,14 @@ class SnapScroll extends React.Component {
       default:
         break;
     }
+    this.to = setTimeout(() => {
+      this.lock = false;
+    }, 300);
   }
 
   mouseScrollHandler(e) {
     const delta = e.wheelDelta;
+    if (this.lock) return;
     inertia.update(delta);
   };
 
@@ -113,16 +121,15 @@ class SnapScroll extends React.Component {
   };
 
   touchEndHandler(e) {
-    this.moving = false;
+    this.lock = false;
   }
 
   touchMoveHandler(e) {
     e.preventDefault();
-    if (this.moving) return;
+    if (this.lock) return;
     let yUp = e.touches[0].clientY;
     let delta = (this.yDown - yUp);
     if (delta !== 0) {
-      this.moving = true;
       this.snap(delta > 0 ? -1 : 1);
     }
     this.yDown = null;
@@ -180,6 +187,7 @@ SnapScroll.actions = actions;
 
 const mapDispatchToProps = dispatch => ({
   updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
+  firstLook: (...props) => dispatch(actions.firstLook(...props)),
 });
 
 export default compose(
