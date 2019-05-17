@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -14,10 +14,10 @@ const DIRECTION = {
   REVERSE: 'reverse',
 };
 
-const Wrapper = ({ children }) => (
-  <div className={cx(styles.wrapper)} >
+const Wrapper = ({ children, index, frame }) => (
+  <div className={cx(styles.wrapper)} style={{ zIndex: frame === index ? 1 : 0 }} >
     <div className={styles.inner} >
-      {children}
+      {cloneElement(children, { index })}
     </div >
   </div >
 );
@@ -25,6 +25,8 @@ const Wrapper = ({ children }) => (
 Wrapper.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  frame: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 class SnapScroll extends React.Component {
@@ -35,11 +37,14 @@ class SnapScroll extends React.Component {
         PropTypes.arrayOf(PropTypes.node)
       ]).isRequired,
       start: PropTypes.number,
+      frame: PropTypes.number.isRequired,
       indexChanged: PropTypes.func,
       updateFrameIndex: PropTypes.func.isRequired,
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       customTransition: PropTypes.string,
       firstLook: PropTypes.func.isRequired,
+      disableNext: PropTypes.bool.isRequired,
+      disablePrev: PropTypes.bool.isRequired,
     };
   }
 
@@ -125,17 +130,24 @@ class SnapScroll extends React.Component {
   }
 
   touchMoveHandler(e) {
-    e.preventDefault();
+    const { disableNext, disablePrev } = this.props;
     if (this.lock) return;
     let yUp = e.touches[0].clientY;
     let delta = (this.yDown - yUp);
     if (delta !== 0) {
+      if ((delta > 0 && !disableNext) ||
+        (delta > 0 && !disablePrev) ||
+        (!disableNext && !disablePrev)) {
+        e.preventDefault();
+      }
       this.snap(delta > 0 ? -1 : 1);
     }
     this.yDown = null;
   };
 
   next() {
+    const { disableNext } = this.props;
+    if (disableNext) return;
     const index = Math.min(this.state.index + 1, this.props.children.length - 1);
     this.setState({
       index,
@@ -147,6 +159,8 @@ class SnapScroll extends React.Component {
   };
 
   prev() {
+    const { disablePrev } = this.props;
+    if (disablePrev) return;
     const index = Math.max(0, this.state.index - 1);
     this.setState({
       index,
@@ -158,7 +172,7 @@ class SnapScroll extends React.Component {
   };
 
   renderPages() {
-    const { children } = this.props;
+    const { children, frame } = this.props;
     // const { index } = this.state;
 
     const isArray = Array.isArray(children);
@@ -166,7 +180,7 @@ class SnapScroll extends React.Component {
     return isArray
       ? children.map((child, key) => {
         return (
-          <Wrapper key={key}>{child}</Wrapper >
+          <Wrapper key={key} frame={frame} index={key} >{child}</Wrapper >
         );
       }) : <Wrapper >{children}</Wrapper >;
   }
@@ -185,11 +199,17 @@ class SnapScroll extends React.Component {
 SnapScroll.selectors = selectors;
 SnapScroll.actions = actions;
 
+const mapStateToProps = state => ({
+  frame: selectors.frame(state),
+  disableNext: selectors.disableNext(state),
+  disablePrev: selectors.disablePrev(state),
+});
+
 const mapDispatchToProps = dispatch => ({
   updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
   firstLook: (...props) => dispatch(actions.firstLook(...props)),
 });
 
 export default compose(
-  connect(() => ({}), mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(SnapScroll);

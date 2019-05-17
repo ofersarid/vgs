@@ -4,6 +4,10 @@ import C from './consts';
 const initialState = fromJS({
   frame: 0,
   firstLook: true,
+  disable: {
+    next: false,
+    prev: false,
+  },
 });
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +17,9 @@ const reducer = (state = initialState, action) => {
 
     case C.ACTIONS.FIRST_LOOK:
       return state.set('firstLook', action.isFirstLook);
+
+    case C.ACTIONS.DISABLE:
+      return state.set('disable', action.disable);
 
     default:
       return state;

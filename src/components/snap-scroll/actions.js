@@ -10,7 +10,16 @@ const firstLook = isFirstLook => ({
   isFirstLook,
 });
 
+const disable = (disableNext, disablePrev) => ({
+  type: C.ACTIONS.DISABLE,
+  disable: {
+    next: disableNext,
+    prev: disablePrev,
+  },
+});
+
 export default {
   updateFrameIndex,
-  firstLook
+  firstLook,
+  disable,
 };

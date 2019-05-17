@@ -8,7 +8,13 @@ import types from '../types';
 
 // import { firestoreConnect } from 'react-redux-firebase';
 
-const footer = '<ol><li>item - 1</li><li>item - 2</li></ol>';
+const footNotes = [
+  'note 1',
+  'note 2',
+  'note 3'
+];
+
+const article = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed justo sit amet ligula vulputate tincidunt vitae id ligula. Etiam luctus tincidunt malesuada. Nulla consequat vestibulum lacus a porta. Sed vulputate neque quis neque pretium euismod. Nam lacinia finibus velit, et sollicitudin urna mollis id. Morbi neque nisi, viverra laoreet rhoncus in, rutrum vel dolor. Proin nec nulla ut massa gravida molestie. Nam pulvinar elementum lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In tempus dolor mattis velit blandit, in rutrum orci ornare. Morbi euismod in lorem vel tincidunt. Morbi et dapibus nunc.';
 
 class Home extends PureComponent {
   constructor(props) {
@@ -24,10 +30,10 @@ class Home extends PureComponent {
     return (
       <SnapScroll >
         <FirstLook />
-        <TwoColumnLayout header="Frame 1" index={1} footer={footer} />
-        <TwoColumnLayout header="Frame 2" index={2} footer={footer} />
-        <TwoColumnLayout header="Frame 3" index={3} footer={footer} />
-        <TwoColumnLayout header="Frame 4" index={4} footer={footer} />
+        <TwoColumnLayout header="Frame 1" footNotes={footNotes} article={article} />
+        <TwoColumnLayout header="Frame 2" footNotes={footNotes} article={article} />
+        <TwoColumnLayout header="Frame 3" footNotes={footNotes} article={article} />
+        <TwoColumnLayout header="Frame 4" footNotes={footNotes} article={article} />
       </SnapScroll >
     );
   }

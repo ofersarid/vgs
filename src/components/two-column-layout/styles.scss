@@ -67,8 +67,31 @@
   left: 0;
 }
 
-.footer {
-  height: 120px;
+.content {
+  height: calc(100% - 66px);
   position: absolute;
   bottom: 0;
+  width: 100%;
+}
+
+.article {
+
+}
+
+.footNotes {
+  margin: 56px 0 0 0;
+  padding: 0;
+  width: 100%;
+  counter-reset: item;
+
+  li {
+    display: block;
+
+    &:before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      width: 1.4em;
+      display: inline-block;
+    }
+  }
 }

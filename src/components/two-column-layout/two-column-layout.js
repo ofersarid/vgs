@@ -3,10 +3,10 @@ import { useSpring, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Device from '/src/components/device';
-import { SnapScroll } from '/src/components/index';
+import { SnapScroll, ScrollableArea } from '/src/components/index';
 import styles from './styles.scss';
 
-const TwoColumnLayout = ({ index, frame, header, footer, firstLook }) => {
+const TwoColumnLayout = ({ index, frame, header, firstLook, article, footNotes }) => {
   const forward = frame >= index;
 
   const resolveSpring = () => {
@@ -46,10 +46,16 @@ const TwoColumnLayout = ({ index, frame, header, footer, firstLook }) => {
             // transform: y.interpolate(y => `translateY(${y}%)`),
           }} >{header}</animated.span >
         </h2 >
-        <animated.section
-          className={styles.footer} style={{ opacity: o }}
-          dangerouslySetInnerHTML={{ __html: footer }}
-        />
+        <animated.section className={styles.content} style={{ opacity: o }} >
+          <ScrollableArea index={index}>
+            <div className={styles.article}>
+              {article}
+            </div>
+            <ol className={styles.footNotes}>
+              {footNotes.map((note, i) => <li key={i}>{note}</li>)}
+            </ol>
+          </ScrollableArea>
+        </animated.section>
       </div >
     </div >
   ) : null;
@@ -57,10 +63,11 @@ const TwoColumnLayout = ({ index, frame, header, footer, firstLook }) => {
 
 TwoColumnLayout.propTypes = {
   header: PropTypes.string.isRequired,
-  footer: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
   firstLook: PropTypes.bool.isRequired,
+  article: PropTypes.string,
+  footNotes: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapStateToProps = state => ({
