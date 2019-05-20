@@ -52,7 +52,6 @@ class ScrollableArea extends PureComponent {
     const { disableScrollSnap } = this.props;
     const { hasOverflow } = this.state;
     const $current = e.currentTarget;
-    e.stopPropagation();
     if (hasOverflow) {
       if ($current.clientHeight + $current.scrollTop === $current.scrollHeight) {
         // e.preventDefault();
@@ -62,6 +61,7 @@ class ScrollableArea extends PureComponent {
         disableScrollSnap(true, false);
       } else {
         disableScrollSnap(true, true);
+        e.stopPropagation();
       }
     }
   };
