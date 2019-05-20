@@ -27,7 +27,7 @@ class ScrollableArea extends PureComponent {
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { frame } = this.props;
     if (frame !== prevProps.frame) {
-      const $current = document.getElementById(this.id);
+      const $current = this.$el.current;
       $current.scrollTo(0, 0);
     }
   }
