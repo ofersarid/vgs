@@ -6,7 +6,7 @@ import autoBind from 'auto-bind';
 import { connect } from 'react-redux';
 import styles from './styles.scss';
 import actions from './actions';
-import { SnapScroll } from '../index';
+import selectors from './selectors';
 
 class ScrollableArea extends PureComponent {
   constructor(props) {
@@ -14,7 +14,6 @@ class ScrollableArea extends PureComponent {
     autoBind(this);
     this.$el = React.createRef();
     this.hasOverflow = false;
-    this.id = `scroll-area-${props.index}`;
   }
 
   componentDidMount() {
@@ -46,7 +45,7 @@ class ScrollableArea extends PureComponent {
 
   handleScrollSnap(e) {
     const { disableScrollSnap } = this.props;
-    const $current = document.getElementById(this.id);
+    const $current = e.currentTarget;
     if (this.hasOverflow) {
       if ($current.clientHeight + $current.scrollTop === $current.scrollHeight) {
         // e.preventDefault();
@@ -70,7 +69,6 @@ class ScrollableArea extends PureComponent {
     return (
       <div
         ref={this.$el}
-        id={this.id}
         className={cx(styles.scrollableArea, className)}
         onMouseEnter={this.handleScrollSnap}
         onMouseLeave={this.handleScrollSnap}
@@ -86,12 +84,11 @@ ScrollableArea.propTypes = {
   disableScrollSnap: PropTypes.func.isRequired,
   children: PropTypes.any,
   className: PropTypes.string,
-  index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
-  frame: SnapScroll.selectors.frame(state),
+  frame: selectors.frame(state),
 });
 
 const mapDispatchToProps = dispatch => ({
