@@ -4,6 +4,7 @@ import inertia from 'wheel-inertia';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
 import { connect } from 'react-redux';
+import Device from '/src/components/device';
 import styles from './styles.scss';
 import actions from './actions';
 import selectors from './selectors';
@@ -52,6 +53,7 @@ class ScrollableArea extends PureComponent {
     const { disableScrollSnap } = this.props;
     const { hasOverflow } = this.state;
     const $current = e.currentTarget;
+    e.stopPropagation();
     if (hasOverflow) {
       if ($current.clientHeight + $current.scrollTop === $current.scrollHeight) {
         // e.preventDefault();
@@ -61,7 +63,6 @@ class ScrollableArea extends PureComponent {
         disableScrollSnap(true, false);
       } else {
         disableScrollSnap(true, true);
-        e.stopPropagation();
       }
     }
   };
@@ -79,7 +80,7 @@ class ScrollableArea extends PureComponent {
   }
 
   render() {
-    const { children, className } = this.props;
+    const { children, className, isMobile } = this.props;
     const { hasOverflow } = this.state;
     return (
       <div
@@ -88,7 +89,7 @@ class ScrollableArea extends PureComponent {
         onMouseLeave={this.mouseLeaveHandler}
         onTouchStart={this.handleScrollSnap}
         onTouchEnd={this.handleScrollSnap}
-        onScroll={this.hasOverflow ? this.handleScrollSnap : undefined}
+        onScroll={(this.hasOverflow && !isMobile) ? this.handleScrollSnap : undefined}
       >{children}</div >
     );
   }
@@ -99,10 +100,12 @@ ScrollableArea.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
   frame: PropTypes.number.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: selectors.frame(state),
+  isMobile: Device.selectors.isMobile(state),
 });
 
 const mapDispatchToProps = dispatch => ({
