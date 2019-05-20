@@ -87,7 +87,7 @@ class ScrollableArea extends PureComponent {
         className={cx(styles.scrollableArea, className, { [styles.hasOverflow]: hasOverflow })}
         onMouseLeave={this.mouseLeaveHandler}
         onTouchStart={this.handleScrollSnap}
-        // onTouchEnd={this.handleScrollSnap}
+        onTouchEnd={this.handleScrollSnap}
         onScroll={this.hasOverflow ? this.handleScrollSnap : undefined}
       >{children}</div >
     );
