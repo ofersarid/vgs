@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import inertia from 'wheel-inertia';
+// import debounce from 'lodash/debounce';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import actions from './actions';
@@ -13,6 +14,8 @@ const DIRECTION = {
   FORWARD: 'forward',
   REVERSE: 'reverse',
 };
+
+const THRESHHOLD = 10;
 
 const Wrapper = ({ children, index, frame }) => (
   <div className={cx(styles.wrapper)} style={{ zIndex: frame === index ? 1 : 0 }} >
@@ -43,6 +46,7 @@ class SnapScroll extends React.Component {
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       customTransition: PropTypes.string,
       firstLook: PropTypes.func.isRequired,
+      disableScrollSnap: PropTypes.func.isRequired,
       disableNext: PropTypes.bool.isRequired,
       disablePrev: PropTypes.bool.isRequired,
     };
@@ -73,6 +77,13 @@ class SnapScroll extends React.Component {
     };
     this.lock = false;
     inertia.addCallback(this.snap);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { frame, disableScrollSnap } = this.props;
+    if (frame === 0 && frame !== prevProps.frame) {
+      disableScrollSnap(false, false);
+    }
   }
 
   componentDidMount() {
@@ -127,6 +138,7 @@ class SnapScroll extends React.Component {
 
   touchEndHandler(e) {
     this.lock = false;
+    this.yDown = null;
   }
 
   touchMoveHandler(e) {
@@ -134,7 +146,7 @@ class SnapScroll extends React.Component {
     if (this.lock) return;
     let yUp = e.touches[0].clientY;
     let delta = (this.yDown - yUp);
-    if (delta !== 0) {
+    if (Math.abs(delta) > THRESHHOLD) {
       if ((delta > 0 && !disableNext) ||
         (delta > 0 && !disablePrev) ||
         (!disableNext && !disablePrev)) {
@@ -142,7 +154,6 @@ class SnapScroll extends React.Component {
       }
       this.snap(delta > 0 ? -1 : 1);
     }
-    this.yDown = null;
   };
 
   next() {
@@ -208,6 +219,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
   firstLook: (...props) => dispatch(actions.firstLook(...props)),
+  disableScrollSnap: (...props) => dispatch(actions.disable(...props)),
 });
 
 export default compose(
