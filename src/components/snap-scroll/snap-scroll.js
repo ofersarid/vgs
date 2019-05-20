@@ -144,16 +144,16 @@ class SnapScroll extends React.Component {
   }
 
   touchMoveHandler(e) {
-    const { disableNext, disablePrev } = this.props;
+    // const { disableNext, disablePrev } = this.props;
     if (this.lock) return;
     let yUp = e.touches[0].clientY;
     let delta = (this.yDown - yUp);
+    e.preventDefault();
     if (Math.abs(delta) > THRESHHOLD) {
-      if ((delta > 0 && !disableNext) ||
-        (delta > 0 && !disablePrev) ||
-        (!disableNext && !disablePrev)) {
-        e.preventDefault();
-      }
+      // if ((delta > 0 && !disableNext) ||
+      //   (delta > 0 && !disablePrev) ||
+      //   (!disableNext && !disablePrev)) {
+      // }
       this.snap(delta > 0 ? -1 : 1);
     }
   };
