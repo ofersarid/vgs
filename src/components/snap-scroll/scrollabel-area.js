@@ -13,13 +13,14 @@ class ScrollableArea extends PureComponent {
     super(props);
     autoBind(this);
     this.$el = React.createRef();
-    this.hasOverflow = false;
+    this.state = {
+      hasOverflow: false,
+    };
     this.enable = true;
   }
 
   componentDidMount() {
-    this.hasOverflow = this.checkOverflow(this.$el);
-    if (this.hasOverflow) {
+    if (this.checkOverflow(this.$el)) {
       this.$el.current.addEventListener('wheel', this.wheelHandler, false);
       inertia.addCallback(() => {
       });
@@ -42,13 +43,17 @@ class ScrollableArea extends PureComponent {
 
   checkOverflow() {
     const $current = this.$el.current;
-    return $current.clientWidth < $current.scrollWidth || $current.clientHeight < $current.scrollHeight;
+    const hasOverflow = $current.clientWidth < $current.scrollWidth || $current.clientHeight < $current.scrollHeight;
+    this.setState({ hasOverflow });
+    return hasOverflow;
   }
 
   handleScrollSnap(e) {
     const { disableScrollSnap } = this.props;
+    const { hasOverflow } = this.state;
     const $current = e.currentTarget;
-    if (this.hasOverflow) {
+    e.stopPropagation();
+    if (hasOverflow) {
       if ($current.clientHeight + $current.scrollTop === $current.scrollHeight) {
         // e.preventDefault();
         disableScrollSnap(false, true);
@@ -75,10 +80,11 @@ class ScrollableArea extends PureComponent {
 
   render() {
     const { children, className } = this.props;
+    const { hasOverflow } = this.state;
     return (
       <div
         ref={this.$el}
-        className={cx(styles.scrollableArea, className)}
+        className={cx(styles.scrollableArea, className, { [styles.hasOverflow]: hasOverflow })}
         onMouseLeave={this.mouseLeaveHandler}
         onTouchStart={this.handleScrollSnap}
         // onTouchEnd={this.handleScrollSnap}

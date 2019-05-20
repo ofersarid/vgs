@@ -133,7 +133,9 @@ class SnapScroll extends React.Component {
   };
 
   touchStartHandler(e) {
+    const { disableScrollSnap } = this.props;
     this.yDown = e.touches[0].clientY;
+    disableScrollSnap(false, false);
   };
 
   touchEndHandler(e) {

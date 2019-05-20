@@ -34,4 +34,10 @@
     overflow: auto;
     width: 100%;
     height: 100%;
+    line-height: 1.5em;
+}
+
+.hasOverflow {
+    padding-right: 8px;
+    width: calc(100% - 8px);
 }
