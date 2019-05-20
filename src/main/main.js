@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Device from '/src/components/device/index';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import styles from './styles.scss';
 import { websiteMainContainer } from './types';
 
-const Main = props => (
-  <div className={styles.container} >
-    <ReduxRoutes />
-    {props.children}
-  </div >
-);
+class Main extends PureComponent {
+  render() {
+    return (
+      <div className={styles.container} >
+        <ReduxRoutes />
+        {this.props.children}
+      </div >
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   deviceType: Device.selectors.deviceType(state),
