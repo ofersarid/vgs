@@ -17,19 +17,19 @@
   position: relative;
 
   :global {
-    @include for-tablet {
+    @include media('>phone') {
       width: 58vw;
       height: 76vh;
       transform: translateY(15vh);
     }
 
-    @include for-desktop {
+    @include media('>tablet') {
       width: 74vw;
       height: 65vh;
       transform: translateY(23vh);
     }
 
-    @include for-wide-screen {
+    @include media('>desktop') {
       width: 60vw;
       height: 50vh;
       transform: translateY(35vh);
@@ -49,7 +49,7 @@
   height: 11px;
 
   :global {
-    @include for-tablet {
+    @include media('>phone') {
       display: none;
     }
   }
@@ -65,9 +65,29 @@
   position: absolute;
   top: 26px;
   left: 0;
+  display: flex;
+  align-items: center;
+
+  @include media('>phone') {
+    top: 0;
+    left: 43px;
+  }
+}
+
+.divider {
+  display: none;
+  background: #0272BA;
+  height: 1px;
+  width: 68px;
+  margin-right: 25px;
+
+  @include media('>phone') {
+    display: inline-block;
+  }
 }
 
 .content {
+  color:  #707070;
   height: calc(100% - 66px);
   position: absolute;
   bottom: 0;
@@ -76,13 +96,27 @@
 
 .article {
 
+  @include media('>tablet') {
+    column-count: 2;
+    column-gap: 10%;
+  }
+
+  @include media('>desktop') {
+    column-gap: 8%;
+  }
 }
 
 .footNotes {
   margin: 56px 0 0 0;
-  padding: 0;
+  padding: 17px 0 0 0;
   width: 100%;
   counter-reset: item;
+  border-top: 1px solid #5E5E5E;
+
+  @include media('>tablet') {
+    position: absolute;
+    bottom: 0
+  }
 
   li {
     display: block;
