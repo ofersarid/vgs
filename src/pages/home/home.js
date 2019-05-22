@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { SnapScroll, TwoColumnLayout } from '/src/components/index';
+import { SnapScroll, Layout } from '/src/components/index';
 import Device from '/src/components/device/index';
-import FirstLook from './first-look';
 import types from '../types';
 import dataMock from './data.mock';
 
@@ -22,9 +21,9 @@ class Home extends PureComponent {
   render() {
     return (
       <SnapScroll >
-        <FirstLook />
+        <Layout.Cover />
         {dataMock.map(d => {
-          return <TwoColumnLayout
+          return <Layout.TwoColumnLayout
             key={d.title}
             header={d.title}
             footNotes={d.footNotes}

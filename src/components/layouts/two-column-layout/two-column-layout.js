@@ -3,7 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Device from '/src/components/device';
-import { SnapScroll, ScrollableArea } from '/src/components/index';
+import { SnapScroll, ScrollableArea } from '/src/components';
 import styles from './styles.scss';
 
 const TwoColumnLayout = ({ index, frame, header, firstLook, article, footNotes, isMobile }) => {
