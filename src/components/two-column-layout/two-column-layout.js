@@ -12,6 +12,7 @@ const TwoColumnLayout = ({ index, frame, header, firstLook, article, footNotes, 
   const resolveSpring = () => {
     return frame !== index ? useSpring({
       x: forward ? 300 : -300,
+      y: forward ? 10 : -10,
       o: 0,
       from: {
         y: 0,
@@ -24,6 +25,7 @@ const TwoColumnLayout = ({ index, frame, header, firstLook, article, footNotes, 
       o: 1,
       from: {
         x: forward ? -100 : 100,
+        y: forward ? -10 : 10,
         o: 0,
       },
     });
@@ -48,23 +50,25 @@ const TwoColumnLayout = ({ index, frame, header, firstLook, article, footNotes, 
             {header}
           </animated.span >
         </h2 >
-        <animated.section className={styles.content} style={{ opacity: o }} >
-          <ScrollableArea index={index}>
-            <div className={styles.article}>
+        <animated.section className={styles.content} style={{
+          opacity: o,
+        }} >
+          <ScrollableArea >
+            <div className={styles.article} >
               {article}
-            </div>
+            </div >
             {isMobile && (
-              <ol className={styles.footNotes}>
-                {footNotes.map((note, i) => <li key={i}>{note}</li>)}
-              </ol>
+              <ol className={styles.footNotes} >
+                {footNotes.map((note, i) => <li key={i} >{note}</li >)}
+              </ol >
             )}
-          </ScrollableArea>
+          </ScrollableArea >
           {!isMobile && (
-            <ol className={styles.footNotes}>
-              {footNotes.map((note, i) => <li key={i}>{note}</li>)}
-            </ol>
+            <ol className={styles.footNotes} >
+              {footNotes.map((note, i) => <li key={i} >{note}</li >)}
+            </ol >
           )}
-        </animated.section>
+        </animated.section >
       </div >
     </div >
   ) : null;

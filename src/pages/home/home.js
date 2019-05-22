@@ -5,16 +5,9 @@ import { SnapScroll, TwoColumnLayout } from '/src/components/index';
 import Device from '/src/components/device/index';
 import FirstLook from './first-look';
 import types from '../types';
+import dataMock from './data.mock';
 
 // import { firestoreConnect } from 'react-redux-firebase';
-
-const footNotes = [
-  'note 1',
-  'note 2',
-  'note 3'
-];
-
-const article = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed justo sit amet ligula vulputate tincidunt vitae id ligula. Etiam luctus tincidunt malesuada. Nulla consequat vestibulum lacus a porta. Sed vulputate neque quis neque pretium euismod. Nam lacinia finibus velit, et sollicitudin urna mollis id. Morbi neque nisi, viverra laoreet rhoncus in, rutrum vel dolor. Proin nec nulla ut massa gravida molestie. Nam pulvinar elementum lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In tempus dolor mattis velit blandit, in rutrum orci ornare. Morbi euismod in lorem vel tincidunt. Morbi et dapibus nunc.';
 
 class Home extends PureComponent {
   constructor(props) {
@@ -30,10 +23,14 @@ class Home extends PureComponent {
     return (
       <SnapScroll >
         <FirstLook />
-        <TwoColumnLayout header="Frame 1" footNotes={footNotes} article={article} />
-        <TwoColumnLayout header="Frame 2" footNotes={footNotes} article={article} />
-        <TwoColumnLayout header="Frame 3" footNotes={footNotes} article={article} />
-        <TwoColumnLayout header="Frame 4" footNotes={footNotes} article={article} />
+        {dataMock.map(d => {
+          return <TwoColumnLayout
+            key={d.title}
+            header={d.title}
+            footNotes={d.footNotes}
+            article={d.article}
+          />;
+        })}
       </SnapScroll >
     );
   }

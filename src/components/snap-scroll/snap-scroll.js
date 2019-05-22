@@ -3,7 +3,6 @@ import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import inertia from 'wheel-inertia';
-// import debounce from 'lodash/debounce';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import actions from './actions';
@@ -164,7 +163,7 @@ class SnapScroll extends React.Component {
   next() {
     const { disableNext } = this.props;
     if (disableNext) return;
-    const index = Math.min(this.state.index + 1, this.props.children.length - 1);
+    const index = Math.min(this.state.index + 1, this.key - 1);
     this.setState({
       index,
       direction: DIRECTION.FORWARD,
@@ -187,26 +186,26 @@ class SnapScroll extends React.Component {
     });
   };
 
-  renderPages() {
-    const { children, frame } = this.props;
-    // const { index } = this.state;
-
+  renderChildren(children) {
+    const { frame } = this.props;
     const isArray = Array.isArray(children);
-
-    return isArray
-      ? children.map((child, key) => {
-        return (
-          <Wrapper key={key} frame={frame} index={key} >{child}</Wrapper >
-        );
-      }) : <Wrapper >{children}</Wrapper >;
+    if (isArray) {
+      return children.map(child => this.renderChildren(child));
+    } else {
+      const wrapper = <Wrapper key={this.key} frame={frame} index={this.key} >{children}</Wrapper >;
+      this.key++;
+      return wrapper;
+    }
   }
 
   render() {
+    const { children } = this.props;
+    this.key = 0;
     return (
       <div className={styles.snapScroll} ref={el => {
         this.$node = el;
       }} >
-        {this.renderPages()}
+        {this.renderChildren(children, this.key)}
       </div >
     );
   }
