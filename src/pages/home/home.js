@@ -25,6 +25,8 @@ class Home extends PureComponent {
         <Layout.ProductCover
           art={donut}
           themeColor="blue"
+          name="Frame"
+          description="EXTERNAL SUPPORT TECHNOLOGHY FOR PERIPHERAL VASCULAR RECONSTRUCTION"
           footer={{
             title: 'AATS 98th Annual Meeting in San Diego',
             dateFrom: new Date(),

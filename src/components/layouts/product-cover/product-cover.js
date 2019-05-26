@@ -6,7 +6,7 @@ import moment from 'moment';
 import { SnapScroll } from '/src/components';
 import styles from './styles.scss';
 
-const ProductCover = ({ frame, art, themeColor, footer }) => {
+const ProductCover = ({ frame, art, themeColor, footer, name, description }) => {
   const forward = frame === 0;
 
   const resolveSpring = () => {
@@ -37,19 +37,17 @@ const ProductCover = ({ frame, art, themeColor, footer }) => {
       }}
     >
       <h1 className={styles.header} >
-        <div style={{ color: colorMap[themeColor] }} >Frame</div >
-        <div >
-          EXTERNAL SUPPORT TECHNOLOGHY FOR PERIPHERAL VASCULAR RECONSTRUCTION
-        </div >
+        <div style={{ color: colorMap[themeColor] }} >{name}</div >
+        <div >{description}</div >
       </h1 >
       <img src={art} className={styles.art} />
-      <div className={styles.footer} style={{ background: colorMap[themeColor] }}>
-        <div className={styles.title}>{footer.title}</div>
-        <div className={styles.date}>
+      <div className={styles.footer} style={{ background: colorMap[themeColor] }} >
+        <div className={styles.title} >{footer.title}</div >
+        <div className={styles.date} >
           {moment(footer.dateFrom).format('MMMM Do')} &mdash;&nbsp;
           {moment(footer.dateTo).format('MMMM Do')}
-        </div>
-      </div>
+        </div >
+      </div >
     </animated.div >
   );
 };
@@ -57,6 +55,8 @@ const ProductCover = ({ frame, art, themeColor, footer }) => {
 ProductCover.propTypes = {
   frame: PropTypes.number.isRequired,
   art: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   themeColor: PropTypes.oneOf(['blue']).isRequired,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
