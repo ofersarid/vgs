@@ -5,6 +5,7 @@ import { SnapScroll, Layout } from '/src/components/index';
 import Device from '/src/components/device/index';
 import types from '../types';
 import dataMock from './data.mock';
+import donut from './donut.png';
 
 // import { firestoreConnect } from 'react-redux-firebase';
 
@@ -21,7 +22,17 @@ class Home extends PureComponent {
   render() {
     return (
       <SnapScroll >
-        <Layout.Cover />
+        <Layout.ProductCover
+          art={donut}
+          themeColor="blue"
+          footer={{
+            title: 'AATS 98th Annual Meeting in San Diego',
+            dateFrom: new Date(),
+            dateTo: new Date(),
+            address: '62 Hadarim street pardess hanna',
+            linkTo: 'home',
+          }}
+        />
         {dataMock.map(d => {
           return <Layout.TwoColumnLayout
             key={d.title}
