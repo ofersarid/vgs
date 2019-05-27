@@ -69,7 +69,7 @@ class ProductCover extends PureComponent {
               <Spring
                 from={{ transform: 'translate(0%, -50%)' }}
                 to={{ transform: 'translate(20%, -50%)' }}
-                config={config.slow}
+                config={reverseAnimation ? Object.assign({}, config.slow, { duration: 200 }) : config.slow}
                 reset
                 reverse={reverseAnimation}
                 onRest={this.reverseAnimation}>
