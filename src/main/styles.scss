@@ -1,5 +1,4 @@
 @import "/src/media-query-mixins";
-@import "/src/dimentions";
 
 .container {
 
@@ -12,14 +11,14 @@
   top: 7%;
 
   @include media('>phone') {
-    left: $gutter-tablet;
+    left: 10%;
   }
 
   @include media('>tablet') {
-    left: $gutter-desktop;
+    left: 5%;
   }
 
   @include media('>desktop') {
-    left: $gutter-wide-screen;
+    left: 8%;
   }
 }

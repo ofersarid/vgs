@@ -12,7 +12,7 @@
 
 .inner {
   width: 66vw;
-  height: 59vh;
+  height: 65vh;
   transform: translateY(27vh);
   position: relative;
 
@@ -32,7 +32,7 @@
     @include media('>desktop') {
       width: 60vw;
       height: 50vh;
-      transform: translateY(35vh);
+      transform: translateY(25vh);
     }
   }
 }
@@ -114,7 +114,7 @@
   counter-reset: item;
   border-top: 1px solid #5E5E5E;
 
-  @include media('>tablet') {
+  @include media('>phone') {
     position: absolute;
     bottom: 0
   }
