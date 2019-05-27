@@ -4,12 +4,14 @@ import Device from '/src/components/device/index';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import styles from './styles.scss';
 import { websiteMainContainer } from './types';
+import logo from './logo.svg';
 
 class Main extends PureComponent {
   render() {
     return (
       <div className={styles.container} >
         <ReduxRoutes />
+        <img src={logo} className={styles.logo}/>
         {this.props.children}
       </div >
     );

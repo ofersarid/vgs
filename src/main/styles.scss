@@ -1,3 +1,25 @@
+@import "/src/media-query-mixins";
+@import "/src/dimentions";
+
 .container {
 
+}
+
+.logo {
+  position: fixed;
+  width: 52px;
+  left: 17%;
+  top: 7%;
+
+  @include media('>phone') {
+    left: $gutter-tablet;
+  }
+
+  @include media('>tablet') {
+    left: $gutter-desktop;
+  }
+
+  @include media('>desktop') {
+    left: $gutter-wide-screen;
+  }
 }
