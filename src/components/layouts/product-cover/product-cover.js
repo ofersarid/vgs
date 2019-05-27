@@ -61,10 +61,12 @@ class ProductCover extends PureComponent {
               style={{ background: colorMap[themeColor] }}
               onClick={navigate}
             >
-              <div className={styles.title} >{footer.title}</div >
-              <div className={styles.date} >
-                {moment(footer.dateFrom).format('MMMM Do')} &mdash;&nbsp;
-                {moment(footer.dateTo).format('MMMM Do')}
+              <div className={styles.text}>
+                <div className={styles.title} >{footer.title}</div >
+                <div className={styles.date} >
+                  {moment(footer.dateFrom).format('MMMM Do')} &mdash;&nbsp;
+                  {moment(footer.dateTo).format('MMMM Do')}
+                </div >
               </div >
               <Spring
                 from={{ transform: 'translate(0%, -50%)' }}
@@ -72,7 +74,7 @@ class ProductCover extends PureComponent {
                 config={reverseAnimation ? Object.assign({}, config.slow, { duration: 200 }) : config.slow}
                 reset
                 reverse={reverseAnimation}
-                onRest={this.reverseAnimation}>
+                onRest={this.reverseAnimation} >
                 {props => <RightArrowAlt className={styles.arrow} style={props} />}
               </Spring >
             </div >
