@@ -32,7 +32,7 @@ class Home extends PureComponent {
             dateFrom: new Date(),
             dateTo: new Date(),
             address: '62 Hadarim street pardess hanna',
-            linkTo: 'home',
+            linkTo: 'home/danny',
           }}
         />
         {dataMock.map(d => {
