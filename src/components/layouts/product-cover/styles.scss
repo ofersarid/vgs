@@ -26,6 +26,14 @@
     height: 35%;
   }
 
+  @include media('>tablet') {
+    font-size: 65px;
+    height: 45%;
+  }
+
+  @include media('>desktop') {
+    font-size: 91px;
+  }
 }
 
 .art {
@@ -51,6 +59,12 @@
   padding-left: 15%;
   justify-content: center;
   box-sizing: border-box;
+
+  @include media('>tablet') {
+    width: 50%;
+    right: 15%;
+    padding-left: 100px;
+  }
 }
 
 .title {
@@ -71,7 +85,7 @@
 .arrow {
   position: absolute;
   top: 50%;
-  right: 15%;
+  right: 100px;
   transform: translate(0, -50%);
   color: white;
   height: 46px;
