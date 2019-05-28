@@ -63,3 +63,36 @@
     position: relative;
   }
 }
+
+.menuContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #005728;
+  color: white;
+  font-size: 28px;
+  z-index: 1;
+
+  .list {
+    left: calc(17% - 12px);
+    right: 17%;
+    top: calc(7% + 65px);
+    bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-weight: 100;
+
+    li {
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      padding: 15px 25px 7px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+  }
+}

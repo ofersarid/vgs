@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Spring } from 'react-spring/renderprops';
 import cx from 'classnames';
@@ -25,29 +25,48 @@ class SideMenu extends PureComponent {
   render() {
     const { openMenu, immediate } = this.state;
     return (
-      <div
-        className={cx('ripple', styles.menuToggle)}
-        onClick={this.toggleMenu}
-      >
+      <Fragment >
         <Spring
-          from={{ transform: 'rotate(0deg)', left: '0px' }}
-          to={{ transform: 'rotate(45deg)', left: '3px' }}
+          from={{ transform: 'translateX(100vw)', opacity: 0 }}
+          to={{ transform: 'translateX(0vw)', opacity: 1 }}
           reset
           reverse={!openMenu}
           immediate={immediate}
         >
-          {props => <span className={styles.handle} style={props} />}
+          {props => <div className={styles.menuContainer} style={props} >
+            <ul className={styles.list} >
+              <li className={cx('ripple waves-light')} >Home</li >
+              <li className={cx('ripple waves-light')} >Products</li >
+              <li className={cx('ripple waves-light')} >News & Events</li >
+              <li className={cx('ripple waves-light')} >About</li >
+              <li className={cx('ripple waves-light')} >Contact</li >
+            </ul >
+          </div >}
         </Spring >
-        <Spring
-          from={{ transform: 'rotate(0deg)', left: '0px' }}
-          to={{ transform: 'rotate(-45deg)', left: '3px' }}
-          reset
-          reverse={!openMenu}
-          immediate={immediate}
+        <div
+          className={cx('ripple', styles.menuToggle)}
+          onClick={this.toggleMenu}
         >
-          {props => <span className={styles.handle} style={props} />}
-        </Spring >
-      </div >
+          <Spring
+            from={{ transform: 'rotate(0deg)', left: '0px', background: '#0272BA' }}
+            to={{ transform: 'rotate(45deg)', left: '3px', background: '#ffffff' }}
+            reset
+            reverse={!openMenu}
+            immediate={immediate}
+          >
+            {props => <span className={styles.handle} style={props} />}
+          </Spring >
+          <Spring
+            from={{ transform: 'rotate(0deg)', left: '0px', background: '#0272BA' }}
+            to={{ transform: 'rotate(-45deg)', left: '3px', background: '#ffffff' }}
+            reset
+            reverse={!openMenu}
+            immediate={immediate}
+          >
+            {props => <span className={styles.handle} style={props} />}
+          </Spring >
+        </div >
+      </Fragment >
     );
   }
 }
