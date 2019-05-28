@@ -38,7 +38,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "styled-components": "^4.2.0",
-    "styled-icons": "^7.9.0",
+    "styled-icons": "^8.0.0",
     "tippy.js": "^3.4.1",
     "wheel-inertia": "^0.0.2"
   },
