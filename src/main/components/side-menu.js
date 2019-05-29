@@ -1,9 +1,12 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Spring } from 'react-spring/renderprops';
+import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
+import SubMenu from './sub-menu';
 import styles from '../styles.scss';
+import camelCase from 'lodash/camelCase';
 
 class SideMenu extends PureComponent {
   constructor(props) {
@@ -22,24 +25,35 @@ class SideMenu extends PureComponent {
     });
   }
 
+  navigate(e) {
+    e.stopPropagation();
+    const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase();
+    this.setState({
+      immediate: true,
+    });
+    console.log(camelCase(txt));
+    hashHistory.push(camelCase(txt));
+  }
+
   render() {
     const { openMenu, immediate } = this.state;
     return (
       <Fragment >
         <Spring
-          from={{ transform: 'translateX(100vw)', opacity: 0 }}
-          to={{ transform: 'translateX(0vw)', opacity: 1 }}
-          reset
-          reverse={!openMenu}
+          from={{ transform: `translateX(${openMenu ? '100vw' : '0vw'})`, opacity: openMenu ? 0 : 1 }}
+          to={{ transform: `translateX(${openMenu ? '0vw' : '100vw'})`, opacity: openMenu ? 1 : 0 }}
           immediate={immediate}
         >
           {props => <div className={styles.menuContainer} style={props} >
             <ul className={styles.list} >
-              <li className={cx('ripple waves-light')} >Home</li >
-              <li className={cx('ripple waves-light')} >Products</li >
-              <li className={cx('ripple waves-light')} >News & Events</li >
-              <li className={cx('ripple waves-light')} >About</li >
-              <li className={cx('ripple waves-light')} >Contact</li >
+              <li className={cx('ripple waves-light')} onClick={this.navigate} >Home</li >
+              <li className={cx('ripple waves-light')} onClick={this.navigate} >Products</li >
+              <li className={cx('ripple waves-light')} onClick={this.navigate} >News & Events</li >
+              <SubMenu label="About" >
+                <li className={cx('ripple waves-light')} onClick={this.navigate} >Team</li >
+                <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
+              </SubMenu>
+              <li className={cx('ripple waves-light')} onClick={this.navigate} >Contact</li >
             </ul >
           </div >}
         </Spring >
