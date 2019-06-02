@@ -4,6 +4,8 @@ import { Spring } from 'react-spring/renderprops';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
+import { Products } from '/src/services';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import SubMenu from './sub-menu';
 import styles from '../styles.scss';
 import camelCase from 'lodash/camelCase';
@@ -37,6 +39,7 @@ class SideMenu extends PureComponent {
 
   render() {
     const { openMenu, immediate } = this.state;
+    console.log(Products.selectors.categories());
     return (
       <Fragment >
         <Spring
@@ -45,16 +48,32 @@ class SideMenu extends PureComponent {
           immediate={immediate}
         >
           {props => <div className={styles.menuContainer} style={props} >
-            <ul className={styles.list} >
-              <li className={cx('ripple waves-light')} onClick={this.navigate} >Home</li >
-              <li className={cx('ripple waves-light')} onClick={this.navigate} >Products</li >
-              <li className={cx('ripple waves-light')} onClick={this.navigate} >News & Events</li >
-              <SubMenu label="About" >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Team</li >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
-              </SubMenu>
-              <li className={cx('ripple waves-light')} onClick={this.navigate} >Contact</li >
-            </ul >
+            <PerfectScrollbar className={styles.listScrollContainer} >
+              <ul className={styles.list} >
+                <li className={cx('ripple waves-light')} onClick={this.navigate} >Home</li >
+                <SubMenu label="Products" >
+                  {Products.selectors.categories().map(category => (
+                    <Fragment key={category} >
+                      <label >{category}</label >
+                      {Products.selectors.list().map(product => {
+                        return product.category === category
+                          ? <li
+                            key={product.name}
+                            className={cx('ripple waves-light')}
+                            onClick={this.navigate} >{product.name}</li >
+                          : null;
+                      })}
+                    </Fragment >
+                  ))}
+                </SubMenu >
+                <li className={cx('ripple waves-light')} onClick={this.navigate} >News & Events</li >
+                <SubMenu label="About" >
+                  <li className={cx('ripple waves-light')} onClick={this.navigate} >Team</li >
+                  <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
+                </SubMenu >
+                <li className={cx('ripple waves-light')} onClick={this.navigate} >Contact</li >
+              </ul >
+            </PerfectScrollbar >
           </div >}
         </Spring >
         <div
