@@ -21,7 +21,6 @@
     "react-immutable-proptypes": "^2.1.0",
     "react-input-range": "^1.3.0",
     "react-motion": "^0.5.2",
-    "react-perfect-scrollbar": "^1.5.3",
     "react-quill": "^1.3.3",
     "react-redux": "5.1.1",
     "react-redux-firebase": "^2.2.5",

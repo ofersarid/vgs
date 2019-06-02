@@ -14,7 +14,6 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/database';
-import 'react-perfect-scrollbar/dist/css/styles.css';
 import './fonts/fonts.scss';
 import styles from './styles.scss';
 

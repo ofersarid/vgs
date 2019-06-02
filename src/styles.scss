@@ -46,13 +46,14 @@ $placeholderColor: #9f9b9b;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+//::-webkit-scrollbar-track {
+//  background: #f1f1f1;
+//}
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #bcbcbc;
+  background: rgba(0,0,0, 0.15);
+  border-radius: 10px;
 }
 
 h1 {
