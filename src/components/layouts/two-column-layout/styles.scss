@@ -12,27 +12,27 @@
 
 .inner {
   width: 66vw;
-  height: 65vh;
-  transform: translateY(27vh);
+  height: calc(77% - 32px);
+  transform: translateY(27%);
   position: relative;
 
   :global {
     @include media('>phone') {
       width: 58vw;
-      height: 76vh;
-      transform: translateY(15vh);
+      height: calc(77% - 5px);
+      transform: translateY(15%);
     }
 
     @include media('>tablet') {
       width: 74vw;
-      height: 65vh;
-      transform: translateY(23vh);
+      height: calc(77% - 65px);
+      transform: translateY(23%);
     }
 
     @include media('>desktop') {
       width: 60vw;
-      height: 50vh;
-      transform: translateY(25vh);
+      //height: 50%;
+      transform: translateY(25%);
     }
   }
 }

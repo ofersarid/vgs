@@ -68,19 +68,17 @@
 .menuContainer {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: #005728;
   color: white;
-  font-size: 28px;
   z-index: 1;
-  text-transform: uppercase;
 
   .list {
     left: calc(17% - 12px);
     right: 17%;
     top: calc(7% + 65px);
-    width: 66%;
-    height: 77%;
+    width: calc(66% + 16px);
+    height: calc(89% - 120px);
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -89,6 +87,17 @@
     list-style: none;
     font-weight: 100;
     overflow: auto;
+    font-size: 28px;
+    text-transform: uppercase;
+
+    @include media('>tablet') {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      top: 20%;
+      height: auto;
+    }
 
     li {
       font-size: 28px;
@@ -98,6 +107,8 @@
       border-radius: 27px;
       cursor: pointer;
       flex-shrink: 0;
+      height: 56px;
+      box-sizing: border-box;
 
       &.noClick {
         cursor: default;
@@ -122,5 +133,34 @@
         display: inline-block;
       }
     }
+
+    .subMenu {
+      height: auto;
+    }
+  }
+}
+
+.legal {
+  text-decoration: underline;
+  position: fixed;
+  right: 17%;
+  bottom: 4%;
+  padding: 10px 30px 7px;
+  transform: translate(45px, 0px);
+  font-weight: 100;
+  border-radius: 30px;
+  z-index: 1;
+  font-size: 28px;
+
+  @include media('>phone') {
+    right: 10%;
+  }
+
+  @include media('>tablet') {
+    right: 5%;
+  }
+
+  @include media('>desktop') {
+    right: 8%;
   }
 }

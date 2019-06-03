@@ -71,6 +71,7 @@ class SideMenu extends PureComponent {
               </SubMenu >
               <li className={cx('ripple waves-light')} onClick={this.navigate} >Contact</li >
             </ul >
+            <div className={cx('ripple waves-light', styles.legal)} onClick={this.navigate} >Legal</div>
           </div >}
         </Spring >
         <div

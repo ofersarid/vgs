@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Spring, config } from 'react-spring/renderprops';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
+import styles from '../styles.scss';
 
 class SubMenu extends PureComponent {
   constructor(props) {
@@ -25,7 +26,7 @@ class SubMenu extends PureComponent {
     const { children, label } = this.props;
     const { expand } = this.state;
     return (
-      <li className={cx('ripple waves-light')} onClick={this.toggle} >{label}
+      <li className={cx('ripple waves-light', styles.subMenu)} onClick={this.toggle} >{label}
         <Spring
           from={expand ? {
             height: 0,
