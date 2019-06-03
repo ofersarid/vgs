@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import Device from '/src/components/device/index';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
+import { FrameIndicator } from '/src/components';
 import styles from './styles.scss';
 import { websiteMainContainer } from './types';
 import logo from './logo.svg';
@@ -20,6 +21,7 @@ class Main extends PureComponent {
         <ReduxRoutes />
         <img src={logo} className={styles.logo} />
         <SideMenu />
+        <FrameIndicator />
         {this.props.children}
       </div >
     );

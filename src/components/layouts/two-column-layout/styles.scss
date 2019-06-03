@@ -96,6 +96,8 @@
 }
 
 .article {
+  font-size: 18px;
+  line-height: 37px;
 
   @include media('>tablet') {
     column-count: 2;
@@ -103,7 +105,7 @@
   }
 
   @include media('>desktop') {
-    column-gap: 8%;
+    column-gap: 20%;
   }
 }
 
