@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import Device from '/src/components/device/index';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
-import { FrameIndicator } from '/src/components';
+import FrameIndicator from './components/frame-indicator';
 import styles from './styles.scss';
 import { websiteMainContainer } from './types';
 import logo from './logo.svg';

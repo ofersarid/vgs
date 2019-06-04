@@ -3,6 +3,7 @@ import C from './consts';
 
 const initialState = fromJS({
   frame: 0,
+  count: 0,
   firstLook: true,
   disable: {
     next: false,
@@ -20,6 +21,9 @@ const reducer = (state = initialState, action) => {
 
     case C.ACTIONS.DISABLE:
       return state.set('disable', action.disable);
+
+    case C.ACTIONS.COUNT:
+      return state.set('count', action.count);
 
     default:
       return state;

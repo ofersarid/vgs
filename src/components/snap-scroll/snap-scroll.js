@@ -8,6 +8,7 @@ import autoBind from 'auto-bind';
 import actions from './actions';
 import selectors from './selectors';
 import styles from './styles.scss';
+import flattenDeep from 'lodash/flattenDeep';
 
 const DIRECTION = {
   FORWARD: 'forward',
@@ -48,6 +49,7 @@ class SnapScroll extends React.Component {
       disableScrollSnap: PropTypes.func.isRequired,
       disableNext: PropTypes.bool.isRequired,
       disablePrev: PropTypes.bool.isRequired,
+      count: PropTypes.func.isRequired,
     };
   }
 
@@ -86,15 +88,17 @@ class SnapScroll extends React.Component {
   }
 
   componentDidMount() {
+    const { indexChanged, updateFrameIndex, firstLook, count, children } = this.props;
     this.$node.addEventListener('wheel', this.mouseScrollHandler, false);
     this.$node.addEventListener('touchstart', this.touchStartHandler, false);
     this.$node.addEventListener('touchend', this.touchEndHandler, false);
     this.$node.addEventListener('touchmove', this.touchMoveHandler, false);
 
     // Fire initial indexChanged();
-    this.props.indexChanged(this.state.index);
-    this.props.updateFrameIndex(this.state.index);
-    this.props.firstLook(true);
+    indexChanged(this.state.index);
+    updateFrameIndex(this.state.index);
+    firstLook(true);
+    count(Array.isArray(children) ? flattenDeep(children).length : 1);
   }
 
   componentWillUnmount() {
@@ -224,6 +228,7 @@ const mapDispatchToProps = dispatch => ({
   updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
   firstLook: (...props) => dispatch(actions.firstLook(...props)),
   disableScrollSnap: (...props) => dispatch(actions.disable(...props)),
+  count: (...props) => dispatch(actions.count(...props)),
 });
 
 export default compose(

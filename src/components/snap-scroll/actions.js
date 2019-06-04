@@ -18,8 +18,14 @@ const disable = (disableNext, disablePrev) => ({
   },
 });
 
+const count = count => ({
+  type: C.ACTIONS.COUNT,
+  count,
+});
+
 export default {
   updateFrameIndex,
   firstLook,
   disable,
+  count,
 };

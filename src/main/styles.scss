@@ -164,3 +164,48 @@
     right: 8%;
   }
 }
+
+.frameIndicator {
+  position: fixed;
+  top: 50%;
+  left: 17%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px;
+
+  @include media('>phone') {
+    left: 10%;
+  }
+
+  @include media('>tablet') {
+    left: 5%;
+  }
+
+  @include media('>desktop') {
+    left: 8%;
+  }
+
+  li {
+    border-radius: 10px;
+    width: 5px;
+    height: 5px;
+    border: 1px solid #0272BA;
+
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+
+    &.indicate {
+      width: 9px;
+      height: 9px;
+      background: #0272BA;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 4px);
+      transition: .2s ease-out;
+    }
+  }
+}
