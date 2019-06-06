@@ -1,0 +1,64 @@
+@import "/src/media-query-mixins";
+
+.header {
+  color: #0272BA;
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 15px;
+  margin: 0;
+  font-weight: normal;
+  position: fixed;
+  width: 66vw;
+  top: 27%;
+  transform: translateY(-55px);
+  height: 37px;
+  z-index: 1;
+
+  @include media('>phone') {
+    width: 58vw;
+    height: 12px;
+    top: 15%;
+    transform: translateY(-63px);
+  }
+
+  @include media('>tablet') {
+    width: 74vw;
+    top: 23%;
+  }
+
+  @include media('>desktop') {
+    width: 60vw;
+    top: 25%;
+  }
+}
+
+.index {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.label {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  display: flex;
+  align-items: center;
+
+  @include media('>phone') {
+    top: 0;
+    left: 43px;
+  }
+}
+
+.divider {
+  display: none;
+  background: #0272BA;
+  height: 1px;
+  width: 68px;
+  margin-right: 25px;
+
+  @include media('>phone') {
+    display: inline-block;
+  }
+}

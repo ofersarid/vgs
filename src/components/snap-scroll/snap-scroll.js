@@ -65,7 +65,7 @@ class SnapScroll extends React.Component {
   // Returns 0 if the start prop is undefined or out of bounds.
   getStartIndex() {
     const { start, children } = this.props;
-    return !children.length ? 0 : (start >= 0 && start < children.length) ? Math.floor(start) : 0;
+    return !children.length ? 0 : (start >= 0 && start <= flattenDeep(children).length) ? start : 0;
   }
 
   constructor(props) {

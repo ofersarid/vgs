@@ -1,0 +1,57 @@
+@import "/src/media-query-mixins";
+
+.twoColumnLayout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  color:  #707070;
+  height: calc(100% - 66px);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.article {
+  font-size: 18px;
+  line-height: 37px;
+
+  @include media('>tablet') {
+    column-count: 2;
+    column-gap: 10%;
+  }
+
+  @include media('>desktop') {
+    column-gap: 20%;
+  }
+}
+
+.footNotes {
+  margin: 56px 0 0 0;
+  padding: 17px 0 0 0;
+  width: 100%;
+  counter-reset: item;
+  border-top: 1px solid #5E5E5E;
+
+  @include media('>phone') {
+    position: absolute;
+    bottom: 0
+  }
+
+  li {
+    display: block;
+
+    &:before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      width: 1.4em;
+      display: inline-block;
+    }
+  }
+}

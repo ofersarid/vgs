@@ -1,0 +1,33 @@
+@import "/src/media-query-mixins";
+
+$nav-bar-height: 80px;
+$gutter-phone: 17%;
+$gutter-tablet: 20%;
+$gutter-desktop: 13%;
+$gutter-wide-screen: 20%;
+
+.inner {
+  width: 66vw;
+  height: calc(100% - #{$gutter-phone} - #{$gutter-phone});
+  transform: translateY(27%);
+  position: relative;
+
+  :global {
+    @include media('>phone') {
+      width: calc(100% - #{$gutter-tablet} - #{$gutter-tablet});
+      height: calc(77% - 5px);
+      transform: translateY(15%);
+    }
+
+    @include media('>tablet') {
+      width: calc(100% - #{$gutter-desktop} - #{$gutter-desktop});
+      height: calc(77% - 65px);
+      transform: translateY(23%);
+    }
+
+    @include media('>desktop') {
+      width: calc(100% - #{$gutter-wide-screen} - #{$gutter-wide-screen});
+      transform: translateY(25%);
+    }
+  }
+}
