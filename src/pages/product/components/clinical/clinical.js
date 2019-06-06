@@ -3,9 +3,10 @@ import { Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SnapScroll, Gallery } from '/src/components';
+import { SnapScroll } from '/src/components';
 import IndexHeader from '../index-header/index-header';
 import styles from './styles.scss';
+import ReactSwipe from 'react-swipe';
 
 class Clinical extends PureComponent {
   constructor(props) {
@@ -14,6 +15,7 @@ class Clinical extends PureComponent {
       reverseAnimation: false,
     };
     autoBind(this);
+    this.clinicalSwipeEl = React.createRef();
   }
 
   // componentDidMount() {
@@ -40,7 +42,19 @@ class Clinical extends PureComponent {
           }}
         >
           <IndexHeader index={index} header="Clinical" />
-          <Gallery />
+          <ReactSwipe
+            swipeOptions={{
+              widthOfSiblingSlidePreview: 40,
+              continuous: true,
+              stopPropagation: true,
+            }}
+            className={styles.carousel}
+            ref={this.clinicalSwipeEl}
+          >
+            <div >PANE 1</div >
+            <div >PANE 2</div >
+            <div >PANE 3</div >
+          </ReactSwipe >
         </div >}
       </Spring >
     );

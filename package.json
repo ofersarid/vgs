@@ -30,6 +30,7 @@
     "react-snap-scroll": "^0.0.5",
     "react-spring": "^8.0.20",
     "react-stack-grid": "^0.7.1",
+    "react-swipe": "^6.0.4",
     "react-tiny-popover": "^3.4.2",
     "react-tippy": "^1.2.3",
     "react-transition-group": "^4.0.0",
@@ -40,6 +41,7 @@
     "reselect": "^4.0.0",
     "styled-components": "^4.2.0",
     "styled-icons": "^8.0.0",
+    "swipe-js-iso": "^2.1.5",
     "tippy.js": "^3.4.1",
     "wheel-inertia": "^0.0.2"
   },
