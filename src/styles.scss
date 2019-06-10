@@ -12,7 +12,7 @@ ul {
 }
 
 * {
-  outline:none;
+  outline: none;
 }
 
 .root {
@@ -27,14 +27,17 @@ $placeholderColor: #9f9b9b;
   color: $placeholderColor;
   font-style: italic;
 }
+
 ::-moz-placeholder { /* Firefox 19+ */
   color: $placeholderColor;
   font-style: italic;
 }
+
 :-ms-input-placeholder { /* IE 10+ */
   color: $placeholderColor;
   font-style: italic;
 }
+
 :-moz-placeholder { /* Firefox 18- */
   color: $placeholderColor;
   font-style: italic;
@@ -52,7 +55,7 @@ $placeholderColor: #9f9b9b;
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0, 0.15);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
 
@@ -62,4 +65,15 @@ h1 {
 
 .ripple {
   cursor: pointer;
+}
+
+:global {
+  .waves-effect.waves-color .waves-ripple {
+    background: rgba(#0272BA, 0.4);
+    background: -webkit-radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
+    background: -o-radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
+    background: -moz-radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
+    background: radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
+
+  }
 }

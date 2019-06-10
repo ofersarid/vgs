@@ -75,7 +75,7 @@ class SideMenu extends PureComponent {
           </div >}
         </Spring >
         <div
-          className={cx('ripple', styles.menuToggle)}
+          className={cx('ripple waves-color', styles.menuToggle)}
           onClick={this.toggleMenu}
         >
           <Spring

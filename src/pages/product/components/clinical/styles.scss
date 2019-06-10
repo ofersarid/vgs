@@ -11,6 +11,46 @@
   padding-left: #{$gutter-phone};
 
   .carousel {
-    width: calc(100% - #{$gutter-phone});
+    width: calc(100% - #{$gutter-phone} + 40px);
+    left: -40px;
+  }
+
+  .outerWrapper {
+    padding-right: 5vw;
+    box-sizing: border-box;
+  }
+
+  .innerWrapper {
+    background: #F9F9F9;
+    border-radius: 10px;
+    padding: 4vh 17px;
+    font-size: 16px;
+    width: 65vw;
+    box-sizing: border-box;
+  }
+
+  .date {
+    color: #8F8F8F;
+    line-height: 16px;
+    margin-bottom: 4%;
+    font-weight: 400;
+  }
+
+  .header {
+    color: #0272BA;
+    line-height: 37px;
+    font-weight: 100;
+    margin-bottom: 4%;
+    height: #{37 * 5}px;
+  }
+
+  .source {
+    line-height: 23px;
+    font-weight: 100;
+    height: #{23 * 3}px;
+  }
+
+  .disable {
+    pointer-events: none;
   }
 }

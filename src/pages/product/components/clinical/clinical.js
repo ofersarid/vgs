@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react';
 import { Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { SnapScroll } from '/src/components';
 import IndexHeader from '../index-header/index-header';
 import styles from './styles.scss';
 import ReactSwipe from 'react-swipe';
+import mock from './clinical.mock';
 
 class Clinical extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       reverseAnimation: false,
+      slide: 0,
     };
     autoBind(this);
     this.clinicalSwipeEl = React.createRef();
@@ -27,6 +31,24 @@ class Clinical extends PureComponent {
   reverseAnimation() {
     const { reverseAnimation } = this.state;
     this.setState({ reverseAnimation: !reverseAnimation });
+  }
+
+  renderData() {
+    const { slide } = this.state;
+    const dom = mock.map((m, i) => (
+      <div className={cx(styles.outerWrapper, { [styles.disable]: slide !== i })} key={m.id} >
+        <div className={`ripple waves-color ${styles.innerWrapper}`} >
+          <div className={styles.date} >{moment(m.date).format('MMMM Do, YYYY')}</div >
+          <div className={styles.header} >{m.header}</div >
+          <div className={styles.source} >{m.source}</div >
+        </div >
+      </div >
+    ));
+    return dom;
+  }
+
+  onChangeHandler(slide) {
+    this.setState({ slide });
   }
 
   render() {
@@ -45,15 +67,14 @@ class Clinical extends PureComponent {
           <ReactSwipe
             swipeOptions={{
               widthOfSiblingSlidePreview: 40,
-              continuous: true,
+              continuous: false,
               stopPropagation: true,
+              callback: this.onChangeHandler,
             }}
             className={styles.carousel}
             ref={this.clinicalSwipeEl}
           >
-            <div >PANE 1</div >
-            <div >PANE 2</div >
-            <div >PANE 3</div >
+            {this.renderData()}
           </ReactSwipe >
         </div >}
       </Spring >
