@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import inertia from 'wheel-inertia';
+import noop from 'lodash/noop';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
 import { connect } from 'react-redux';
@@ -30,8 +31,8 @@ class ScrollableArea extends PureComponent {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { frame } = this.props;
+    const $current = this.$el.current;
     if (frame !== prevProps.frame) {
-      const $current = this.$el.current;
       $current.scrollTo(0, 0);
     }
   }
@@ -82,6 +83,7 @@ class ScrollableArea extends PureComponent {
     const { hasOverflow } = this.state;
     return (
       <div
+        {...this.handlers}
         ref={this.$el}
         className={cx(styles.scrollableArea, className, { [styles.hasOverflow]: hasOverflow })}
         onMouseLeave={this.mouseLeaveHandler}
@@ -99,6 +101,11 @@ ScrollableArea.propTypes = {
   className: PropTypes.string,
   frame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
+};
+
+ScrollableArea.defaultProps = {
+  horizontal: false,
+  onSwipe: noop,
 };
 
 const mapStateToProps = state => ({

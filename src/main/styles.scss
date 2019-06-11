@@ -1,7 +1,6 @@
 @import "/src/media-query-mixins";
 
 .container {
-
 }
 
 .logo {
@@ -72,6 +71,12 @@
   background: #005728;
   color: white;
   z-index: 2;
+
+  :global {
+    ::-webkit-scrollbar-thumb {
+      background: rgba(white, 0.15);
+    }
+  }
 
   .list {
     left: calc(17% - 12px);

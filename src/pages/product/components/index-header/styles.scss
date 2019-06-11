@@ -1,4 +1,5 @@
 @import "/src/media-query-mixins";
+@import "../../styles";
 
 .header {
   color: #0272BA;
@@ -13,22 +14,26 @@
   transform: translateY(-55px);
   height: 37px;
   z-index: 1;
+  left: $gutter-phone;
 
   @include media('>phone') {
     width: 58vw;
     height: 12px;
     top: 15%;
     transform: translateY(-63px);
+    left: $gutter-tablet;
   }
 
   @include media('>tablet') {
     width: 74vw;
     top: 23%;
+    left: $gutter-desktop;
   }
 
   @include media('>desktop') {
     width: 60vw;
     top: 25%;
+    left: $gutter-wide-screen;
   }
 }
 

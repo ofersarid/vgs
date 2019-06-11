@@ -133,6 +133,7 @@ class SnapScroll extends React.Component {
 
   mouseScrollHandler(e) {
     const delta = e.wheelDelta;
+    this.isTouchDevice = false;
     if (this.lock) return;
     inertia.update(delta);
   };

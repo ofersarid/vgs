@@ -1,14 +1,14 @@
 @import "/src/media-query-mixins";
 
 $nav-bar-height: 80px;
-$gutter-phone: 17%;
-$gutter-tablet: 20%;
-$gutter-desktop: 13%;
-$gutter-wide-screen: 20%;
+$gutter-phone: 17vw;
+$gutter-tablet: 20vw;
+$gutter-desktop: 13vw;
+$gutter-wide-screen: 20vw;
 
 .inner {
   width: 66vw;
-  height: calc(100% - #{$gutter-phone} - #{$gutter-phone});
+  height: 75%;
   transform: translateY(27%);
   position: relative;
 
