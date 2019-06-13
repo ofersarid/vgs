@@ -7,38 +7,43 @@ $peek-mobile: 54px;
   z-index: 1;
   width: calc(100vw - #{$gutter-phone});
   position: fixed;
-  height: auto;
-  top: 27%;
   margin: 0 0 0 #{$gutter-phone};
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 62%;
+  bottom: 10%;
 
   @include media('>phone') {
-    height: 76%;
-    top: 15%;
+    height: 64%;
     margin: 0 0 0 #{$gutter-tablet};
+    bottom: 15%;
   }
 
   @include media('>tablet') {
-    height: 65%;
-    top: 23%;
+    height: 54%;
     margin: 0 0 0 #{$gutter-desktop};
+    bottom: 24%;
   }
 
   @include media('>desktop') {
-    height: 50%;
-    top: 25%;
     margin: 0 0 0 #{$gutter-wide-screen};
   }
 
   .carousel {
     width: 100%;
-    height: auto;
+    height: 100%;
     overflow: hidden;
     display: flex;
+    flex-grow: 1;
+    align-items: center;
 
     @include media('>tablet') {
       overflow: auto;
       padding-bottom: 10px;
+      height: 74%;
+      flex-grow: 0;
     }
     //left: #{-$peek-mobile};
 
@@ -54,8 +59,10 @@ $peek-mobile: 54px;
     flex-shrink: 0;
     //padding: 0 2%;
     width: 63vw;
+    height: 100%;
 
     @include media('>phone') {
+      height: 75%;
       width: 35vw;
       padding-right: 3vw;
     }
@@ -63,14 +70,11 @@ $peek-mobile: 54px;
     @include media('>tablet') {
       width: 27.5vw;
       padding-right: 2.5vw;
+      height: 100%;
     }
 
     @include media('>desktop') {
       width: 45vw;
-    }
-
-    &.toFront {
-      z-index: 1;
     }
   }
 
@@ -79,28 +83,32 @@ $peek-mobile: 54px;
     border-radius: 10px;
     padding: 4vh 17px;
     font-size: 16px;
+    height: 100%;
     //width: 65vw;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
 
   .date {
     color: #8F8F8F;
+    height: 10%;
     line-height: 16px;
-    margin-bottom: 4vh;
     font-weight: 400;
   }
 
   .header {
     color: #0272BA;
+    height: 70%;
     line-height: 37px;
     font-weight: 100;
-    margin-bottom: 4vh;
     //height: #{37 * 5}px;
   }
 
   .source {
     line-height: 23px;
     font-weight: 100;
+    height: 20%;
     //height: #{23 * 3}px;
   }
 
@@ -118,8 +126,14 @@ $peek-mobile: 54px;
     border-radius: 10px;
     width: 25px;
 
-    @include media('>tablet') {
-      display: none;
-    }
+    //@include media('>tablet') {
+    //  display: none;
+    //}
+  }
+
+  .menuTrigger {
+    margin: 5px 0 30px 0;
+    flex-shrink: 0;
+    align-self: start;
   }
 }

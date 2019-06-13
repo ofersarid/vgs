@@ -38,6 +38,7 @@
 }
 
 .hasOverflow {
-    padding-right: 8px;
-    width: calc(100% - 8px);
+    $padding-right: 16px;
+    padding-right: $padding-right;
+    width: calc(100% - #{$padding-right});
 }

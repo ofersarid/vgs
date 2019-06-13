@@ -12,6 +12,7 @@ module.exports = {
     'space-before-function-paren': 0,
     'no-new': 0,
     'no-new': 0,
+    'spaced-comment': 0,
   },
   globals: {
     File: true,

@@ -43,7 +43,9 @@ class Cover extends PureComponent {
     return (
       <Spring
         from={{ opacity: forward ? 0 : 1 }}
-        to={{ opacity: forward ? 1 : 0 }} >
+        to={{ opacity: forward ? 1 : 0 }}
+        immediate={frame !== 0}
+      >
         {props => <div
           className={styles.cover}
           style={{

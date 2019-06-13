@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { Spring } from 'react-spring/renderprops';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,27 +18,25 @@ const TwoColumnLayout = ({ index, frame, header, firstLook, article, footNotes, 
         to={{ opacity: frame === index ? 1 : 0 }}
         immediate={frame !== index}
       >
-        {styleProps => <div className={sharedStyles.inner} >
-          <section className={styles.content} style={{
-            opacity: styleProps.opacity,
-          }} >
-            <ScrollableArea >
-              <div className={styles.article} >
-                {article}
-              </div >
-              {isMobile && (
-                <ol className={styles.footNotes} >
-                  {footNotes.map((note, i) => <li key={i} >{note}</li >)}
-                </ol >
-              )}
-            </ScrollableArea >
-            {!isMobile && (
+        {styleProps => <section className={cx(styles.content, sharedStyles.inner)} style={{
+          opacity: styleProps.opacity,
+        }} >
+          <ScrollableArea >
+            <div className={styles.article} >
+              {article}
+            </div >
+            {isMobile && (
               <ol className={styles.footNotes} >
                 {footNotes.map((note, i) => <li key={i} >{note}</li >)}
               </ol >
             )}
-          </section >
-        </div >}
+          </ScrollableArea >
+          {!isMobile && (
+            <ol className={styles.footNotes} >
+              {footNotes.map((note, i) => <li key={i} >{note}</li >)}
+            </ol >
+          )}
+        </section >}
       </Spring>
     </div >
   ) : null;
