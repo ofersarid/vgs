@@ -19,7 +19,9 @@ class Main extends PureComponent {
     return (
       <div className={styles.container} >
         <ReduxRoutes />
-        <img src={logo} className={styles.logo} />
+        <div className={styles.logo}>
+          <img src={logo} />
+        </div>
         <SideMenu />
         <FrameIndicator />
         {this.props.children}
