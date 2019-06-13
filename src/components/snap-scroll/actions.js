@@ -5,11 +5,6 @@ const updateFrameIndex = index => ({
   index,
 });
 
-const firstLook = isFirstLook => ({
-  type: C.ACTIONS.FIRST_LOOK,
-  isFirstLook,
-});
-
 const disable = (disableNext, disablePrev) => ({
   type: C.ACTIONS.DISABLE,
   disable: {
@@ -25,7 +20,6 @@ const count = count => ({
 
 export default {
   updateFrameIndex,
-  firstLook,
   disable,
   count,
 };

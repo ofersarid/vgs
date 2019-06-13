@@ -6,30 +6,22 @@ import Device from '/src/components/device';
 import { SnapScroll } from '/src/components';
 import styles from './styles.scss';
 
-const IndexHeader = ({ index, frame, header, firstLook, isMobile }) => {
+const IndexHeader = ({ index, frame, header, isMobile }) => {
   const forward = frame >= index;
 
   const resolveSpring = () => {
     return frame !== index ? useSpring({
       x: forward ? 300 : -300,
       o: 0,
-      from: {
-        x: 0,
-        o: 1,
-      },
     }) : useSpring({
       x: 0,
       o: 1,
-      from: {
-        x: forward ? -100 : 100,
-        o: 0,
-      },
     });
   };
 
   const { o, x } = resolveSpring();
 
-  return (frame > 0 || !firstLook) ? (
+  return (
     <h2 className={styles.header} >
       <animated.span className={styles.index} style={{
         opacity: o,
@@ -44,14 +36,13 @@ const IndexHeader = ({ index, frame, header, firstLook, isMobile }) => {
         {header}
       </animated.span >
     </h2 >
-  ) : null;
+  );
 };
 
 IndexHeader.propTypes = {
   header: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
-  firstLook: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };
 
@@ -59,7 +50,6 @@ const mapStateToProps = state => ({
   deviceType: Device.selectors.deviceType(state),
   deviceOrientation: Device.selectors.deviceOrientation(state),
   frame: SnapScroll.selectors.frame(state),
-  firstLook: SnapScroll.selectors.firstLook(state),
   isMobile: Device.selectors.isMobile(state),
 });
 

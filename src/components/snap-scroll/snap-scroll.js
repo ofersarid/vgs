@@ -45,7 +45,6 @@ class SnapScroll extends React.Component {
       updateFrameIndex: PropTypes.func.isRequired,
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       customTransition: PropTypes.string,
-      firstLook: PropTypes.func.isRequired,
       disableScrollSnap: PropTypes.func.isRequired,
       disableNext: PropTypes.bool.isRequired,
       disablePrev: PropTypes.bool.isRequired,
@@ -62,16 +61,11 @@ class SnapScroll extends React.Component {
     };
   }
 
-  // Returns 0 if the start prop is undefined or out of bounds.
-  getStartIndex() {
-    const { start, children } = this.props;
-    return !children.length ? 0 : (start >= 0 && start <= flattenDeep(children).length) ? start : 0;
-  }
-
   constructor(props) {
     super(props);
     autoBind(this);
     this.xDown = null;
+    this.children = flattenDeep(props.children);
     this.state = {
       index: this.getStartIndex(),
       direction: DIRECTION.FORWARD,
@@ -88,7 +82,7 @@ class SnapScroll extends React.Component {
   }
 
   componentDidMount() {
-    const { indexChanged, updateFrameIndex, firstLook, count, children } = this.props;
+    const { indexChanged, updateFrameIndex, count, children } = this.props;
     this.$node.addEventListener('wheel', this.mouseScrollHandler, false);
     this.$node.addEventListener('touchstart', this.touchStartHandler, false);
     this.$node.addEventListener('touchend', this.touchEndHandler, false);
@@ -97,7 +91,6 @@ class SnapScroll extends React.Component {
     // Fire initial indexChanged();
     indexChanged(this.state.index);
     updateFrameIndex(this.state.index);
-    firstLook(true);
     count(Array.isArray(children) ? flattenDeep(children).length : 1);
   }
 
@@ -108,9 +101,14 @@ class SnapScroll extends React.Component {
     this.$node.removeEventListener('touchmove', this.touchMoveHandler, false);
   }
 
+  getStartIndex(props) {
+    const { start } = props || this.props;
+    // Returns 0 if the start prop is undefined or out of bounds.
+    return !this.children.length ? 0 : (start < 0 || start >= this.children.length) ? 0 : start;
+  }
+
   snap(direction) {
     this.lock = true;
-    this.props.firstLook(false);
     if (this.to) {
       clearTimeout(this.to);
     }
@@ -168,7 +166,7 @@ class SnapScroll extends React.Component {
   next() {
     const { disableNext } = this.props;
     if (disableNext) return;
-    const index = Math.min(this.state.index + 1, this.key - 1);
+    const index = Math.min(this.state.index + 1, this.children.length - 1);
     this.setState({
       index,
       direction: DIRECTION.FORWARD,
@@ -191,26 +189,24 @@ class SnapScroll extends React.Component {
     });
   };
 
-  renderChildren(children) {
+  renderChildren() {
     const { frame } = this.props;
-    const isArray = Array.isArray(children);
-    if (isArray) {
-      return children.map(child => this.renderChildren(child));
-    } else {
-      const wrapper = <Wrapper key={this.key} frame={frame} index={this.key} >{children}</Wrapper >;
-      this.key++;
-      return wrapper;
-    }
+    return this.children[frame];
+    // if (isArray) {
+    //   return children.map(child => this.renderChildren(child));
+    // } else {
+    //   const wrapper = <Wrapper key={this.key} frame={frame} index={this.key} >{children}</Wrapper >;
+    //   this.key++;
+    //   return wrapper;
+    // }
   }
 
   render() {
-    const { children } = this.props;
-    this.key = 0;
     return (
       <div className={styles.snapScroll} ref={el => {
         this.$node = el;
       }} >
-        {this.renderChildren(children, this.key)}
+        {this.renderChildren()}
       </div >
     );
   }
@@ -227,7 +223,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
-  firstLook: (...props) => dispatch(actions.firstLook(...props)),
   disableScrollSnap: (...props) => dispatch(actions.disable(...props)),
   count: (...props) => dispatch(actions.count(...props)),
 });

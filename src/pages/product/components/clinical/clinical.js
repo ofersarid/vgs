@@ -12,7 +12,6 @@ import { SnapScroll, DropMenu } from '/src/components';
 import { Swipeable } from 'react-swipeable';
 import { LongArrowAltRight } from 'styled-icons/fa-solid/LongArrowAltRight';
 import { LongArrowAltLeft } from 'styled-icons/fa-solid/LongArrowAltLeft';
-import IndexHeader from '../index-header/index-header';
 import sharedStyles from '../../styles.scss';
 import styles from './styles.scss';
 // import ReactSwipe from 'react-swipe';
@@ -43,8 +42,8 @@ class Clinical extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.listRef.removeventListener('mouseenter', this.preventOuterScroll, false);
-    this.listRef.removeventListener('mouseleave', this.enableOuterScroll, false);
+    this.listRef.removeEventListener('mouseenter', this.preventOuterScroll, false);
+    this.listRef.removeEventListener('mouseleave', this.enableOuterScroll, false);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -143,7 +142,6 @@ class Clinical extends PureComponent {
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
       <Fragment >
-        <IndexHeader index={index} header="Clinical" />
         <Spring
           from={{
             opacity: frame === index ? 0 : 1,
