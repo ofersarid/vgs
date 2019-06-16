@@ -11,8 +11,15 @@
   z-index: 1;
   transform: translate(-50%, -50%);
 
-  img {
+  .logoImg {
     width: 100%;
+  }
+
+  .logoText {
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   @include media('>phone') {
