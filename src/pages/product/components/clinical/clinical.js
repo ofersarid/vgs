@@ -39,6 +39,9 @@ class Clinical extends PureComponent {
     this.listRef.addEventListener('mouseenter', this.preventOuterScroll, false);
     this.listRef.addEventListener('mouseleave', this.enableOuterScroll, false);
     this.listRef.addEventListener('scroll', this.onScrollHandlerDB, false);
+    this.setState({
+      start: this.listRef.clientWidth < this.listRef.scrollWidth,
+    });
   }
 
   componentWillUnmount() {
@@ -48,9 +51,9 @@ class Clinical extends PureComponent {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { slide } = this.state;
-    const { isMobile } = this.props;
+    const { isTouchDevice } = this.props;
     // this.listRef.scrollLeft = this.getSlideScrollPosition();
-    if (isMobile) {
+    if (isTouchDevice) {
       animateScrollTo(this.slidesRefs[slide].current, { element: this.listRef, horizontal: true });
     }
   }
@@ -137,7 +140,7 @@ class Clinical extends PureComponent {
   }
 
   render() {
-    const { frame, index } = this.props;
+    const { frame, index, isTouchDevice } = this.props;
     const { start, end } = this.state;
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
@@ -167,6 +170,9 @@ class Clinical extends PureComponent {
               innerRef={ref => {
                 this.listRef = ref;
               }}
+              style={{
+                overflow: isTouchDevice ? 'hidden' : 'auto',
+              }}
               onSwipedLeft={this.onSwipedLeftHandler}
               onSwipedRight={this.onSwipedRightHandler}
               onSwiping={this.onSwipingHandler}
@@ -193,14 +199,14 @@ Clinical.propTypes = {
   themeColor: PropTypes.oneOf(['blue']).isRequired,
   index: PropTypes.number.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
-  isMobile: PropTypes.bool.isRequired,
+  isTouchDevice: PropTypes.bool.isRequired,
   disableNext: PropTypes.bool.isRequired,
   disablePrev: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  isMobile: Device.selectors.isMobile(state),
+  isTouchDevice: Device.selectors.isTouchDevice(state),
   disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),
 });
