@@ -7,6 +7,7 @@ import autoBind from 'auto-bind';
 import styles from './styles.scss';
 import { Spring } from 'react-spring/renderprops-universal';
 import { SnapScroll, ScrollableArea } from '/src/components';
+import Device from '/src/components/device';
 import sharedStyles from '../../styles.scss';
 
 class ImgTxtBtn extends PureComponent {
@@ -16,7 +17,7 @@ class ImgTxtBtn extends PureComponent {
   }
 
   render() {
-    const { showOnFrame, frame, img, txt, pdfSrc, themeColor } = this.props;
+    const { showOnFrame, frame, img, txt, pdfSrc, themeColor, isMobile, footNotes } = this.props;
     return (
       <Spring
         from={{ opacity: 0 }}
@@ -41,6 +42,11 @@ class ImgTxtBtn extends PureComponent {
           >
             PRODUCT PDF
           </a>
+          {isMobile && (
+            <ol className={styles.footNotes} >
+              {footNotes.map((note, i) => <li key={i} >{note}</li >)}
+            </ol >
+          )}
         </ScrollableArea >}
       </Spring >
     );
@@ -59,10 +65,12 @@ ImgTxtBtn.propTypes = {
   themeColor: PropTypes.string.isRequired,
   frame: PropTypes.number.isRequired,
   showOnFrame: PropTypes.number.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
+  isMobile: Device.selectors.isMobile(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

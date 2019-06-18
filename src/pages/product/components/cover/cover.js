@@ -83,7 +83,7 @@ Cover.propTypes = {
   art: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  themeColor: PropTypes.oneOf(['blue']).isRequired,
+  themeColor: PropTypes.string.isRequired,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
     dateFrom: PropTypes.instanceOf(Date).isRequired,

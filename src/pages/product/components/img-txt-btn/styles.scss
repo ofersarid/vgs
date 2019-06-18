@@ -1,3 +1,5 @@
+@import "/src/media-query-mixins";
+
 .container {
 
 }
@@ -15,6 +17,7 @@
 .txt {
   font-size: 16px;
   line-height: 35px;
+  margin: 25px 0 0 0;
 }
 
 .btn {
@@ -24,4 +27,32 @@
   border-radius: 30px;
   font-size: 11px;
   line-height: 11px;
+  margin: 34px 0 50px;
+  display: inline-block;
+}
+
+.footNotes {
+  margin: 0;
+  padding: 17px 0 0 0;
+  width: 100%;
+  counter-reset: item;
+  border-top: 1px solid #5E5E5E;
+  font-size: 10px;
+  line-height: 18px;
+
+  @include media('>phone') {
+    position: absolute;
+    bottom: 0
+  }
+
+  li {
+    display: block;
+
+    &:before {
+      content: "(" counter(item) ") ";
+      counter-increment: item;
+      width: 1.4em;
+      display: inline-block;
+    }
+  }
 }

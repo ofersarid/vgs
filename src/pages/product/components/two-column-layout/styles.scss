@@ -38,6 +38,8 @@
   width: 100%;
   counter-reset: item;
   border-top: 1px solid #5E5E5E;
+  font-size: 10px;
+  line-height: 18px;
 
   @include media('>phone') {
     position: absolute;
@@ -48,7 +50,7 @@
     display: block;
 
     &:before {
-      content: counter(item) ". ";
+      content: "(" counter(item) ") ";
       counter-increment: item;
       width: 1.4em;
       display: inline-block;
