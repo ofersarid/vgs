@@ -79,7 +79,7 @@ class ScrollableArea extends PureComponent {
   }
 
   render() {
-    const { children, className, isMobile } = this.props;
+    const { children, className, isMobile, style } = this.props;
     const { hasOverflow } = this.state;
     return (
       <div
@@ -90,6 +90,7 @@ class ScrollableArea extends PureComponent {
         onTouchStart={this.handleScrollSnap}
         onTouchEnd={this.handleScrollSnap}
         onScroll={(this.hasOverflow && !isMobile) ? this.handleScrollSnap : undefined}
+        style={style}
       >{children}</div >
     );
   }
@@ -101,6 +102,7 @@ ScrollableArea.propTypes = {
   className: PropTypes.string,
   frame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  style: PropTypes.object,
 };
 
 ScrollableArea.defaultProps = {

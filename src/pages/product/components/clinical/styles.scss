@@ -7,7 +7,6 @@ $peek-mobile: 54px;
   z-index: 1;
   width: calc(100vw - #{$gutter-phone});
   position: fixed;
-  margin: 0 0 0 #{$gutter-phone};
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -17,18 +16,18 @@ $peek-mobile: 54px;
 
   @include media('>phone') {
     height: 64%;
-    margin: 0 0 0 #{$gutter-tablet};
     bottom: 15%;
+    width: calc(100vw - #{$gutter-tablet});
   }
 
   @include media('>tablet') {
     height: 54%;
-    margin: 0 0 0 #{$gutter-desktop};
     bottom: 24%;
+    width: calc(100vw - #{$gutter-desktop});
   }
 
   @include media('>desktop') {
-    margin: 0 0 0 #{$gutter-wide-screen};
+    width: calc(100vw - #{$gutter-wide-screen});
   }
 
   .carousel {

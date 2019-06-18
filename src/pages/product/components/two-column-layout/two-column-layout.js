@@ -8,40 +8,38 @@ import { SnapScroll, ScrollableArea } from '/src/components';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
 
-const TwoColumnLayout = ({ index, frame, article, footNotes, isMobile }) => {
+const TwoColumnLayout = ({ showOnFrame, frame, article, footNotes, isMobile }) => {
   return (
-    <div className={styles.twoColumnLayout} >
-      <Spring
-        from={{ opacity: frame === index ? 0 : 1 }}
-        to={{ opacity: frame === index ? 1 : 0 }}
-        immediate={frame !== index}
-      >
-        {styleProps => <section className={cx(styles.content, sharedStyles.inner)} style={{
-          opacity: styleProps.opacity,
-        }} >
-          <ScrollableArea >
-            <div className={styles.article} >
-              {article}
-            </div >
-            {isMobile && (
-              <ol className={styles.footNotes} >
-                {footNotes.map((note, i) => <li key={i} >{note}</li >)}
-              </ol >
-            )}
-          </ScrollableArea >
-          {!isMobile && (
+    <Spring
+      from={{ opacity: frame === showOnFrame ? 0 : 1 }}
+      to={{ opacity: frame === showOnFrame ? 1 : 0 }}
+      immediate={frame !== showOnFrame}
+    >
+      {styleProps => <section className={cx(styles.content, sharedStyles.inner)} style={{
+        opacity: styleProps.opacity,
+      }} >
+        <ScrollableArea >
+          <div className={styles.article} >
+            {article}
+          </div >
+          {isMobile && (
             <ol className={styles.footNotes} >
               {footNotes.map((note, i) => <li key={i} >{note}</li >)}
             </ol >
           )}
-        </section >}
-      </Spring >
-    </div >
+        </ScrollableArea >
+        {!isMobile && (
+          <ol className={styles.footNotes} >
+            {footNotes.map((note, i) => <li key={i} >{note}</li >)}
+          </ol >
+        )}
+      </section >}
+    </Spring >
   );
 };
 
 TwoColumnLayout.propTypes = {
-  index: PropTypes.number.isRequired,
+  showOnFrame: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
   article: PropTypes.string,
   footNotes: PropTypes.arrayOf(PropTypes.string),

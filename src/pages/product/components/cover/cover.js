@@ -19,24 +19,15 @@ class Cover extends PureComponent {
     autoBind(this);
   }
 
-  // componentDidMount() {
-  //   setInterval(() => {
-  //     this.setState({ reset: !this.state.reset });
-  //   }, 1000);
-  // }
-
   reverseAnimation() {
     const { reverseAnimation } = this.state;
     this.setState({ reverseAnimation: !reverseAnimation });
   }
 
   render() {
-    const { frame, footer, themeColor, name, description, art } = this.props;
+    const { frame, footer, themeColor, name, description, art, showOnFrame } = this.props;
     const { reverseAnimation } = this.state;
-    const forward = frame === 0;
-    const colorMap = {
-      blue: '#0272BA',
-    };
+    const forward = frame === showOnFrame;
     const navigate = () => {
       hashHistory.push(footer.linkTo);
     };
@@ -53,14 +44,14 @@ class Cover extends PureComponent {
           }}
         >
           <h1 className={styles.header} >
-            <div style={{ color: colorMap[themeColor] }} >{name}</div >
+            <div style={{ color: themeColor }} >{name}</div >
             <div >{description}</div >
           </h1 >
           <img src={art} className={styles.art} />
           {footer ? (
             <div
               className={cx('ripple waves-light', styles.footer)}
-              style={{ background: colorMap[themeColor] }}
+              style={{ background: themeColor }}
               onClick={navigate}
             >
               <div className={styles.text}>
@@ -99,7 +90,8 @@ Cover.propTypes = {
     dateTo: PropTypes.instanceOf(Date).isRequired,
     address: PropTypes.string.isRequired,
     linkTo: PropTypes.string.isRequired,
-  })
+  }),
+  showOnFrame: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({

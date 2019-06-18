@@ -11,21 +11,25 @@ $gutter-wide-screen: 20vw;
   height: 61%;
   bottom: 10%;
   position: fixed;
+  left: $gutter-phone;
 
   :global {
     @include media('>phone') {
       width: calc(100% - #{$gutter-tablet} - #{$gutter-tablet});
       height: calc(67%);
+      left: $gutter-tablet;
       //transform: translateY(15%);
     }
 
     @include media('>tablet') {
       width: calc(100% - #{$gutter-desktop} - #{$gutter-desktop});
+      left: $gutter-desktop;
       //transform: translateY(23%);
     }
 
     @include media('>desktop') {
       width: calc(100% - #{$gutter-wide-screen} - #{$gutter-wide-screen});
+      left: $gutter-wide-screen;
       //transform: translateY(25%);
     }
   }

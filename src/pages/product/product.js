@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll } from '/src/components';
-import { TwoColumnLayout, Clinical, Cover, IndexHeader } from './components';
+import { TwoColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn } from './components';
 import Device from '/src/components/device';
-import dataMock from './data.mock';
-import donut from './donut.png';
+import mock from './mocks/data.mock';
 
 // import { firestoreConnect } from 'react-redux-firebase';
 
@@ -21,38 +20,37 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { frame } = this.props;
     return (
       <Fragment>
-        {frame > 0 && <IndexHeader index={1} header={dataMock[0].title} />}
-        {dataMock.slice(1).map((d, i) => (
-          <IndexHeader key={`index-${i}`} index={i + 2} header={dataMock[i + 1].title} />
-        ))}
-        <IndexHeader index={dataMock.length + 1} header="Clinical" />
-        <SnapScroll start={5} >
+        <IndexHeader index={1} header="About" />
+        <IndexHeader index={2} header="Key Features" />
+        <IndexHeader index={3} header="Clinical" />
+        <SnapScroll start={2} >
           <Cover
-            art={donut}
-            themeColor="blue"
-            name="Frame"
-            description="EXTERNAL SUPPORT TECHNOLOGHY FOR PERIPHERAL VASCULAR RECONSTRUCTION"
-            footer={{
-              title: 'AATS 98th Annual Meeting in San Diego',
-              dateFrom: new Date(),
-              dateTo: new Date(),
-              address: '62 Hadarim street pardess hanna',
-              linkTo: 'home/danny',
-            }}
+            art={mock.cover.art}
+            themeColor={mock.themeColor}
+            name={mock.cover.name}
+            description={mock.cover.description}
+            footer={mock.cover.footer}
+            showOnFrame={0}
           />
-          {dataMock.map((d, i) => {
-            return <TwoColumnLayout
-              key={d.title}
-              header={d.title}
-              footNotes={d.footNotes}
-              article={d.article}
-              index={i + 1}
-            />;
-          })}
-          <Clinical index={dataMock.length + 1} themeColor="blue" />
+          <TwoColumnLayout
+            key={mock.about.title}
+            header={mock.about.title}
+            footNotes={mock.about.footNotes}
+            article={mock.about.article}
+            showOnFrame={1}
+          />
+          <ImgTxtBtn
+            img={mock.keyFeatures.img}
+            txt={mock.keyFeatures.txt}
+            footNotes={mock.keyFeatures.footNotes}
+            pdfSrc={mock.keyFeatures.pdfSrc}
+            title={mock.keyFeatures.title}
+            showOnFrame={2}
+            themeColor={mock.themeColor}
+          />
+          <Clinical showOnFrame={3} themeColor={mock.themeColor} articles={mock.clinical} />
         </SnapScroll >
       </Fragment>
     );

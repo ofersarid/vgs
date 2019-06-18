@@ -14,8 +14,6 @@ import { LongArrowAltRight } from 'styled-icons/fa-solid/LongArrowAltRight';
 import { LongArrowAltLeft } from 'styled-icons/fa-solid/LongArrowAltLeft';
 import sharedStyles from '../../styles.scss';
 import styles from './styles.scss';
-// import ReactSwipe from 'react-swipe';
-import mock from './clinical.mock';
 
 class Clinical extends PureComponent {
   constructor(props) {
@@ -28,7 +26,7 @@ class Clinical extends PureComponent {
     };
     autoBind(this);
     this.slidesRefs = [];
-    mock.forEach(item => {
+    props.articles.forEach(item => {
       this.slidesRefs.push(React.createRef());
     });
 
@@ -89,7 +87,8 @@ class Clinical extends PureComponent {
   }
 
   renderData() {
-    const dom = mock.map((m, i) => (
+    const { articles } = this.props;
+    const dom = articles.map((m, i) => (
       <div ref={this.slidesRefs[i]} className={cx(styles.outerWrapper)} key={m.id} >
         <div className={`ripple waves-color ${styles.innerWrapper}`} >
           <div className={styles.date} >{moment(m.date).format('MMMM Do, YYYY')}</div >
@@ -106,22 +105,24 @@ class Clinical extends PureComponent {
   // }
 
   onSwipedLeftHandler() {
+    const { articles } = this.props;
     const { slide } = this.state;
-    const nextSlide = Math.min(slide + 1, mock.length - 1);
+    const nextSlide = Math.min(slide + 1, articles.length - 1);
     this.setState({
       slide: nextSlide,
       start: nextSlide === 0,
-      end: nextSlide === mock.length - 1,
+      end: nextSlide === articles.length - 1,
     });
   }
 
   onSwipedRightHandler() {
     const { slide } = this.state;
+    const { articles } = this.props;
     const nextSlide = Math.max(slide - 1, 0);
     this.setState({
       slide: nextSlide,
       start: nextSlide === 0,
-      end: nextSlide === mock.length - 1,
+      end: nextSlide === articles.length - 1,
     });
   }
 
@@ -140,23 +141,23 @@ class Clinical extends PureComponent {
   }
 
   render() {
-    const { frame, index, isTouchDevice } = this.props;
+    const { frame, showOnFrame, isTouchDevice } = this.props;
     const { start, end } = this.state;
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
       <Fragment >
         <Spring
           from={{
-            opacity: frame === index ? 0 : 1,
+            opacity: frame === showOnFrame ? 0 : 1,
             arrowRightOpacity: start ? 0 : 1,
             arrowLeftOpacity: end ? 0 : 1
           }}
           to={{
-            opacity: frame === index ? 1 : 0,
+            opacity: frame === showOnFrame ? 1 : 0,
             arrowRightOpacity: start ? 1 : 0,
             arrowLeftOpacity: end ? 1 : 0
           }}
-          immediate={frame !== index}
+          immediate={frame !== showOnFrame}
         >
           {props => <div
             className={cx(styles.clinical, sharedStyles.inner)}
@@ -197,11 +198,17 @@ class Clinical extends PureComponent {
 Clinical.propTypes = {
   frame: PropTypes.number.isRequired,
   themeColor: PropTypes.oneOf(['blue']).isRequired,
-  index: PropTypes.number.isRequired,
+  showOnFrame: PropTypes.number.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
   isTouchDevice: PropTypes.bool.isRequired,
   disableNext: PropTypes.bool.isRequired,
   disablePrev: PropTypes.bool.isRequired,
+  articles: PropTypes.arrayOf(PropTypes.shape({
+    date: PropTypes.instanceOf(Date).isRequired,
+    header: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = state => ({
