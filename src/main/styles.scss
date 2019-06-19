@@ -1,4 +1,5 @@
 @import "/src/media-query-mixins";
+@import "/src/dimentions";
 
 .container {
 }
@@ -119,10 +120,9 @@
   }
 
   .list {
-    left: calc(17% - 12px);
-    right: 17%;
+    left: $gutter-phone;
     top: calc(7% + 65px);
-    width: calc(66% + 15px);
+    width: calc(100% - #{$gutter-phone * 2});
     height: calc(89% - 120px);
     display: flex;
     flex-direction: column;
@@ -136,24 +136,37 @@
     text-transform: uppercase;
 
     @include media('>phone') {
-      left: calc(13% - 12px);
+      left: $gutter-tablet;
       right: 17%;
       top: calc(7% + 65px);
-      width: calc(76% + 22px);
+      width: calc(100% - #{$gutter-tablet} - 10%);
       height: calc(89% - 120px);
       display: flex;
 
-      @include orientation(landscape) {
-        @media (min-width: 1200px) {
-          flex-direction: row;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          align-content: flex-start;
-          top: 20%;
-          height: auto;
-          width: calc(76% + 16px);
-        }
-      }
+      //@include orientation(landscape) {
+      //  @media (min-width: 1200px) {
+      //    flex-direction: row;
+      //    justify-content: space-between;
+      //    flex-wrap: wrap;
+      //    align-content: flex-start;
+      //    top: 20%;
+      //    height: auto;
+      //    width: calc(76% + 16px);
+      //  }
+      //}
+    }
+
+    @include media('>tablet') {
+      width: calc(100% - #{$gutter-tablet} - 5%);
+    }
+
+    @media (min-width: 1200px) {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      top: 20%;
+      height: auto;
     }
 
     li {

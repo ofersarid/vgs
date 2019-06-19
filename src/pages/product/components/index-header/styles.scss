@@ -27,6 +27,8 @@
     width: 74vw;
     top: 23%;
     left: $gutter-desktop;
+    font-size: 18px;
+    line-height: 18px;
   }
 
   @include media('>desktop') {

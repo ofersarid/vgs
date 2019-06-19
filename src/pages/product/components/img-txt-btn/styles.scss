@@ -47,6 +47,17 @@
   font-size: 16px;
   line-height: 35px;
   margin: 25px 0 0 0;
+
+  @include media('>tablet') {
+    font-size: 18px;
+    line-height: 30px;
+    margin: 0;
+  }
+
+  @include media('>desktop') {
+    font-size: 22px;
+    line-height: 37px;
+  }
 }
 
 .btn {
@@ -58,6 +69,11 @@
   line-height: 11px;
   margin: 34px 0 50px;
   display: inline-block;
+  flex-shrink: 0;
+
+  @include media('>tablet') {
+    margin: 0;
+  }
 }
 
 .footNotes {
@@ -73,12 +89,6 @@
     position: absolute;
     bottom: 0
   }
-
-  //@include media('>tablet') {
-  //  clear: both;
-  //  position: static;
-  //  transform: translateY(40px);
-  //}
 
   @include media('>desktop') {
     font-size: 12px;
@@ -99,18 +109,16 @@
 
 .rightCol {
   @include media('>tablet') {
-    @include orientation(landscape) {
-      width: 32vw;
-      float: right;
-      height: 35vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
+    width: 35vw;
+    float: right;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 
-      p {
-        margin: 0;
-      }
+    p {
+      margin: 0;
     }
   }
 
