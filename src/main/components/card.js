@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
-import cx from 'classnames';
+// import cx from 'classnames';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from '../styles.scss';
 import mobileIcon from './mobile_icon.svg';
+import { logoGreen, vgsGreen } from '../assets';
 
 class Card extends PureComponent {
   constructor(props) {
@@ -26,10 +27,12 @@ class Card extends PureComponent {
     const { reverseAnimation } = this.state;
     return (
       <Spring
-        from={{ opacity: 0 }}
-        to={{ opacity: 1 }}
+        from={{ opacity: 0, twist: 'rotate(90deg) scaleX(-1)' }}
+        to={{ opacity: 1, twist: 'rotate(0deg) scaleX(1)' }}
       >
-        {cardSpring => <div className={cx(styles.bizCard, cardSpring)} >
+        {cardSpring => <div className={styles.bizCard} style={cardSpring} >
+          <img src={logoGreen} className={styles.logoCard} style={{ transform: cardSpring.twist }} />
+          <img src={vgsGreen} className={styles.logoTxtCard} />
           <Spring
             from={{ rotate: 'rotate(0deg)' }}
             to={{ rotate: 'rotate(-90deg)' }}

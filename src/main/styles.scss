@@ -27,6 +27,18 @@
     right: 17%;
     transform-origin: 100% 100%;
   }
+
+  .logoCard {
+    position: absolute;
+    left: 13%;
+    top: 20%;
+  }
+
+  .logoTxtCard {
+    position: absolute;
+    left: 13%;
+    top: calc(20% + 90px);
+  }
 }
 
 .logo {

@@ -8,8 +8,8 @@ import Routes from '/src/routes';
 import Device from '/src/components/device';
 import FrameIndicator from './components/frame-indicator';
 import styles from './styles.scss';
-import logo from './logo.svg';
-import vgs from './vgs.svg';
+import logo from './assets/logo_blue.svg';
+import vgs from './assets/vgs_blue.svg';
 import SideMenu from './components/side-menu';
 import Card from './components/card';
 
