@@ -53,7 +53,7 @@ class Clinical extends PureComponent {
     const { slide } = this.state;
     const { isTouchDevice } = this.props;
     // this.listRef.scrollLeft = this.getSlideScrollPosition();
-    if (isTouchDevice) {
+    if (isTouchDevice && slide !== prevState.slide) {
       animateScrollTo(this.slidesRefs[slide].current, { element: this.listRef, horizontal: true });
     }
   }
