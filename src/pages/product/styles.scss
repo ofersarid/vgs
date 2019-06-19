@@ -15,23 +15,23 @@ $gutter-wide-screen: 20vw;
 
   :global {
     @include media('>phone') {
-      width: calc(100% - #{$gutter-tablet} - #{$gutter-tablet});
+      width: 58vw;
       height: calc(67%);
-      left: $gutter-tablet;
+      left: calc((100vw - 58vw)/2);
       //transform: translateY(15%);
     }
 
     @include media('>tablet') {
       @include orientation(landscape) {
-        width: calc(100% - #{$gutter-desktop} - #{$gutter-desktop});
-        left: $gutter-desktop;
+        width: 74vw;
+        left: calc((100vw - 74vw)/2);
         //transform: translateY(23%);
       }
     }
 
     @include media('>desktop') {
-      width: calc(100% - #{$gutter-wide-screen} - #{$gutter-wide-screen});
-      left: $gutter-wide-screen;
+      width: 60vw;
+      left: calc((100vw - 60vw)/2);
       //transform: translateY(25%);
     }
   }
