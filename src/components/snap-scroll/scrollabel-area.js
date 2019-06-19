@@ -44,8 +44,9 @@ class ScrollableArea extends PureComponent {
   }
 
   checkOverflow() {
+    const { hideOverflow } = this.props;
     const $current = this.$el.current;
-    const hasOverflow = $current.clientWidth < $current.scrollWidth || $current.clientHeight < $current.scrollHeight;
+    const hasOverflow = hideOverflow ? false : $current.clientWidth < $current.scrollWidth || $current.clientHeight < $current.scrollHeight;
     this.setState({ hasOverflow });
     return hasOverflow;
   }
@@ -103,11 +104,13 @@ ScrollableArea.propTypes = {
   frame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
   style: PropTypes.object,
+  hideOverflow: PropTypes.bool.isRequired,
 };
 
 ScrollableArea.defaultProps = {
   horizontal: false,
   onSwipe: noop,
+  hideOverflow: false
 };
 
 const mapStateToProps = state => ({

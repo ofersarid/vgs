@@ -37,6 +37,7 @@ class Clinical extends PureComponent {
     this.listRef.addEventListener('mouseenter', this.preventOuterScroll, false);
     this.listRef.addEventListener('mouseleave', this.enableOuterScroll, false);
     this.listRef.addEventListener('scroll', this.onScrollHandlerDB, false);
+    this.listRef.addEventListener('wheel', this.onWheelHandler, false);
     this.setState({
       start: this.listRef.clientWidth < this.listRef.scrollWidth,
     });
@@ -69,6 +70,12 @@ class Clinical extends PureComponent {
       // somewhere in the middle
       this.setState({ start: false, end: false });
     }
+  }
+
+  onWheelHandler(e) {
+    const deltaY = e.wheelDeltaY;
+    e.preventDefault();
+    if (Math.abs(deltaY) > 0) this.listRef.scrollLeft += deltaY;
   }
 
   preventOuterScroll() {
@@ -197,7 +204,7 @@ class Clinical extends PureComponent {
 
 Clinical.propTypes = {
   frame: PropTypes.number.isRequired,
-  themeColor: PropTypes.oneOf(['blue']).isRequired,
+  themeColor: PropTypes.string.isRequired,
   showOnFrame: PropTypes.number.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
   isTouchDevice: PropTypes.bool.isRequired,
