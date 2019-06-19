@@ -22,9 +22,11 @@ $gutter-wide-screen: 20vw;
     }
 
     @include media('>tablet') {
-      width: calc(100% - #{$gutter-desktop} - #{$gutter-desktop});
-      left: $gutter-desktop;
-      //transform: translateY(23%);
+      @include orientation(landscape) {
+        width: calc(100% - #{$gutter-desktop} - #{$gutter-desktop});
+        left: $gutter-desktop;
+        //transform: translateY(23%);
+      }
     }
 
     @include media('>desktop') {

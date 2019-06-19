@@ -25,7 +25,7 @@ class ImgTxtBtn extends PureComponent {
         immediate={frame !== showOnFrame}
       >
         {styleProps => <ScrollableArea
-          hideOverflow
+          // hideOverflow
           className={cx(styles.container, sharedStyles.inner)}
           style={{
             opacity: styleProps.opacity,

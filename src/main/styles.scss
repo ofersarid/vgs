@@ -3,6 +3,31 @@
 .container {
 }
 
+.bizCard {
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+
+  @include orientation(landscape) {
+    transition: opacity .2s ease-out;
+    z-index: 1;
+    opacity: 1;
+    display: block;
+  }
+
+  @include media('>phone') {
+    z-index: -1;
+    opacity: 0;
+  }
+
+  .mobileIcon {
+    position: fixed;
+    bottom: 26%;
+    right: 17%;
+    transform-origin: 100% 100%;
+  }
+}
+
 .logo {
   position: fixed;
   width: 52px;
@@ -27,7 +52,9 @@
   }
 
   @include media('>tablet') {
-    left: 5%;
+    @include orientation(landscape) {
+      left: 5%;
+    }
   }
 
   @include media('>desktop') {
@@ -57,7 +84,9 @@
   }
 
   @include media('>tablet') {
-    right: 5%;
+    @include orientation(landscape) {
+      right: 5%;
+    }
   }
 
   @include media('>desktop') {
@@ -93,7 +122,7 @@
     left: calc(17% - 12px);
     right: 17%;
     top: calc(7% + 65px);
-    width: calc(66% + 16px);
+    width: calc(66% + 15px);
     height: calc(89% - 120px);
     display: flex;
     flex-direction: column;
@@ -106,13 +135,25 @@
     font-size: 28px;
     text-transform: uppercase;
 
-    @include media('>tablet') {
-      flex-direction: row;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-content: flex-start;
-      top: 20%;
-      height: auto;
+    @include media('>phone') {
+      left: calc(13% - 12px);
+      right: 17%;
+      top: calc(7% + 65px);
+      width: calc(76% + 22px);
+      height: calc(89% - 120px);
+      display: flex;
+
+      @include orientation(landscape) {
+        @media (min-width: 1200px) {
+          flex-direction: row;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          align-content: flex-start;
+          top: 20%;
+          height: auto;
+          width: calc(76% + 16px);
+        }
+      }
     }
 
     li {

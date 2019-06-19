@@ -38,6 +38,7 @@ class Clinical extends PureComponent {
     this.listRef.addEventListener('mouseleave', this.enableOuterScroll, false);
     this.listRef.addEventListener('scroll', this.onScrollHandlerDB, false);
     this.listRef.addEventListener('wheel', this.onWheelHandler, false);
+    this.listRef.scrollLeft = 0;
     this.setState({
       start: this.listRef.clientWidth < this.listRef.scrollWidth,
     });
@@ -75,7 +76,7 @@ class Clinical extends PureComponent {
   onWheelHandler(e) {
     const deltaY = e.wheelDeltaY;
     e.preventDefault();
-    if (Math.abs(deltaY) > 0) this.listRef.scrollLeft += deltaY;
+    if (Math.abs(deltaY) > 0) this.listRef.scrollLeft -= deltaY;
   }
 
   preventOuterScroll() {
