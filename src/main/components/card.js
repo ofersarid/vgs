@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Spring } from 'react-spring/renderprops';
+import { config, Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 // import cx from 'classnames';
 // import PropTypes from 'prop-types';
@@ -27,12 +27,30 @@ class Card extends PureComponent {
     const { reverseAnimation } = this.state;
     return (
       <Spring
-        from={{ opacity: 0, twist: 'rotate(90deg) scaleX(-1)' }}
-        to={{ opacity: 1, twist: 'rotate(0deg) scaleX(1)' }}
+        from={{ opacity: 0, twist: 'rotate(90deg) scaleX(-1)', delayOpacity: 0 }}
+        to={{ opacity: 1, twist: 'rotate(0deg) scaleX(1)', delayOpacity: 1 }}
+        config={key => {
+          switch (key) {
+            case 'delayOpacity':
+              return Object.assign({}, config.default, { duration: 2000, delay: 300 });
+            default:
+              return config.slow;
+          }
+        }}
       >
-        {cardSpring => <div className={styles.bizCard} style={cardSpring} >
-          <img src={logoGreen} className={styles.logoCard} style={{ transform: cardSpring.twist }} />
-          <img src={vgsGreen} className={styles.logoTxtCard} />
+        {cardSpring => <div className={styles.bizCard} >
+          <div className={styles.contentBox} >
+            <img src={logoGreen} className={styles.cardLogo} style={{
+              transform: cardSpring.twist,
+              opacity: cardSpring.opacity,
+            }} />
+            <img src={vgsGreen} className={styles.cardLogoTxt} style={{ opacity: cardSpring.delayOpacity }} />
+            <div className={styles.info} style={{ opacity: cardSpring.delayOpacity }} >
+              <div >24 Raul Wallenberg st.</div >
+              <div >TEL AVIV, ISRAEL 6971921</div >
+              <div >+972 3 549 9054</div >
+            </div >
+          </div >
           <Spring
             from={{ rotate: 'rotate(0deg)' }}
             to={{ rotate: 'rotate(-90deg)' }}
@@ -44,9 +62,10 @@ class Card extends PureComponent {
               src={mobileIcon}
               style={{
                 transform: `${imgSpring.rotate} translate(50%, 50%)`,
+                opacity: cardSpring.delayOpacity,
               }}
               className={styles.mobileIcon} />}
-          </Spring>
+          </Spring >
         </div >}
       </Spring >
     );

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { RightArrowAlt } from 'styled-icons/boxicons-regular/RightArrowAlt';
-import { SnapScroll } from '/src/components';
+import { SnapScroll, Button } from '/src/components';
 import styles from './styles.scss';
 
 class Cover extends PureComponent {
@@ -49,8 +49,8 @@ class Cover extends PureComponent {
           </h1 >
           <img src={art} className={styles.art} />
           {footer ? (
-            <div
-              className={cx('ripple waves-light', styles.footer)}
+            <Button
+              className={cx(styles.footer)}
               style={{ background: themeColor }}
               onClick={navigate}
             >
@@ -70,7 +70,7 @@ class Cover extends PureComponent {
                 onRest={this.reverseAnimation} >
                 {props => <RightArrowAlt className={styles.arrow} style={props} />}
               </Spring >
-            </div >
+            </Button >
           ) : null}
         </div >}
       </Spring >

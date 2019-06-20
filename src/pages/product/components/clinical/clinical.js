@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import Device from '/src/components/device';
-import { SnapScroll, DropMenu } from '/src/components';
+import { SnapScroll, DropMenu, Button } from '/src/components';
 import { Swipeable } from 'react-swipeable';
 import { LongArrowAltRight } from 'styled-icons/fa-solid/LongArrowAltRight';
 import { LongArrowAltLeft } from 'styled-icons/fa-solid/LongArrowAltLeft';
@@ -98,11 +98,11 @@ class Clinical extends PureComponent {
     const { articles } = this.props;
     const dom = articles.map((m, i) => (
       <div ref={this.slidesRefs[i]} className={cx(styles.outerWrapper)} key={m.id} >
-        <div className={`ripple waves-color ${styles.innerWrapper}`} >
+        <Button className={styles.innerWrapper} color onClick={() => {}} >
           <div className={styles.date} >{moment(m.date).format('MMMM Do, YYYY')}</div >
           <div className={styles.header} >{m.header}</div >
           <div className={styles.source} >{m.source}</div >
-        </div >
+        </Button >
       </div >
     ));
     return dom;

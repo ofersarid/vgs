@@ -28,16 +28,34 @@
     transform-origin: 100% 100%;
   }
 
-  .logoCard {
+  .contentBox {
+    width: 266px;
     position: absolute;
-    left: 13%;
     top: 20%;
+    height: 60%;
+    left: 13%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
-  .logoTxtCard {
-    position: absolute;
-    left: 13%;
-    top: calc(20% + 90px);
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 100;
+    height: 66px;
+    width: 100%;
+  }
+
+  .cardLogo {
+    opacity: 0;
+  }
+
+  .cardLogoTxt {
+    opacity: 0;
   }
 }
 
@@ -149,7 +167,6 @@
 
     @include media('>phone') {
       left: $gutter-tablet;
-      right: 17%;
       top: calc(7% + 65px);
       width: calc(100% - #{$gutter-tablet} - 10%);
       height: calc(89% - 120px);
@@ -169,7 +186,11 @@
     }
 
     @include media('>tablet') {
-      width: calc(100% - #{$gutter-tablet} - 5%);
+      width: calc(100% - #{$gutter-desktop} - 5%);
+    }
+
+    @include media('>desktop') {
+      width: calc(100% - #{$gutter-wide-screen} - 5%);
     }
 
     @media (min-width: 1200px) {
@@ -179,6 +200,9 @@
       align-content: flex-start;
       top: 20%;
       height: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1200px;
     }
 
     li {
@@ -279,15 +303,16 @@
     &:not(:last-of-type) {
       margin-bottom: 10px;
     }
+  }
 
-    &.indicate {
-      width: 9px;
-      height: 9px;
-      background: #0272BA;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, 4px);
-      transition: .2s ease-out;
-    }
+  .indicate {
+    width: 9px;
+    height: 9px;
+    background: #0272BA;
+    position: absolute;
+    left: 50%;
+    transform: translate(-5px, 50%);
+    transition: .2s ease-out;
+    border-radius: 10px;
   }
 }

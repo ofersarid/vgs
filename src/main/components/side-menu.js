@@ -4,6 +4,7 @@ import { Spring } from 'react-spring/renderprops';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
+import { Button } from '/src/components';
 import { Products } from '/src/services';
 import SubMenu from './sub-menu';
 import styles from '../styles.scss';
@@ -48,39 +49,40 @@ class SideMenu extends PureComponent {
         >
           {props => <div className={styles.menuContainer} style={props} >
             <ul className={styles.list} >
-              <li className={cx('ripple waves-light')} onClick={this.navigate} >Home</li >
+              <Button onClick={this.navigate} el="li" >Home</Button >
               <SubMenu label="Products" >
                 {Products.selectors.categories().map(category => (
                   <Fragment key={category} >
                     <label >{category}</label >
                     {Products.selectors.list().map(product => {
                       return product.category === category
-                        ? <li
+                        ? <Button
+                          el="li"
                           key={product.name}
-                          className={cx('ripple waves-light')}
-                          onClick={this.navigate} >{product.name}</li >
+                          onClick={this.navigate} >{product.name}</Button >
                         : null;
                     })}
                   </Fragment >
                 ))}
               </SubMenu >
-              <li className={cx('ripple waves-light')} onClick={this.navigate} >News & Events</li >
+              <Button el="li" onClick={this.navigate} >News & Events</Button >
               <SubMenu label="About" >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Team</li >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
-                <li className={cx('ripple waves-light')} onClick={this.navigate} >Jobs</li >
+                <Button el="li" onClick={this.navigate} >Team</Button >
+                <Button el="li" onClick={this.navigate} >Jobs</Button >
+                <Button el="li" onClick={this.navigate} >Jobs</Button >
+                <Button el="li" onClick={this.navigate} >Jobs</Button >
+                <Button el="li" onClick={this.navigate} >Jobs</Button >
+                <Button el="li" onClick={this.navigate} >Jobs</Button >
               </SubMenu >
-              <li className={cx('ripple waves-light')} onClick={this.navigate} >Contact</li >
+              <Button el="li" onClick={this.navigate} >Contact</Button >
             </ul >
-            <div className={cx('ripple waves-light', styles.legal)} onClick={this.navigate} >Legal</div>
+            <Button el="a" className={cx(styles.legal)} onClick={this.navigate} >Legal</Button>
           </div >}
         </Spring >
-        <div
-          className={cx('ripple waves-color', styles.menuToggle)}
+        <Button
+          className={cx(styles.menuToggle)}
           onClick={this.toggleMenu}
+          color
         >
           <Spring
             from={{ transform: 'rotate(0deg)', left: '0px', background: '#0272BA' }}
@@ -100,7 +102,7 @@ class SideMenu extends PureComponent {
           >
             {props => <span className={styles.handle} style={props} />}
           </Spring >
-        </div >
+        </Button >
       </Fragment >
     );
   }

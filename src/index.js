@@ -8,7 +8,6 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { Router, hashHistory } from 'react-router';
 import rootReducer from './root-reducer';
 import Routes from '/src/routes';
-import Waves from 'node-waves';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -56,6 +55,3 @@ ReactDOM.render(
   </Provider >,
   $root
 );
-
-Waves.attach('.ripple');
-Waves.init();

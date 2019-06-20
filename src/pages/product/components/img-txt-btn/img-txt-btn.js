@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import styles from './styles.scss';
 import { Spring } from 'react-spring/renderprops-universal';
-import { SnapScroll, ScrollableArea } from '/src/components';
+import { SnapScroll, ScrollableArea, Button } from '/src/components';
 import Device from '/src/components/device';
 import sharedStyles from '../../styles.scss';
 
@@ -39,17 +39,18 @@ class ImgTxtBtn extends PureComponent {
           </div >
           <div className={cx(styles.rightCol)} >
             <p className={cx(styles.txt)} >{txt}</p >
-            <a
+            <Button
+              el="a"
               target="_blank"
               rel="noopener noreferrer"
               href={pdfSrc}
-              className={cx('ripple waves-light', styles.btn)}
+              className={cx(styles.btn)}
               style={{
                 background: themeColor,
               }}
             >
               PRODUCT PDF
-            </a >
+            </Button >
           </div >
           {isMobile && (
             <ol className={styles.footNotes} >

@@ -27,7 +27,7 @@ class FrameIndicator extends PureComponent {
     return (
       <ul className={styles.frameIndicator} >
         {this.renderBullets()}
-        <li className={styles.indicate} style={{
+        <div className={styles.indicate} style={{
           top: 17 * frame
         }} />
       </ul >
