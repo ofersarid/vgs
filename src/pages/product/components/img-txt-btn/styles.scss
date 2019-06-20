@@ -33,9 +33,9 @@
 }
 
 .title {
-  font-size: 10px;
+  font-size: 12px;
   text-transform: capitalize;
-  line-height: 10px;
+  line-height: 12px;
 
   @include media('>desktop') {
     font-size: 12px;
@@ -82,17 +82,12 @@
   width: 100%;
   counter-reset: item;
   border-top: 1px solid #5E5E5E;
-  font-size: 10px;
-  line-height: 18px;
+  font-size: 12px;
+  line-height: 20px;
 
   @include media('>phone') {
     position: absolute;
     bottom: 0
-  }
-
-  @include media('>desktop') {
-    font-size: 12px;
-    line-height: 20px;
   }
 
   li {

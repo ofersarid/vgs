@@ -69,10 +69,6 @@ class SideMenu extends PureComponent {
               <SubMenu label="About" >
                 <Button el="li" onClick={this.navigate} >Team</Button >
                 <Button el="li" onClick={this.navigate} >Jobs</Button >
-                <Button el="li" onClick={this.navigate} >Jobs</Button >
-                <Button el="li" onClick={this.navigate} >Jobs</Button >
-                <Button el="li" onClick={this.navigate} >Jobs</Button >
-                <Button el="li" onClick={this.navigate} >Jobs</Button >
               </SubMenu >
               <Button el="li" onClick={this.navigate} >Contact</Button >
             </ul >
