@@ -6,6 +6,7 @@ import { Spring } from 'react-spring/renderprops';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
 import Device from '/src/components/device';
+import { toggleFullScreen } from '/src/utils';
 import FrameIndicator from './components/frame-indicator';
 import styles from './styles.scss';
 import logo from './assets/logo_blue.svg';
@@ -44,7 +45,7 @@ class Main extends PureComponent {
         {springs => (orientation === 'landscape' && isMobile) ? <Card />
           : <div className={styles.container} >
             <ReduxRoutes />
-            <div className={styles.logo} >
+            <div className={styles.logo} onClick={toggleFullScreen} >
               <img className={styles.logoImg} src={logo} />
               <img className={styles.logoText} src={vgs} style={springs} />
             </div >

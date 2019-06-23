@@ -13,32 +13,50 @@ export const toTitleCase = str => {
   });
 };
 
-export const fullScreen = () => {
-  // Kind of painful, but this is how it works for now
-  if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen();
-  } else if (document.documentElement.mozRequestFullScreen) {
-    document.documentElement.mozRequestFullScreen();
-  } else if (document.documentElement.webkitRequestFullscreen) {
-    document.documentElement.webkitRequestFullscreen();
-  } else if (document.documentElement.msRequestFullscreen) {
-    document.documentElement.msRequestFullscreen();
+export const toggleFullScreen = () => {
+  const isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+    (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+  const docElm = document.documentElement;
+
+  if (!isInFullScreen) {
+    if (docElm.requestFullscreen) {
+      docElm.requestFullscreen();
+    } else if (docElm.mozRequestFullScreen) {
+      docElm.mozRequestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen();
+    } else if (docElm.msRequestFullscreen) {
+      docElm.msRequestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
   }
 };
 
-export const smolScreen = () => {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  } else if (document.mozCancelFullScreen) {
-    document.mozCancelFullScreen();
-  } else if (document.msExitFullscreen) {
-    document.msExitFullscreen();
-  }
-};
+// export const smolScreen = () => {
+//   if (document.exitFullscreen) {
+//     document.exitFullscreen();
+//   } else if (document.webkitExitFullscreen) {
+//     document.webkitExitFullscreen();
+//   } else if (document.mozCancelFullScreen) {
+//     document.mozCancelFullScreen();
+//   } else if (document.msExitFullscreen) {
+//     document.msExitFullscreen();
+//   }
+// };
 
-export const lock = orientation => {
-  fullScreen();
-  window.screen.orientation.lock(orientation);
-};
+// export const lock = orientation => {
+//   fullScreen();
+//   window.screen.orientation.lock(orientation);
+// };
