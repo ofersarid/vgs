@@ -100,7 +100,19 @@ $peek-mobile: 54px;
     height: 70%;
     line-height: 37px;
     font-weight: 100;
-    //height: #{37 * 5}px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+
+    @include media('>phone') {
+      -webkit-line-clamp: 7;
+    }
+
+    @include media('>tablet') {
+      -webkit-line-clamp: 6;
+    }
+
   }
 
   .source {
