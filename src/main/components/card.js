@@ -61,7 +61,7 @@ class Card extends PureComponent {
             {imgSpring => <img
               src={mobileIcon}
               style={{
-                transform: `${imgSpring.rotate} translate(50%, 50%)`,
+                transform: `${imgSpring.rotate} translate(50%, 0%)`,
                 opacity: cardSpring.delayOpacity,
               }}
               className={styles.mobileIcon} />}
