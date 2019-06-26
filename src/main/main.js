@@ -13,6 +13,7 @@ import logo from './assets/logo_blue.svg';
 import vgs from './assets/vgs_blue.svg';
 import SideMenu from './components/side-menu';
 import Card from './components/card';
+import { logoGreen, vgsGreen } from './assets';
 
 class Main extends PureComponent {
   constructor(props) {
@@ -42,17 +43,24 @@ class Main extends PureComponent {
         from={{ opacity: show ? 0 : 1 }}
         to={{ opacity: show ? 1 : 0 }}
       >
-        {springs => (orientation === 'landscape' && isMobile) ? <Card />
-          : <div className={styles.container} >
-            <ReduxRoutes />
-            <div className={styles.logo} onClick={toggleFullScreen} >
-              <img className={styles.logoImg} src={logo} />
-              <img className={styles.logoText} src={vgs} style={springs} />
-            </div >
-            <SideMenu />
-            <FrameIndicator />
-            {this.props.children}
-          </div >}
+        {springs => (orientation === 'landscape' && isMobile) ? <Card
+          logo={logoGreen}
+          underLogo={vgsGreen}
+          address="24 Raul Wallenberg st."
+          city="TEL AVIV"
+          state="ISRAEL"
+          zip={6971921}
+          phone="+972 3 549 9054"
+        /> : <div className={styles.container} >
+          <ReduxRoutes />
+          <div className={styles.logo} onClick={toggleFullScreen} >
+            <img className={styles.logoImg} src={logo} />
+            <img className={styles.logoText} src={vgs} style={springs} />
+          </div >
+          <SideMenu />
+          <FrameIndicator />
+          {this.props.children}
+        </div >}
       </Spring >
     );
   }

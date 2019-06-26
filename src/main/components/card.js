@@ -2,11 +2,10 @@ import React, { PureComponent } from 'react';
 import { config, Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 // import cx from 'classnames';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from '../styles.scss';
-import mobileIcon from './mobile_icon.svg';
-import { logoGreen, vgsGreen } from '../assets';
+import mobileIcon from '../assets/mobile_icon.svg';
 
 class Card extends PureComponent {
   constructor(props) {
@@ -25,6 +24,7 @@ class Card extends PureComponent {
 
   render() {
     const { reverseAnimation } = this.state;
+    const { logo, underLogo, address, city, state, zip, phone } = this.props;
     return (
       <Spring
         from={{ opacity: 0, twist: 'rotate(90deg) scaleX(-1)', delayOpacity: 0 }}
@@ -40,15 +40,15 @@ class Card extends PureComponent {
       >
         {cardSpring => <div className={styles.bizCard} >
           <div className={styles.contentBox} >
-            <img src={logoGreen} className={styles.cardLogo} style={{
+            <img src={logo} className={styles.cardLogo} style={{
               transform: cardSpring.twist,
               opacity: cardSpring.opacity,
             }} />
-            <img src={vgsGreen} className={styles.cardLogoTxt} style={{ opacity: cardSpring.delayOpacity }} />
+            {underLogo && <img src={underLogo} className={styles.cardLogoTxt} style={{ opacity: cardSpring.delayOpacity }} />}
             <div className={styles.info} style={{ opacity: cardSpring.delayOpacity }} >
-              <div >24 Raul Wallenberg st.</div >
-              <div >TEL AVIV, ISRAEL 6971921</div >
-              <div >+972 3 549 9054</div >
+              <div >{address}</div >
+              <div >{city}, {state} {zip}</div >
+              <div >{phone}</div >
             </div >
           </div >
           <Spring
@@ -72,9 +72,17 @@ class Card extends PureComponent {
   }
 }
 
-Card.propTypes = {};
+Card.propTypes = {
+  logo: PropTypes.string.isRequired,
+  underLogo: PropTypes.string,
+  address: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  zip: PropTypes.number.isRequired,
+  phone: PropTypes.string.isRequired,
+};
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({}); // eslint-disable-line
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
