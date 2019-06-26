@@ -134,24 +134,24 @@ class Clinical extends PureComponent {
     });
   }
 
-  // onSwipingHandler() {
-  //   const { disableScrollSnap, disableNext, disablePrev } = this.props;
-  //   if (!disableNext || !disablePrev) {
-  //     // disableScrollSnap(true, true);
-  //   }
-  // }
+  onSwipingHandler() {
+    const { disableScrollSnap, disableNext, disablePrev } = this.props;
+    if (!disableNext || !disablePrev) {
+      disableScrollSnap(true, true);
+    }
+  }
   //
   // onVertivcalSwipeHandler() {
   //   const { disableScrollSnap } = this.props;
   //   // disableScrollSnap(false, false);
   // }
   //
-  // onSwipedHandler() {
-  //   const { disableScrollSnap, disableNext, disablePrev } = this.props;
-  //   if (disableNext || disablePrev) {
-  //     // disableScrollSnap(false, false);
-  //   }
-  // }
+  onSwipedHandler() {
+    const { disableScrollSnap, disableNext, disablePrev } = this.props;
+    if (disableNext || disablePrev) {
+      disableScrollSnap(false, false);
+    }
+  }
 
   render() {
     const { frame, showOnFrame, isTouchDevice } = this.props;

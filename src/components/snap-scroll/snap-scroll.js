@@ -79,6 +79,11 @@ class SnapScroll extends React.Component {
     if (frame === 0 && frame !== prevProps.frame) {
       disableScrollSnap(false, false);
     }
+    if (this.lock && frame !== prevProps.frame) {
+      setTimeout(() => {
+        this.lock = false;
+      });
+    }
   }
 
   componentDidMount() {
@@ -122,11 +127,11 @@ class SnapScroll extends React.Component {
       default:
         break;
     }
-    if (!this.isTouchDevice) {
-      this.to = setTimeout(() => {
-        this.lock = false;
-      }, 300);
-    }
+    // if (!this.isTouchDevice) {
+    //   this.to = setTimeout(() => {
+    //     this.lock = false;
+    //   }, 300);
+    // }
   }
 
   mouseScrollHandler(e) {
