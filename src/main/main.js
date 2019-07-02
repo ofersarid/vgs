@@ -31,7 +31,13 @@ class Main extends PureComponent {
 
   onOrientationchange() {
     const or = window.screen.orientation;
-    this.setState({ orientation: or.angle === 0 ? 'portrait' : 'landscape' });
+    let orientation;
+    if ((or && or.angle === 0) || window.matchMedia('(orientation: portrait)').matches) {
+      orientation = 'portrait';
+    } else {
+      orientation = 'landscape';
+    }
+    this.setState({ orientation });
   }
 
   render() {
