@@ -25,7 +25,7 @@ class Product extends PureComponent {
         <IndexHeader index={1} header="About" />
         <IndexHeader index={2} header="Key Features" />
         <IndexHeader index={3} header="Clinical" />
-        <SnapScroll start={2} >
+        <SnapScroll start={0} >
           <Cover
             art={mock.cover.art}
             themeColor={mock.themeColor}
