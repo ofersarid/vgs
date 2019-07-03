@@ -72,6 +72,7 @@ class SnapScroll extends React.Component {
     };
     this.lock = false;
     inertia.addCallback(this.snap);
+    props.disableScrollSnap(props.frame === this.children.length - 1, props.frame === 0);
   }
 
   componentDidUpdate(prevProps) {
@@ -79,10 +80,14 @@ class SnapScroll extends React.Component {
     if (frame === 0 && frame !== prevProps.frame) {
       disableScrollSnap(false, false);
     }
-    if (this.lock && frame !== prevProps.frame) {
-      setTimeout(() => {
-        this.lock = false;
-      });
+    // if (this.lock && frame !== prevProps.frame) {
+    //   setTimeout(() => {
+    //     console.log('lock false');
+    //     this.lock = false;
+    //   }, 100);
+    // }
+    if (frame !== prevProps.frame) {
+      disableScrollSnap(frame === this.children.length - 1, frame === 0);
     }
   }
 
@@ -92,7 +97,6 @@ class SnapScroll extends React.Component {
     this.$node.addEventListener('touchstart', this.touchStartHandler, false);
     this.$node.addEventListener('touchend', this.touchEndHandler, false);
     this.$node.addEventListener('touchmove', this.touchMoveHandler, false);
-
     // Fire initial indexChanged();
     indexChanged(this.state.index);
     updateFrameIndex(this.state.index);
@@ -113,10 +117,13 @@ class SnapScroll extends React.Component {
   }
 
   snap(direction) {
-    this.lock = true;
-    if (this.to) {
-      clearTimeout(this.to);
+    if (this.lock) return;
+    if (this.isTouchDevice) {
+      this.lock = true;
     }
+    // if (this.to) {
+    //   clearTimeout(this.to);
+    // }
     switch (direction) {
       case -1:
         this.next();
@@ -127,38 +134,35 @@ class SnapScroll extends React.Component {
       default:
         break;
     }
-    // if (!this.isTouchDevice) {
-    //   this.to = setTimeout(() => {
-    //     this.lock = false;
-    //   }, 300);
-    // }
+    // this.to = setTimeout(() => {
+    //   this.lock = false;
+    // }, 100);
   }
 
   mouseScrollHandler(e) {
     const delta = e.wheelDelta;
     this.isTouchDevice = false;
-    if (this.lock) return;
     inertia.update(delta);
   };
 
   touchStartHandler(e) {
     const { disableScrollSnap } = this.props;
+    this.lock = false;
     this.yDown = e.touches[0].clientY;
     disableScrollSnap(false, false);
     this.isTouchDevice = true;
   };
 
   touchEndHandler(e) {
-    this.lock = false;
+    // this.lock = false;
     this.yDown = null;
   }
 
   touchMoveHandler(e) {
     // const { disableNext, disablePrev } = this.props;
-    if (this.lock) return;
     let yUp = e.touches[0].clientY;
     let delta = (this.yDown - yUp);
-    e.preventDefault();
+    // e.preventDefault();
     if (Math.abs(delta) > THRESHHOLD) {
       // if ((delta > 0 && !disableNext) ||
       //   (delta > 0 && !disablePrev) ||
@@ -183,6 +187,7 @@ class SnapScroll extends React.Component {
 
   prev() {
     const { disablePrev } = this.props;
+    console.log('prev');
     if (disablePrev) return;
     const index = Math.max(0, this.state.index - 1);
     this.setState({

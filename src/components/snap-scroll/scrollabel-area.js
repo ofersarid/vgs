@@ -84,7 +84,6 @@ class ScrollableArea extends PureComponent {
     const { hasOverflow } = this.state;
     return (
       <div
-        {...this.handlers}
         ref={this.$el}
         className={cx(styles.scrollableArea, className, { [styles.hasOverflow]: hasOverflow })}
         onMouseLeave={this.mouseLeaveHandler}

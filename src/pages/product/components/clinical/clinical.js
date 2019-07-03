@@ -34,10 +34,12 @@ class Clinical extends PureComponent {
   }
 
   componentDidMount() {
-    this.listRef.addEventListener('mouseenter', this.preventOuterScroll, false);
-    this.listRef.addEventListener('mouseleave', this.enableOuterScroll, false);
+    this.listRef.addEventListener('mouseenter', this.touchStartHandler, false);
+    this.listRef.addEventListener('mouseleave', this.touchEndHandler, false);
     this.listRef.addEventListener('scroll', this.onScrollHandlerDB, false);
     this.listRef.addEventListener('wheel', this.onWheelHandler, false);
+    this.listRef.addEventListener('touchstart', this.touchStartHandler, false);
+    this.listRef.addEventListener('touchend', this.touchEndHandler, false);
     this.listRef.scrollLeft = 0;
     this.setState({
       start: this.listRef.clientWidth < this.listRef.scrollWidth,
@@ -45,8 +47,12 @@ class Clinical extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.listRef.removeEventListener('mouseenter', this.preventOuterScroll, false);
-    this.listRef.removeEventListener('mouseleave', this.enableOuterScroll, false);
+    this.listRef.removeEventListener('mouseenter', this.touchStartHandler, false);
+    this.listRef.removeEventListener('mouseleave', this.touchEndHandler, false);
+    this.listRef.removeEventListener('touchstart', this.touchStartHandler, false);
+    this.listRef.removeEventListener('touchend', this.touchEndHandler, false);
+    this.listRef.removeEventListener('wheel', this.onWheelHandler, false);
+    this.listRef.removeEventListener('scroll', this.onScrollHandlerDB, false);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -56,6 +62,20 @@ class Clinical extends PureComponent {
     if (isTouchDevice && slide !== prevState.slide) {
       animateScrollTo(this.slidesRefs[slide].current, { element: this.listRef, horizontal: true });
     }
+  }
+
+  touchStartHandler(e) {
+    const { disableScrollSnap } = this.props;
+    e.stopPropagation();
+    e.preventDefault();
+    disableScrollSnap(true, true);
+  }
+
+  touchEndHandler(e) {
+    const { disableScrollSnap } = this.props;
+    e.stopPropagation();
+    e.preventDefault();
+    disableScrollSnap(false, false);
   }
 
   onScrollHandler() {
@@ -79,16 +99,6 @@ class Clinical extends PureComponent {
     if (Math.abs(deltaY) > 0) this.listRef.scrollLeft -= deltaY;
   }
 
-  preventOuterScroll() {
-    const { disableScrollSnap } = this.props;
-    disableScrollSnap(true, true);
-  }
-
-  enableOuterScroll() {
-    const { disableScrollSnap } = this.props;
-    disableScrollSnap(false, false);
-  }
-
   reverseAnimation() {
     const { reverseAnimation } = this.state;
     this.setState({ reverseAnimation: !reverseAnimation });
@@ -98,7 +108,8 @@ class Clinical extends PureComponent {
     const { articles } = this.props;
     const dom = articles.map((m, i) => (
       <div ref={this.slidesRefs[i]} className={cx(styles.outerWrapper)} key={m.id} >
-        <Button className={styles.innerWrapper} color onClick={() => {}} >
+        <Button className={styles.innerWrapper} color onClick={() => {
+        }} >
           <div className={styles.date} >{moment(m.date).format('MMMM Do, YYYY')}</div >
           <div className={styles.header} >{m.header}</div >
           <div className={styles.source} >{m.source}</div >
@@ -134,12 +145,11 @@ class Clinical extends PureComponent {
     });
   }
 
-  onSwipingHandler() {
-    const { disableScrollSnap, disableNext, disablePrev } = this.props;
-    if (!disableNext || !disablePrev) {
-      disableScrollSnap(true, true);
-    }
-  }
+  // onSwipingHandler() {
+  //   // const { disableNext, disablePrev } = this.props;
+  //   this.preventOuterScroll();
+  // }
+
   //
   // onVertivcalSwipeHandler() {
   //   const { disableScrollSnap } = this.props;
@@ -149,7 +159,7 @@ class Clinical extends PureComponent {
   onSwipedHandler() {
     const { disableScrollSnap, disableNext, disablePrev } = this.props;
     if (disableNext || disablePrev) {
-      disableScrollSnap(false, false);
+      disableScrollSnap(disableNext, disablePrev);
     }
   }
 
@@ -189,11 +199,12 @@ class Clinical extends PureComponent {
               }}
               onSwipedLeft={this.onSwipedLeftHandler}
               onSwipedRight={this.onSwipedRightHandler}
-              onSwiping={this.onSwipingHandler}
-              onSwipedUp={this.onVertivcalSwipeHandler}
-              onSwipedDown={this.onVertivcalSwipeHandler}
+              // onSwiping={this.onSwipingHandler}
+              // onSwipedUp={this.onVertivcalSwipeHandler}
+              // onSwipedDown={this.onVertivcalSwipeHandler}
               onSwiped={this.onSwipedHandler}
-              preventDefaultTouchmoveEvent={false}
+              preventDefaultTouchmoveEvent={true}
+              trackTouch={true}
             >
               {this.renderData()}
             </Swipeable >
