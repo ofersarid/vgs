@@ -80,12 +80,6 @@ class SnapScroll extends React.Component {
     if (frame === 0 && frame !== prevProps.frame) {
       disableScrollSnap(false, false);
     }
-    // if (this.lock && frame !== prevProps.frame) {
-    //   setTimeout(() => {
-    //     console.log('lock false');
-    //     this.lock = false;
-    //   }, 100);
-    // }
     if (frame !== prevProps.frame) {
       disableScrollSnap(frame === this.children.length - 1, frame === 0);
     }
@@ -121,9 +115,6 @@ class SnapScroll extends React.Component {
     if (this.isTouchDevice) {
       this.lock = true;
     }
-    // if (this.to) {
-    //   clearTimeout(this.to);
-    // }
     switch (direction) {
       case -1:
         this.next();
@@ -134,9 +125,6 @@ class SnapScroll extends React.Component {
       default:
         break;
     }
-    // this.to = setTimeout(() => {
-    //   this.lock = false;
-    // }, 100);
   }
 
   mouseScrollHandler(e) {
@@ -154,20 +142,13 @@ class SnapScroll extends React.Component {
   };
 
   touchEndHandler(e) {
-    // this.lock = false;
     this.yDown = null;
   }
 
   touchMoveHandler(e) {
-    // const { disableNext, disablePrev } = this.props;
     let yUp = e.touches[0].clientY;
     let delta = (this.yDown - yUp);
-    // e.preventDefault();
     if (Math.abs(delta) > THRESHHOLD) {
-      // if ((delta > 0 && !disableNext) ||
-      //   (delta > 0 && !disablePrev) ||
-      //   (!disableNext && !disablePrev)) {
-      // }
       this.snap(delta > 0 ? -1 : 1);
     }
   };
@@ -202,13 +183,6 @@ class SnapScroll extends React.Component {
   renderChildren() {
     const { frame } = this.props;
     return this.children[frame];
-    // if (isArray) {
-    //   return children.map(child => this.renderChildren(child));
-    // } else {
-    //   const wrapper = <Wrapper key={this.key} frame={frame} index={this.key} >{children}</Wrapper >;
-    //   this.key++;
-    //   return wrapper;
-    // }
   }
 
   render() {
