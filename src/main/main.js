@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
@@ -30,14 +30,8 @@ class Main extends PureComponent {
   }
 
   onOrientationchange() {
-    const or = window.screen.orientation;
-    let orientation;
-    if ((or && or.angle === 0) || window.matchMedia('(orientation: portrait)').matches) {
-      orientation = 'portrait';
-    } else {
-      orientation = 'landscape';
-    }
-    this.setState({ orientation });
+    const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation;
+    this.setState({ orientation: angle === 0 ? 'portrait' : 'landscape' });
   }
 
   render() {
@@ -45,29 +39,31 @@ class Main extends PureComponent {
     const { isMobile } = this.props;
     const { orientation } = this.state;
     return (
-      <Spring
-        from={{ opacity: show ? 0 : 1 }}
-        to={{ opacity: show ? 1 : 0 }}
-      >
-        {springs => (orientation === 'landscape' && isMobile) ? <Card
-          logo={logoGreen}
-          underLogo={vgsGreen}
-          address="24 Raul Wallenberg st."
-          city="TEL AVIV"
-          state="ISRAEL"
-          zip={6971921}
-          phone="+972 3 549 9054"
-        /> : <div className={styles.container} >
-          <ReduxRoutes />
-          <div className={styles.logo} onClick={toggleFullScreen} >
-            <img className={styles.logoImg} src={logo} />
-            <img className={styles.logoText} src={vgs} style={springs} />
-          </div >
-          <SideMenu />
-          <FrameIndicator />
-          {this.props.children}
-        </div >}
-      </Spring >
+      <Fragment >
+        <ReduxRoutes />
+        <Spring
+          from={{ opacity: show ? 0 : 1 }}
+          to={{ opacity: show ? 1 : 0 }}
+        >
+          {springs => (orientation === 'landscape' && isMobile) ? <Card
+            logo={logoGreen}
+            underLogo={vgsGreen}
+            address="24 Raul Wallenberg st."
+            city="TEL AVIV"
+            state="ISRAEL"
+            zip={6971921}
+            phone="+972 3 549 9054"
+          /> : <div className={styles.container} >
+            <div className={styles.logo} onClick={toggleFullScreen} >
+              <img className={styles.logoImg} src={logo} />
+              <img className={styles.logoText} src={vgs} style={springs} />
+            </div >
+            <SideMenu />
+            <FrameIndicator />
+            {this.props.children}
+          </div >}
+        </Spring >
+      </Fragment >
     );
   }
 }
