@@ -20,11 +20,13 @@
 
 .article {
   font-size: 16px;
-  line-height: 34px;
+  line-height: 35px;
+  margin-bottom: 12px;
 
   @include media('>tablet') {
     column-count: 2;
     column-gap: 10%;
+    margin-bottom: 0;
   }
 
   @include media('>desktop') {
