@@ -7,9 +7,9 @@ import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
 import Device from '/src/components/device';
 import { toggleFullScreen } from '/src/utils';
+import services from '/src/services';
 import FrameIndicator from './components/frame-indicator';
 import styles from './styles.scss';
-import logo from './assets/logo_blue.svg';
 import vgs from './assets/vgs_blue.svg';
 import SideMenu from './components/side-menu';
 import Card from './components/card';
@@ -36,7 +36,7 @@ class Main extends PureComponent {
 
   render() {
     const show = this.props.pathname !== '/product';
-    const { isMobile, pathname } = this.props;
+    const { isMobile, pathname, logo } = this.props;
     const { orientation } = this.state;
     return (
       <Fragment >
@@ -72,11 +72,13 @@ Main.propTypes = {
   children: PropTypes.any,
   pathname: PropTypes.string,
   isMobile: PropTypes.bool.isRequired,
+  logo: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   pathname: Routes.selectors.pathname(state),
   isMobile: Device.selectors.isMobile(state),
+  logo: services.products.selectors.logo(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

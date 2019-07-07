@@ -3,6 +3,8 @@ import Routes from '/src/routes';
 import mock from './mocks/data.mock';
 import donut from './donut.png';
 import violaCoverPic from './viola_cover.png';
+import logoFrame from './logo_frame.svg';
+import logoViola from './logo_viola.svg';
 
 const list = () => [{
   category: 'Cardiac',
@@ -81,6 +83,17 @@ const color = createSelector(Routes.selectors.pathname, pathname => {
   }
 });
 
+const logo = createSelector(Routes.selectors.pathname, pathname => {
+  switch (pathname.split('/').pop()) {
+    case 'frame':
+      return logoFrame;
+    case 'viola':
+      return logoViola;
+    default:
+      return null;
+  }
+});
+
 export default {
   list,
   categories,
@@ -89,4 +102,5 @@ export default {
   art,
   clinical,
   color,
+  logo,
 };
