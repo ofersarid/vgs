@@ -37,13 +37,14 @@ class Button extends PureComponent {
   }
 
   render() {
-    const { children, className, color, tag } = this.props;
+    const { children, className, color, tag, waveColor } = this.props;
     const Tag = tag;
     const copyProps = Object.assign({}, this.props);
     delete copyProps.color;
     delete copyProps.className;
     delete copyProps.children;
     delete copyProps.tag;
+    delete copyProps.waveColor;
     return (
       <Tag
         {...copyProps}
@@ -52,8 +53,9 @@ class Button extends PureComponent {
         onMouseDown={this.ripple}
         onMouseUp={this.calm}
         className={cx('ripple waves-effect', styles.button, className, {
-          'waves-light': color,
-          'waves-color': !color,
+          'waves-white': waveColor === 'white',
+          'waves-blue': waveColor === 'blue',
+          'waves-purple': waveColor === 'purple',
           [styles.color]: color,
         })}
       >
@@ -69,11 +71,13 @@ Button.propTypes = {
   color: PropTypes.bool,
   tag: PropTypes.string,
   onClick: PropTypes.func,
+  waveColor: PropTypes.oneOf(['white', 'blue', 'purple'])
 };
 
 Button.defaultProps = {
   color: false,
   tag: 'div',
+  waveColor: 'white',
 };
 
 export default Button;

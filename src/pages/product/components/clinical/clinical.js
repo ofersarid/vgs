@@ -12,6 +12,7 @@ import { SnapScroll, DropMenu, Button } from '/src/components';
 import { Swipeable } from 'react-swipeable';
 import { LongArrowAltRight } from 'styled-icons/fa-solid/LongArrowAltRight';
 import { LongArrowAltLeft } from 'styled-icons/fa-solid/LongArrowAltLeft';
+import services from '/src/services';
 import sharedStyles from '../../styles.scss';
 import styles from './styles.scss';
 
@@ -106,29 +107,25 @@ class Clinical extends PureComponent {
   }
 
   renderData() {
-    const { articles } = this.props;
+    const { articles, color } = this.props;
     const dom = articles.map((m, i) => (
       <div ref={this.slidesRefs[i]} className={cx(styles.outerWrapper)} key={m.link} >
         <Button
           className={styles.innerWrapper}
-          color
           tag="a"
           target="_blank"
           rel="noopener noreferrer"
           href={m.link}
+          waveColor={color === '#0272BA' ? 'blue' : 'purple'}
         >
           <div className={styles.date} >{moment(m.date).format('MMMM Do, YYYY')}</div >
-          <div className={styles.header} >{m.title}</div >
+          <div className={styles.header} style={{ color }} >{m.title}</div >
           <div className={styles.source} >{m.source}</div >
         </Button >
       </div >
     ));
     return dom;
   }
-
-  // onChangeHandler(slide) {
-  //   this.setState({ slide });
-  // }
 
   onSwipedLeftHandler() {
     const { articles } = this.props;
@@ -152,17 +149,6 @@ class Clinical extends PureComponent {
     });
   }
 
-  // onSwipingHandler() {
-  //   // const { disableNext, disablePrev } = this.props;
-  //   this.preventOuterScroll();
-  // }
-
-  //
-  // onVertivcalSwipeHandler() {
-  //   const { disableScrollSnap } = this.props;
-  //   // disableScrollSnap(false, false);
-  // }
-  //
   onSwipedHandler() {
     const { disableScrollSnap, disableNext, disablePrev } = this.props;
     if (disableNext || disablePrev) {
@@ -171,7 +157,7 @@ class Clinical extends PureComponent {
   }
 
   render() {
-    const { frame, showOnFrame, isTouchDevice } = this.props;
+    const { frame, showOnFrame, isTouchDevice, color } = this.props;
     const { start, end } = this.state;
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
@@ -195,7 +181,7 @@ class Clinical extends PureComponent {
               opacity: props.opacity,
             }}
           >
-            <DropMenu options={menuOptions} selected={menuOptions[0]} triggerClass={styles.menuTrigger} />
+            <DropMenu options={menuOptions} selected={menuOptions[0]} triggerClass={styles.menuTrigger} color={color} />
             <Swipeable
               className={styles.carousel}
               innerRef={ref => {
@@ -242,6 +228,7 @@ Clinical.propTypes = {
     source: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
   })).isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -249,6 +236,7 @@ const mapStateToProps = state => ({
   isTouchDevice: Device.selectors.isTouchDevice(state),
   disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),
+  color: services.products.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -46,6 +46,7 @@ class ImgTxtBtn extends PureComponent {
               target="_blank"
               rel="noopener noreferrer"
               href={pdfSrc}
+              waveColor="white"
               className={cx(styles.btn)}
               style={{
                 background: themeColor,

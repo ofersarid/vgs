@@ -23,11 +23,14 @@ class DropMenu extends PureComponent {
   }
 
   render() {
-    const { options, decorator, selected, triggerClass } = this.props;
+    const { options, decorator, selected, triggerClass, color } = this.props;
     const { open } = this.state;
     return (
       <Fragment >
-        <Button className={cx(styles.trigger, triggerClass)} onClick={this.toggle} color >
+        <Button className={cx(styles.trigger, triggerClass)} onClick={this.toggle} style={{
+          color,
+          borderColor: color,
+        }} waveColor={color === '#0272BA' ? 'blue' : 'purple'} >
           <p >{selected.display}</p >
           <ChevronDown className={cx(styles.arrow, { [styles.flip]: open })} />
         </Button >
@@ -51,6 +54,7 @@ DropMenu.propTypes = {
   decorator: PropTypes.func,
   selected: option,
   triggerClass: PropTypes.string,
+  color: PropTypes.string.isRequired,
 };
 
 DropMenu.defaultProps = {

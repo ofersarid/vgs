@@ -39,7 +39,6 @@ class SnapScroll extends React.Component {
         PropTypes.node,
         PropTypes.arrayOf(PropTypes.node)
       ]).isRequired,
-      start: PropTypes.number,
       frame: PropTypes.number.isRequired,
       indexChanged: PropTypes.func,
       updateFrameIndex: PropTypes.func.isRequired,
@@ -54,7 +53,6 @@ class SnapScroll extends React.Component {
 
   static get defaultProps() {
     return {
-      start: 0,
       indexChanged: f => f,
       orientation: 'vertical',
       customTransition: null,
@@ -67,7 +65,7 @@ class SnapScroll extends React.Component {
     this.xDown = null;
     this.children = flattenDeep(props.children);
     this.state = {
-      index: this.getStartIndex(),
+      index: 0,
       direction: DIRECTION.FORWARD,
     };
     this.lock = false;
@@ -111,12 +109,6 @@ class SnapScroll extends React.Component {
     this.$node.removeEventListener('touchstart', this.touchStartHandler, false);
     this.$node.removeEventListener('touchend', this.touchEndHandler, false);
     this.$node.removeEventListener('touchmove', this.touchMoveHandler, false);
-  }
-
-  getStartIndex(props) {
-    const { start } = props || this.props;
-    // Returns 0 if the start prop is undefined or out of bounds.
-    return !this.children.length ? 0 : (start < 0 || start >= this.children.length) ? 0 : start;
   }
 
   snap(direction) {

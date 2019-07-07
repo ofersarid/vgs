@@ -63,12 +63,33 @@ h1 {
 }
 
 :global {
-  .waves-effect.waves-color .waves-ripple {
-    background: rgba(#0272BA, 0.4);
-    background: -webkit-radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
-    background: -o-radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
-    background: -moz-radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
-    background: radial-gradient(rgba(#0272BA, 0.2) 0, rgba(#0272BA, 0.3) 40%, rgba(#0272BA, 0.4) 50%, rgba(#0272BA, 0.5) 60%, rgba(#0272BA, 0) 70%);
+  .waves-effect.waves-white .waves-ripple {
+    $c: #ffffff;
+    background: rgba($c, 0.4);
+    background: -webkit-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -o-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -moz-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+
+  }
+
+  .waves-effect.waves-blue .waves-ripple {
+    $c: #0272BA;
+    background: rgba($c, 0.4);
+    background: -webkit-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -o-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -moz-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+
+  }
+
+  .waves-effect.waves-purple .waves-ripple {
+    $c: #662d91;
+    background: rgba($c, 0.4);
+    background: -webkit-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -o-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -moz-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
 
   }
 }

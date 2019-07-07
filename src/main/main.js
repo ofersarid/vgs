@@ -72,7 +72,7 @@ Main.propTypes = {
   children: PropTypes.any,
   pathname: PropTypes.string,
   isMobile: PropTypes.bool.isRequired,
-  logo: PropTypes.string.isRequired,
+  logo: PropTypes.string,
 };
 
 const mapStateToProps = state => ({

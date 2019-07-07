@@ -50,6 +50,7 @@ class Cover extends PureComponent {
           <img src={art} className={styles.art} />
           {footer ? (
             <Button
+              waveColor="white"
               className={cx(styles.footer)}
               style={{ background: themeColor }}
               onClick={navigate}

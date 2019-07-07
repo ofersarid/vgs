@@ -53,7 +53,7 @@ class SideMenu extends PureComponent {
         >
           {props => <div className={styles.menuContainer} style={props} >
             <ul className={styles.list} >
-              <Button onClick={this.navigate} tag="li" >Home</Button >
+              <Button onClick={this.navigate} tag="li" waveColor="white" >Home</Button >
               <SubMenu label="Products" >
                 {categories.map(category => (
                   <Fragment key={category} >
@@ -63,26 +63,27 @@ class SideMenu extends PureComponent {
                         ? <Button
                           tag="li"
                           key={product.name}
+                          waveColor="white"
                           onClick={this.navigate} >{product.name}</Button >
                         : null;
                     })}
                   </Fragment >
                 ))}
               </SubMenu >
-              <Button tag="li" onClick={this.navigate} >News & Events</Button >
+              <Button tag="li" onClick={this.navigate} waveColor="white" >News & Events</Button >
               <SubMenu label="About" >
-                <Button tag="li" onClick={this.navigate} >Team</Button >
-                <Button tag="li" onClick={this.navigate} >Jobs</Button >
+                <Button tag="li" onClick={this.navigate} waveColor="white" >Team</Button >
+                <Button tag="li" onClick={this.navigate} waveColor="white" >Jobs</Button >
               </SubMenu >
-              <Button tag="li" onClick={this.navigate} >Contact</Button >
+              <Button tag="li" onClick={this.navigate} waveColor="white" >Contact</Button >
             </ul >
-            <Button tag="a" className={cx(styles.legal)} onClick={this.navigate} >Legal</Button >
+            <Button tag="a" className={cx(styles.legal)} onClick={this.navigate} waveColor="white" >Legal</Button >
           </div >}
         </Spring >
         <Button
           className={cx(styles.menuToggle)}
           onClick={this.toggleMenu}
-          color
+          waveColor={openMenu ? 'white' : color === '#0272BA' ? 'blue' : 'purple'}
         >
           <Spring
             from={{ transform: 'rotate(0deg)', left: '0px', background: color }}
