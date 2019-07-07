@@ -7,6 +7,7 @@ import Device from '/src/components/device';
 import { SnapScroll, ScrollableArea } from '/src/components';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
+import Footnotes from '../footnotes/footnotes';
 
 const TwoColumnLayout = ({ showOnFrame, frame, article, footNotes, isMobile }) => {
   return (
@@ -19,20 +20,10 @@ const TwoColumnLayout = ({ showOnFrame, frame, article, footNotes, isMobile }) =
         opacity: styleProps.opacity,
       }} >
         <ScrollableArea >
-          <div className={styles.article} >
-            {article}
-          </div >
-          {isMobile && (
-            <ol className={styles.footNotes} >
-              {footNotes.map((note, i) => <li key={i} >{note}</li >)}
-            </ol >
-          )}
+          <div className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
+          {isMobile && <Footnotes footNotes={footNotes} />}
         </ScrollableArea >
-        {!isMobile && (
-          <ol className={styles.footNotes} >
-            {footNotes.map((note, i) => <li key={i} >{note}</li >)}
-          </ol >
-        )}
+        {!isMobile && <Footnotes footNotes={footNotes} />}
       </section >}
     </Spring >
   );

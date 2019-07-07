@@ -36,7 +36,7 @@ class Main extends PureComponent {
 
   render() {
     const show = this.props.pathname !== '/product';
-    const { isMobile } = this.props;
+    const { isMobile, pathname } = this.props;
     const { orientation } = this.state;
     return (
       <Fragment >
@@ -56,7 +56,7 @@ class Main extends PureComponent {
           /> : <div className={styles.container} >
             <div className={styles.logo} onClick={toggleFullScreen} >
               <img className={styles.logoImg} src={logo} />
-              <img className={styles.logoText} src={vgs} style={springs} />
+              {!['viola', 'frame'].includes(pathname.split('/').pop()) && <img className={styles.logoText} src={vgs} style={springs} />}
             </div >
             <SideMenu />
             <FrameIndicator />

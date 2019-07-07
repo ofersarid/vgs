@@ -27,7 +27,7 @@ class SubMenu extends PureComponent {
     const { children, label } = this.props;
     const { expand } = this.state;
     return (
-      <Button el="li" className={cx(styles.subMenu)} onClick={this.toggle} >{label}
+      <Button tag="li" className={cx(styles.subMenu)} onClick={this.toggle} >{label}
         <Spring
           from={expand ? {
             height: 0,

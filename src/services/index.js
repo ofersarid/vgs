@@ -1,1 +1,3 @@
-export { default as Products } from './products';
+export default {
+  products: require('./products').default,
+};

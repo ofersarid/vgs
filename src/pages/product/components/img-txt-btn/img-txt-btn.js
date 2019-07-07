@@ -9,6 +9,7 @@ import { Spring } from 'react-spring/renderprops-universal';
 import { SnapScroll, ScrollableArea, Button } from '/src/components';
 import Device from '/src/components/device';
 import sharedStyles from '../../styles.scss';
+import Footnotes from '../footnotes/footnotes';
 
 class ImgTxtBtn extends PureComponent {
   constructor(props) {
@@ -17,7 +18,7 @@ class ImgTxtBtn extends PureComponent {
   }
 
   render() {
-    const { showOnFrame, frame, img, txt, pdfSrc, themeColor, isMobile, footNotes, isTouchDevice } = this.props;
+    const { imgSubTitle, showOnFrame, frame, img, txt, pdfSrc, themeColor, footNotes, isTouchDevice } = this.props;
     return (
       <Spring
         from={{ opacity: 0 }}
@@ -32,15 +33,16 @@ class ImgTxtBtn extends PureComponent {
           }}
         >
           <div className={cx(styles.img)} >
-            {isTouchDevice ? <img src={img.src} className={styles.inner} />
-              : <div style={{ backgroundImage: `url(${img.src})` }} className={styles.inner} />
+            {isTouchDevice ? <img src={img} className={styles.inner} />
+              : <div style={{ backgroundImage: `url(${img})` }} className={styles.inner} />
             }
-            <div className={cx(styles.title)} >{img.title}</div >
+            <div className={cx(styles.title)} >{imgSubTitle}</div >
           </div >
           <div className={cx(styles.rightCol)} >
-            <p className={cx(styles.txt)} >{txt}</p >
+            <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
             <Button
-              el="a"
+              tag="a"
+              color
               target="_blank"
               rel="noopener noreferrer"
               href={pdfSrc}
@@ -52,16 +54,7 @@ class ImgTxtBtn extends PureComponent {
               PRODUCT PDF
             </Button >
           </div >
-          {isMobile && (
-            <ol className={styles.footNotes} >
-              {footNotes.map((note, i) => <li key={i} >{note}</li >)}
-            </ol >
-          )}
-          {!isMobile && (
-            <ol className={styles.footNotes} >
-              {footNotes.map((note, i) => <li key={i} >{note}</li >)}
-            </ol >
-          )}
+          <Footnotes footNotes={footNotes} />
         </ScrollableArea >}
       </Spring >
     );
@@ -69,24 +62,19 @@ class ImgTxtBtn extends PureComponent {
 }
 
 ImgTxtBtn.propTypes = {
-  img: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
+  img: PropTypes.string.isRequired,
+  imgSubTitle: PropTypes.string.isRequired,
   txt: PropTypes.string.isRequired,
   footNotes: PropTypes.arrayOf(PropTypes.string).isRequired,
   pdfSrc: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   themeColor: PropTypes.string.isRequired,
   frame: PropTypes.number.isRequired,
   showOnFrame: PropTypes.number.isRequired,
-  isMobile: PropTypes.bool.isRequired,
   isTouchDevice: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  isMobile: Device.selectors.isMobile(state),
   isTouchDevice: Device.selectors.isTouchDevice(state),
 });
 

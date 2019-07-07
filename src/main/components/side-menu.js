@@ -1,11 +1,12 @@
 import React, { PureComponent, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spring } from 'react-spring/renderprops';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
-import { Button } from '/src/components';
-import { Products } from '/src/services';
+import { Button, SnapScroll } from '/src/components';
+import services from '/src/services';
 import SubMenu from './sub-menu';
 import styles from '../styles.scss';
 import camelCase from 'lodash/camelCase';
@@ -28,36 +29,39 @@ class SideMenu extends PureComponent {
   }
 
   navigate(e) {
+    const { resetFrame } = this.props;
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase();
-    this.setState({
-      immediate: true,
-    });
     console.log(camelCase(txt));
     hashHistory.push(camelCase(txt));
+    resetFrame();
+    this.toggleMenu();
   }
 
   render() {
+    const { products, categories, color } = this.props;
     const { openMenu, immediate } = this.state;
-    console.log(Products.selectors.categories());
     return (
       <Fragment >
         <Spring
           from={{ transform: `translateX(${openMenu ? '100vw' : '0vw'})`, opacity: openMenu ? 0 : 1 }}
           to={{ transform: `translateX(${openMenu ? '0vw' : '100vw'})`, opacity: openMenu ? 1 : 0 }}
           immediate={immediate}
+          onRest={() => {
+            this.setState({ immediate: true });
+          }}
         >
           {props => <div className={styles.menuContainer} style={props} >
             <ul className={styles.list} >
-              <Button onClick={this.navigate} el="li" >Home</Button >
+              <Button onClick={this.navigate} tag="li" >Home</Button >
               <SubMenu label="Products" >
-                {Products.selectors.categories().map(category => (
+                {categories.map(category => (
                   <Fragment key={category} >
                     <label >{category}</label >
-                    {Products.selectors.list().map(product => {
+                    {products.map(product => {
                       return product.category === category
                         ? <Button
-                          el="li"
+                          tag="li"
                           key={product.name}
                           onClick={this.navigate} >{product.name}</Button >
                         : null;
@@ -65,14 +69,14 @@ class SideMenu extends PureComponent {
                   </Fragment >
                 ))}
               </SubMenu >
-              <Button el="li" onClick={this.navigate} >News & Events</Button >
+              <Button tag="li" onClick={this.navigate} >News & Events</Button >
               <SubMenu label="About" >
-                <Button el="li" onClick={this.navigate} >Team</Button >
-                <Button el="li" onClick={this.navigate} >Jobs</Button >
+                <Button tag="li" onClick={this.navigate} >Team</Button >
+                <Button tag="li" onClick={this.navigate} >Jobs</Button >
               </SubMenu >
-              <Button el="li" onClick={this.navigate} >Contact</Button >
+              <Button tag="li" onClick={this.navigate} >Contact</Button >
             </ul >
-            <Button el="a" className={cx(styles.legal)} onClick={this.navigate} >Legal</Button>
+            <Button tag="a" className={cx(styles.legal)} onClick={this.navigate} >Legal</Button >
           </div >}
         </Spring >
         <Button
@@ -81,7 +85,7 @@ class SideMenu extends PureComponent {
           color
         >
           <Spring
-            from={{ transform: 'rotate(0deg)', left: '0px', background: '#0272BA' }}
+            from={{ transform: 'rotate(0deg)', left: '0px', background: color }}
             to={{ transform: 'rotate(45deg)', left: '3px', background: '#ffffff' }}
             reset
             reverse={!openMenu}
@@ -90,7 +94,7 @@ class SideMenu extends PureComponent {
             {props => <span className={styles.handle} style={props} />}
           </Spring >
           <Spring
-            from={{ transform: 'rotate(0deg)', left: '0px', background: '#0272BA' }}
+            from={{ transform: 'rotate(0deg)', left: '0px', background: color }}
             to={{ transform: 'rotate(-45deg)', left: '3px', background: '#ffffff' }}
             reset
             reverse={!openMenu}
@@ -104,10 +108,24 @@ class SideMenu extends PureComponent {
   }
 }
 
-SideMenu.propTypes = {};
+SideMenu.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+  })),
+  categories: PropTypes.arrayOf(PropTypes.string),
+  resetFrame: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
-const mapStateToProps = state => ({}); // eslint-disable-line
+const mapStateToProps = state => ({
+  products: services.products.selectors.list(state),
+  categories: services.products.selectors.categories(state),
+  color: services.products.selectors.color(state),
+});
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = dispatch => ({
+  resetFrame: () => dispatch(SnapScroll.actions.reset()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);

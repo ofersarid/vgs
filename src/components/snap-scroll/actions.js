@@ -18,8 +18,14 @@ const count = count => ({
   count,
 });
 
+const reset = count => ({
+  type: C.ACTIONS.RESET,
+  count,
+});
+
 export default {
   updateFrameIndex,
   disable,
   count,
+  reset,
 };

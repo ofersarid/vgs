@@ -129,7 +129,6 @@
   .handle {
     width: 35px;
     height: 2px;
-    background: #0272BA;
     display: inline-block;
     transform-origin: 7.5px;
     margin: 6px;
@@ -300,7 +299,7 @@
     border-radius: 10px;
     width: 5px;
     height: 5px;
-    border: 1px solid #0272BA;
+    border: 1px solid;
 
     &:not(:last-of-type) {
       margin-bottom: 10px;
@@ -310,7 +309,6 @@
   .indicate {
     width: 10px;
     height: 10px;
-    background: #0272BA;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 50%);

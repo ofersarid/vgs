@@ -79,8 +79,9 @@ class Clinical extends PureComponent {
   }
 
   onScrollHandler() {
+    const { disableScrollSnap } = this.props;
     const { slide } = this.state;
-    this.preventOuterScroll();
+    disableScrollSnap(true, true);
     if (this.listRef.scrollLeft + this.listRef.clientWidth >= this.listRef.scrollWidth - 10) {
       // end reached
       this.setState({ end: true, start: false });
@@ -107,11 +108,17 @@ class Clinical extends PureComponent {
   renderData() {
     const { articles } = this.props;
     const dom = articles.map((m, i) => (
-      <div ref={this.slidesRefs[i]} className={cx(styles.outerWrapper)} key={m.id} >
-        <Button className={styles.innerWrapper} color onClick={() => {
-        }} >
+      <div ref={this.slidesRefs[i]} className={cx(styles.outerWrapper)} key={m.link} >
+        <Button
+          className={styles.innerWrapper}
+          color
+          tag="a"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={m.link}
+        >
           <div className={styles.date} >{moment(m.date).format('MMMM Do, YYYY')}</div >
-          <div className={styles.header} >{m.header}</div >
+          <div className={styles.header} >{m.title}</div >
           <div className={styles.source} >{m.source}</div >
         </Button >
       </div >
@@ -231,9 +238,9 @@ Clinical.propTypes = {
   disablePrev: PropTypes.bool.isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({
     date: PropTypes.instanceOf(Date).isRequired,
-    header: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
   })).isRequired,
 };
 

@@ -75,18 +75,27 @@ class SnapScroll extends React.Component {
     props.disableScrollSnap(props.frame === this.children.length - 1, props.frame === 0);
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      index: nextProps.frame,
+      prevPath: DIRECTION[nextProps.frame > prevState.index ? 'FORWARD' : 'REVERSE'],
+    };
+  }
+
   componentDidUpdate(prevProps) {
-    const { frame, disableScrollSnap } = this.props;
+    const { frame, disableScrollSnap, children, count } = this.props;
     if (frame === 0 && frame !== prevProps.frame) {
       disableScrollSnap(false, false);
     }
     if (frame !== prevProps.frame) {
       disableScrollSnap(frame === this.children.length - 1, frame === 0);
     }
+    this.children = flattenDeep(children);
+    count(this.children.length || 1);
   }
 
   componentDidMount() {
-    const { indexChanged, updateFrameIndex, count, children } = this.props;
+    const { indexChanged, updateFrameIndex, count } = this.props;
     this.$node.addEventListener('wheel', this.mouseScrollHandler, false);
     this.$node.addEventListener('touchstart', this.touchStartHandler, false);
     this.$node.addEventListener('touchend', this.touchEndHandler, false);
@@ -94,7 +103,7 @@ class SnapScroll extends React.Component {
     // Fire initial indexChanged();
     indexChanged(this.state.index);
     updateFrameIndex(this.state.index);
-    count(Array.isArray(children) ? flattenDeep(children).length : 1);
+    count(this.children.length || 1);
   }
 
   componentWillUnmount() {
@@ -157,13 +166,8 @@ class SnapScroll extends React.Component {
     const { disableNext } = this.props;
     if (disableNext) return;
     const index = Math.min(this.state.index + 1, this.children.length - 1);
-    this.setState({
-      index,
-      direction: DIRECTION.FORWARD,
-    }, () => {
-      this.props.indexChanged(index);
-      this.props.updateFrameIndex(index);
-    });
+    this.props.indexChanged(index);
+    this.props.updateFrameIndex(index);
   };
 
   prev() {
@@ -171,13 +175,8 @@ class SnapScroll extends React.Component {
     console.log('prev');
     if (disablePrev) return;
     const index = Math.max(0, this.state.index - 1);
-    this.setState({
-      index,
-      direction: DIRECTION.REVERSE,
-    }, () => {
-      this.props.indexChanged(index);
-      this.props.updateFrameIndex(index);
-    });
+    this.props.indexChanged(index);
+    this.props.updateFrameIndex(index);
   };
 
   renderChildren() {

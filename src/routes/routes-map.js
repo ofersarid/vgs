@@ -5,8 +5,9 @@ import { Product } from '/src/pages';
 
 export default (
   <Route path="/" component={Main} >
-    <IndexRedirect to="product" />
-    <Route path="product" component={Product} />
-    <Redirect from="*" to="product" />
+    <IndexRedirect to="frame" />
+    <Route path="frame" component={Product} />
+    <Route path="viola" component={Product} />
+    <Redirect from="*" to="frame" />
   </Route >
 );

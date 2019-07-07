@@ -4,6 +4,7 @@ import autoBind from 'auto-bind';
 import { connect } from 'react-redux';
 import { SnapScroll } from '/src/components';
 import 'babel-polyfill';
+import services from '/src/services';
 import styles from '../styles.scss';
 
 class FrameIndicator extends PureComponent {
@@ -13,22 +14,23 @@ class FrameIndicator extends PureComponent {
   }
 
   renderBullets() {
-    const { count } = this.props;
+    const { count, color } = this.props;
     const bullets = [];
     for (let i = 0; i < count; i++) {
-      bullets.push(<li key={i} />);
+      bullets.push(<li key={i} style={{ borderColor: color }} />);
     }
     return bullets;
   }
 
   render() {
-    const { frame } = this.props;
+    const { frame, color } = this.props;
 
     return (
       <ul className={styles.frameIndicator} >
         {this.renderBullets()}
         <div className={styles.indicate} style={{
-          top: 17 * frame
+          top: 17 * frame,
+          backgroundColor: color,
         }} />
       </ul >
     );
@@ -38,11 +40,13 @@ class FrameIndicator extends PureComponent {
 FrameIndicator.propTypes = {
   count: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   count: SnapScroll.selectors.count(state),
   frame: SnapScroll.selectors.frame(state),
+  color: services.products.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({});

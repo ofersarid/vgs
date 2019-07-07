@@ -7,7 +7,7 @@ import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { Router, hashHistory } from 'react-router';
 import rootReducer from './root-reducer';
-import Routes from '/src/routes';
+import routesMap from '/src/routes/routes-map/';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -51,7 +51,7 @@ export const store = createStore(
 
 ReactDOM.render(
   <Provider store={store} >
-    <Router history={hashHistory} routes={Routes.routesMap} />
+    <Router history={hashHistory} routes={routesMap} />
   </Provider >,
   $root
 );
