@@ -8,6 +8,7 @@ $gutter-wide-screen: 20vw;
 
 .inner {
   width: 66vw;
+  box-sizing: border-box;
   height: 61%;
   bottom: 10%;
   position: fixed;
