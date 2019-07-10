@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Spring, config } from 'react-spring/renderprops';
-import { hashHistory } from 'react-router';
 import autoBind from 'auto-bind';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -28,9 +27,6 @@ class Cover extends PureComponent {
     const { frame, footer, themeColor, name, description, art, showOnFrame } = this.props;
     const { reverseAnimation } = this.state;
     const forward = frame === showOnFrame;
-    const navigate = () => {
-      hashHistory.push(footer.linkTo);
-    };
     return (
       <Spring
         from={{ opacity: forward ? 0 : 1 }}
@@ -53,7 +49,9 @@ class Cover extends PureComponent {
               waveColor="white"
               className={cx(styles.footer)}
               style={{ background: themeColor }}
-              onClick={navigate}
+              tag="a"
+              href={footer.linkTo}
+              target="_blank"
             >
               <div className={styles.text}>
                 <div className={styles.title} >{footer.title}</div >

@@ -297,9 +297,10 @@
 
   li {
     border-radius: 10px;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border: 1px solid;
+    box-sizing: border-box;
 
     &:not(:last-of-type) {
       margin-bottom: 10px;
@@ -307,11 +308,12 @@
   }
 
   .indicate {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
+    box-sizing: border-box;
     position: absolute;
-    left: 5px;
-    transform: translate(0, 50%);
+    left: 6px;
+    transform: translate(0, 6px);
     transition: .2s ease-out;
     border-radius: 10px;
   }
