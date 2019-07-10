@@ -203,9 +203,11 @@ class Clinical extends PureComponent {
             </Swipeable >
             <LongArrowAltRight className={cx(styles.arrow)} style={{
               opacity: props.arrowRightOpacity,
+              color,
             }} />
             <LongArrowAltLeft className={cx(styles.arrow)} style={{
               opacity: props.arrowLeftOpacity,
+              color,
             }} />
           </div >}
         </Spring >
