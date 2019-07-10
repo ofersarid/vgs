@@ -3,6 +3,7 @@ import { Spring, config } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { RightArrowAlt } from 'styled-icons/boxicons-regular/RightArrowAlt';
@@ -18,10 +19,6 @@ class Cover extends PureComponent {
     autoBind(this);
   }
 
-  static getDerivedStateFromProps(nextProps, state) {
-    console.log(nextProps.description);
-  }
-
   reverseAnimation() {
     const { reverseAnimation } = this.state;
     this.setState({ reverseAnimation: !reverseAnimation });
@@ -31,6 +28,7 @@ class Cover extends PureComponent {
     const { frame, footer, themeColor, name, description, art, showOnFrame } = this.props;
     const { reverseAnimation } = this.state;
     const forward = frame === showOnFrame;
+    const justOneDay = _isEqual(footer.dateFrom, footer.dateTo);
     return (
       <Spring
         from={{ opacity: forward ? 0 : 1 }}
@@ -60,8 +58,8 @@ class Cover extends PureComponent {
               <div className={styles.text}>
                 <div className={styles.title} >{footer.title}</div >
                 <div className={styles.date} >
-                  {moment(footer.dateFrom).format('MMMM Do')} &mdash;&nbsp;
-                  {moment(footer.dateTo).format('MMMM Do')}
+                  {moment(footer.dateFrom.toDate()).format('MMMM Do')}
+                  {!justOneDay ? ` &mdash;&nbsp; ${moment(footer.dateTo.toDate()).format('MMMM Do')}` : null}
                 </div >
               </div >
               <Spring
@@ -89,8 +87,8 @@ Cover.propTypes = {
   themeColor: PropTypes.string.isRequired,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    dateFrom: PropTypes.instanceOf(Date).isRequired,
-    dateTo: PropTypes.instanceOf(Date).isRequired,
+    dateFrom: PropTypes.object.isRequired,
+    dateTo: PropTypes.object.isRequired,
     address: PropTypes.string.isRequired,
     linkTo: PropTypes.string.isRequired,
   }),
