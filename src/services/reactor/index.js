@@ -25,7 +25,7 @@ const middleware = composeEnhancers(reduxFirestore(firebase));
 const connect = firestoreConnect(props => {
   let aggregated = [{
     collection: 'users',
-    doc: 'JRe2F6XCHTaBTIFAy0uL7EpkuzG2',
+    doc: _userId,
   }];
   if (props.resourceList) {
     aggregated = aggregated.concat(props.resourceList.collections.reduce((list, id) => {
