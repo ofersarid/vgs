@@ -63,6 +63,7 @@
   height: 1px;
   width: 68px;
   margin-right: 25px;
+  transform: translateY(-2px);
 
   @include media('>phone') {
     display: inline-block;

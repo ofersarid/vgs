@@ -21,7 +21,8 @@ class Product extends PureComponent {
 
   render() {
     const { color, data, name, art, clinical } = this.props;
-    return (
+    if (data) console.log(data.coverTagLine);
+    return data ? (
       <Fragment>
         <IndexHeader index={1} header={data.screen1Title} color={color} />
         <IndexHeader index={2} header={data.screen2Title} color={color} />
@@ -59,7 +60,7 @@ class Product extends PureComponent {
           <Clinical showOnFrame={3} themeColor={color} articles={clinical} />
         </SnapScroll >
       </Fragment>
-    );
+    ) : null;
   }
 }
 
@@ -97,7 +98,7 @@ const mapStateToProps = state => ({
   deviceOrientation: Device.selectors.deviceOrientation(state),
   frame: SnapScroll.selectors.frame(state),
   color: services.products.selectors.color(state),
-  data: services.products.selectors.data(state),
+  data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
   art: services.products.selectors.art(state),
   clinical: services.products.selectors.clinical(state),

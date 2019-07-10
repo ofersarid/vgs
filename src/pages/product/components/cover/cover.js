@@ -18,6 +18,10 @@ class Cover extends PureComponent {
     autoBind(this);
   }
 
+  static getDerivedStateFromProps(nextProps, state) {
+    console.log(nextProps.description);
+  }
+
   reverseAnimation() {
     const { reverseAnimation } = this.state;
     this.setState({ reverseAnimation: !reverseAnimation });

@@ -40,10 +40,8 @@ class SnapScroll extends React.Component {
         PropTypes.arrayOf(PropTypes.node)
       ]).isRequired,
       frame: PropTypes.number.isRequired,
-      indexChanged: PropTypes.func,
       updateFrameIndex: PropTypes.func.isRequired,
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
-      customTransition: PropTypes.string,
       disableScrollSnap: PropTypes.func.isRequired,
       disableNext: PropTypes.bool.isRequired,
       disablePrev: PropTypes.bool.isRequired,
@@ -53,9 +51,7 @@ class SnapScroll extends React.Component {
 
   static get defaultProps() {
     return {
-      indexChanged: f => f,
       orientation: 'vertical',
-      customTransition: null,
     };
   }
 
@@ -63,45 +59,44 @@ class SnapScroll extends React.Component {
     super(props);
     autoBind(this);
     this.xDown = null;
-    this.children = flattenDeep(props.children);
     this.state = {
       index: 0,
       direction: DIRECTION.FORWARD,
+      children: [],
     };
     this.lock = false;
     inertia.addCallback(this.snap);
-    props.disableScrollSnap(props.frame === this.children.length - 1, props.frame === 0);
+    // props.disableScrollSnap(props.frame === this.children.length - 1, props.frame === 0);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    const children = flattenDeep(nextProps.children);
+    nextProps.count(children.length || 1);
     return {
       index: nextProps.frame,
       prevPath: DIRECTION[nextProps.frame > prevState.index ? 'FORWARD' : 'REVERSE'],
+      children,
     };
   }
 
   componentDidUpdate(prevProps) {
-    const { frame, disableScrollSnap, children, count } = this.props;
+    const { frame, disableScrollSnap } = this.props;
+    const { children } = this.state;
     if (frame === 0 && frame !== prevProps.frame) {
       disableScrollSnap(false, false);
     }
     if (frame !== prevProps.frame) {
-      disableScrollSnap(frame === this.children.length - 1, frame === 0);
+      disableScrollSnap(frame === children.length - 1, frame === 0);
     }
-    this.children = flattenDeep(children);
-    count(this.children.length || 1);
   }
 
   componentDidMount() {
-    const { indexChanged, updateFrameIndex, count } = this.props;
+    const { updateFrameIndex } = this.props;
     this.$node.addEventListener('wheel', this.mouseScrollHandler, false);
     this.$node.addEventListener('touchstart', this.touchStartHandler, false);
     this.$node.addEventListener('touchend', this.touchEndHandler, false);
     this.$node.addEventListener('touchmove', this.touchMoveHandler, false);
-    // Fire initial indexChanged();
-    indexChanged(this.state.index);
     updateFrameIndex(this.state.index);
-    count(this.children.length || 1);
   }
 
   componentWillUnmount() {
@@ -156,24 +151,23 @@ class SnapScroll extends React.Component {
 
   next() {
     const { disableNext } = this.props;
+    const { children } = this.state;
     if (disableNext) return;
-    const index = Math.min(this.state.index + 1, this.children.length - 1);
-    this.props.indexChanged(index);
+    const index = Math.min(this.state.index + 1, children.length - 1);
     this.props.updateFrameIndex(index);
   };
 
   prev() {
     const { disablePrev } = this.props;
-    console.log('prev');
     if (disablePrev) return;
     const index = Math.max(0, this.state.index - 1);
-    this.props.indexChanged(index);
     this.props.updateFrameIndex(index);
   };
 
   renderChildren() {
     const { frame } = this.props;
-    return this.children[frame];
+    const { children } = this.state;
+    return children[frame];
   }
 
   render() {

@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { Spring } from 'react-spring/renderprops';
@@ -73,14 +74,22 @@ Main.propTypes = {
   pathname: PropTypes.string,
   isMobile: PropTypes.bool.isRequired,
   logo: PropTypes.string,
+  resourceList: PropTypes.shape({
+    collections: PropTypes.arrayOf(PropTypes.string).isRequired,
+    pages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({
   pathname: Routes.selectors.pathname(state),
   isMobile: Device.selectors.isMobile(state),
   logo: services.products.selectors.logo(state),
+  resourceList: services.reactor.selectors.resourceList(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  services.reactor.connect,
+)(Main);
