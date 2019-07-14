@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll } from '/src/components';
-import { TwoColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn } from './components';
+import { TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn } from './components';
 import Device from '/src/components/device';
 import services from '/src/services';
 
@@ -26,7 +26,8 @@ class Product extends PureComponent {
       <Fragment>
         <IndexHeader index={1} header={data.screen1Title} color={color} />
         <IndexHeader index={2} header={data.screen2Title} color={color} />
-        <IndexHeader index={3} header="Clinical" />
+        <IndexHeader index={3} header="Key Features" color={color} />
+        <IndexHeader index={4} header="Clinical" />
         <SnapScroll >
           <Cover
             art={art}
@@ -43,10 +44,12 @@ class Product extends PureComponent {
             showOnFrame={0}
           />
           <TwoColumnLayout
-            key={data.screen1Title}
             article={data.screen1Body}
             footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
             showOnFrame={1}
+          />
+          <ThreeColumnLayout
+            showOnFrame={2}
           />
           <ImgTxtBtn
             img={data.screen2Image}
@@ -54,10 +57,10 @@ class Product extends PureComponent {
             footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
             pdfSrc={data.screen2PDF}
             imgSubTitle={data.screen2ImageSubtitle}
-            showOnFrame={2}
+            showOnFrame={3}
             themeColor={color}
           />
-          <Clinical showOnFrame={3} themeColor={color} />
+          <Clinical showOnFrame={4} themeColor={color} />
         </SnapScroll >
       </Fragment>
     ) : null;

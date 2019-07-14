@@ -1,0 +1,43 @@
+@import "/src/media-query-mixins";
+
+.content {
+  color:  #707070;
+  //height: 100%;
+  //width: 100%;
+  //position: absolute;
+  //bottom: 0;
+}
+
+.list {
+  font-size: 16px;
+  line-height: 25px;
+
+  @include media('>phone') {
+    font-size: 18px;
+    line-height: 35px;
+    column-count: 2;
+    column-gap: 10%;
+    margin-bottom: 0;
+  }
+
+  @include media('>tablet') {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.listItem {
+  margin-bottom: 40px;
+  padding-top: 20px;
+  border-top: 1px solid;
+
+  @include media('>phone') {
+    margin-bottom: 50px;
+  }
+
+  @include media('>tablet') {
+    flex-shrink: 0;
+    width: calc(100% / 3);
+  }
+}
