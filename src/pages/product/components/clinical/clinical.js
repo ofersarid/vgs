@@ -118,8 +118,8 @@ class Clinical extends PureComponent {
           href={m.link}
           waveColor={color === '#0272BA' ? 'blue' : 'purple'}
         >
-          <div className={styles.date} >{moment(m.date).format('MMMM Do, YYYY')}</div >
-          <div className={styles.header} style={{ color }} >{m.title}</div >
+          <div className={styles.date} >{moment(m.dateTime.toDate()).format('MMMM Do, YYYY')}</div >
+          <div className={styles.header} style={{ color }} >{m.description}</div >
           <div className={styles.source} >{m.source}</div >
         </Button >
       </div >
@@ -225,8 +225,8 @@ Clinical.propTypes = {
   disableNext: PropTypes.bool.isRequired,
   disablePrev: PropTypes.bool.isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({
-    date: PropTypes.instanceOf(Date).isRequired,
-    title: PropTypes.string.isRequired,
+    dateTime: PropTypes.object.isRequired,
+    description: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
   })).isRequired,
@@ -239,6 +239,7 @@ const mapStateToProps = state => ({
   disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),
   color: services.products.selectors.color(state),
+  articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
 });
 
 const mapDispatchToProps = dispatch => ({

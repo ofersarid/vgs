@@ -71,7 +71,12 @@ const selectors = {
     if (collections) {
       const collectionId = Object.keys(collections).find(id => collections[id].name.toLowerCase() === name.toLowerCase());
       if (collectionId) {
-        return collections[collectionId].data;
+        const data = collections[collectionId].data;
+        if (!data) return [];
+        return Object.keys(data).reduce((dataArray, key) => {
+          dataArray.push(Object.assign({}, data[key], { id: key }));
+          return dataArray;
+        }, []);
       }
       console.warn(`collection ${name} not found`);
     }

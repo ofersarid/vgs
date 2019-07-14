@@ -20,7 +20,7 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { color, data, name, art, clinical } = this.props;
+    const { color, data, name, art } = this.props;
     if (data) console.log(data.coverTagLine);
     return data ? (
       <Fragment>
@@ -57,7 +57,7 @@ class Product extends PureComponent {
             showOnFrame={2}
             themeColor={color}
           />
-          <Clinical showOnFrame={3} themeColor={color} articles={clinical} />
+          <Clinical showOnFrame={3} themeColor={color} />
         </SnapScroll >
       </Fragment>
     ) : null;
@@ -69,12 +69,6 @@ Product.propTypes = {
   color: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   art: PropTypes.string.isRequired,
-  clinical: PropTypes.arrayOf(PropTypes.shape({
-    date: PropTypes.instanceOf(Date).isRequired,
-    title: PropTypes.string.isRequired,
-    source: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-  })),
   data: PropTypes.shape({
     coverTagLine: PropTypes.string.isRequired,
     screen1Title: PropTypes.string.isRequired,
@@ -101,7 +95,6 @@ const mapStateToProps = state => ({
   data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
   art: services.products.selectors.art(state),
-  clinical: services.products.selectors.clinical(state),
 });
 
 export default compose(
