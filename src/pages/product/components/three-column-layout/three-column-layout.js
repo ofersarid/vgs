@@ -40,13 +40,13 @@ const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: [{
     id: '1',
-    text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
+    text: 'A variety of models'
   }, {
     id: '2',
     text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
   }, {
     id: '3',
-    text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
+    text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
   }, {
     id: '4',
     text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'

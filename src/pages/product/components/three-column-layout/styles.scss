@@ -11,19 +11,26 @@
 .list {
   font-size: 16px;
   line-height: 25px;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding-left: 16px;
 
   @include media('>phone') {
     font-size: 18px;
-    line-height: 35px;
-    column-count: 2;
-    column-gap: 10%;
-    margin-bottom: 0;
+    line-height: 37px;
+    padding: 15% 0 15% 16px;
+    width: 100%;
   }
 
   @include media('>tablet') {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    padding: 7% 0 7% 16px;
+  }
+
+  @include media('>desktop') {
+    font-size: 22px;
+    line-height: 37px;
   }
 }
 
@@ -31,13 +38,28 @@
   margin-bottom: 40px;
   padding-top: 20px;
   border-top: 1px solid;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
 
   @include media('>phone') {
-    margin-bottom: 50px;
+    margin-bottom: 0;
+    width: 45%;
+    height: calc(70% / 3);
+    overflow: hidden;
+
+    &:nth-of-type(odd) {
+      margin-right: 10%;
+    }
   }
 
   @include media('>tablet') {
-    flex-shrink: 0;
-    width: calc(100% / 3);
+    width: calc(70% / 3);
+    margin-right: 15% !important;
+    height: 50%;
+
+    &:nth-of-type(3n) {
+      margin-right: 0 !important;
+    }
   }
 }

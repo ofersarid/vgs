@@ -35,10 +35,9 @@
     width: 100%;
     height: 100%;
     line-height: 1.5em;
+    box-sizing: border-box;
 }
 
 .hasOverflow {
-    $padding-right: 16px;
-    padding-right: $padding-right;
-    width: calc(100% - #{$padding-right});
+    padding-right: 16px;
 }
