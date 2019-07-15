@@ -1,0 +1,77 @@
+@import "/src/media-query-mixins";
+
+.content {
+  color:  #707070;
+
+  @include media('>tablet') {
+    height: 65%;
+    width: 35vw;
+    left: 48vw;
+    top: 23%;
+  }
+}
+
+.list {
+  font-size: 18px;
+  line-height: 24px;
+  box-sizing: border-box;
+  position: relative;
+  padding: 0;
+
+  @include media('>phone') {
+    font-size: 28px;
+    line-height: 37px;
+    padding: 20px 0 0 0;
+    width: 100%;
+  }
+
+  @include media('>tablet') {
+    padding: 7% 0 7% 16px;
+  }
+
+  @include media('>desktop') {
+    font-size: 40px;
+    line-height: 45px;
+  }
+}
+
+.listItem {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.check {
+  height: 100%;
+  width: 22px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 10px;
+  transform: translate(-1vw, -2px);
+
+  @include media('>phone') {
+    width: 36px;
+    transform: translate(-1.5vw, -2px);
+  }
+
+  @include media('>desktop') {
+    width: 43px;
+    transform: translate(-1.5vw, -5px);
+  }
+}
+
+.art {
+  height: 35%;
+  position: absolute;
+  bottom: 0;
+
+  @include media('>phone') {
+    height: 40%
+  }
+
+  @include media('>tablet') {
+    height: 75%
+  }
+}
