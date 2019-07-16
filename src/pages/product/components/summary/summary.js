@@ -4,7 +4,7 @@ import { Spring } from 'react-spring/renderprops';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Check } from 'styled-icons/material/Check';
-import { SnapScroll } from '/src/components';
+import { SnapScroll } from '/src/shared';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
 import art from './summary-art.png';

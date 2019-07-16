@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import styles from './styles.scss';
 import { Spring } from 'react-spring/renderprops-universal';
-import { SnapScroll, ScrollableArea, Button } from '/src/components';
-import Device from '/src/components/device';
+import { SnapScroll, ScrollableArea, Button } from '/src/shared';
+import Device from '/src/shared/device';
 import sharedStyles from '../../styles.scss';
 import Footnotes from '../footnotes/footnotes';
 

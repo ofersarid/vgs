@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button } from '/src/components';
+import { Button } from '/src/shared';
 import { Spring, config } from 'react-spring/renderprops';
 import cx from 'classnames';
 import autoBind from 'auto-bind';

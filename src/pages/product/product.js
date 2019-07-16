@@ -2,9 +2,9 @@ import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { SnapScroll } from '/src/components';
+import { SnapScroll } from '/src/shared';
 import { TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn, Summary } from './components';
-import Device from '/src/components/device';
+import Device from '/src/shared/device';
 import services from '/src/services';
 
 // import { firestoreConnect } from 'react-redux-firebase';

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Spring } from 'react-spring/renderprops';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
-import Device from '/src/components/device';
+import Device from '/src/shared/device';
 import { toggleFullScreen } from '/src/utils';
 import services from '/src/services';
 import FrameIndicator from './components/frame-indicator';

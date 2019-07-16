@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import { connect } from 'react-redux';
-import { SnapScroll } from '/src/components';
+import { SnapScroll } from '/src/shared';
 import 'babel-polyfill';
 import services from '/src/services';
 import styles from '../styles.scss';

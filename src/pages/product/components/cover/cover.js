@@ -7,7 +7,7 @@ import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { RightArrowAlt } from 'styled-icons/boxicons-regular/RightArrowAlt';
-import { SnapScroll, Button } from '/src/components';
+import { SnapScroll, Button } from '/src/shared';
 import styles from './styles.scss';
 
 class Cover extends PureComponent {

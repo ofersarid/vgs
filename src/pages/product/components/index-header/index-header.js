@@ -3,8 +3,8 @@ import { useSpring, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import services from '/src/services';
-import Device from '/src/components/device';
-import { SnapScroll } from '/src/components';
+import Device from '/src/shared/device';
+import { SnapScroll } from '/src/shared';
 import styles from './styles.scss';
 
 const IndexHeader = ({ index, frame, header, isMobile, color }) => {

@@ -5,7 +5,7 @@ import { Spring } from 'react-spring/renderprops';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
-import { Button, SnapScroll } from '/src/components';
+import { Button, SnapScroll } from '/src/shared';
 import services from '/src/services';
 import SubMenu from './sub-menu';
 import styles from '../styles.scss';

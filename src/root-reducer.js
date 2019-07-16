@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable';
-import device from '/src/components/device/reducer';
-import snapScroll from '/src/components/snap-scroll/reducer';
+import device from '/src/shared/device/reducer';
+import snapScroll from '/src/shared/snap-scroll/reducer';
 import services from '/src/services';
 // import { firebaseReducer as fireBase } from 'react-redux-firebase';
 import routs from '/src/routes/reducer';
