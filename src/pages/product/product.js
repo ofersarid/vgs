@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll } from '/src/shared';
-import { TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn, Summary } from './components';
+import {
+  TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn, Summary, TwoImagesLayout
+} from './components';
 import Device from '/src/shared/device';
 import services from '/src/services';
 
@@ -23,12 +25,13 @@ class Product extends PureComponent {
     const { color, data, name, art } = this.props;
     if (data) console.log(data.coverTagLine);
     return data ? (
-      <Fragment>
+      <Fragment >
         <IndexHeader index={1} header={data.screen1Title} color={color} />
         <IndexHeader index={2} header={data.screen2Title} color={color} />
         <IndexHeader index={3} header="Key Features" color={color} />
-        <IndexHeader index={4} header="Summary" color={color} />
-        <IndexHeader index={5} header="Clinical" />
+        <IndexHeader index={4} header="Two Pictures Layout" color={color} />
+        <IndexHeader index={5} header="Summary" color={color} />
+        <IndexHeader index={6} header="Clinical" />
         <SnapScroll >
           <Cover
             art={art}
@@ -49,7 +52,25 @@ class Product extends PureComponent {
             footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
             showOnFrame={1}
           />
-          <ThreeColumnLayout showOnFrame={2} />
+          <ThreeColumnLayout showOnFrame={2} data={[{
+            id: '1',
+            text: 'A variety of models'
+          }, {
+            id: '2',
+            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
+          }, {
+            id: '3',
+            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
+          }, {
+            id: '4',
+            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
+          }, {
+            id: '5',
+            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
+          }, {
+            id: '6',
+            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
+          }]} />
           <ImgTxtBtn
             img={data.screen2Image}
             txt={data.screen2Body}
@@ -59,10 +80,16 @@ class Product extends PureComponent {
             showOnFrame={3}
             themeColor={color}
           />
-          <Summary showOnFrame={4} />
-          <Clinical showOnFrame={5} themeColor={color} />
+          <TwoImagesLayout
+            showOnFrame={4}
+            image1="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
+            image2="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
+            footNotes={[data.screen1Footnote1, data.screen1Footnote2]}
+          />
+          <Summary showOnFrame={5} />
+          <Clinical showOnFrame={6} themeColor={color} />
         </SnapScroll >
-      </Fragment>
+      </Fragment >
     ) : null;
   }
 }

@@ -13,6 +13,7 @@ $gutter-wide-screen: 20vw;
   bottom: 10%;
   position: fixed;
   left: $gutter-phone;
+  color:  #707070;
 
   :global {
     @include media('>phone') {

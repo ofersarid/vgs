@@ -1,0 +1,60 @@
+@import "/src/media-query-mixins";
+
+.twoColumnLayout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  width: 100%;
+
+  @include media('>phone') {
+
+  }
+
+  @include media('>tablet') {
+
+  }
+
+  @include media('>desktop') {
+
+  }
+}
+
+.title {
+  font-size: 12px;
+  text-transform: capitalize;
+  line-height: 12px;
+  margin-top: 10px;
+}
+
+.footNotes {
+  margin: 56px 0 0 0;
+  padding: 17px 0 0 0;
+  width: 100%;
+  counter-reset: item;
+  border-top: 1px solid #5E5E5E;
+  font-size: 12px;
+  line-height: 20px;
+
+  @include media('>phone') {
+    position: absolute;
+    bottom: 0
+  }
+
+  li {
+    display: block;
+
+    &:before {
+      content: "(" counter(item) ") ";
+      counter-increment: item;
+      width: 1.4em;
+      display: inline-block;
+    }
+  }
+}
