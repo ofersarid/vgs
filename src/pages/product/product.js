@@ -130,13 +130,4 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps, {}),
-  // firestoreConnect(() => ([{
-  //   collection: 'collections',
-  //   doc: 'xB6QKYKm7tnXl2QNjjfF',
-  //   subcollections: [{
-  //     collection: 'data',
-  //     // where: [['active', '==', true]],
-  //     // orderBy: ['name', 'desc'],
-  //   }],
-  // }])),
 )(Product);
