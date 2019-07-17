@@ -18,7 +18,7 @@ $gutter-wide-screen: 20vw;
   :global {
     @include media('>phone') {
       width: 58vw;
-      height: calc(67%);
+      height: 67%;
       left: calc((100vw - 58vw)/2);
       //transform: translateY(15%);
     }

@@ -1,28 +1,32 @@
 @import "/src/media-query-mixins";
 
-.twoColumnLayout {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
+.inner {
+  @include media('>tablet') {
+    height: 62%;
+  }
 }
 
+.content {
+  @include media('>tablet') {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.container {
+  width: 100%;
+
+  @include media('>tablet') {
+    width: 32vw;
+  }
+}
 .image {
   width: 100%;
 
-  @include media('>phone') {
-
-  }
-
   @include media('>tablet') {
-
-  }
-
-  @include media('>desktop') {
-
+    height: 35vh;
+    background-position: center center;
+    background-size: cover;
   }
 }
 
@@ -31,6 +35,7 @@
   text-transform: capitalize;
   line-height: 12px;
   margin-top: 10px;
+  margin-bottom: 50px;
 }
 
 .footNotes {
@@ -57,4 +62,13 @@
       display: inline-block;
     }
   }
+}
+
+.bottom {
+  margin-bottom: 0;
+}
+
+.spacer {
+  width: 10vw;
+  flex-shrink: 0;
 }

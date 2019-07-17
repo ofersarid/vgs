@@ -84,7 +84,8 @@ class Product extends PureComponent {
             showOnFrame={4}
             image1="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
             image2="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
-            footNotes={[data.screen1Footnote1, data.screen1Footnote2]}
+            img1Description="A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models"
+            img2Description="A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models"
           />
           <Summary showOnFrame={5} />
           <Clinical showOnFrame={6} themeColor={color} />
