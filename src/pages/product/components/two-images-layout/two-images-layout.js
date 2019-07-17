@@ -33,7 +33,7 @@ const TwoImagesLayout = (
               ? <img src={image1} className={styles.image} />
               : <div className={styles.image} style={{ backgroundImage: `url(${image1})` }} />
             }
-            <div className={cx(styles.title)} >{img1Description}</div >
+            <div className={cx(styles.description)} >{img1Description}</div >
           </div >
           {isTouchDevice ? null : <div className={styles.spacer}/>}
           <div className={styles.container} >
@@ -41,7 +41,7 @@ const TwoImagesLayout = (
               ? <img src={image2} className={styles.image} />
               : <div className={styles.image} style={{ backgroundImage: `url(${image2})` }} />
             }
-            <div className={cx(styles.bottom, styles.title)} >{img2Description}</div >
+            <div className={cx(styles.bottom, styles.description)} >{img2Description}</div >
           </div >
         </ScrollableArea >
       </section >}

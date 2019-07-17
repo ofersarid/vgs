@@ -1,0 +1,92 @@
+@import "/src/media-query-mixins";
+
+.container {
+  @include media('>tablet') {
+    height: 62%;
+  }
+}
+
+.img {
+  width: 100%;
+  margin-bottom: 40px;
+
+  .inner {
+    width: 100%;
+  }
+
+  @include media('>phone') {
+    margin-bottom: 60px;
+  }
+
+  @include media('>tablet') {
+    @include orientation(landscape) {
+      width: 32vw;
+      height: 35vh;
+      float: left;
+
+      .inner {
+        height: 100%;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  @include media('>desktop') {
+    width: 26vw;
+    height: 30vh;
+  }
+}
+
+.title {
+  font-size: 12px;
+  text-transform: capitalize;
+  line-height: 12px;
+  margin-top: 10px;
+
+  @include media('>desktop') {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  padding: 17px 29px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  line-height: 11px;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 215px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include media('>phone') {
+    align-items: flex-start;
+  }
+
+  @include media('>tablet') {
+    width: 35vw;
+    float: right;
+    height: 35vh;
+  }
+
+  @include media('>desktop') {
+    width: 26vw;
+    height: 30vh;
+  }
+}

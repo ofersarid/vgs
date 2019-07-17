@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll } from '/src/shared';
 import {
-  TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn, Summary, TwoImagesLayout
+  TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
 } from './components';
 import Device from '/src/shared/device';
 import services from '/src/services';
@@ -88,7 +88,18 @@ class Product extends PureComponent {
             img2Description="A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models"
           />
           <Summary showOnFrame={5} />
-          <Clinical showOnFrame={6} themeColor={color} />
+          <Downloads
+            showOnFrame={6}
+            image="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
+            imageTitle="Example Title"
+            brochure="http://www.africau.edu/images/default/sample.pdf"
+            ifu="http://www.africau.edu/images/default/sample.pdf"
+            patientCard="http://www.africau.edu/images/default/sample.pdf"
+            instructions="http://www.africau.edu/images/default/sample.pdf"
+            themeColor={color}
+
+          />
+          <Clinical showOnFrame={7} themeColor={color} />
         </SnapScroll >
       </Fragment >
     ) : null;
