@@ -5,6 +5,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
+import { LocationOn } from 'styled-icons/material/LocationOn';
 import moment from 'moment';
 import { RightArrowAlt } from 'styled-icons/boxicons-regular/RightArrowAlt';
 import { SnapScroll, Button } from '/src/shared';
@@ -43,7 +44,7 @@ class Cover extends PureComponent {
         >
           <h1 className={styles.header} >
             <div style={{ color: themeColor }} >{name}</div >
-            <div >{description}</div >
+            <div dangerouslySetInnerHTML={{ __html: description.replace(/\n\r?/g, '<br />') }} />
           </h1 >
           <img src={art} className={styles.art} />
           {footer ? (
@@ -59,8 +60,13 @@ class Cover extends PureComponent {
                 <div className={styles.title} >{footer.title}</div >
                 <div className={styles.date} >
                   {moment(footer.dateFrom.toDate()).format('MMMM Do')}
-                  {!justOneDay ? ` &mdash;&nbsp; ${moment(footer.dateTo.toDate()).format('MMMM Do')}` : null}
+                  {!justOneDay && <span>&nbsp;&mdash;&nbsp;</span>}
+                  {!justOneDay && moment(footer.dateTo.toDate()).format('MMMM Do')}
                 </div >
+                <div className={styles.address}>
+                  <LocationOn />
+                  <span className={styles.addressText}>{footer.address}</span>
+                </div>
               </div >
               <Spring
                 from={{ transform: 'translate(50%, -50%)' }}
