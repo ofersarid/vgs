@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import inertia from 'wheel-inertia';
 import noop from 'lodash/noop';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
@@ -23,9 +22,6 @@ class ScrollableArea extends PureComponent {
 
   componentDidMount() {
     if (this.checkOverflow(this.$el)) {
-      this.$el.current.addEventListener('wheel', this.wheelHandler, false);
-      inertia.addCallback(() => {
-      });
     }
   }
 
@@ -40,7 +36,6 @@ class ScrollableArea extends PureComponent {
   componentWillUnmount() {
     const { disableScrollSnap } = this.props;
     disableScrollSnap(false, false);
-    this.$el.current.removeEventListener('wheel', this.wheelHandler);
   }
 
   checkOverflow() {
@@ -65,11 +60,6 @@ class ScrollableArea extends PureComponent {
         disableScrollSnap(true, true);
       }
     }
-  };
-
-  wheelHandler(e) {
-    const delta = e.wheelDelta;
-    inertia.update(delta);
   };
 
   mouseLeaveHandler() {

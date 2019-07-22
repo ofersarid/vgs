@@ -2,7 +2,6 @@ import React, { cloneElement } from 'react';
 import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import inertia from 'wheel-inertia';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import flattenDeep from 'lodash/flattenDeep';
@@ -65,7 +64,6 @@ class SnapScroll extends React.Component {
       children: [],
     };
     this.lock = false;
-    inertia.addCallback(this.snap);
     // props.disableScrollSnap(props.frame === this.children.length - 1, props.frame === 0);
   }
 
