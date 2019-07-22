@@ -4,8 +4,6 @@
     "auto-bind": "^1.2.1",
     "classnames": "^2.2.6",
     "current-device": "^0.7.8",
-    "delay": "^4.3.0",
-    "emailjs-com": "^2.3.2",
     "firebase": "^5.7.0",
     "history": "^4.7.2",
     "immutable": "^4.0.0-rc.12",
@@ -15,21 +13,16 @@
     "node-waves": "^0.7.6",
     "prop-types": "^15.6.2",
     "react": ">=15.3.0",
-    "react-click-outside": "^3.0.1",
     "react-dom": ">=15.3.0",
-    "react-immutable-proptypes": "^2.1.0",
     "react-redux": "5.1.1",
     "react-redux-firebase": "^2.2.6",
     "react-router": "<4.0.0",
-    "react-router-dom": "^4.3.1",
     "react-spring": "^8.0.20",
     "react-swipeable": "^5.2.3",
     "redux": "^3.6.0 || ^4.0.0",
     "redux-firestore": "^0.8.0",
     "redux-immutable": "^4.0.0",
-    "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "src": "^1.1.2",
     "styled-components": "^4.2.0",
     "styled-icons": "^8.0.0"
   },
@@ -68,7 +61,8 @@
     "lint": "esw src/",
     "lint-watch": "esw src/ -w",
     "build": "rimraf ./docs && NODE_ENV=dev parcel build index.html --public-url '.' --out-dir docs && copyfiles -f CNAME ./docs/",
-    "publish": "yarn build && git add . && git commit -am \"publish\" && git push"
+    "publish": "yarn build && git add . && git commit -am \"publish\" && git push",
+    "depcheck": "depcheck"
   },
   "pre-commit": [
     "lint"
