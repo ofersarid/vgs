@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import inertia from 'wheel-inertia';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
+import flattenDeep from 'lodash/flattenDeep';
 import actions from './actions';
 import selectors from './selectors';
 import styles from './styles.scss';
-import flattenDeep from 'lodash/flattenDeep';
 
 const DIRECTION = {
   FORWARD: 'forward',
@@ -92,7 +92,7 @@ class SnapScroll extends React.Component {
 
   componentDidMount() {
     const { updateFrameIndex } = this.props;
-    this.$node.addEventListener('wheel', this.mouseScrollHandler, false);
+    this.$node.addEventListener('wheel', this.mouseScrollHandler, true);
     this.$node.addEventListener('touchstart', this.touchStartHandler, false);
     this.$node.addEventListener('touchend', this.touchEndHandler, false);
     this.$node.addEventListener('touchmove', this.touchMoveHandler, false);
@@ -100,7 +100,7 @@ class SnapScroll extends React.Component {
   }
 
   componentWillUnmount() {
-    this.$node.removeEventListener('wheel', this.mouseScrollHandler, false);
+    this.$node.removeEventListener('wheel', this.mouseScrollHandler, true);
     this.$node.removeEventListener('touchstart', this.touchStartHandler, false);
     this.$node.removeEventListener('touchend', this.touchEndHandler, false);
     this.$node.removeEventListener('touchmove', this.touchMoveHandler, false);
@@ -108,8 +108,8 @@ class SnapScroll extends React.Component {
 
   snap(direction) {
     if (this.lock) return;
+    this.lock = true;
     if (this.isTouchDevice) {
-      this.lock = true;
     }
     switch (direction) {
       case -1:
@@ -124,9 +124,17 @@ class SnapScroll extends React.Component {
   }
 
   mouseScrollHandler(e) {
+    clearTimeout(this.to);
+    e.preventDefault();
+    e.stopPropagation();
     const delta = e.wheelDelta;
     this.isTouchDevice = false;
-    inertia.update(delta);
+    if (Math.abs(delta) > THRESHHOLD) {
+      this.snap(delta < 0 ? -1 : 1);
+    }
+    this.to = setTimeout(() => {
+      this.lock = false;
+    }, 100);
   };
 
   touchStartHandler(e) {
