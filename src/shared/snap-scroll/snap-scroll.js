@@ -91,17 +91,17 @@ class SnapScroll extends React.Component {
   componentDidMount() {
     const { updateFrameIndex } = this.props;
     this.$node.addEventListener('wheel', this.mouseScrollHandler, true);
-    this.$node.addEventListener('touchstart', this.touchStartHandler, false);
-    this.$node.addEventListener('touchend', this.touchEndHandler, false);
-    this.$node.addEventListener('touchmove', this.touchMoveHandler, false);
+    this.$node.addEventListener('touchstart', this.touchStartHandler, true);
+    this.$node.addEventListener('touchend', this.touchEndHandler, true);
+    this.$node.addEventListener('touchmove', this.touchMoveHandler, true);
     updateFrameIndex(this.state.index);
   }
 
   componentWillUnmount() {
     this.$node.removeEventListener('wheel', this.mouseScrollHandler, true);
-    this.$node.removeEventListener('touchstart', this.touchStartHandler, false);
-    this.$node.removeEventListener('touchend', this.touchEndHandler, false);
-    this.$node.removeEventListener('touchmove', this.touchMoveHandler, false);
+    this.$node.removeEventListener('touchstart', this.touchStartHandler, true);
+    this.$node.removeEventListener('touchend', this.touchEndHandler, true);
+    this.$node.removeEventListener('touchmove', this.touchMoveHandler, true);
   }
 
   snap(direction) {
@@ -123,8 +123,6 @@ class SnapScroll extends React.Component {
 
   mouseScrollHandler(e) {
     clearTimeout(this.to);
-    e.preventDefault();
-    e.stopPropagation();
     const delta = e.wheelDelta;
     this.isTouchDevice = false;
     if (Math.abs(delta) > THRESHHOLD) {
