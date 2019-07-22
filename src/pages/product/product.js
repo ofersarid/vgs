@@ -82,15 +82,15 @@ class Product extends PureComponent {
           />
           <TwoImagesLayout
             showOnFrame={4}
-            image1="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
-            image2="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
+            image1="https://www.deadlineclaims.com/wp-content/uploads/2017/02/placeholder-image.jpg"
+            image2="https://www.deadlineclaims.com/wp-content/uploads/2017/02/placeholder-image.jpg"
             img1Description="A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models"
             img2Description="A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models"
           />
           <Summary showOnFrame={5} />
           <Downloads
             showOnFrame={6}
-            image="https://firebasestorage.googleapis.com/v0/b/reactor-dam.appspot.com/o/JRe2F6XCHTaBTIFAy0uL7EpkuzG2%2FvFOr1g0ggnoxgGy8wLYj%2Fscreen2Image?alt=media&token=4c8261fd-aefa-4c38-a56c-6725038c949d&noCache=1563270600891"
+            image="https://www.deadlineclaims.com/wp-content/uploads/2017/02/placeholder-image.jpg"
             imageTitle="Example Title"
             brochure="http://www.africau.edu/images/default/sample.pdf"
             ifu="http://www.africau.edu/images/default/sample.pdf"
