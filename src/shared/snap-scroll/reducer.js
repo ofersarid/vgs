@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import C from './consts';
 
 const initialState = fromJS({
-  frame: 7,
+  frame: 0,
   count: 0,
   firstLook: true,
   disable: {
