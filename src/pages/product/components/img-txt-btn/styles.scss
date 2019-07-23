@@ -6,6 +6,7 @@
 
 .img {
   width: 100%;
+  position: relative;
 
   .inner {
     width: 100%;
@@ -29,6 +30,10 @@
   @include media('>desktop') {
     width: 26vw;
     height: 30vh;
+  }
+
+  iframe {
+    transition: 1s ease-out;
   }
 }
 
@@ -96,4 +101,11 @@
     width: 26vw;
     height: 30vh;
   }
+}
+
+.indicator {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
