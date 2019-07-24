@@ -6,6 +6,7 @@ import cx from 'classnames';
 import debounce from 'lodash/debounce';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _orderBy from 'lodash/orderBy';
 import moment from 'moment';
 import Device from '/src/shared/device';
 import { SnapScroll, DropMenu, Button } from '/src/shared';
@@ -239,7 +240,10 @@ const mapStateToProps = state => ({
   disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),
   color: services.products.selectors.color(state),
-  articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
+  articles: _orderBy(services.reactor.selectors.collectionData(
+    state,
+    `publications - ${services.products.selectors.name(state)}`
+  ), item => [item.dateTime.toDate()]),
 });
 
 const mapDispatchToProps = dispatch => ({
