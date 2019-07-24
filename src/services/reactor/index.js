@@ -74,6 +74,7 @@ const selectors = {
         const data = collections[collectionId].data;
         if (!data) return [];
         return Object.keys(data).reduce((dataArray, key) => {
+          if (!data[key].published) return dataArray;
           dataArray.push(Object.assign({}, data[key], { id: key }));
           return dataArray;
         }, []);
