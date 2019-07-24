@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import Routes from '/src/routes';
-import mock from './mocks/data.mock';
 import donut from './donut.png';
 import violaCoverPic from './viola_cover.png';
 import logoFrame from './logo_frame.svg';
@@ -28,17 +27,6 @@ const categories = createSelector(list, products => {
   }, []);
 });
 
-const data = createSelector(Routes.selectors.pathname, pathname => {
-  switch (pathname.split('/').pop()) {
-    case 'frame':
-      return mock.frame;
-    case 'viola':
-      return mock.viola;
-    default:
-      return null;
-  }
-});
-
 const name = createSelector(Routes.selectors.pathname, pathname => {
   switch (pathname.split('/').pop()) {
     case 'frame':
@@ -56,17 +44,6 @@ const art = createSelector(Routes.selectors.pathname, pathname => {
       return donut;
     case 'viola':
       return violaCoverPic;
-    default:
-      return null;
-  }
-});
-
-const clinical = createSelector(Routes.selectors.pathname, pathname => {
-  switch (pathname.split('/').pop()) {
-    case 'frame':
-      return mock.clinicalFrame;
-    case 'viola':
-      return mock.clinicalViola;
     default:
       return null;
   }
@@ -97,10 +74,8 @@ const logo = createSelector(Routes.selectors.pathname, pathname => {
 export default {
   list,
   categories,
-  data,
   name,
   art,
-  clinical,
   color,
   logo,
 };

@@ -9,7 +9,7 @@
   font-size: 12px;
   line-height: 20px;
 
-  @include media('>phone') {
+  @include media('>tablet') {
     position: absolute;
     bottom: 0
   }

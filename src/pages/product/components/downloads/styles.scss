@@ -24,10 +24,12 @@
 
   @include media('>tablet') {
     height: 35vh;
+    width: 30vw;
+    float: left;
   }
 
   @include media('>desktop') {
-    width: 26vw;
+    width: 30vw;
     height: 30vh;
   }
 }
