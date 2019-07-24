@@ -26,14 +26,13 @@ class Product extends PureComponent {
     if (data) console.log(data.coverTagLine);
     return data ? (
       <Fragment >
-        <IndexHeader index={1} header={data.screen1Title} color={color} />
-        <IndexHeader index={2} header={data.screen2Title} color={color} />
-        <IndexHeader index={3} header={data.screen3Title} color={color} />
-        <IndexHeader index={4} header="Key Features" color={color} />
-        <IndexHeader index={5} header="Two Pictures Layout" color={color} />
-        <IndexHeader index={6} header="Summary" color={color} />
-        <IndexHeader index={7} header="Downloads" color={color} />
-        <IndexHeader index={8} header="Clinical" />
+        <IndexHeader index={1} header={data.screen1Title} />
+        <IndexHeader index={2} header={data.screen2Title} />
+        <IndexHeader index={3} header={data.screen3Title} />
+        <IndexHeader index={4} header={data.screen4Title} />
+        <IndexHeader index={5} header={data.screen5Title} />
+        <IndexHeader index={6} header={data.screen6Title} />
+        <IndexHeader index={7} header={data.screen7Title} />
         <SnapScroll >
           <Cover
             art={art}
@@ -70,44 +69,29 @@ class Product extends PureComponent {
             showOnFrame={3}
             themeColor={color}
           />
-          <ThreeColumnLayout showOnFrame={4} data={[{
-            id: '1',
-            text: 'A variety of models'
-          }, {
-            id: '2',
-            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
-          }, {
-            id: '3',
-            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
-          }, {
-            id: '4',
-            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
-          }, {
-            id: '5',
-            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
-          }, {
-            id: '6',
-            text: 'A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models'
-          }]} />
+          <ThreeColumnLayout
+            showOnFrame={4}
+            data={[data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6]}
+          />
           <TwoImagesLayout
             showOnFrame={5}
-            image1="https://www.deadlineclaims.com/wp-content/uploads/2017/02/placeholder-image.jpg"
-            image2="https://www.deadlineclaims.com/wp-content/uploads/2017/02/placeholder-image.jpg"
-            img1Description="A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models"
-            img2Description="A variety of models compatible with veins 3.5-8.0 mm in diameter, variety of models"
+            image1={data.screen5Image1}
+            image2={data.screen5Image2}
+            img1Description={data.screen5Image1Subtitle}
+            img2Description={data.screen5Image2Subtitle}
           />
-          <Summary showOnFrame={6} />
           <Downloads
-            showOnFrame={7}
-            image="https://www.deadlineclaims.com/wp-content/uploads/2017/02/placeholder-image.jpg"
-            imageTitle="Example Title"
-            brochure="http://www.africau.edu/images/default/sample.pdf"
-            ifu="http://www.africau.edu/images/default/sample.pdf"
-            patientCard="http://www.africau.edu/images/default/sample.pdf"
-            instructions="http://www.africau.edu/images/default/sample.pdf"
+            showOnFrame={6}
+            image={data.screen6Image}
+            imageTitle={data.screen6ImageSubtitle}
+            brochure={data.brochure}
+            ifu={data.ifu}
+            patientCard={data.patientCard}
+            instructions={data.instructions}
             themeColor={color}
 
           />
+          <Summary showOnFrame={7} data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
           <Clinical showOnFrame={8} themeColor={color} />
         </SnapScroll >
       </Fragment >

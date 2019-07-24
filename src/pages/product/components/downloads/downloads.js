@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import { Spring } from 'react-spring/renderprops-universal';
 import { SnapScroll, ScrollableArea, Button } from '/src/shared';
-import Device from '/src/shared/device';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
 
@@ -26,7 +25,6 @@ class Downloads extends PureComponent {
       ifu,
       patientCard,
       instructions,
-      isTouchDevice,
       themeColor,
     } = this.props;
     return (
@@ -43,9 +41,7 @@ class Downloads extends PureComponent {
           }}
         >
           <div className={cx(styles.img)} >
-            {isTouchDevice ? <img src={image} className={styles.inner} />
-              : <div style={{ backgroundImage: `url(${image})` }} className={styles.inner} />
-            }
+            <img src={image} className={styles.inner} />
             <div className={cx(styles.title)} >{imageTitle}</div >
           </div >
           <div className={cx(styles.rightCol)} >
@@ -122,7 +118,7 @@ class Downloads extends PureComponent {
 
 Downloads.propTypes = {
   image: PropTypes.string.isRequired,
-  imageTitle: PropTypes.string.isRequired,
+  imageTitle: PropTypes.string,
   brochure: PropTypes.string,
   ifu: PropTypes.string,
   patientCard: PropTypes.string,
@@ -130,12 +126,10 @@ Downloads.propTypes = {
   themeColor: PropTypes.string.isRequired,
   frame: PropTypes.number.isRequired,
   showOnFrame: PropTypes.number.isRequired,
-  isTouchDevice: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  isTouchDevice: Device.selectors.isTouchDevice(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

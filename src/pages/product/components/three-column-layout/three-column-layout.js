@@ -18,9 +18,9 @@ const ThreeColumnLayout = ({ showOnFrame, frame, data }) => {
         opacity: styleProps.opacity,
       }} >
         <ScrollableArea className={styles.list} >
-          {data.map(item => (
-            <div key={item.id} className={styles.listItem} >{item.text}</div >
-          ))}
+          {data.map(item => item ? (
+            <div key={item} className={styles.listItem} >{item}</div >
+          ) : null)}
         </ScrollableArea >
       </section >}
     </Spring >
@@ -30,10 +30,7 @@ const ThreeColumnLayout = ({ showOnFrame, frame, data }) => {
 ThreeColumnLayout.propTypes = {
   showOnFrame: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  })),
+  data: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapStateToProps = state => ({

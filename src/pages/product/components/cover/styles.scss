@@ -59,18 +59,18 @@
     bottom: 0;
     z-index: 2;
     display: flex;
-    flex-direction: column;
-    padding-left: $gutter-phone;
-    justify-content: center;
+    //padding: 0 $gutter-phone;
+    justify-content: space-around;
+    align-items: center;
     box-sizing: border-box;
 
     @include media('>phone') {
       height: 127px;
-      padding-left: $gutter-tablet;
+      //padding: 0 $gutter-tablet;
     }
 
     @include media('>tablet') {
-      padding-left: 100px;
+      //padding: 0 100px;
       left: 35%;
       right: 10%;
       width: auto;
@@ -82,9 +82,9 @@
   }
 
   .text {
-    width: 240px;
+    //width: 240px;
     text-align: left;
-    line-height: 1.3em;
+    line-height: 1.5em;
     font-size: 16px;
     transform: translateY(1px);
   }
@@ -101,19 +101,20 @@
   }
 
   .arrow {
-    position: absolute;
-    top: 50%;
-    right: $gutter-phone;
+    //position: absolute;
+    //top: 50%;
+    //right: $gutter-phone;
     color: white;
     height: 46px;
+    position: relative;
 
-    @include media('>phone') {
-      right: $gutter-tablet;
-    }
-
-    @include media('>tablet') {
-      right: 100px;
-    }
+    //@include media('>phone') {
+    //  right: $gutter-tablet;
+    //}
+    //
+    //@include media('>tablet') {
+    //  right: 100px;
+    //}
   }
 }
 

@@ -1,0 +1,4 @@
+@mixin gradient-vertical($bottom, $top) {
+  background: $bottom;
+  background: linear-gradient(0deg, rgba($bottom, 1) 0%, rgba($top, 1) 100%);
+}

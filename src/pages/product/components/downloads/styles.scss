@@ -8,29 +8,22 @@
 
 .img {
   width: 100%;
+  height: 25vh;
   margin-bottom: 40px;
 
   .inner {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   @include media('>phone') {
     margin-bottom: 60px;
+    height: 30vh;
   }
 
   @include media('>tablet') {
-    @include orientation(landscape) {
-      width: 32vw;
-      height: 35vh;
-      float: left;
-
-      .inner {
-        height: 100%;
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-    }
+    height: 35vh;
   }
 
   @include media('>desktop') {

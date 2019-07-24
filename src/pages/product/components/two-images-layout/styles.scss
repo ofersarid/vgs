@@ -1,4 +1,5 @@
 @import "/src/media-query-mixins";
+@import "/src/utils";
 
 .inner {
   @include media('>tablet') {
@@ -17,16 +18,21 @@
   width: 100%;
 
   @include media('>tablet') {
-    width: 32vw;
+    width: 35vw;
   }
 }
 .image {
   width: 100%;
+  height: 25vh;
+  object-fit: cover;
+  @include gradient-vertical(#f0f1f5, #ffffff);
+
+  @include media('>phone') {
+    height: 30vh;
+  }
 
   @include media('>tablet') {
-    height: 35vh;
-    background-position: center center;
-    background-size: cover;
+    height: 40vh;
   }
 }
 

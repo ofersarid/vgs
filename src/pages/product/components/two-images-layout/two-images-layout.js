@@ -29,18 +29,12 @@ const TwoImagesLayout = (
       }} >
         <ScrollableArea className={styles.content} >
           <div className={styles.container} >
-            {isTouchDevice
-              ? <img src={image1} className={styles.image} />
-              : <div className={styles.image} style={{ backgroundImage: `url(${image1})` }} />
-            }
+            <img src={image1} className={styles.image} />
             <div className={cx(styles.description)} >{img1Description}</div >
           </div >
-          {isTouchDevice ? null : <div className={styles.spacer}/>}
+          {/*{isTouchDevice ? null : <div className={styles.spacer}/>}*/}
           <div className={styles.container} >
-            {isTouchDevice
-              ? <img src={image2} className={styles.image} />
-              : <div className={styles.image} style={{ backgroundImage: `url(${image2})` }} />
-            }
+            <img src={image2} className={styles.image} />
             <div className={cx(styles.bottom, styles.description)} >{img2Description}</div >
           </div >
         </ScrollableArea >
@@ -54,8 +48,8 @@ TwoImagesLayout.propTypes = {
   frame: PropTypes.number.isRequired,
   image1: PropTypes.string.isRequired,
   image2: PropTypes.string.isRequired,
-  img1Description: PropTypes.string.isRequired,
-  img2Description: PropTypes.string.isRequired,
+  img1Description: PropTypes.string,
+  img2Description: PropTypes.string,
   footNotes: PropTypes.arrayOf(PropTypes.string),
   isTouchDevice: PropTypes.bool.isRequired,
 };

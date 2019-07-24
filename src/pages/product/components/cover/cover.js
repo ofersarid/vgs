@@ -69,8 +69,8 @@ class Cover extends PureComponent {
                 </div>
               </div >
               <Spring
-                from={{ transform: 'translate(50%, -50%)' }}
-                to={{ transform: 'translate(70%, -50%)' }}
+                from={{ transform: 'translateX(-10%)' }}
+                to={{ transform: 'translateX(10%)' }}
                 config={reverseAnimation ? Object.assign({}, config.slow, { duration: 200 }) : config.slow}
                 reset
                 reverse={reverseAnimation}

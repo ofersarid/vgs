@@ -7,7 +7,6 @@ import autoBind from 'auto-bind';
 import styles from './styles.scss';
 import { Spring } from 'react-spring/renderprops-universal';
 import { SnapScroll, ScrollableArea, Button } from '/src/shared';
-import Device from '/src/shared/device';
 // import activityIndicator from '/src/svg-loaders/ball-triangle.svg';
 // import ReactSVG from 'react-svg';
 import sharedStyles from '../../styles.scss';
@@ -22,12 +21,12 @@ class ImgTxtBtn extends PureComponent {
     };
   }
 
-  hideSpinner() {
+  mediaReady() {
     this.setState({ isLoaded: true });
   }
 
   render() {
-    const { imgSubTitle, showOnFrame, frame, img, youtube, txt, pdfSrc, themeColor, footNotes, isTouchDevice } = this.props;
+    const { imgSubTitle, showOnFrame, frame, img, youtube, txt, pdfSrc, themeColor, footNotes } = this.props;
     const { isLoaded } = this.state;
     return (
       <Spring
@@ -43,14 +42,14 @@ class ImgTxtBtn extends PureComponent {
           }}
         >
           <div className={cx(styles.img)} >
-            {img && isTouchDevice && <img src={img} className={styles.inner} onLoad={this.hideSpinner} />}
-            {img && !isTouchDevice && <div style={{ backgroundImage: `url(${img})` }} className={styles.inner} />}
+            {img && <img src={img} className={styles.inner} onLoad={this.mediaReady} />}
             {imgSubTitle && <div className={cx(styles.title)} >{imgSubTitle}</div >}
             {youtube && (
               <iframe
                 src={`https://www.youtube.com/embed/${youtube.split('v=')[1]}?loop=1&modestbranding=1&showinfo=0&theme=light&disablekb=1`}
-                width="560" height="315" frameBorder="0"
-                onLoad={this.hideSpinner}
+                frameBorder="0"
+                className={styles.inner}
+                onLoad={this.mediaReady}
                 style={{
                   opacity: isLoaded ? 1 : 0,
                 }}
@@ -93,12 +92,10 @@ ImgTxtBtn.propTypes = {
   themeColor: PropTypes.string.isRequired,
   frame: PropTypes.number.isRequired,
   showOnFrame: PropTypes.number.isRequired,
-  isTouchDevice: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  isTouchDevice: Device.selectors.isTouchDevice(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

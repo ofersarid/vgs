@@ -22,9 +22,9 @@ const Summary = ({ showOnFrame, frame, data }) => {
         }} >
           <ul className={styles.list} >
             {data.map(item => (
-              <li key={item.id} className={styles.listItem} >
+              <li key={item} className={styles.listItem} >
                 <Check className={styles.check} />
-                <div >{item.text}</div >
+                <div >{item}</div >
               </li >
             ))}
           </ul >
@@ -38,27 +38,11 @@ const Summary = ({ showOnFrame, frame, data }) => {
 Summary.propTypes = {
   showOnFrame: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  })),
+  data: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  data: [{
-    id: '1',
-    text: 'Simple to apply without affecting standard practice'
-  }, {
-    id: '2',
-    text: 'Requires no fixation'
-  }, {
-    id: '3',
-    text: 'Can be adjusted to perfectly fit the graft length'
-  }, {
-    id: '4',
-    text: 'Optimal dimensional match'
-  }],
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
