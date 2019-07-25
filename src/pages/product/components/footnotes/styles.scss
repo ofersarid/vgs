@@ -9,7 +9,11 @@
   font-size: 12px;
   line-height: 20px;
 
-  @include media('>tablet') {
+  &.hideTopLine {
+    border-top: none;
+  }
+
+  @include media('>phone') {
     position: absolute;
     bottom: 0
   }
