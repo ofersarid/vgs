@@ -66,6 +66,7 @@
   height: 35%;
   position: absolute;
   bottom: 0;
+  z-index: -1;
 
   @include media('>phone') {
     height: 40%

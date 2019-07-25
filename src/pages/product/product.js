@@ -8,6 +8,8 @@ import {
 } from './components';
 import Device from '/src/shared/device';
 import services from '/src/services';
+import frameSummeryPic from '/src/assets/frame_summery.png';
+import violaSummeryPic from '/src/assets/viola_summery.png';
 
 // import { firestoreConnect } from 'react-redux-firebase';
 
@@ -19,6 +21,18 @@ class Product extends PureComponent {
 
   componentDidMount() {
     this.didMount = true;
+  }
+
+  resolveSummeryPic() {
+    const { name } = this.props;
+    switch (name) {
+      case 'FRAME':
+        return frameSummeryPic;
+      case 'VIOLA':
+        return violaSummeryPic;
+      default:
+        return '';
+    }
   }
 
   render() {
@@ -90,7 +104,7 @@ class Product extends PureComponent {
             themeColor={color}
 
           />
-          <Summary showOnFrame={7} data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
+          <Summary showOnFrame={7} art={this.resolveSummeryPic()} data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
           <Clinical showOnFrame={8} themeColor={color} />
         </SnapScroll >
       </Fragment >

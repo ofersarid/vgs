@@ -7,9 +7,8 @@ import { Check } from 'styled-icons/material/Check';
 import { SnapScroll } from '/src/shared';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
-import art from './summary-art.png';
 
-const Summary = ({ showOnFrame, frame, data }) => {
+const Summary = ({ showOnFrame, frame, data, art }) => {
   return (
     <Fragment >
       <Spring
@@ -38,6 +37,7 @@ const Summary = ({ showOnFrame, frame, data }) => {
 Summary.propTypes = {
   showOnFrame: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
+  art: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.string),
 };
 
