@@ -23,7 +23,6 @@ class Product extends PureComponent {
 
   render() {
     const { color, data, name, art } = this.props;
-    if (data) console.log(data.coverTagLine);
     return data ? (
       <Fragment >
         <IndexHeader index={1} header={data.screen1Title} />

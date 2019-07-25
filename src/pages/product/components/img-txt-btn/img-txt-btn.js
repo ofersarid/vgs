@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import cx from 'classnames';
+import YouTube from 'react-youtube';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -25,6 +26,10 @@ class ImgTxtBtn extends PureComponent {
     this.setState({ isLoaded: true });
   }
 
+  onYouTubeReady() {
+    this.mediaReady();
+  }
+
   render() {
     const { imgSubTitle, showOnFrame, frame, img, youtube, txt, pdfSrc, themeColor, footNotes } = this.props;
     const { isLoaded } = this.state;
@@ -45,14 +50,15 @@ class ImgTxtBtn extends PureComponent {
             {img && <img src={img} className={styles.inner} onLoad={this.mediaReady} />}
             {imgSubTitle && <div className={cx(styles.title)} >{imgSubTitle}</div >}
             {youtube && (
-              <iframe
-                src={`https://www.youtube.com/embed/${youtube.split('v=')[1]}?loop=1&modestbranding=1&showinfo=0&theme=light&disablekb=1`}
-                frameBorder="0"
-                className={styles.inner}
-                onLoad={this.mediaReady}
-                style={{
-                  opacity: isLoaded ? 1 : 0,
+              <YouTube
+                videoId={youtube.split('v=')[1]}
+                opts={{
+                  playerVars: {
+                    rel: 0,
+                  }
                 }}
+                onReady={this.onYouTubeReady}
+                className={cx(styles.youtube, styles.inner, { [styles.ready]: isLoaded })}
               />
             )}
           </div >
