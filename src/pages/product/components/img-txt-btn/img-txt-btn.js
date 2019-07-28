@@ -1,10 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import cx from 'classnames';
 import YouTube from 'react-youtube';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import Device from '/src/shared/device';
 import autoBind from 'auto-bind';
+import services from '/src/services';
 import styles from './styles.scss';
 import { Spring } from 'react-spring/renderprops-universal';
 import { SnapScroll, ScrollableArea, Button } from '/src/shared';
@@ -22,16 +24,38 @@ class ImgTxtBtn extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const { disableBizCard, youtube } = this.props;
+    if (youtube) {
+      disableBizCard();
+    }
+  }
+
+  componentWillUnmount() {
+    const { enableBizCard, youtube } = this.props;
+    if (youtube) {
+      enableBizCard();
+    }
+  }
+
   mediaReady() {
     this.setState({ isLoaded: true });
   }
 
-  onYouTubeReady() {
+  onYouTubePlay() {
+    const { disableBizCard } = this.props;
+    disableBizCard();
+  }
+
+  onYouTubeReady(event) {
     this.mediaReady();
   }
 
   render() {
-    const { imgSubTitle, showOnFrame, frame, img, youtube, txt, pdfSrc, themeColor, footNotes } = this.props;
+    const {
+      imgSubTitle, showOnFrame, frame, img, youtube, txt,
+      pdfSrc, themeColor, footNotes, orientation, isMobile
+    } = this.props;
     const { isLoaded } = this.state;
     return (
       <Spring
@@ -58,30 +82,38 @@ class ImgTxtBtn extends PureComponent {
                   }
                 }}
                 onReady={this.onYouTubeReady}
-                className={cx(styles.youtube, styles.inner, { [styles.ready]: isLoaded })}
+                onPlay={this.onYouTubePlay}
+                className={cx(styles.youtube, styles.inner, {
+                  [styles.ready]: isLoaded,
+                  [styles.fullScreen]: orientation === 'landscape',
+                })}
               />
             )}
           </div >
-          <div className={cx(styles.rightCol)} >
-            <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
-            {pdfSrc && (
-              <Button
-                tag="a"
-                color
-                target="_blank"
-                rel="noopener noreferrer"
-                href={pdfSrc}
-                waveColor="white"
-                className={cx(styles.btn)}
-                style={{
-                  background: themeColor,
-                }}
-              >
-                PRODUCT PDF
-              </Button >
-            )}
-          </div >
-          <Footnotes footNotes={footNotes} />
+          {(orientation === 'landscape' && isMobile) ? null : (
+            <Fragment>
+              <div className={cx(styles.rightCol)} >
+                <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
+                {pdfSrc && (
+                  <Button
+                    tag="a"
+                    color
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={pdfSrc}
+                    waveColor="white"
+                    className={cx(styles.btn)}
+                    style={{
+                      background: themeColor,
+                    }}
+                  >
+                    PRODUCT PDF
+                  </Button >
+                )}
+              </div >
+              <Footnotes footNotes={footNotes} />
+            </Fragment>
+          )}
         </ScrollableArea >}
       </Spring >
     );
@@ -98,13 +130,22 @@ ImgTxtBtn.propTypes = {
   themeColor: PropTypes.string.isRequired,
   frame: PropTypes.number.isRequired,
   showOnFrame: PropTypes.number.isRequired,
+  disableBizCard: PropTypes.func.isRequired,
+  enableBizCard: PropTypes.func.isRequired,
+  orientation: PropTypes.oneOf(['portrait', 'landscape']),
+  isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
+  orientation: services.vgs.selectors.orientation(state),
+  isMobile: Device.selectors.isMobile(state),
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = dispatch => ({
+  disableBizCard: () => dispatch(services.vgs.actions.disableBizCard()),
+  enableBizCard: () => dispatch(services.vgs.actions.disableBizCard()),
+});
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),

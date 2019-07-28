@@ -5,6 +5,7 @@ import cx from 'classnames';
 import autoBind from 'auto-bind';
 import { connect } from 'react-redux';
 import Device from '/src/shared/device';
+import services from '/src/services';
 import styles from './styles.scss';
 import actions from './actions';
 import selectors from './selectors';
@@ -21,21 +22,24 @@ class ScrollableArea extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.checkOverflow(this.$el)) {
-    }
+    this.checkOverflow(this.$el);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { frame } = this.props;
+    const { frame, orientation } = this.props;
     const $current = this.$el.current;
     if (frame !== prevProps.frame) {
       $current.scrollTo(0, 0);
+    }
+    if (orientation !== prevProps.orientation) {
+      this.checkOverflow(this.$el);
     }
   }
 
   componentWillUnmount() {
     const { disableScrollSnap } = this.props;
     disableScrollSnap(false, false);
+    this.$el.current.removeEventListener('orientationchange', this.onOrientationchange);
   }
 
   checkOverflow() {
@@ -94,6 +98,7 @@ ScrollableArea.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   style: PropTypes.object,
   hideOverflow: PropTypes.bool.isRequired,
+  orientation: PropTypes.oneOf(['portrait', 'landscape']),
 };
 
 ScrollableArea.defaultProps = {
@@ -105,6 +110,7 @@ ScrollableArea.defaultProps = {
 const mapStateToProps = state => ({
   frame: selectors.frame(state),
   isMobile: Device.selectors.isMobile(state),
+  orientation: services.vgs.selectors.orientation(state),
 });
 
 const mapDispatchToProps = dispatch => ({

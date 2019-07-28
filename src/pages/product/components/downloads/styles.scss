@@ -1,10 +1,10 @@
 @import "/src/media-query-mixins";
 
-.container {
-  @include media('>tablet') {
-    height: 62%;
-  }
-}
+//.container {
+//  @include media('>tablet') {
+//    height: 62%;
+//  }
+//}
 
 .img {
   width: 100%;

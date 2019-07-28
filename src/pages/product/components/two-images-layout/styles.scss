@@ -1,11 +1,11 @@
 @import "/src/media-query-mixins";
 @import "/src/utils";
 
-.inner {
-  @include media('>tablet') {
-    height: 62%;
-  }
-}
+//.inner {
+//  @include media('>tablet') {
+//    height: 62%;
+//  }
+//}
 
 .content {
   display: flex;

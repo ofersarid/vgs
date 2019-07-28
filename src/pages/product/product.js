@@ -36,16 +36,21 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { color, data, name, art } = this.props;
+    const { color, data, name, art, orientation, isMobile } = this.props;
     return data ? (
       <Fragment >
-        <IndexHeader index={1} header={data.screen1Title} />
-        <IndexHeader index={2} header={data.screen2Title} />
-        <IndexHeader index={3} header={data.screen3Title} />
-        <IndexHeader index={4} header={data.screen4Title} />
-        <IndexHeader index={5} header={data.screen5Title} />
-        <IndexHeader index={6} header={data.screen6Title} />
-        <IndexHeader index={7} header={data.screen7Title} />
+        {(orientation === 'landscape' && isMobile) ? null : (
+          <Fragment>
+            <IndexHeader index={1} header={data.screen1Title} />
+            <IndexHeader index={2} header={data.screen2Title} />
+            <IndexHeader index={3} header={data.screen3Title} />
+            <IndexHeader index={4} header={data.screen4Title} />
+            <IndexHeader index={5} header={data.screen5Title} />
+            <IndexHeader index={6} header={data.screen6Title} />
+            <IndexHeader index={7} header={data.screen7Title} />
+            <IndexHeader index={8} header="Clinical" />
+          </Fragment>
+        )}
         <SnapScroll >
           <Cover
             art={art}
@@ -118,6 +123,8 @@ Product.propTypes = {
   name: PropTypes.string.isRequired,
   art: PropTypes.string.isRequired,
   data: PropTypes.object,
+  isMobile: PropTypes.bool.isRequired,
+  orientation: PropTypes.oneOf(['portrait', 'landscape']),
 };
 
 const mapStateToProps = state => ({
@@ -128,276 +135,10 @@ const mapStateToProps = state => ({
   data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
   art: services.products.selectors.art(state),
+  isMobile: Device.selectors.isMobile(state),
+  orientation: services.vgs.selectors.orientation(state),
 });
 
 export default compose(
   connect(mapStateToProps, {}),
 )(Product);
-
-// const schema = [{
-//   key: 'coverTagLine',
-//   label: 'Cover tagline',
-//   maxChars: 70,
-//   required: true,
-//   type: 'multi-line-preserve-lines',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'eventTitle',
-//   label: 'Main event title',
-//   maxChars: 60,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'eventDateFrom',
-//   label: 'Date - Start',
-//   required: true,
-//   type: 'date',
-//   validateWith: 'date-time',
-// }, {
-//   key: 'eventDateTo',
-//   label: 'Date - End',
-//   required: true,
-//   type: 'date',
-//   validateWith: 'date-time',
-// }, {
-//   key: 'eventAddress',
-//   label: 'Location',
-//   maxChars: 30,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'eventLinkTo',
-//   label: 'URL link',
-//   required: true,
-//   type: 'link',
-//   validateWith: 'link',
-// }, {
-//   key: 'screen1Title',
-//   label: 'Screen title',
-//   maxChars: 50,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen1Body',
-//   label: 'Body',
-//   maxChars: 950,
-//   required: true,
-//   type: 'multi-line-preserve-lines',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen1Footnote1',
-//   label: 'Footnote 1',
-//   maxChars: 250,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen1Footnote2',
-//   label: 'Footnote 2',
-//   maxChars: 250,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen1Footnote3',
-//   label: 'Footnote 3',
-//   maxChars: 250,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen2Title',
-//   label: 'Screen title',
-//   maxChars: 50,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, { key: 'screen2Image', label: 'Image', required: true, type: 'image', }, {
-//   key: 'screen2ImageSubtitle',
-//   label: 'Image subtitle',
-//   maxChars: 50,
-//   required: false,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen2Body',
-//   label: 'Body',
-//   maxChars: 450,
-//   required: true,
-//   type: 'multi-line-preserve-lines',
-//   validateWith: 'min-max',
-// }, { key: 'screen2PDF', label: 'PDF', required: true, type: 'pdf', }, {
-//   key: 'screen2Footnote1',
-//   label: 'Footnote 1',
-//   maxChars: 250,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen2Footnote2',
-//   label: 'Footnote 2',
-//   maxChars: 250,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen2Footnote3',
-//   label: 'Footnote 3',
-//   maxChars: 250,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// },
-// {
-//   key: 'screen3Title',
-//   label: 'Screen title',
-//   maxChars: 50,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen3Videolink',
-//   label: 'YOUTUBE link',
-//   required: true,
-//   type: 'link',
-//   validateWith: 'link',
-// }, {
-//   key: 'screen3Body',
-//   label: 'Body',
-//   maxChars: 950,
-//   required: true,
-//   type: 'multi-line-preserve-lines',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen4Title',
-//   label: 'Screen title',
-//   maxChars: 50,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen4Bullet1',
-//   label: 'Bullet 1',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen4Bullet2',
-//   label: 'Bullet 2',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen4Bullet3',
-//   label: 'Bullet 3',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen4Bullet4',
-//   label: 'Bullet 4',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen4Bullet5',
-//   label: 'Bullet 5',
-//   maxChars: 170,
-//   required: false,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen4Bullet6',
-//   label: 'Bullet 6',
-//   maxChars: 170,
-//   required: false,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen5Title',
-//   label: 'Screen title',
-//   maxChars: 50,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, { key: 'screen5Image1', label: 'Image 1', required: true, type: 'image', }, {
-//   key: 'screen5Image1Subtitle',
-//   label: 'Image subtitle',
-//   maxChars: 50,
-//   required: false,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, { key: 'screen5Image2', label: 'Image 2', required: true, type: 'image', }, {
-//   key: 'screen5Image2Subtitle',
-//   label: 'Image subtitle',
-//   maxChars: 50,
-//   required: false,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen6Title',
-//   label: 'Screen title',
-//   maxChars: 50,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, { key: 'screen6Image', label: 'Image 2', required: true, type: 'image', }, {
-//   key: 'screen6ImageSubtitle',
-//   label: 'Image subtitle',
-//   maxChars: 50,
-//   required: false,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, { key: 'brochure', label: 'Brochure PDF', required: false, type: 'pdf', }, {
-//   key: 'ifu',
-//   label: 'IFU PDF',
-//   required: false,
-//   type: 'pdf',
-// }, { key: 'patientCard', label: 'Patiend card PDF', required: false, type: 'pdf', }, {
-//   key: 'instructions',
-//   label: 'Reprocessing instructions PDF',
-//   required: false,
-//   type: 'pdf',
-// }, {
-//   key: 'screen7Title',
-//   label: 'Screen title',
-//   maxChars: 50,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen7Bullet1',
-//   label: 'Bullet 1',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen7Bullet2',
-//   label: 'Bullet 2',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen7Bullet3',
-//   label: 'Bullet 3',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }, {
-//   key: 'screen7Bullet4',
-//   label: 'Bullet 4',
-//   maxChars: 170,
-//   required: true,
-//   type: 'multi-line',
-//   validateWith: 'min-max',
-// }];

@@ -20,9 +20,6 @@ class Main extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = {
-      orientation: window.screen.orientation,
-    };
   }
 
   componentDidMount() {
@@ -31,14 +28,15 @@ class Main extends PureComponent {
   }
 
   onOrientationchange() {
+    const { setOrientation } = this.props;
     const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation;
-    this.setState({ orientation: angle === 0 ? 'portrait' : 'landscape' });
+    setOrientation(angle === 0 ? 'portrait' : 'landscape');
   }
 
   render() {
     const show = this.props.pathname !== '/product';
-    const { isMobile, pathname, logo } = this.props;
-    const { orientation } = this.state;
+    const { isMobile, pathname, logo, bizCard, orientation } = this.props;
+
     return (
       <Fragment >
         <ReduxRoutes />
@@ -46,7 +44,7 @@ class Main extends PureComponent {
           from={{ opacity: show ? 0 : 1 }}
           to={{ opacity: show ? 1 : 0 }}
         >
-          {springs => (orientation === 'landscape' && isMobile) ? <Card
+          {springs => (bizCard && orientation === 'landscape' && isMobile) ? <Card
             logo={logoGreen}
             underLogo={vgsGreen}
             address="24 Raul Wallenberg st."
@@ -55,12 +53,12 @@ class Main extends PureComponent {
             zip={6971921}
             phone="+972 3 549 9054"
           /> : <div className={styles.container} >
-            <div className={styles.logo} onClick={toggleFullScreen} >
+            {(orientation === 'landscape' && isMobile) ? null : <div className={styles.logo} onClick={toggleFullScreen} >
               <img className={styles.logoImg} src={logo} />
               {!['viola', 'frame'].includes(pathname.split('/').pop()) && <img className={styles.logoText} src={vgs} style={springs} />}
-            </div >
-            <SideMenu />
-            <FrameIndicator />
+            </div >}
+            {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
+            {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
             {this.props.children}
           </div >}
         </Spring >
@@ -78,6 +76,9 @@ Main.propTypes = {
     collections: PropTypes.arrayOf(PropTypes.string).isRequired,
     pages: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
+  bizCard: PropTypes.bool.isRequired,
+  setOrientation: PropTypes.func.isRequired,
+  orientation: PropTypes.oneOf(['portrait', 'landscape']),
 };
 
 const mapStateToProps = state => ({
@@ -85,9 +86,13 @@ const mapStateToProps = state => ({
   isMobile: Device.selectors.isMobile(state),
   logo: services.products.selectors.logo(state),
   resourceList: services.reactor.selectors.resourceList(state),
+  bizCard: services.vgs.selectors.bizCard(state),
+  orientation: services.vgs.selectors.orientation(state),
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = dispatch => ({
+  setOrientation: orientation => dispatch(services.vgs.actions.setOrientation(orientation)),
+});
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),

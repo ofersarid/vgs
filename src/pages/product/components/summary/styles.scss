@@ -21,12 +21,7 @@
   @include media('>phone') {
     font-size: 28px;
     line-height: 37px;
-    padding: 20px 0 0 0;
     width: 100%;
-  }
-
-  @include media('>tablet') {
-    padding: 7% 0 7% 16px;
   }
 
   @include media('>desktop') {

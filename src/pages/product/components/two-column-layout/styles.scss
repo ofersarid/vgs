@@ -26,13 +26,8 @@
   @include media('>tablet') {
     font-size: 18px;
     column-count: 2;
-    column-gap: 10%;
+    column-gap: 4vw;
     margin-bottom: 0;
-  }
-
-  @include media('>desktop') {
-    font-size: 22px;
-    column-gap: 20%;
   }
 }
 
