@@ -243,7 +243,7 @@ const mapStateToProps = state => ({
   articles: _orderBy(services.reactor.selectors.collectionData(
     state,
     `publications - ${services.products.selectors.name(state)}`
-  ), item => [item.dateTime.toDate()]),
+  ), item => [item.dateTime.toDate()], 'desc'),
 });
 
 const mapDispatchToProps = dispatch => ({
