@@ -35,6 +35,9 @@
   .youtube {
     opacity: 0;
     transition: 1s ease-out;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 
     &.ready {
       opacity: 1;
