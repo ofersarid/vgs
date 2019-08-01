@@ -2,7 +2,11 @@
 @import "/src/utils";
 
 .container {
-
+  @include media('>phone') {
+    @include orientation(landscape) {
+      display: flex;
+    }
+  }
 }
 
 .img {
@@ -10,6 +14,7 @@
   height: 0;
   padding-bottom: 55%;
   position: relative;
+  flex-shrink: 0;
 
   .inner {
     width: 100%;
@@ -22,7 +27,9 @@
   @include media('>phone') {
     padding-bottom: 55%;
     @include orientation(landscape) {
-      padding-bottom: 25.25%;
+      width: 30vw;
+      padding-bottom: 36%;
+      float: left;
     }
   }
 
@@ -30,6 +37,9 @@
     width: 30vw;
     padding-bottom: 25.25%;
     float: left;
+    @include orientation(landscape) {
+      padding-bottom: 25.25%;
+    }
   }
 
   @include media('>desktop') {
@@ -66,10 +76,17 @@
   line-height: 35px;
   margin: 25px 0;
 
+  @include media('>phone') {
+    @include orientation(landscape) {
+      margin: 0 0 25px;
+    }
+  }
+
+
   @include media('>tablet') {
     font-size: 18px;
     line-height: 30px;
-    margin: 0;
+    margin: 0 0 25px;
   }
 
   @include media('>desktop') {
@@ -95,17 +112,27 @@
 }
 
 .rightCol {
+  @include media('>phone') {
+    @include orientation(landscape) {
+      margin-left: 10vh;
+
+      p {
+        margin: 0 0 25px 0;
+      }
+    }
+  }
+
   @include media('>tablet') {
     width: 35vw;
     float: right;
-    height: 35vh;
+    //height: 35vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    //justify-content: space-between;
     align-items: flex-start;
 
     p {
-      margin: 0;
+      margin: 0 0 25px 0;
     }
   }
 

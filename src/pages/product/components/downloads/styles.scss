@@ -1,10 +1,12 @@
 @import "/src/media-query-mixins";
 
-//.container {
-//  @include media('>tablet') {
-//    height: 62%;
-//  }
-//}
+.container {
+  @include media('>phone') {
+    @include orientation(landscape) {
+      display: flex;
+    }
+  }
+}
 
 .img {
   width: 100%;
@@ -23,7 +25,7 @@
   @include media('>phone') {
     padding-bottom: 55%;
     @include orientation(landscape) {
-      padding-bottom: 25.25%;
+      padding-bottom: 36%;
     }
   }
 
@@ -77,6 +79,13 @@
 
   @include media('>phone') {
     align-items: flex-start;
+    @include orientation(landscape) {
+      margin-left: 10vh;
+
+      p {
+        margin: 0;
+      }
+    }
   }
 
   @include media('>tablet') {

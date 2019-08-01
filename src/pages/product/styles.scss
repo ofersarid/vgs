@@ -21,6 +21,11 @@ $gutter-wide-screen: 20vw;
       height: 67%;
       left: calc((100vw - 58vw)/2);
       //transform: translateY(15%);
+      @include orientation(landscape) {
+        width: 60vw;
+        left: calc((100vw - 60vw)/2);
+        //transform: translateY(23%);
+      }
     }
 
     @include media('>tablet') {
