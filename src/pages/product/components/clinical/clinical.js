@@ -243,7 +243,7 @@ const mapStateToProps = state => ({
   articles: _sortBy(services.reactor.selectors.collectionData(
     state,
     `publications - ${services.products.selectors.name(state)}`
-  ), item => [item.dateTime.toDate()]).reverse(),
+  ), item => item.dateTime.toDate()).reverse(),
 });
 
 const mapDispatchToProps = dispatch => ({
