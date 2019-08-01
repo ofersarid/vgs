@@ -1,6 +1,6 @@
 import React, { Fragment, PureComponent } from 'react';
 import cx from 'classnames';
-import YouTube from 'react-youtube';
+import YouTubePlayer from 'react-player/lib/players/YouTube';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -74,15 +74,20 @@ class ImgTxtBtn extends PureComponent {
             {img && <img src={img} className={styles.inner} onLoad={this.mediaReady} />}
             {imgSubTitle && <div className={cx(styles.title)} >{imgSubTitle}</div >}
             {youtube && (
-              <YouTube
-                videoId={youtube.split('v=')[1]}
-                opts={{
-                  playerVars: {
-                    rel: 0,
+              <YouTubePlayer
+                url={youtube}
+                playing={isLoaded}
+                config={{
+                  youtube: {
+                    playerVars: { rel: 0 },
+                    preload: true,
                   }
                 }}
                 onReady={this.onYouTubeReady}
                 onPlay={this.onYouTubePlay}
+                controls
+                width="100%"
+                height="100%"
                 className={cx(styles.youtube, styles.inner, {
                   [styles.ready]: isLoaded,
                   [styles.fullScreen]: orientation === 'landscape',

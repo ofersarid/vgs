@@ -59,7 +59,7 @@ const connect = firestoreConnect(props => {
 const selectors = {
   resourceList: state => {
     const isLoaded = state.get('reactor').data.users;
-    return isLoaded ? ({
+    return isLoaded && isLoaded[_userId] ? ({
       collections: isLoaded[_userId].collections || [],
       pages: isLoaded[_userId].pages || [],
     }) : null;
