@@ -90,7 +90,7 @@ class ImgTxtBtn extends PureComponent {
                 height="100%"
                 className={cx(styles.youtube, styles.inner, {
                   [styles.ready]: isLoaded,
-                  [styles.fullScreen]: orientation === 'landscape',
+                  [styles.fullScreen]: isMobile && orientation === 'landscape',
                 })}
               />
             )}
