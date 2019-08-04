@@ -27,7 +27,7 @@ const IndexHeader = ({ index, frame, header, isMobile, color }) => {
       <animated.span className={styles.index} style={{
         opacity: o,
         transform: isMobile ? x.interpolate(x => `translateX(${x}%)`) : x.interpolate(x => `translateY(${-x}%)`),
-      }} >0{index}</animated.span >
+      }} >0{index + 1}</animated.span >
       <animated.span className={styles.label} style={{
         opacity: o,
       }} >
