@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
-import { reduxRoutes } from '../../types';
+import PropTypes from 'prop-types';
 import { updateLocation } from '../../actions';
 
 class ReduxRoutes extends Component {
@@ -23,11 +23,21 @@ class ReduxRoutes extends Component {
   }
 
   render() {
-    return null;
+    return this.props.children;
   }
 }
 
-ReduxRoutes.propTypes = reduxRoutes;
+ReduxRoutes.propTypes = {
+  location: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+    state: PropTypes.object,
+  }).isRequired,
+  update: PropTypes.func.isRequired,
+  children: PropTypes.any,
+  params: PropTypes.object,
+};
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 

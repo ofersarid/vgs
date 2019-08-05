@@ -39,29 +39,33 @@ class Main extends PureComponent {
 
     return (
       <Fragment >
-        <ReduxRoutes />
-        <Spring
-          from={{ opacity: show ? 0 : 1 }}
-          to={{ opacity: show ? 1 : 0 }}
-        >
-          {springs => (bizCard && orientation === 'landscape' && isMobile) ? <Card
-            logo={logoGreen}
-            underLogo={vgsGreen}
-            address="24 Raul Wallenberg st."
-            city="TEL AVIV"
-            state="ISRAEL"
-            zip={6971921}
-            phone="+972 3 549 9054"
-          /> : <div className={styles.container} >
-            {(orientation === 'landscape' && isMobile) ? null : <div className={styles.logo} onClick={toggleFullScreen} >
-              <img className={styles.logoImg} src={logo} />
-              {!['viola', 'frame'].includes(pathname.split('/').pop()) && <img className={styles.logoText} src={vgs} style={springs} />}
+        <ReduxRoutes >
+          <Spring
+            from={{ opacity: show ? 0 : 1 }}
+            to={{ opacity: show ? 1 : 0 }}
+          >
+            {springs => (bizCard && orientation === 'landscape' && isMobile) ? <Card
+              logo={logoGreen}
+              underLogo={vgsGreen}
+              address="24 Raul Wallenberg st."
+              city="TEL AVIV"
+              state="ISRAEL"
+              zip={6971921}
+              phone="+972 3 549 9054"
+            /> : <div className={styles.container} >
+              {(orientation === 'landscape' && isMobile)
+                ? null
+                : <div className={styles.logo} onClick={toggleFullScreen} >
+                  <img className={styles.logoImg} src={logo} />
+                  {!['viola', 'frame'].includes(pathname.split('/').pop()) &&
+                  <img className={styles.logoText} src={vgs} style={springs} />}
+                </div >}
+              {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
+              {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
+              {this.props.children}
             </div >}
-            {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
-            {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
-            {this.props.children}
-          </div >}
-        </Spring >
+          </Spring >
+        </ReduxRoutes >
       </Fragment >
     );
   }
@@ -79,6 +83,10 @@ Main.propTypes = {
   bizCard: PropTypes.bool.isRequired,
   setOrientation: PropTypes.func.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
+};
+
+Main.defaultProps = {
+  logo: logoGreen,
 };
 
 const mapStateToProps = state => ({

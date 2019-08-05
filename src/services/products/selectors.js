@@ -56,7 +56,7 @@ const color = createSelector(Routes.selectors.pathname, pathname => {
     case 'viola':
       return '#662D91';
     default:
-      return null;
+      return undefined;
   }
 });
 
@@ -67,7 +67,7 @@ const logo = createSelector(Routes.selectors.pathname, pathname => {
     case 'viola':
       return logoViola;
     default:
-      return null;
+      return undefined;
   }
 });
 

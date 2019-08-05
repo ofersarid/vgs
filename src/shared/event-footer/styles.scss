@@ -1,0 +1,71 @@
+@import "/src/media-query-mixins";
+@import "/src/dimentions";
+
+.footer {
+  height: 15%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+
+  @include media('>phone') {
+    height: 127px;
+  }
+
+  @include media('>tablet') {
+    left: 35%;
+    right: 10%;
+    width: auto;
+  }
+
+  @include media('>desktop') {
+    font-size: 91px;
+  }
+}
+
+.text {
+  text-align: left;
+  line-height: 1.5em;
+  font-size: 16px;
+  transform: translateY(1px);
+}
+
+.title {
+  color: white;
+  width: 100%;
+}
+
+.date {
+  width: 100%;
+  color: white;
+  opacity: 0.6;
+}
+
+.arrow {
+  color: white;
+  height: 46px;
+  position: relative;
+}
+
+.address {
+  color: white;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 20px;
+    margin-right: 5px;
+  }
+}
+
+.addressText {
+  height: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - 25px);
+}
