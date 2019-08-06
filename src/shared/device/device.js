@@ -12,10 +12,23 @@ class Device extends PureComponent {
     });
   }
 
+  // componentDidMount() {
+  //   window.addEventListener('orientationchange', this.onOrientationchange, false);
+  //   this.onOrientationchange();
+  // }
+  //
+  // onOrientationchange() {
+  //   const { storeOrientation } = this.props;
+  //   const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation;
+  //   storeOrientation(angle === 0 ? 'portrait' : 'landscape');
+  // }
+
   render() {
     return null;
   }
 }
+
+// todo - remove oreintation from vgs reducer
 
 Device.propTypes = types;
 

@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll } from '/src/shared';
-// import {
-//   TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
-// } from './components';
-import Device from '/src/shared/device';
 import services from '/src/services';
 import homeCoverPic from '/src/assets/home_cover.jpg';
 import Cover from './components/cover/cover';
+import SingleParagraph from './components/single-paragraph/single-paragraph';
 import styles from './styles.scss';
 
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -20,7 +17,7 @@ class Home extends PureComponent {
   // }
 
   render() {
-    const { data, orientation, isMobile } = this.props; // eslint-disable-line
+    const { data } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
         <div className={styles.coverPic} style={{ backgroundImage: `url(${homeCoverPic})` }} >
@@ -37,6 +34,7 @@ class Home extends PureComponent {
               }}
               showOnFrame={0}
             />
+            <SingleParagraph showOnFrame={1} text="Lorem ipsum dolor sit amet, homero sadipscing est in. Dolore deserunt consectetuer in ius, ex est eius invidunt. Id nam vidit veniam pertinax. Vel tantas nominati eu. His diam quot scripserit in, omnium iuvaret senserit vim an. His cu latine incorrupte accommodare, semper vocent eligendi pro an. Mucius imperdiet reformidans cu sea, sed inani nulla zril ad. Graeci sapientem ne pro. Primis labore his ex. Vim ne brute indoctum. Elaboraret instructior voluptatibus ad vis, pro ex paulo prompta." />
           </SnapScroll >
         </div >
       </Fragment >
@@ -47,15 +45,11 @@ class Home extends PureComponent {
 Home.propTypes = {
   frame: PropTypes.number.isRequired,
   data: PropTypes.object,
-  isMobile: PropTypes.bool.isRequired,
-  orientation: PropTypes.oneOf(['portrait', 'landscape']),
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
-  isMobile: Device.selectors.isMobile(state),
-  orientation: services.vgs.selectors.orientation(state),
 });
 
 export default compose(

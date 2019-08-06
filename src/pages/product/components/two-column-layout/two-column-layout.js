@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Device from '/src/shared/device';
 import { SnapScroll, ScrollableArea } from '/src/shared';
 import styles from './styles.scss';
-import sharedStyles from '../../styles.scss';
+import layout from '/src/shared/styles/layout.scss';
 import Footnotes from '../footnotes/footnotes';
 
 const TwoColumnLayout = ({ showOnFrame, frame, article, footNotes, isMobile }) => {
@@ -16,7 +16,7 @@ const TwoColumnLayout = ({ showOnFrame, frame, article, footNotes, isMobile }) =
       to={{ opacity: frame === showOnFrame ? 1 : 0 }}
       immediate={frame !== showOnFrame}
     >
-      {styleProps => <section className={cx(styles.content, sharedStyles.inner)} style={{
+      {styleProps => <section className={cx(layout.inner)} style={{
         opacity: styleProps.opacity,
       }} >
         <ScrollableArea >

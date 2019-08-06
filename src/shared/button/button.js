@@ -51,6 +51,8 @@ class Button extends PureComponent {
         ref={this.ref}
         onClick={this.onClick}
         onMouseDown={this.ripple}
+        onTouchStart={this.ripple}
+        onTouchEnd={this.calm}
         onMouseUp={this.calm}
         onMouseLeave={this.calm}
         className={cx('ripple waves-effect', styles.button, className, {

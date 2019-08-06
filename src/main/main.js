@@ -60,6 +60,7 @@ class Main extends PureComponent {
 
     return (
       <Fragment >
+        <Device />
         <ReduxRoutes >
           <Spring
             from={{ opacity: show ? 0 : 1 }}

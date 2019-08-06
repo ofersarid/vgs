@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import Device from '/src/shared/device';
 import services from '/src/services';
 import styles from './styles.scss';
-import actions from './actions';
-import selectors from './selectors';
+import actions from '../actions';
+import selectors from '../selectors';
 
 class ScrollableArea extends PureComponent {
   constructor(props) {
