@@ -1,5 +1,6 @@
 @import "/src/media-query-mixins";
 @import "/src/dimentions";
+@import "/src/colors";
 
 .cover {
   z-index: 1;
@@ -7,35 +8,45 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .gradientOverLay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(#808080, 0.03) 0%, rgba(#ffffff, 0.85) 50%, rgba(#ffffff, 1) 100%);
+  }
 
   .header {
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: $gutter-phone;
     width: 66%;
-    font-size: 27px;
-    line-height: 31px;
+    font-size: 50px;
+    line-height: 58px;
     text-transform: uppercase;
     font-weight: lighter;
     z-index: 1;
+    color: $green;
 
     @include media('>phone') {
-      font-size: 50px;
-      line-height: 58px;
+      font-size: 91px;
+      line-height: 90px;
       left: $gutter-tablet;
       width: 60%;
     }
 
     @include media('>tablet') {
-      font-size: 65px;
-      left: $gutter-desktop;
+      left: 35vw;
+      width: 55%;
     }
 
     @include media('>desktop') {
-      font-size: 91px;
-      line-height: 81px;
-      left: $gutter-wide-screen;
-      width: 55%;
+      font-size: 127px;
+      line-height: 128px;
     }
   }
 

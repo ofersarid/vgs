@@ -65,7 +65,7 @@ class Cover extends PureComponent {
 }
 
 Cover.propTypes = {
-  themeColor: PropTypes.string.isRequired,
+  themeColor: PropTypes.string,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
     dateFrom: PropTypes.object.isRequired,

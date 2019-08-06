@@ -68,7 +68,7 @@ class SnapScroll extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const children = flattenDeep(nextProps.children);
+    const children = Array.isArray(Array.isArray(nextProps.children)) ? flattenDeep(nextProps.children) : [nextProps.children];
     nextProps.count(children.length || 1);
     return {
       index: nextProps.frame,

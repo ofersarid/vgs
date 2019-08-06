@@ -1,5 +1,6 @@
 @import "/src/media-query-mixins";
 @import "/src/dimentions";
+@import "/src/colors";
 
 .footer {
   height: 15%;
@@ -11,13 +12,14 @@
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
+  background: $green;
 
   @include media('>phone') {
     height: 127px;
   }
 
   @include media('>tablet') {
-    left: 35%;
+    left: 35vw;
     right: 10%;
     width: auto;
   }

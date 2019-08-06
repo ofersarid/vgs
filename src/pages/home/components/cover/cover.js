@@ -4,7 +4,8 @@ import autoBind from 'auto-bind';
 // import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Shared from '/src/shared';
+import { EventFooter, SnapScroll } from '/src/shared';
+import homeCoverPic from '/src/assets/home_cover.jpg';
 import styles from './styles.scss';
 
 class Cover extends PureComponent {
@@ -26,12 +27,14 @@ class Cover extends PureComponent {
           className={styles.cover}
           style={{
             opacity: props.opacity,
+            backgroundImage: `url(${homeCoverPic})`,
           }}
         >
+          <div className={styles.gradientOverLay}/>
           <h1 className={styles.header} >
             <div dangerouslySetInnerHTML={{ __html: tagLine.replace(/\n\r?/g, '<br />') }} />
           </h1 >
-          {footer ? <Shared.EventFooter footer={footer} /> : null}
+          {footer ? <EventFooter footer={footer} /> : null}
         </div >}
       </Spring >
     );
@@ -41,7 +44,6 @@ class Cover extends PureComponent {
 Cover.propTypes = {
   frame: PropTypes.number.isRequired,
   tagLine: PropTypes.string.isRequired,
-  themeColor: PropTypes.string.isRequired,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
     dateFrom: PropTypes.object.isRequired,
@@ -53,7 +55,7 @@ Cover.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  frame: Shared.SnapScroll.selectors.frame(state),
+  frame: SnapScroll.selectors.frame(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

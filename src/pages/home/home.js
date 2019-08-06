@@ -22,8 +22,17 @@ class Home extends PureComponent {
     return data ? (
       <Fragment >
         <SnapScroll >
-          <div>Hello</div>
-          <Cover tagLine={data.coverTagline} showOnFrame={0} />
+          <Cover
+            tagLine={data.coverTagLine}
+            footer={{
+              title: data.eventTitle,
+              dateFrom: data.eventDateFrom,
+              dateTo: data.eventDateTo,
+              address: data.eventAddress,
+              linkTo: data.eventLinkTo,
+            }}
+            showOnFrame={0}
+          />
         </SnapScroll >
       </Fragment >
     ) : null;
