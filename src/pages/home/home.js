@@ -12,9 +12,10 @@ import styles from './styles.scss';
 // import { firestoreConnect } from 'react-redux-firebase';
 
 class Home extends PureComponent {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    props.resetFrame();
+  }
 
   render() {
     const { data } = this.props; // eslint-disable-line
@@ -32,9 +33,8 @@ class Home extends PureComponent {
                 address: data.eventAddress,
                 linkTo: data.eventLinkTo,
               }}
-              showOnFrame={0}
             />
-            <SingleParagraph showOnFrame={1} text="Lorem ipsum dolor sit amet, homero sadipscing est in. Dolore deserunt consectetuer in ius, ex est eius invidunt. Id nam vidit veniam pertinax. Vel tantas nominati eu. His diam quot scripserit in, omnium iuvaret senserit vim an. His cu latine incorrupte accommodare, semper vocent eligendi pro an. Mucius imperdiet reformidans cu sea, sed inani nulla zril ad. Graeci sapientem ne pro. Primis labore his ex. Vim ne brute indoctum. Elaboraret instructior voluptatibus ad vis, pro ex paulo prompta." />
+            <SingleParagraph text="Lorem ipsum dolor sit amet, homero sadipscing est in. Dolore deserunt consectetuer in ius, ex est eius invidunt. Id nam vidit veniam pertinax. Vel tantas nominati eu. His diam quot scripserit in, omnium iuvaret senserit vim an. His cu latine incorrupte accommodare, semper vocent eligendi pro an. Mucius imperdiet reformidans cu sea, sed inani nulla zril ad. Graeci sapientem ne pro. Primis labore his ex. Vim ne brute indoctum. Elaboraret instructior voluptatibus ad vis, pro ex paulo prompta." />
           </SnapScroll >
         </div >
       </Fragment >
@@ -45,6 +45,7 @@ class Home extends PureComponent {
 Home.propTypes = {
   frame: PropTypes.number.isRequired,
   data: PropTypes.object,
+  resetFrame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -52,6 +53,10 @@ const mapStateToProps = state => ({
   data: services.reactor.selectors.pageData(state, 'home'),
 });
 
+const mapDispatchToProps = dispatch => ({
+  resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
+});
+
 export default compose(
-  connect(mapStateToProps, {}),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Home);

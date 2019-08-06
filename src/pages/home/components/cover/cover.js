@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
-// import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { EventFooter, SnapScroll } from '/src/shared';
+import { EventFooter, FadeIn } from '/src/shared';
 import styles from './styles.scss';
 
 class Cover extends PureComponent {
@@ -14,32 +12,21 @@ class Cover extends PureComponent {
   }
 
   render() {
-    const { frame, footer, tagLine, showOnFrame } = this.props;
-    const forward = frame === showOnFrame;
+    const { footer, tagLine } = this.props;
     return (
-      <Spring
-        from={{ opacity: forward ? 0 : 1 }}
-        to={{ opacity: forward ? 1 : 0 }}
-        immediate={frame !== showOnFrame}
-      >
-        {props => <div
-          className={styles.cover}
-          style={{
-            opacity: props.opacity,
-          }}
-        >
+      <FadeIn >
+        <div className={styles.cover} >
           <h1 className={styles.header} >
             <div dangerouslySetInnerHTML={{ __html: tagLine.replace(/\n\r?/g, '<br />') }} />
           </h1 >
           {footer ? <EventFooter footer={footer} /> : null}
-        </div >}
-      </Spring >
+        </div >
+      </FadeIn >
     );
   }
 }
 
 Cover.propTypes = {
-  frame: PropTypes.number.isRequired,
   tagLine: PropTypes.string.isRequired,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -48,12 +35,9 @@ Cover.propTypes = {
     address: PropTypes.string.isRequired,
     linkTo: PropTypes.string.isRequired,
   }),
-  showOnFrame: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = state => ({
-  frame: SnapScroll.selectors.frame(state),
-});
+const mapStateToProps = state => ({}); // eslint-disable-line
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
