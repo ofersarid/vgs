@@ -7,7 +7,7 @@ import { Spring } from 'react-spring/renderprops';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
 import Device from '/src/shared/device';
-import { toggleFullScreen } from '/src/utils';
+import { hashHistory } from 'react-router';
 import services from '/src/services';
 import FrameIndicator from './components/frame-indicator';
 import styles from './styles.scss';
@@ -15,6 +15,8 @@ import vgs from './assets/vgs_blue.svg';
 import SideMenu from './components/side-menu';
 import Card from './components/card';
 import { logoGreen, vgsGreen } from './assets';
+import cx from 'classnames';
+import { Button } from '../shared';
 
 class Main extends PureComponent {
   constructor(props) {
@@ -31,6 +33,25 @@ class Main extends PureComponent {
     const { setOrientation } = this.props;
     const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation;
     setOrientation(angle === 0 ? 'portrait' : 'landscape');
+  }
+
+  goToHome() {
+    hashHistory.push('home');
+  }
+
+  resolveWaveColor() {
+    const { color } = this.props;
+    if (!color) {
+      return 'gray';
+    }
+    switch (color.toLowerCase()) {
+      case '#0272ba':
+        return 'blue';
+      case '#662d91':
+        return 'purple';
+      default:
+        return 'gray';
+    }
   }
 
   render() {
@@ -55,11 +76,19 @@ class Main extends PureComponent {
             /> : <div className={styles.container} >
               {(orientation === 'landscape' && isMobile)
                 ? null
-                : <div className={styles.logo} onClick={toggleFullScreen} >
-                  <img className={styles.logoImg} src={logo} />
-                  {!['viola', 'frame'].includes(pathname.split('/').pop()) &&
-                  <img className={styles.logoText} src={vgs} style={springs} />}
-                </div >}
+                : (
+                  <Button
+                    waveColor={this.resolveWaveColor()}
+                    className={cx(styles.logo)}
+                    tag="a"
+                    onClick={this.goToHome}
+                    target="_blank"
+                  >
+                    <img className={styles.logoImg} src={logo} />
+                    {!['viola', 'frame'].includes(pathname.split('/').pop()) &&
+                    <img className={styles.logoText} src={vgs} style={springs} />}
+                  </Button >
+                )}
               {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
               {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
               {this.props.children}
@@ -74,6 +103,7 @@ class Main extends PureComponent {
 Main.propTypes = {
   children: PropTypes.any,
   pathname: PropTypes.string,
+  color: PropTypes.string,
   isMobile: PropTypes.bool.isRequired,
   logo: PropTypes.string,
   resourceList: PropTypes.shape({
@@ -96,6 +126,7 @@ const mapStateToProps = state => ({
   resourceList: services.reactor.selectors.resourceList(state),
   bizCard: services.vgs.selectors.bizCard(state),
   orientation: services.vgs.selectors.orientation(state),
+  color: services.products.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({

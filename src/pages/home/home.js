@@ -23,7 +23,7 @@ class Home extends PureComponent {
     const { data, orientation, isMobile } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
-        <div style={{ backgroundImage: `url(${homeCoverPic})` }} >
+        <div className={styles.coverPic} style={{ backgroundImage: `url(${homeCoverPic})` }} >
           <div className={styles.gradientOverLay} />
           <SnapScroll >
             <Cover

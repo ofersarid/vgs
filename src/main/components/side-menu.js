@@ -38,6 +38,17 @@ class SideMenu extends PureComponent {
     this.toggleMenu();
   }
 
+  resolveWaveColor(color) {
+    switch (color.toLowerCase()) {
+      case '#0272ba':
+        return 'blue';
+      case '#662d91':
+        return 'purple';
+      default:
+        return 'gray';
+    }
+  }
+
   render() {
     const { products, categories, color } = this.props;
     const { openMenu, immediate } = this.state;
@@ -83,7 +94,7 @@ class SideMenu extends PureComponent {
         <Button
           className={cx(styles.menuToggle)}
           onClick={this.toggleMenu}
-          waveColor={openMenu ? 'white' : color === '#0272BA' ? 'blue' : 'purple'}
+          waveColor={openMenu ? 'white' : this.resolveWaveColor(color)}
         >
           <Spring
             from={{ transform: 'rotate(0deg)', left: '0px', background: color }}

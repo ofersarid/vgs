@@ -52,10 +52,12 @@ class Button extends PureComponent {
         onClick={this.onClick}
         onMouseDown={this.ripple}
         onMouseUp={this.calm}
+        onMouseLeave={this.calm}
         className={cx('ripple waves-effect', styles.button, className, {
           'waves-white': waveColor === 'white',
           'waves-blue': waveColor === 'blue',
           'waves-purple': waveColor === 'purple',
+          'waves-gray': waveColor === 'gray',
           [styles.color]: color,
         })}
       >
