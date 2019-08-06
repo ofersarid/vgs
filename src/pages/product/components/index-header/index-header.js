@@ -50,8 +50,6 @@ IndexHeader.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  deviceType: Device.selectors.deviceType(state),
-  deviceOrientation: Device.selectors.deviceOrientation(state),
   frame: SnapScroll.selectors.frame(state),
   isMobile: Device.selectors.isMobile(state),
   color: services.products.selectors.color(state),

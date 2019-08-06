@@ -64,12 +64,10 @@ class Product extends PureComponent {
               address: data.eventAddress,
               linkTo: data.eventLinkTo,
             }}
-            showOnFrame={0}
           />
           <TwoColumnLayout
             article={data.screen1Body}
             footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
-            showOnFrame={1}
           />
           <ImgTxtBtn
             img={data.screen2Image}
@@ -77,7 +75,6 @@ class Product extends PureComponent {
             footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
             pdfSrc={data.screen2PDF}
             imgSubTitle={data.screen2ImageSubtitle}
-            showOnFrame={2}
             themeColor={color}
           />
           <ImgTxtBtn
@@ -128,15 +125,13 @@ Product.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  deviceType: Device.selectors.deviceType(state),
-  deviceOrientation: Device.selectors.deviceOrientation(state),
   frame: SnapScroll.selectors.frame(state),
   color: services.products.selectors.color(state),
   data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
   art: services.products.selectors.art(state),
   isMobile: Device.selectors.isMobile(state),
-  orientation: services.vgs.selectors.orientation(state),
+  orientation: Device.selectors.orientation(state),
 });
 
 export default compose(

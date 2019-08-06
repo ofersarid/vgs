@@ -39,13 +39,12 @@ class ScrollableArea extends PureComponent {
   componentWillUnmount() {
     const { disableScrollSnap } = this.props;
     disableScrollSnap(false, false);
-    this.$el.current.removeEventListener('orientationchange', this.onOrientationchange);
   }
 
   checkOverflow() {
-    const { hideOverflow } = this.props;
+    const { disableScroll } = this.props;
     const $current = this.$el.current;
-    const hasOverflow = hideOverflow ? false : $current.clientWidth < $current.scrollWidth || $current.clientHeight < $current.scrollHeight;
+    const hasOverflow = disableScroll ? false : $current.clientWidth < $current.scrollWidth || $current.clientHeight < $current.scrollHeight;
     this.setState({ hasOverflow });
     return hasOverflow;
   }
@@ -97,14 +96,14 @@ ScrollableArea.propTypes = {
   frame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
   style: PropTypes.object,
-  hideOverflow: PropTypes.bool.isRequired,
+  disableScroll: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
 };
 
 ScrollableArea.defaultProps = {
   horizontal: false,
   onSwipe: noop,
-  hideOverflow: false
+  disableScroll: false
 };
 
 const mapStateToProps = state => ({
