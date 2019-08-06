@@ -21,13 +21,6 @@ class ImgTxtBtn extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    const { disableBizCard, youtube } = this.props;
-    if (youtube) {
-      disableBizCard();
-    }
-  }
-
   componentWillUnmount() {
     const { enableBizCard, youtube } = this.props;
     if (youtube) {
@@ -39,8 +32,10 @@ class ImgTxtBtn extends PureComponent {
     this.setState({ isLoaded: true });
   }
 
-  onYouTubeReady(event) {
+  onYouTubeReady() {
+    const { disableBizCard } = this.props;
     this.mediaReady();
+    disableBizCard();
   }
 
   render() {
