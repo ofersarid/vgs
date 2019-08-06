@@ -37,7 +37,6 @@ class Home extends PureComponent {
               }}
               showOnFrame={0}
             />
-            <div>Frame 2</div>
           </SnapScroll >
         </div >
       </Fragment >

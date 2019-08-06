@@ -73,7 +73,7 @@ Button.propTypes = {
   color: PropTypes.bool,
   tag: PropTypes.string,
   onClick: PropTypes.func,
-  waveColor: PropTypes.oneOf(['white', 'blue', 'purple']),
+  waveColor: PropTypes.oneOf(['white', 'blue', 'purple', 'gray']),
 };
 
 Button.defaultProps = {
