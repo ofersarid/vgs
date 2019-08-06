@@ -8,7 +8,9 @@ import { SnapScroll } from '/src/shared';
 // } from './components';
 import Device from '/src/shared/device';
 import services from '/src/services';
+import homeCoverPic from '/src/assets/home_cover.jpg';
 import Cover from './components/cover/cover';
+import styles from './styles.scss';
 
 // import { firestoreConnect } from 'react-redux-firebase';
 
@@ -21,19 +23,23 @@ class Home extends PureComponent {
     const { data, orientation, isMobile } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
-        <SnapScroll >
-          <Cover
-            tagLine={data.coverTagLine}
-            footer={{
-              title: data.eventTitle,
-              dateFrom: data.eventDateFrom,
-              dateTo: data.eventDateTo,
-              address: data.eventAddress,
-              linkTo: data.eventLinkTo,
-            }}
-            showOnFrame={0}
-          />
-        </SnapScroll >
+        <div style={{ backgroundImage: `url(${homeCoverPic})` }} >
+          <div className={styles.gradientOverLay} />
+          <SnapScroll >
+            <Cover
+              tagLine={data.coverTagLine}
+              footer={{
+                title: data.eventTitle,
+                dateFrom: data.eventDateFrom,
+                dateTo: data.eventDateTo,
+                address: data.eventAddress,
+                linkTo: data.eventLinkTo,
+              }}
+              showOnFrame={0}
+            />
+            <div>Frame 2</div>
+          </SnapScroll >
+        </div >
       </Fragment >
     ) : null;
   }

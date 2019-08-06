@@ -5,7 +5,6 @@ import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { EventFooter, SnapScroll } from '/src/shared';
-import homeCoverPic from '/src/assets/home_cover.jpg';
 import styles from './styles.scss';
 
 class Cover extends PureComponent {
@@ -27,10 +26,8 @@ class Cover extends PureComponent {
           className={styles.cover}
           style={{
             opacity: props.opacity,
-            backgroundImage: `url(${homeCoverPic})`,
           }}
         >
-          <div className={styles.gradientOverLay}/>
           <h1 className={styles.header} >
             <div dangerouslySetInnerHTML={{ __html: tagLine.replace(/\n\r?/g, '<br />') }} />
           </h1 >
