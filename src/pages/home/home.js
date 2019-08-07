@@ -10,6 +10,7 @@ import SingleParagraph from './components/single-paragraph/single-paragraph';
 import styles from './styles.scss';
 
 // import { firestoreConnect } from 'react-redux-firebase';
+// trigger build
 
 class Home extends PureComponent {
   constructor(props) {
