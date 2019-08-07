@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import currentDevice from 'current-device';
-import { storeOrientation } from './actions';
+import actions from './actions';
 import types from './types';
 import connect from 'react-redux/es/connect/connect';
 
@@ -12,17 +12,6 @@ class Device extends PureComponent {
     });
   }
 
-  // componentDidMount() {
-  //   window.addEventListener('orientationchange', this.onOrientationchange, false);
-  //   this.onOrientationchange();
-  // }
-  //
-  // onOrientationchange() {
-  //   const { storeOrientation } = this.props;
-  //   const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation;
-  //   storeOrientation(angle === 0 ? 'portrait' : 'landscape');
-  // }
-
   render() {
     return null;
   }
@@ -33,7 +22,7 @@ class Device extends PureComponent {
 Device.propTypes = types;
 
 const mapDispatchToProps = dispatch => ({
-  storeOrientation: (...props) => dispatch(storeOrientation(...props)),
+  storeOrientation: (...props) => dispatch(actions.storeOrientation(...props)),
 });
 
 export default connect(() => ({}), mapDispatchToProps)(Device);

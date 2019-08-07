@@ -1,5 +1,6 @@
 @import "/src/media-query-mixins";
-@import "../../styles";
+@import "/src/colors";
+@import "/src/shared/styles/layout.scss";
 
 .header {
   font-size: 15px;
@@ -15,6 +16,7 @@
   z-index: 1;
   left: $gutter-phone;
   pointer-events: none;
+  color: $green;
 
   @include media('>phone') {
     width: 58vw;

@@ -1,6 +1,10 @@
 import { ACTIONS } from './constants';
 
-export const storeOrientation = (orientation) => ({
+const storeOrientation = (orientation) => ({
   type: ACTIONS.STORE_ORIENTATION,
   orientation,
 });
+
+export default {
+  storeOrientation,
+};

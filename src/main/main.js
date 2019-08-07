@@ -79,7 +79,7 @@ class Main extends PureComponent {
                 ? null
                 : (
                   <Button
-                    waveColor={this.resolveWaveColor()}
+                    waveColor="gray"
                     className={cx(styles.logo)}
                     tag="a"
                     onClick={this.goToHome}

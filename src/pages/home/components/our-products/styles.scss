@@ -1,0 +1,36 @@
+@import "/src/media-query-mixins";
+@import "/src/dimentions";
+@import "/src/colors";
+
+.paragraph {
+  color: $black;
+  font-size: 16px;
+  line-height: 35px;
+  height: 65%;
+  bottom: 8%;
+}
+
+.btn {
+  background: $green;
+  text-decoration: none;
+  padding: 17px 29px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  line-height: 11px;
+  margin: 34px 0 50px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.art {
+  height: 35%;
+  bottom: 0;
+  right: 10vw;
+  position: absolute;
+
+  @include media('>tablet') {
+    height: 70%;
+    bottom: 8%;
+  }
+
+}

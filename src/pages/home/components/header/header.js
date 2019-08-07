@@ -7,7 +7,7 @@ import Device from '/src/shared/device';
 import { SnapScroll } from '/src/shared';
 import styles from './styles.scss';
 
-const IndexHeader = ({ index, frame, header, isMobile, color }) => {
+const Header = ({ index, frame, text, isMobile }) => {
   const forward = frame >= index;
 
   const resolveSpring = () => {
@@ -23,31 +23,22 @@ const IndexHeader = ({ index, frame, header, isMobile, color }) => {
   const { o, x } = resolveSpring();
 
   return (
-    <h2 className={styles.header} style={{ color: color }}>
-      <animated.span className={styles.index} style={{
-        opacity: o,
-        transform: isMobile ? x.interpolate(x => `translateX(${x}px)`) : x.interpolate(x => `translateY(${-x}px)`),
-      }} >0{index + 1}</animated.span >
-      <div className={styles.divider} style={{
-        backgroundColor: color,
-        opacity: frame === index ? 1 : 0,
-      }} />
+    <h2 className={styles.header} >
       <animated.span className={styles.label} style={{
         opacity: o,
         transform: isMobile ? x.interpolate(x => `translateX(${-x}px)`) : x.interpolate(x => `translateY(${x}px)`),
       }} >
-        {header}
+        {text}
       </animated.span >
     </h2 >
   );
 };
 
-IndexHeader.propTypes = {
-  header: PropTypes.string.isRequired,
+Header.propTypes = {
+  text: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  color: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -58,4 +49,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
-export default connect(mapStateToProps, mapDispatchToProps)(IndexHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
