@@ -9,21 +9,53 @@
   top: 27%;
 
   @include media('>phone') {
-    top: 22%;
+    top: 30%;
     font-size: 28px;
     line-height: 37px;
+    height: 60%;
   }
 
   @include media('>tablet') {
-    top: 35%;
-    left: 35%;
-    width: 55%;
-    font-size: 28px;
-    line-height: 37px;
+    top: 30%;
+    height: 65%;
   }
 
   @include media('>desktop') {
+    top: 35%;
     font-size: 34px;
     line-height: 43px;
+  }
+}
+
+.pics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  @include media('>phone') {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  @include media('>phone') {
+    width: 50%;
+  }
+
+  .picImg {
+    width: 164px;
+  }
+
+  label {
+    text-align: center;
+    height: 45px;
+    margin-bottom: 20px;
   }
 }

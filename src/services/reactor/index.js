@@ -71,10 +71,11 @@ const selectors = {
     if (collections) {
       const collectionId = Object.keys(collections).find(id => collections[id].name.toLowerCase() === name.toLowerCase());
       if (collectionId) {
+        const order = collections[collectionId].order.split(' | ');
         const data = collections[collectionId].data;
         if (!data) return [];
-        return Object.keys(data).reduce((dataArray, key) => {
-          if (!data[key].published) return dataArray;
+        return order.reduce((dataArray, key) => {
+          if (data[key] && !data[key].published) return dataArray;
           dataArray.push(Object.assign({}, data[key], { id: key }));
           return dataArray;
         }, []);

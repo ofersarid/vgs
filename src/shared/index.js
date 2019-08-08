@@ -5,3 +5,4 @@ export { default as Button } from './button/button';
 export { default as EventFooter } from './event-footer/event-footer';
 export { default as FadeIn } from './fade-in/fade-in';
 export { default as FadeInOut } from './fade-in-out/fade-in-out';
+export { default as RatioBox } from './ratio-box/ratio-box';
