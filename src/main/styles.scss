@@ -74,14 +74,17 @@
   .logoImg {
     width: 100%;
   }
+}
 
-  .logoText {
-    position: absolute;
-    left: calc(100% + 10px);
-    top: 50%;
-    transform: translateY(-50%);
-  }
+.logoText {
+  position: fixed;
+  left: 17%;
+  top: 10%;
+  z-index: 1;
+  transform: translate(40px, -50%);
+}
 
+.logo, .logoText {
   @include media('>phone') {
     left: 10%;
   }

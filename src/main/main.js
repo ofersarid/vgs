@@ -78,17 +78,19 @@ class Main extends PureComponent {
               {(orientation === 'landscape' && isMobile)
                 ? null
                 : (
-                  <Button
-                    waveColor="gray"
-                    className={cx(styles.logo)}
-                    tag="a"
-                    onClick={this.goToHome}
-                    target="_blank"
-                  >
-                    <img className={styles.logoImg} src={logo} />
+                  <Fragment>
+                    <Button
+                      waveColor="gray"
+                      className={cx(styles.logo)}
+                      tag="a"
+                      onClick={this.goToHome}
+                      target="_blank"
+                    >
+                      <img className={styles.logoImg} src={logo} />
+                    </Button >
                     {!['viola', 'frame'].includes(pathname.split('/').pop()) &&
                     <img className={styles.logoText} src={vgs} style={springs} />}
-                  </Button >
+                  </Fragment>
                 )}
               {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
               {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
