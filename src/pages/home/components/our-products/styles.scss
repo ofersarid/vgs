@@ -1,5 +1,4 @@
 @import "/src/media-query-mixins";
-@import "/src/dimentions";
 @import "/src/colors";
 
 .paragraph {
@@ -7,7 +6,25 @@
   font-size: 16px;
   line-height: 35px;
   height: 65%;
-  bottom: 8%;
+  top: 27%;
+
+  @include media('>phone') {
+    top: 30%;
+    font-size: 28px;
+    line-height: 37px;
+    height: 60%;
+  }
+
+  @include media('>tablet') {
+    top: 30%;
+    height: 65%;
+  }
+
+  @include media('>desktop') {
+    top: 35%;
+    font-size: 34px;
+    line-height: 43px;
+  }
 }
 
 .btn {
@@ -28,9 +45,17 @@
   right: 10vw;
   position: absolute;
 
+  @include media('>phone') {
+    height: 40%;
+  }
+
   @include media('>tablet') {
-    height: 70%;
-    bottom: 8%;
+    height: 50%;
+    right: 5vw;
+  }
+
+  @include media('>desktop') {
+    height: 55%;
   }
 
 }

@@ -10,8 +10,7 @@
   font-weight: normal;
   position: fixed;
   width: 66vw;
-  top: 27%;
-  transform: translateY(-55px);
+  top: 21%;
   height: 37px;
   z-index: 1;
   left: $gutter-phone;
@@ -34,8 +33,6 @@
   }
 
   @include media('>desktop') {
-    width: 60vw;
-    top: 22%;
     left: $gutter-wide-screen;
     font-size: 20px;
     line-height: 20px;
@@ -50,15 +47,9 @@
 
 .label {
   position: absolute;
-  top: 26px;
   left: 0;
   display: flex;
   align-items: center;
-
-  @include media('>phone') {
-    top: 0;
-    left: 130px;
-  }
 }
 
 .divider {
