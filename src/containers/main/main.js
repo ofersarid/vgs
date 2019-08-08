@@ -16,7 +16,7 @@ import SideMenu from './components/side-menu';
 import Card from './components/card';
 import { logoGreen, vgsGreen } from './assets';
 import cx from 'classnames';
-import { Button } from '../shared';
+import { Button } from '/src/shared';
 
 class Main extends PureComponent {
   constructor(props) {

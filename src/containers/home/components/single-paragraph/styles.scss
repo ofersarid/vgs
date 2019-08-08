@@ -1,0 +1,29 @@
+@import "/src/media-query-mixins";
+@import "/src/colors";
+
+.paragraph {
+  color: $black;
+  font-size: 16px;
+  line-height: 35px;
+  height: 65%;
+  top: 27%;
+
+  @include media('>phone') {
+    top: 22%;
+    font-size: 28px;
+    line-height: 37px;
+  }
+
+  @include media('>tablet') {
+    top: 35%;
+    left: 35%;
+    width: 55%;
+    font-size: 28px;
+    line-height: 37px;
+  }
+
+  @include media('>desktop') {
+    font-size: 34px;
+    line-height: 43px;
+  }
+}

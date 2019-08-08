@@ -8,6 +8,7 @@ import homeCoverPic from '/src/assets/home_cover.jpg';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
+import GlobalImpact from './components/global-impact/global-impact';
 import Header from './components/header/header';
 import styles from './styles.scss';
 
@@ -30,6 +31,7 @@ class Home extends PureComponent {
           <div className={styles.gradientOverLay} />
         </FadeInOut >
         <Header index={2} text="OUR PRODUCTS" />
+        <Header index={3} text="GLOBAL IMPACT" />
         <SnapScroll >
           <Cover
             tagLine={data.coverTagLine}
@@ -45,6 +47,9 @@ class Home extends PureComponent {
             text="Lorem ipsum dolor sit amet, homero sadipscing est in. Dolore deserunt consectetuer in ius, ex est eius invidunt. Id nam vidit veniam pertinax. Vel tantas nominati eu. His diam quot scripserit in, omnium iuvaret senserit vim an. His cu latine incorrupte accommodare, semper vocent eligendi pro an. Mucius imperdiet reformidans cu sea, sed inani nulla zril ad. Graeci sapientem ne pro. Primis labore his ex. Vim ne brute indoctum. Elaboraret instructior voluptatibus ad vis, pro ex paulo prompta." />
           <OurProducts
             link="https://www.google.com"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum." />
+          <GlobalImpact
+            regions={[{}, {}, {}]}
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum." />
         </SnapScroll >
       </Fragment >
