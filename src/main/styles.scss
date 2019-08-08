@@ -277,7 +277,7 @@
 .frameIndicator {
   position: fixed;
   top: 50%;
-  left: 8.5%;
+  left: #{$gutter-phone / 2};
   z-index: 1;
   transform: translate(-50%, -50%);
   display: flex;
@@ -286,7 +286,7 @@
   padding: 6px;
 
   @include media('>phone') {
-    left: 10%;
+    left: #{$gutter-tablet / 2};
   }
 
   @include media('>tablet') {
