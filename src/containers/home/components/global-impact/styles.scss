@@ -9,9 +9,9 @@
   top: 27%;
 
   @include media('>phone') {
-    top: 30%;
-    font-size: 28px;
-    line-height: 37px;
+    //top: 30%;
+    font-size: 22px;
+    line-height: 36px;
     height: 60%;
   }
 
@@ -36,11 +36,20 @@
   @include media('>phone') {
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
+    //height: 60%;
+    transform: translateY(10%);
+
+    @include orientation(landscape) {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 
   @include media('>tablet') {
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     overflow: auto;
   }
@@ -53,8 +62,14 @@
   width: 136px;
 
   @include media('>phone') {
-    width: 32%;
-    margin: 9%;
+    width: 28%;
+    margin: 0 11%;
+
+    @include orientation(landscape) {
+      width: 20%;
+      margin: 0;
+      flex-shrink: 0;
+    }
   }
 
   @include media('>tablet') {
