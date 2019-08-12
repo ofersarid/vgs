@@ -37,25 +37,61 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+
+  @include media('>tablet') {
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    width: 100%;
+    overflow: auto;
+  }
 }
 
 .pic {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 136px;
 
   @include media('>phone') {
-    width: 50%;
+    width: 32%;
+    margin: 9%;
+  }
+
+  @include media('>tablet') {
+    width: 12%;
+    margin: 3%;
+    flex-shrink: 0;
   }
 
   .picImg {
-    width: 164px;
+    width: 100%;
   }
 
   label {
     text-align: center;
     height: 45px;
     margin-bottom: 20px;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 37px;
+
+    @include media('>phone') {
+      font-size: 18px;
+      line-height: 27px;
+    }
+
+    @include media('>tablet') {
+      font-size: 18px;
+      line-height: 37px;
+      margin-top: 26px;
+      margin-bottom: 0;
+    }
+
+    @include media('>desktop') {
+      font-size: 22px;
+    }
   }
 }
