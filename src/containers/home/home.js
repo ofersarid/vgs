@@ -69,7 +69,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(3)),
+  resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
 });
 
 export default compose(
