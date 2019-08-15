@@ -48,7 +48,19 @@ class Home extends PureComponent {
             link="https://www.google.com"
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum." />
           <GlobalImpact
-            regions={[{}, {}, {}]}
+            regions={[{
+              pic: data.globalImpactImage1,
+              label: data.globalImpactImageSubtitle1,
+            }, {
+              pic: data.globalImpactImage2,
+              label: data.globalImpactImageSubtitle2,
+            }, {
+              pic: data.globalImpactImage3,
+              label: data.globalImpactImageSubtitle3,
+            }, {
+              pic: data.globalImpactImage4,
+              label: data.globalImpactImageSubtitle4,
+            }]}
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum." />
         </SnapScroll >
       </Fragment >

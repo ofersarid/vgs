@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ScrollableArea, FadeIn, RatioBox } from '/src/shared';
 import cx from 'classnames';
-import services from '/src/services';
 import styles from './styles.scss';
 import layout from '../../../../shared/styles/layout.scss';
 
@@ -15,7 +14,7 @@ class GlobalImpact extends PureComponent {
   }
 
   render() {
-    const { text, data } = this.props;
+    const { text, regions } = this.props;
     return (
       <FadeIn >
         <div className={cx(styles.paragraph, layout.inner)} >
@@ -24,7 +23,7 @@ class GlobalImpact extends PureComponent {
               dangerouslySetInnerHTML={{ __html: text.replace(/\n\r?/g, '<br />') }}
             />
             <ul className={styles.pics}>
-              {data.map(item => (
+              {regions.map(item => (
                 <div key={item.label} className={styles.pic}>
                   <RatioBox ratio={1} image={item.pic} className={styles.picImg} />
                   <label>{item.label}</label>
@@ -40,12 +39,10 @@ class GlobalImpact extends PureComponent {
 
 GlobalImpact.propTypes = {
   text: PropTypes.string.isRequired,
-  data: PropTypes.array,
+  regions: PropTypes.array,
 };
 
-const mapStateToProps = state => ({
-  data: services.reactor.selectors.collectionData(state, 'global impact'),
-});
+const mapStateToProps = state => ({}); // eslint-disable-line
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
