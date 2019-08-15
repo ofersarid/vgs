@@ -12,12 +12,14 @@ class Cover extends PureComponent {
   }
 
   render() {
-    const { footer, tagLine } = this.props;
+    const { footer } = this.props;
     return (
       <FadeIn >
         <div className={styles.cover} >
           <h1 className={styles.header} >
-            <div dangerouslySetInnerHTML={{ __html: tagLine.replace(/\n\r?/g, '<br />') }} />
+            VASCULAR<br/>
+            GRAFT<br/>
+            SOLUTIONS
           </h1 >
           {footer ? <EventFooter footer={footer} /> : null}
         </div >
@@ -27,7 +29,6 @@ class Cover extends PureComponent {
 }
 
 Cover.propTypes = {
-  tagLine: PropTypes.string.isRequired,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
     dateFrom: PropTypes.object.isRequired,

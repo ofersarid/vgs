@@ -26,7 +26,7 @@ class Home extends PureComponent {
     return data ? (
       <Fragment >
         <div className={styles.grayBg} />
-        <FadeInOut show={frame < 2} className={styles.bgWrap}>
+        <FadeInOut show={frame < 2} className={styles.bgWrap} >
           <div className={styles.coverPic} style={{ backgroundImage: `url(${homeCoverPic})` }} />
           <div className={styles.gradientOverLay} />
         </FadeInOut >
@@ -34,7 +34,6 @@ class Home extends PureComponent {
         <Header index={3} text="GLOBAL IMPACT" />
         <SnapScroll >
           <Cover
-            tagLine={data.coverTagLine}
             footer={{
               title: data.eventTitle,
               dateFrom: data.eventDateFrom,
