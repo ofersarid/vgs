@@ -43,10 +43,10 @@ class Home extends PureComponent {
             }}
           />
           <SingleParagraph
-            text="Lorem ipsum dolor sit amet, homero sadipscing est in. Dolore deserunt consectetuer in ius, ex est eius invidunt. Id nam vidit veniam pertinax. Vel tantas nominati eu. His diam quot scripserit in, omnium iuvaret senserit vim an. His cu latine incorrupte accommodare, semper vocent eligendi pro an. Mucius imperdiet reformidans cu sea, sed inani nulla zril ad. Graeci sapientem ne pro. Primis labore his ex. Vim ne brute indoctum. Elaboraret instructior voluptatibus ad vis, pro ex paulo prompta." />
+            text={data.synopsis} />
           <OurProducts
             link="https://www.google.com"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum." />
+            text={data.ourProductsBody} />
           <GlobalImpact
             regions={[{
               pic: data.globalImpactImage1,
@@ -61,7 +61,7 @@ class Home extends PureComponent {
               pic: data.globalImpactImage4,
               label: data.globalImpactImageSubtitle4,
             }]}
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum." />
+            text={data.globalImpactBody} />
         </SnapScroll >
       </Fragment >
     ) : null;
