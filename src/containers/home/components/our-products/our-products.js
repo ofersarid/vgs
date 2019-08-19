@@ -17,7 +17,7 @@ class OurProducts extends PureComponent {
   render() {
     const { text, link } = this.props;
     return (
-      <FadeIn >
+      <FadeIn spread >
         <img src={heartPic} className={styles.art} />
         <div className={cx(styles.paragraph, layout.inner)} >
           <ScrollableArea >

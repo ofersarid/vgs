@@ -82,10 +82,7 @@ class SideMenu extends PureComponent {
                 ))}
               </SubMenu >
               <Button tag="li" onClick={this.navigate} waveColor="white" >News & Events</Button >
-              <SubMenu label="About" >
-                <Button tag="li" onClick={this.navigate} waveColor="white" >Team</Button >
-                <Button tag="li" onClick={this.navigate} waveColor="white" >Jobs</Button >
-              </SubMenu >
+              <Button tag="li" onClick={this.navigate} waveColor="white" >About</Button >
               <Button tag="li" onClick={this.navigate} waveColor="white" >Contact</Button >
             </ul >
             <Button tag="a" className={cx(styles.legal)} onClick={this.navigate} waveColor="white" >Legal</Button >

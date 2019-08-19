@@ -10,7 +10,7 @@ import Footnotes from '../footnotes/footnotes';
 
 const TwoColumnLayout = ({ article, footNotes, isMobile }) => {
   return (
-    <FadeIn>
+    <FadeIn spread >
       <section className={cx(layout.inner)} >
         <ScrollableArea >
           <div className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
@@ -18,7 +18,7 @@ const TwoColumnLayout = ({ article, footNotes, isMobile }) => {
         </ScrollableArea >
         {!isMobile && <Footnotes footNotes={footNotes} />}
       </section >
-    </FadeIn>
+    </FadeIn >
   );
 };
 

@@ -16,7 +16,7 @@ class SingleParagraph extends PureComponent {
   render() {
     const { text } = this.props;
     return (
-      <FadeIn >
+      <FadeIn spread >
         <div className={cx(styles.paragraph, layout.inner)} >
           <ScrollableArea >
             <div

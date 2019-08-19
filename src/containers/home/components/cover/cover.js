@@ -14,7 +14,7 @@ class Cover extends PureComponent {
   render() {
     const { footer } = this.props;
     return (
-      <FadeIn >
+      <FadeIn spread >
         <div className={styles.cover} >
           <h1 className={styles.header} >
             VASCULAR<br/>

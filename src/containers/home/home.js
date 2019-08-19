@@ -26,7 +26,7 @@ class Home extends PureComponent {
     return data ? (
       <Fragment >
         <div className={styles.grayBg} />
-        <FadeInOut show={frame < 2} className={styles.bgWrap} >
+        <FadeInOut show={frame < 2} className={styles.bgWrap} spread >
           <div className={styles.coverPic} style={{ backgroundImage: `url(${homeCoverPic})` }} />
           <div className={styles.gradientOverLay} />
         </FadeInOut >

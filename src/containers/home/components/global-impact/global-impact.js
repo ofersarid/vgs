@@ -16,7 +16,7 @@ class GlobalImpact extends PureComponent {
   render() {
     const { text, regions } = this.props;
     return (
-      <FadeIn >
+      <FadeIn spread >
         <div className={cx(styles.paragraph, layout.inner)} >
           <ScrollableArea >
             <div

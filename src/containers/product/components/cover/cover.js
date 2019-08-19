@@ -22,7 +22,7 @@ class Cover extends PureComponent {
   render() {
     const { footer, themeColor, name, description, art } = this.props;
     return (
-      <FadeIn >
+      <FadeIn spread >
         <div className={styles.cover} >
           <h1 className={styles.header} >
             <div style={{ color: themeColor }} >{name}</div >

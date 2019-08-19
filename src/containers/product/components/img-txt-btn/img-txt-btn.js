@@ -45,7 +45,7 @@ class ImgTxtBtn extends PureComponent {
     } = this.props;
     const { isLoaded } = this.state;
     return (
-      <FadeIn>
+      <FadeIn spread >
         <ScrollableArea disableScroll={isMobile && orientation === 'landscape'} className={cx(styles.container, sharedStyles.inner)} >
           <div className={cx(styles.img)} >
             {img && <img src={img} className={styles.inner} onLoad={this.mediaReady} />}
