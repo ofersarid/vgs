@@ -24,6 +24,12 @@ class Product extends PureComponent {
     this.didMount = true;
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.name !== this.props.name) {
+      this.props.setColor(this.resolveColor());
+    }
+  }
+
   resolveSummeryPic() {
     const { name } = this.props;
     switch (name) {
@@ -50,19 +56,23 @@ class Product extends PureComponent {
 
   render() {
     const { color, data, name, art, orientation, isMobile } = this.props;
-    return data ? (
+    if (!data) {
+      return null;
+    }
+    let countPublishedScreen = 1;
+    return (
       <Fragment >
         {(orientation === 'landscape' && isMobile) ? null : (
-          <Fragment>
-            <IndexHeader index={1} header={data.screen1Title} />
-            <IndexHeader index={2} header={data.screen2Title} />
-            <IndexHeader index={3} header={data.screen3Title} />
-            <IndexHeader index={4} header={data.screen4Title} />
-            <IndexHeader index={5} header={data.screen5Title} />
-            <IndexHeader index={6} header={data.screen6Title} />
-            <IndexHeader index={7} header={data.screen7Title} />
-            <IndexHeader index={8} header="Clinical" />
-          </Fragment>
+          <Fragment >
+            {data.screen1Published && <IndexHeader index={countPublishedScreen++} header={data.screen1Title} />}
+            {data.screen2Published && <IndexHeader index={countPublishedScreen++} header={data.screen2Title} />}
+            {data.screen3Published && <IndexHeader index={countPublishedScreen++} header={data.screen3Title} />}
+            {data.screen4Published && <IndexHeader index={countPublishedScreen++} header={data.screen4Title} />}
+            {data.screen5Published && <IndexHeader index={countPublishedScreen++} header={data.screen5Title} />}
+            {data.screen6Published && <IndexHeader index={countPublishedScreen++} header={data.screen6Title} />}
+            {data.screen7Published && <IndexHeader index={countPublishedScreen++} header={data.screen7Title} />}
+            <IndexHeader index={countPublishedScreen} header="Clinical" />
+          </Fragment >
         )}
         <SnapScroll >
           <Cover
@@ -78,52 +88,64 @@ class Product extends PureComponent {
               linkTo: data.eventLinkTo,
             }}
           />
-          <TwoColumnLayout
-            article={data.screen1Body}
-            footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
-          />
-          <ImgTxtBtn
-            img={data.screen2Image}
-            txt={data.screen2Body}
-            footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
-            pdfSrc={data.screen2PDF}
-            imgSubTitle={data.screen2ImageSubtitle}
-            themeColor={color}
-          />
-          <ImgTxtBtn
-            youtube={data.screen3Videolink}
-            txt={data.screen3Body}
-            footNotes={[data.screen3Footnote1, data.screen3Footnote2, data.screen3Footnote3]}
-            showOnFrame={3}
-            themeColor={color}
-          />
-          <ThreeColumnLayout
-            showOnFrame={4}
-            data={[data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6]}
-          />
-          <TwoImagesLayout
-            showOnFrame={5}
-            image1={data.screen5Image1}
-            image2={data.screen5Image2}
-            img1Description={data.screen5Image1Subtitle}
-            img2Description={data.screen5Image2Subtitle}
-          />
-          <Downloads
-            showOnFrame={6}
-            image={data.screen6Image}
-            imageTitle={data.screen6ImageSubtitle}
-            brochure={data.brochure}
-            ifu={data.ifu}
-            patientCard={data.patientCard}
-            instructions={data.instructions}
-            themeColor={color}
+          {data.screen1Published && (
+            <TwoColumnLayout
+              article={data.screen1Body}
+              footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
+            />
+          )}
+          {data.screen2Published && (
+            <ImgTxtBtn
+              img={data.screen2Image}
+              txt={data.screen2Body}
+              footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
+              pdfSrc={data.screen2PDF}
+              imgSubTitle={data.screen2ImageSubtitle}
+              themeColor={color}
+            />
+          )}
+          {data.screen3Published && (
+            <ImgTxtBtn
+              youtube={data.screen3Videolink}
+              txt={data.screen3Body}
+              footNotes={[data.screen3Footnote1, data.screen3Footnote2, data.screen3Footnote3]}
+              themeColor={color}
+            />
+          )}
+          {data.screen4Published && (
+            <ThreeColumnLayout
+              data={[data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6]}
+            />
+          )}
+          {data.screen5Published && (
+            <TwoImagesLayout
+              image1={data.screen5Image1}
+              image2={data.screen5Image2}
+              img1Description={data.screen5Image1Subtitle}
+              img2Description={data.screen5Image2Subtitle}
+            />
+          )}
+          {data.screen6Published && (
+            <Downloads
+              image={data.screen6Image}
+              imageTitle={data.screen6ImageSubtitle}
+              brochure={data.brochure}
+              ifu={data.ifu}
+              patientCard={data.patientCard}
+              instructions={data.instructions}
+              themeColor={color}
 
-          />
-          <Summary showOnFrame={7} art={this.resolveSummeryPic()} data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
-          <Clinical showOnFrame={8} themeColor={color} />
+            />
+          )}
+          {data.screen7Published && (
+            <Summary
+              art={this.resolveSummeryPic()}
+              data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
+          )}
+          <Clinical themeColor={color} />
         </SnapScroll >
       </Fragment >
-    ) : null;
+    );
   }
 }
 

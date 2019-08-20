@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import flattenDeep from 'lodash/flattenDeep';
+import compact from 'lodash/compact';
 import actions from './actions';
 import selectors from './selectors';
 import styles from './styles.scss';
@@ -68,7 +69,7 @@ class SnapScroll extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const children = Array.isArray(nextProps.children) ? flattenDeep(nextProps.children) : [nextProps.children];
+    const children = Array.isArray(nextProps.children) ? compact(flattenDeep(nextProps.children)) : compact(nextProps.children);
     nextProps.count(children.length || 1);
     return {
       index: nextProps.frame,

@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 import animateScrollTo from 'animated-scroll-to';
@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import _sortBy from 'lodash/sortBy';
 import moment from 'moment';
 import Device from '/src/shared/device';
-import { SnapScroll, DropMenu, Button } from '/src/shared';
+import { SnapScroll, FadeIn, DropMenu, Button } from '/src/shared';
 import { Swipeable } from 'react-swipeable';
 import { LongArrowAltRight } from 'styled-icons/fa-solid/LongArrowAltRight';
 import { LongArrowAltLeft } from 'styled-icons/fa-solid/LongArrowAltLeft';
@@ -158,30 +158,22 @@ class Clinical extends PureComponent {
   }
 
   render() {
-    const { frame, showOnFrame, isTouchDevice, color } = this.props;
+    const { isTouchDevice, color } = this.props;
     const { start, end } = this.state;
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
-      <Fragment >
+      <FadeIn spread >
         <Spring
           from={{
-            opacity: frame === showOnFrame ? 0 : 1,
             arrowRightOpacity: start ? 0 : 1,
             arrowLeftOpacity: end ? 0 : 1
           }}
           to={{
-            opacity: frame === showOnFrame ? 1 : 0,
             arrowRightOpacity: start ? 1 : 0,
             arrowLeftOpacity: end ? 1 : 0
           }}
-          immediate={frame !== showOnFrame}
         >
-          {props => <div
-            className={cx(styles.clinical, sharedStyles.inner)}
-            style={{
-              opacity: props.opacity,
-            }}
-          >
+          {props => <div className={cx(styles.clinical, sharedStyles.inner)} >
             <DropMenu options={menuOptions} selected={menuOptions[0]} triggerClass={styles.menuTrigger} color={color} />
             <Swipeable
               className={styles.carousel}
@@ -193,9 +185,6 @@ class Clinical extends PureComponent {
               }}
               onSwipedLeft={this.onSwipedLeftHandler}
               onSwipedRight={this.onSwipedRightHandler}
-              // onSwiping={this.onSwipingHandler}
-              // onSwipedUp={this.onVertivcalSwipeHandler}
-              // onSwipedDown={this.onVertivcalSwipeHandler}
               onSwiped={this.onSwipedHandler}
               preventDefaultTouchmoveEvent={true}
               trackTouch={true}
@@ -212,15 +201,13 @@ class Clinical extends PureComponent {
             }} />
           </div >}
         </Spring >
-      </Fragment >
+      </FadeIn >
     );
   }
 }
 
 Clinical.propTypes = {
-  frame: PropTypes.number.isRequired,
   themeColor: PropTypes.string.isRequired,
-  showOnFrame: PropTypes.number.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
   isTouchDevice: PropTypes.bool.isRequired,
   disableNext: PropTypes.bool.isRequired,
@@ -235,7 +222,6 @@ Clinical.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  frame: SnapScroll.selectors.frame(state),
   isTouchDevice: Device.selectors.isTouchDevice(state),
   disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),

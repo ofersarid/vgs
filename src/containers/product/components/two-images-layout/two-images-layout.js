@@ -1,32 +1,20 @@
 import React from 'react';
 import cx from 'classnames';
-import { Spring } from 'react-spring/renderprops';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Device from '/src/shared/device';
-import { SnapScroll, ScrollableArea } from '/src/shared';
+import { FadeIn, ScrollableArea } from '/src/shared';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
 
 const TwoImagesLayout = (
   {
-    showOnFrame,
-    frame,
     image1,
     image2,
     img1Description,
     img2Description,
-    isTouchDevice,
   }) => {
   return (
-    <Spring
-      from={{ opacity: frame === showOnFrame ? 0 : 1 }}
-      to={{ opacity: frame === showOnFrame ? 1 : 0 }}
-      immediate={frame !== showOnFrame}
-    >
-      {styleProps => <section className={cx(styles.inner, sharedStyles.inner)} style={{
-        opacity: styleProps.opacity,
-      }} >
+    <FadeIn spread >
+      <section className={cx(styles.inner, sharedStyles.inner)} >
         <ScrollableArea className={styles.content} >
           <div className={styles.container} >
             <img src={image1} className={styles.image} />
@@ -38,27 +26,17 @@ const TwoImagesLayout = (
             <div className={cx(styles.bottom, styles.description)} >{img2Description}</div >
           </div >
         </ScrollableArea >
-      </section >}
-    </Spring >
+      </section >
+    </FadeIn >
   );
 };
 
 TwoImagesLayout.propTypes = {
-  showOnFrame: PropTypes.number.isRequired,
-  frame: PropTypes.number.isRequired,
   image1: PropTypes.string.isRequired,
   image2: PropTypes.string.isRequired,
   img1Description: PropTypes.string,
   img2Description: PropTypes.string,
   footNotes: PropTypes.arrayOf(PropTypes.string),
-  isTouchDevice: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  frame: SnapScroll.selectors.frame(state),
-  isTouchDevice: Device.selectors.isTouchDevice(state),
-});
-
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
-
-export default connect(mapStateToProps, mapDispatchToProps)(TwoImagesLayout);
+export default TwoImagesLayout;
