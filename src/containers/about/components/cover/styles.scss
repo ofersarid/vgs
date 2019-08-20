@@ -17,22 +17,24 @@
     top: 42%;
 
     @include media('>phone') {
-      top: 22%;
-      font-size: 28px;
+      top: 45%;
+      font-size: 18px;
       line-height: 37px;
+    }
+
+    @include media('ipad-pro') {
+      top: 40%;
+      font-size: 28px;
     }
 
     @include media('>tablet') {
-      top: 35%;
-      left: 35%;
-      width: 55%;
-      font-size: 28px;
-      line-height: 37px;
+      top: 45%;
+      font-size: 18px;
+      width: 30%;
     }
 
     @include media('>desktop') {
-      font-size: 34px;
-      line-height: 43px;
+      font-size: 22px;
     }
   }
 
@@ -56,8 +58,7 @@
     }
 
     @include media('>tablet') {
-      left: 35vw;
-      width: 55%;
+      left: $gutter-desktop;
     }
 
     @include media('>desktop') {
@@ -65,25 +66,25 @@
       line-height: 128px;
     }
   }
-
-  .body {
-
-  }
 }
 
 .art {
   width: 50%;
-  bottom: -54px;
-  right: 40px;
+  bottom: 0;
+  right: 0;
   position: absolute;
 
   .img {
     width: 100%;
+    transform: translate(-15%, 25%);
+
+    @include media('>phone') {
+      transform: translate(-25%, 25%);
+    }
   }
 
-  @include media('>tablet') {
-    height: 70%;
-    bottom: 8%;
+  @include media('>phone') {
+    width: 38%;
   }
 
 }
