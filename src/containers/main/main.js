@@ -22,6 +22,7 @@ class Main extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+    props.setColor('#005728');
   }
 
   componentDidMount() {
@@ -116,6 +117,7 @@ Main.propTypes = {
   bizCard: PropTypes.bool.isRequired,
   setOrientation: PropTypes.func.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
+  setColor: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
@@ -129,11 +131,12 @@ const mapStateToProps = state => ({
   resourceList: services.reactor.selectors.resourceList(state),
   bizCard: services.vgs.selectors.bizCard(state),
   orientation: services.vgs.selectors.orientation(state),
-  color: services.products.selectors.color(state),
+  color: services.vgs.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   setOrientation: orientation => dispatch(services.vgs.actions.setOrientation(orientation)),
+  setColor: color => dispatch(services.vgs.actions.setColor(color)),
 });
 
 export default compose(

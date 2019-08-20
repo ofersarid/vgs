@@ -1,0 +1,50 @@
+@import "/src/media-query-mixins";
+
+.twoColumnLayout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.article {
+  font-size: 16px;
+  line-height: 35px;
+  margin-bottom: 12px;
+
+  @include media('>tablet') {
+    font-size: 18px;
+    column-count: 2;
+    column-gap: 4vw;
+    margin-bottom: 0;
+  }
+}
+
+.footNotes {
+  margin: 56px 0 0 0;
+  padding: 17px 0 0 0;
+  width: 100%;
+  counter-reset: item;
+  border-top: 1px solid #5E5E5E;
+  font-size: 12px;
+  line-height: 20px;
+
+  @include media('>phone') {
+    position: absolute;
+    bottom: 0
+  }
+
+  li {
+    display: block;
+
+    &:before {
+      content: "(" counter(item) ") ";
+      counter-increment: item;
+      width: 1.4em;
+      display: inline-block;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 const reducer = (state = fromJS({
   bizCard: 'enabled',
   orientation: 'portrait',
+  color: '#005728',
 }), action) => {
   switch (action.type) {
     case 'DISABLE_BIZ_CARD':
@@ -11,6 +12,8 @@ const reducer = (state = fromJS({
       return state.set('bizCard', 'enabled');
     case 'SET_ORIENTATION':
       return state.set('orientation', action.orientation);
+    case 'SET_COLOR':
+      return state.set('color', action.color);
     default:
       return state;
   }
@@ -27,11 +30,16 @@ const actions = {
     type: 'SET_ORIENTATION',
     orientation,
   }),
+  setColor: color => ({
+    type: 'SET_COLOR',
+    color,
+  }),
 };
 
 const selectors = {
   bizCard: state => state.getIn(['vgs', 'bizCard']) === 'enabled',
   orientation: state => state.getIn(['vgs', 'orientation']),
+  color: state => state.getIn(['vgs', 'color']),
 };
 
 export default {

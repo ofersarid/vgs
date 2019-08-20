@@ -43,14 +43,10 @@ FrameIndicator.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-FrameIndicator.defaultProps = {
-  color: '#005728',
-};
-
 const mapStateToProps = state => ({
   count: SnapScroll.selectors.count(state),
   frame: SnapScroll.selectors.frame(state),
-  color: services.products.selectors.color(state),
+  color: services.vgs.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({});

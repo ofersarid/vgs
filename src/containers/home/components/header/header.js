@@ -44,7 +44,7 @@ Header.propTypes = {
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   isMobile: Device.selectors.isMobile(state),
-  color: services.products.selectors.color(state),
+  color: services.vgs.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

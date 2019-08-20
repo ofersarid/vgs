@@ -2,9 +2,9 @@ import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { SnapScroll } from '/src/shared';
+import { SnapScroll, IndexHeader } from '/src/shared';
 import {
-  TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, IndexHeader, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
+  TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
 } from './components';
 import Device from '/src/shared/device';
 import services from '/src/services';
@@ -17,6 +17,7 @@ class Product extends PureComponent {
   constructor(props) {
     super(props);
     this.didMount = false;
+    props.setColor(this.resolveColor());
   }
 
   componentDidMount() {
@@ -30,6 +31,18 @@ class Product extends PureComponent {
         return frameSummeryPic;
       case 'VIOLA':
         return violaSummeryPic;
+      default:
+        return '';
+    }
+  }
+
+  resolveColor() {
+    const { name } = this.props;
+    switch (name) {
+      case 'FRAME':
+        return '#0272BA';
+      case 'VIOLA':
+        return '#662D91';
       default:
         return '';
     }
@@ -122,11 +135,12 @@ Product.propTypes = {
   data: PropTypes.object,
   isMobile: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
+  setColor: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  color: services.products.selectors.color(state),
+  color: services.vgs.selectors.color(state),
   data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
   art: services.products.selectors.art(state),
@@ -134,6 +148,10 @@ const mapStateToProps = state => ({
   orientation: Device.selectors.orientation(state),
 });
 
+const mapDispatch = dispatch => ({
+  setColor: color => dispatch(services.vgs.actions.setColor(color)),
+});
+
 export default compose(
-  connect(mapStateToProps, {}),
+  connect(mapStateToProps, mapDispatch),
 )(Product);

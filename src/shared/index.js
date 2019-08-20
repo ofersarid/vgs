@@ -6,3 +6,6 @@ export { default as EventFooter } from './event-footer/event-footer';
 export { default as FadeIn } from './fade-in/fade-in';
 export { default as FadeInOut } from './fade-in-out/fade-in-out';
 export { default as RatioBox } from './ratio-box/ratio-box';
+export { default as Header } from './header/header';
+export { default as IndexHeader } from './index-header/index-header';
+export { default as TwoColumnLayout } from './two-column-layout/two-column-layout';

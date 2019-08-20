@@ -239,7 +239,7 @@ const mapStateToProps = state => ({
   isTouchDevice: Device.selectors.isTouchDevice(state),
   disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),
-  color: services.products.selectors.color(state),
+  color: services.vgs.selectors.color(state),
   articles: _sortBy(services.reactor.selectors.collectionData(
     state,
     `publications - ${services.products.selectors.name(state)}`

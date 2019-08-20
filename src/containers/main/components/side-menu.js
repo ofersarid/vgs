@@ -127,14 +127,10 @@ SideMenu.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-SideMenu.defaultProps = {
-  color: '#3e3e3e',
-};
-
 const mapStateToProps = state => ({
   products: services.products.selectors.list(state),
   categories: services.products.selectors.categories(state),
-  color: services.products.selectors.color(state),
+  color: services.vgs.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({

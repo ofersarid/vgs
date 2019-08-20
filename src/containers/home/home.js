@@ -19,6 +19,7 @@ class Home extends PureComponent {
   constructor(props) {
     super(props);
     props.resetFrame();
+    props.setColor('#005728');
   }
 
   render() {
@@ -72,6 +73,7 @@ Home.propTypes = {
   frame: PropTypes.number.isRequired,
   data: PropTypes.object,
   resetFrame: PropTypes.func.isRequired,
+  setColor: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -81,6 +83,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
+  setColor: color => dispatch(services.vgs.actions.setColor(color)),
 });
 
 export default compose(

@@ -49,17 +49,6 @@ const art = createSelector(Routes.selectors.pathname, pathname => {
   }
 });
 
-const color = createSelector(Routes.selectors.pathname, pathname => {
-  switch (pathname.split('/').pop()) {
-    case 'frame':
-      return '#0272BA';
-    case 'viola':
-      return '#662D91';
-    default:
-      return undefined;
-  }
-});
-
 const logo = createSelector(Routes.selectors.pathname, pathname => {
   switch (pathname.split('/').pop()) {
     case 'frame':
@@ -76,6 +65,5 @@ export default {
   categories,
   name,
   art,
-  color,
   logo,
 };

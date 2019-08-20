@@ -4,13 +4,16 @@ import { Spring } from 'react-spring/renderprops';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Check } from 'styled-icons/material/Check';
-import { SnapScroll } from '/src/shared';
+import { SnapScroll, FadeIn } from '/src/shared';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
 
 const Summary = ({ showOnFrame, frame, data, art }) => {
   return (
     <Fragment >
+      <FadeIn spread >
+        <img className={styles.art} src={art} />
+      </FadeIn >
       <Spring
         from={{ opacity: frame === showOnFrame ? 0 : 1 }}
         to={{ opacity: frame === showOnFrame ? 1 : 0 }}
@@ -29,7 +32,6 @@ const Summary = ({ showOnFrame, frame, data, art }) => {
           </ul >
         </section >}
       </Spring >
-      <img className={styles.art} src={art} />
     </Fragment >
   );
 };
