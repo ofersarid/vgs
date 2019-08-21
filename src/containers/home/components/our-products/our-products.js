@@ -7,6 +7,7 @@ import cx from 'classnames';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
 import heartPic from '/src/assets/vector_heart.png';
+import { hashHistory } from 'react-router';
 
 class OurProducts extends PureComponent {
   constructor(props) {
@@ -15,7 +16,7 @@ class OurProducts extends PureComponent {
   }
 
   render() {
-    const { text, link } = this.props;
+    const { text } = this.props;
     return (
       <FadeIn spread >
         <img src={heartPic} className={styles.art} />
@@ -25,11 +26,8 @@ class OurProducts extends PureComponent {
               dangerouslySetInnerHTML={{ __html: text.replace(/\n\r?/g, '<br />') }}
             />
             <Button
-              tag="a"
               color
-              target="_blank"
-              rel="noopener noreferrer"
-              href={link}
+              onClick={hashHistory.push('our-products')}
               waveColor="white"
               className={cx(styles.btn)}
             >
@@ -44,7 +42,6 @@ class OurProducts extends PureComponent {
 
 OurProducts.propTypes = {
   text: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({}); // eslint-disable-line

@@ -46,7 +46,6 @@ class Home extends PureComponent {
           <SingleParagraph
             text={data.synopsis} />
           <OurProducts
-            link="https://www.google.com"
             text={data.ourProductsBody} />
           <GlobalImpact
             regions={[{

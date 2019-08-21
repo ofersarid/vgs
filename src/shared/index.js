@@ -9,3 +9,4 @@ export { default as RatioBox } from './ratio-box/ratio-box';
 export { default as Header } from './header/header';
 export { default as IndexHeader } from './index-header/index-header';
 export { default as TwoColumnLayout } from './two-column-layout/two-column-layout';
+export { default as Carousel } from './carousel/carousel';

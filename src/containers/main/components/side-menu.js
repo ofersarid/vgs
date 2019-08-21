@@ -32,7 +32,6 @@ class SideMenu extends PureComponent {
     const { resetFrame } = this.props;
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase();
-    console.log(camelCase(txt));
     hashHistory.push(camelCase(txt));
     resetFrame();
     this.toggleMenu();

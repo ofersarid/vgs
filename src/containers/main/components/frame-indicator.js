@@ -23,9 +23,9 @@ class FrameIndicator extends PureComponent {
   }
 
   render() {
-    const { frame, color } = this.props;
+    const { frame, color, count } = this.props;
 
-    return (
+    return count > 1 ? (
       <ul className={styles.frameIndicator} >
         {this.renderBullets()}
         <div className={styles.indicate} style={{
@@ -33,7 +33,7 @@ class FrameIndicator extends PureComponent {
           backgroundColor: color,
         }} />
       </ul >
-    );
+    ) : null;
   }
 }
 
