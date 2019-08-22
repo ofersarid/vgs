@@ -30,7 +30,9 @@ class Cover extends PureComponent {
           </div >
         </div >
         <FadeIn slideFrom="right" className={styles.art} slow >
-          <RatioBox ratio={1} image={logoGreen} className={styles.img} />
+          <RatioBox ratio={1} >
+            <img src={logoGreen} />
+          </RatioBox>
         </FadeIn>
       </FadeIn >
     );

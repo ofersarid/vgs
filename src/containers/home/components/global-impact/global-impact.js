@@ -25,7 +25,9 @@ class GlobalImpact extends PureComponent {
             <ul className={styles.pics}>
               {regions.map(item => (
                 <div key={item.label} className={styles.pic}>
-                  <RatioBox ratio={1} image={item.pic} className={styles.picImg} />
+                  <RatioBox ratio={1} >
+                    <img src={item.pic} />
+                  </RatioBox>
                   <label>{item.label}</label>
                 </div>
               ))}

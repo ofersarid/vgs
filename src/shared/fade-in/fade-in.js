@@ -23,7 +23,7 @@ const FadeIn = ({ children, slideFrom, spread, className, config }) => {
         className={cx(className, { [styles.spread]: spread })}
         style={{
           opacity: spring.opacity,
-          transform: `translate${resolveOrientation()}(${spring.x}%)`,
+          transform: `translate${resolveOrientation()}(${slideFrom === 'left' ? '-' : ''}${spring.x}%)`,
         }}
       >
         {children}
@@ -34,7 +34,7 @@ const FadeIn = ({ children, slideFrom, spread, className, config }) => {
 
 FadeIn.propTypes = {
   children: PropTypes.any,
-  slideFrom: PropTypes.oneOfType(['right']),
+  slideFrom: PropTypes.oneOfType(['right', 'left']),
   spread: PropTypes.bool,
   className: PropTypes.string,
   config: PropTypes.oneOf(['default', 'slow', 'gentle', 'wobbly', 'stiff', 'slow', 'molasses']),

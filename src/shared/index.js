@@ -10,3 +10,5 @@ export { default as Header } from './header/header';
 export { default as IndexHeader } from './index-header/index-header';
 export { default as TwoColumnLayout } from './two-column-layout/two-column-layout';
 export { default as Carousel } from './carousel/carousel';
+export { default as Paragraph } from './paragraph/paragraph';
+export { default as MediaLoader } from './media-loader/media-loader';

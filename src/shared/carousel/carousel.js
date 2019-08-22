@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 import animateScrollTo from 'animated-scroll-to';
@@ -129,7 +129,7 @@ class Carousel extends PureComponent {
   renderData() {
     const { children } = this.state;
     const dom = children.map((child, i) => (
-      <div ref={this.slidesRefs[i]} className={cx(styles.outerWrapper)} key={i} >
+      <div ref={this.slidesRefs[i]} className={cx(child.props.wrapperClass)} key={i} >
         {child}
       </div >
     ));
@@ -164,7 +164,7 @@ class Carousel extends PureComponent {
   }
 
   render() {
-    const { isTouchDevice, color } = this.props;
+    const { isTouchDevice, color, className } = this.props;
     const { start, end } = this.state;
     return (
       <Spring
@@ -177,9 +177,9 @@ class Carousel extends PureComponent {
           arrowLeftOpacity: end ? 1 : 0
         }}
       >
-        {props => <Fragment >
+        {props => <div className={cx(styles.carousel, className)} >
           <Swipeable
-            className={styles.carousel}
+            className={cx(styles.inner)}
             innerRef={ref => {
               this.listRef = ref;
             }}
@@ -202,7 +202,7 @@ class Carousel extends PureComponent {
             opacity: props.arrowLeftOpacity,
             color,
           }} />
-        </Fragment >}
+        </div >}
       </Spring >
     );
   }
@@ -215,6 +215,7 @@ Carousel.propTypes = {
   disablePrev: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
   children: PropTypes.any.isRequired,
+  className: PropTypes.string,
 };
 
 const mapStateToProps = state => ({

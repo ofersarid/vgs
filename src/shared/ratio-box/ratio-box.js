@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import cx from 'classnames';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
-const RatioBox = ({ ratio, className, children, style, image }) => (
-  <div className={cx(styles.ratioBox, className)} style={Object.assign({}, {
-    paddingTop: `${100 * ratio}%`,
-    backgroundImage: image ? `url(${image})` : undefined,
-  }, style)}>{children}</div >
-);
+class RatioBox extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.box = React.createRef();
+  }
+
+  componentDidMount() {
+    const { ratio } = this.props;
+    const width = this.box.current.offsetWidth;
+    const height = width * ratio;
+    this.box.current.style.height = `${height}px`;
+  }
+
+  render() {
+    const { className, children, style } = this.props;
+    return (
+      <div
+        ref={this.box}
+        className={cx(styles.ratioBox, className)}
+        style={style} >{children}</div >
+    );
+  }
+}
 
 RatioBox.propTypes = {
   ratio: PropTypes.number.isRequired,
@@ -20,10 +35,4 @@ RatioBox.propTypes = {
   image: PropTypes.string,
 };
 
-const mapStateToProps = state => ({}); // eslint-disable-line
-
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(RatioBox);
+export default RatioBox;

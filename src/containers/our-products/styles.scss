@@ -1,7 +1,155 @@
-.item {
+@import '/src/shared/styles';
 
+.contentWrapper {
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  height: 100%;
+  width: 67vw;
+  box-sizing: border-box;
+  padding-right: 10vw;
+  flex-shrink: 0;
+
+  @include media('>phone') {
+    width: 35vw;
+  }
+
+  @include media('>tablet') {
+    width: 25vw;
+    padding-right: 2.5vw;
+    height: 100%;
+  }
+
+  @include media('>desktop') {
+    width: 17.5vw;
+  }
+
+  .innerWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  label {
+    font-size: 18px;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  .description {
+    margin: 8px 0 20px 0;
+    height: 100%;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .imgIndicator {
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn {
+    margin-top: 20px;
+    padding: 17px 29px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    line-height: 11px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+}
+
+.lastItem {
+  width: calc(66vw + #{$gutter-phone});
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  font-size: 44px;
+  line-height: 50px;
+  color: rgba($green, 0.25);
+  cursor: pointer;
+
+  @include media('>phone') {
+    font-size: 53px;
+    flex-direction: row;
+    margin-top: 37px;
+
+    & li:first-of-type {
+      margin-right: 30px;
+    }
+  }
+
+  li {
+    transition: .2s ease-out;
+
+    &.active {
+      transition: .5s ease-out;
+      color: rgba($green, 1);
+    }
+  }
+}
+
+.carousel {
+  width: calc(100% + #{$gutter-phone});
+  margin-top: 20px;
+
+  @include media('>phone') {
+    width: calc(100% + #{$gutter-tablet});
+    height: 70%;
+    margin-top: 65px;
+
+    @include orientation(landscape) {
+      height: 70%;
+      //margin-top: 45px;
+    }
+  }
+}
+
+.frame {
+  label {
+    color: $frame;
+  }
+
+  .btn {
+    background-color: $frame;
+  }
+}
+
+.frameFr {
+  label {
+    color: $frameFR;
+  }
+
+  .btn {
+    background-color: $frameFR;
+  }
 }
 
 .viola {
+  label {
+    color: $viola;
+  }
 
+  .btn {
+    background-color: $viola;
+  }
+}
+
+.vest {
+  label {
+    color: $vest;
+  }
+
+  .btn {
+    background-color: $vest;
+  }
 }

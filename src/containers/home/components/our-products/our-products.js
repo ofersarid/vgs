@@ -15,6 +15,10 @@ class OurProducts extends PureComponent {
     autoBind(this);
   }
 
+  goToProductsCarousel() {
+    hashHistory.push('our-products');
+  }
+
   render() {
     const { text } = this.props;
     return (
@@ -27,7 +31,7 @@ class OurProducts extends PureComponent {
             />
             <Button
               color
-              onClick={hashHistory.push('our-products')}
+              onClick={this.goToProductsCarousel}
               waveColor="white"
               className={cx(styles.btn)}
             >
