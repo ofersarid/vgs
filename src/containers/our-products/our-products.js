@@ -8,22 +8,33 @@ import { hashHistory } from 'react-router';
 import LinesEllipsisLoose from 'react-lines-ellipsis/lib/loose';
 
 import { SnapScroll, Header, Carousel, FadeIn, RatioBox, MediaLoader, Button } from '/src/shared';
+import Device from '/src/shared/device';
 import layout from '/src/shared/styles/layout.scss';
 import services from '/src/services';
 
 import styles from './styles.scss';
 import { Spring } from 'react-spring/renderprops-universal';
 
-const CarouselItem = ({ label, description, pic, className }) => (
+const resolveLineHeight = (deviceType) => {
+  switch (deviceType) {
+    case 'tablet':
+    case 'desktop':
+      return 37;
+    default:
+      return 24;
+  }
+};
+
+const CarouselItem = ({ label, description, pic, className, deviceType }) => (
   <div className={cx(className, styles.innerWrapper)} >
     <label >{label}&trade;</label >
     <LinesEllipsisLoose
       text={description}
       maxLine='4'
-      lineHeight='24'
+      lineHeight={resolveLineHeight(deviceType)}
       className={styles.description}
     />
-    <RatioBox ratio={1 / 2} >
+    <RatioBox ratio={1 / 2} className={styles.imgBox} >
       <MediaLoader src={pic} />
     </RatioBox >
     <Button
@@ -43,6 +54,7 @@ CarouselItem.propTypes = {
   description: PropTypes.string.isRequired,
   pic: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
+  deviceType: PropTypes.string.isRequired,
 };
 
 class OurProducts extends PureComponent {
@@ -62,7 +74,7 @@ class OurProducts extends PureComponent {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, deviceType } = this.props;
     const { activeTab } = this.state;
     return data ? (
       <FadeIn spread >
@@ -96,10 +108,10 @@ class OurProducts extends PureComponent {
               </Spring >
             </ul >
             <Carousel className={styles.carousel} >
-              <CarouselItem wrapperClass={styles.item} label="Viola" className={styles.viola} description={data.violaDescription} pic={data.violaPic} />
-              <CarouselItem wrapperClass={styles.item} label="Vest" className={styles.vest} description={data.vestDescription} pic={data.vestPic} />
-              <CarouselItem wrapperClass={styles.item} label="Frame" className={styles.frame} description={data.frameDescription} pic={data.framePic} />
-              <CarouselItem wrapperClass={cx(styles.item)} label="Frame FR" className={styles.frameFr} description={data.frameFRDescription} pic={data.frameFRPic} />
+              <CarouselItem deviceType={deviceType} wrapperClass={styles.item} label="Viola" className={styles.viola} description={data.violaDescription} pic={data.violaPic} />
+              <CarouselItem deviceType={deviceType} wrapperClass={styles.item} label="Vest" className={styles.vest} description={data.vestDescription} pic={data.vestPic} />
+              <CarouselItem deviceType={deviceType} wrapperClass={styles.item} label="Frame" className={styles.frame} description={data.frameDescription} pic={data.framePic} />
+              <CarouselItem deviceType={deviceType} wrapperClass={cx(styles.item)} label="Frame FR" className={styles.frameFr} description={data.frameFRDescription} pic={data.frameFRPic} />
             </Carousel >
           </div >
         </SnapScroll >
@@ -112,10 +124,12 @@ OurProducts.propTypes = {
   data: PropTypes.object,
   resetFrame: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
+  deviceType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: services.reactor.selectors.pageData(state, 'our products'),
+  deviceType: Device.selectors.deviceType(state),
 });
 
 const mapDispatchToProps = dispatch => ({

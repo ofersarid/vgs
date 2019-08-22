@@ -1,6 +1,4 @@
-@import "/src/media-query-mixins";
-@import "/src/dimentions";
-@import "/src/colors";
+@import "/src/shared/styles";
 
 .cover {
   z-index: 1;
@@ -22,15 +20,15 @@
       line-height: 37px;
     }
 
-    @include media('ipad-pro') {
-      top: 40%;
-      font-size: 28px;
-    }
-
     @include media('>tablet') {
       top: 45%;
       font-size: 18px;
       width: 30%;
+
+      @include orientation(portrait) {
+        top: 40%;
+        font-size: 28px;
+      }
     }
 
     @include media('>desktop') {

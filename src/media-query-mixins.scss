@@ -13,7 +13,7 @@
 @mixin orientation($mode) {
   @if $mode == "landscape" {
     @media screen and (orientation:landscape) { @content; }
-  } @else if $size == "portrait" {
+  } @else if $mode == "portrait" {
     @media screen and (orientation:portrait) { @content; }
   }
 }

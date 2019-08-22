@@ -8,23 +8,34 @@
 
 .item {
   height: 100%;
-  width: 67vw;
+  width: 220px;
   box-sizing: border-box;
-  padding-right: 10vw;
+  margin-right: 10vw;
   flex-shrink: 0;
 
   @include media('>phone') {
-    width: 35vw;
+    width: 220px;
+    font-size: 18px;
+    margin-right: 5vw;
+
+    @include orientation(portrait) {
+      width: 240px;
+    }
   }
 
   @include media('>tablet') {
-    width: 25vw;
-    padding-right: 2.5vw;
-    height: 100%;
+    width: 240px;
+    margin-right: 80px;
+
+    @include orientation(portrait) {
+      width: 240px;
+    }
   }
 
   @include media('>desktop') {
-    width: 17.5vw;
+    width: 240px;
+    font-size: 22px;
+    margin-right: 5vw;
   }
 
   .innerWrapper {
@@ -48,6 +59,11 @@
     height: 100%;
     box-sizing: border-box;
     width: 100%;
+
+  }
+
+  .imgBox {
+
   }
 
   .imgIndicator {
@@ -107,10 +123,25 @@
     height: 70%;
     margin-top: 65px;
 
-    @include orientation(landscape) {
-      height: 70%;
-      //margin-top: 45px;
+    //@include orientation(landscape) {
+    //  height: 80% !important;
+    //  margin-top: 33px !important;
+    //}
+  }
+
+  @include media('>tablet') {
+    width: calc(100% + #{$gutter-tablet});
+    height: 80%;
+    margin-top: 7%;
+
+    @include orientation(portrait) {
+      height: 50%;
+      margin-top: 90px;
     }
+  }
+
+  @include media('>desktop') {
+    height: 50%;
   }
 }
 
