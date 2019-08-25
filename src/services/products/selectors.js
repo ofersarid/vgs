@@ -1,7 +1,5 @@
 import { createSelector } from 'reselect';
 import Routes from '/src/routes';
-import donut from './donut.png';
-import violaCoverPic from './viola_cover.png';
 import logoFrame from './logo_frame.svg';
 import logoViola from './logo_viola.svg';
 
@@ -38,17 +36,6 @@ const name = createSelector(Routes.selectors.pathname, pathname => {
   }
 });
 
-const art = createSelector(Routes.selectors.pathname, pathname => {
-  switch (pathname.split('/').pop()) {
-    case 'frame':
-      return donut;
-    case 'viola':
-      return violaCoverPic;
-    default:
-      return null;
-  }
-});
-
 const logo = createSelector(Routes.selectors.pathname, pathname => {
   switch (pathname.split('/').pop()) {
     case 'frame':
@@ -64,6 +51,5 @@ export default {
   list,
   categories,
   name,
-  art,
   logo,
 };

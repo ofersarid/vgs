@@ -8,8 +8,14 @@ import {
 } from './components';
 import Device from '/src/shared/device';
 import services from '/src/services';
+import frameCoverPic from '/src/assets/frame_cover.png';
+import violaCoverPic from '/src/assets/viola_cover.png';
+import vestCoverPic from '/src/assets/vest_cover.png';
+import frameFrCoverPic from '/src/assets/frame_fr_cover.png';
 import frameSummeryPic from '/src/assets/frame_summery.png';
 import violaSummeryPic from '/src/assets/viola_summery.png';
+import vestSummeryPic from '/src/assets/vest_summery.png';
+import frameFrSummeryPic from '/src/assets/frame_fr_summery.png';
 
 // import { firestoreConnect } from 'react-redux-firebase';
 
@@ -37,6 +43,26 @@ class Product extends PureComponent {
         return frameSummeryPic;
       case 'VIOLA':
         return violaSummeryPic;
+      case 'VEST':
+        return vestSummeryPic;
+      case 'FRAME FR':
+        return frameFrSummeryPic;
+      default:
+        return '';
+    }
+  }
+
+  resolveCoverPic() {
+    const { name } = this.props;
+    switch (name) {
+      case 'FRAME':
+        return frameCoverPic;
+      case 'VIOLA':
+        return violaCoverPic;
+      case 'VEST':
+        return vestCoverPic;
+      case 'FRAME FR':
+        return frameFrCoverPic;
       default:
         return '';
     }
@@ -49,13 +75,33 @@ class Product extends PureComponent {
         return '#0272BA';
       case 'VIOLA':
         return '#662D91';
+      case 'VEST':
+        return '#ED1C24';
+      case 'FRAME FR':
+        return '#22B0AF';
+      default:
+        return '';
+    }
+  }
+
+  resolveArt() {
+    const { name } = this.props;
+    switch (name) {
+      case 'FRAME':
+        return '#0272BA';
+      case 'VIOLA':
+        return '#662D91';
+      case 'VEST':
+        return '#ED1C24';
+      case 'FRAME FR':
+        return '#22B0AF';
       default:
         return '';
     }
   }
 
   render() {
-    const { color, data, name, art, orientation, isMobile } = this.props;
+    const { color, data, name, orientation, isMobile } = this.props;
     if (!data) {
       return null;
     }
@@ -76,7 +122,7 @@ class Product extends PureComponent {
         )}
         <SnapScroll >
           <Cover
-            art={art}
+            art={this.resolveCoverPic()}
             themeColor={color}
             name={name}
             description={data.coverTagLine}
@@ -153,7 +199,6 @@ Product.propTypes = {
   frame: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  art: PropTypes.string.isRequired,
   data: PropTypes.object,
   isMobile: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
@@ -165,7 +210,6 @@ const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
   data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
-  art: services.products.selectors.art(state),
   isMobile: Device.selectors.isMobile(state),
   orientation: Device.selectors.orientation(state),
 });

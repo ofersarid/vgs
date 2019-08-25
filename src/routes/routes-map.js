@@ -10,6 +10,8 @@ export default (
     <Route path="our-products" component={Pages.OurProducts} />
     <Route path="frame" component={Pages.Product} />
     <Route path="viola" component={Pages.Product} />
+    <Route path="frame-fr" component={Pages.Product} />
+    <Route path="vest" component={Pages.Product} />
     <Route path="about" component={Pages.About} />
     <Redirect from="*" to="home" />
   </Route >
