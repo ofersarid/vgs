@@ -108,10 +108,42 @@ class OurProducts extends PureComponent {
               </Spring >
             </ul >
             <Carousel className={styles.carousel} >
-              <CarouselItem deviceType={deviceType} wrapperClass={styles.item} label="Viola" className={styles.viola} description={data.violaDescription} pic={data.violaPic} />
-              <CarouselItem deviceType={deviceType} wrapperClass={styles.item} label="Vest" className={styles.vest} description={data.vestDescription} pic={data.vestPic} />
-              <CarouselItem deviceType={deviceType} wrapperClass={styles.item} label="Frame" className={styles.frame} description={data.frameDescription} pic={data.framePic} />
-              <CarouselItem deviceType={deviceType} wrapperClass={cx(styles.item)} label="Frame FR" className={styles.frameFr} description={data.frameFRDescription} pic={data.frameFRPic} />
+              {activeTab === 'cardiac' && (
+                <CarouselItem
+                  deviceType={deviceType}
+                  wrapperClass={styles.item}
+                  label="Viola"
+                  className={styles.viola}
+                  description={data.violaDescription}
+                  pic={data.violaPic} />
+              )}
+              {activeTab === 'cardiac' && (
+                <CarouselItem
+                  deviceType={deviceType}
+                  wrapperClass={styles.item}
+                  label="Vest"
+                  className={styles.vest}
+                  description={data.vestDescription}
+                  pic={data.vestPic} />
+              )}
+              {activeTab === 'vascular' && (
+                <CarouselItem
+                  deviceType={deviceType}
+                  wrapperClass={styles.item}
+                  label="Frame"
+                  className={styles.frame}
+                  description={data.frameDescription}
+                  pic={data.framePic} />
+              )}
+              {activeTab === 'vascular' && (
+                <CarouselItem
+                  deviceType={deviceType}
+                  wrapperClass={cx(styles.item)}
+                  label="Frame FR"
+                  className={styles.frameFr}
+                  description={data.frameFRDescription}
+                  pic={data.frameFRPic} />
+              )}
             </Carousel >
           </div >
         </SnapScroll >
