@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 import Routes from '/src/routes';
 import logoFrame from './logo_frame.svg';
 import logoViola from './logo_viola.svg';
+import logoVest from './logo_vest.svg';
+import logoFrameFr from './logo_frame_fr.svg';
 
 const list = () => [{
   category: 'Cardiac',
@@ -31,6 +33,10 @@ const name = createSelector(Routes.selectors.pathname, pathname => {
       return 'FRAME';
     case 'viola':
       return 'VIOLA';
+    case 'vest':
+      return 'VEST';
+    case 'frameFr':
+      return 'FRAME FR';
     default:
       return null;
   }
@@ -42,6 +48,10 @@ const logo = createSelector(Routes.selectors.pathname, pathname => {
       return logoFrame;
     case 'viola':
       return logoViola;
+    case 'vest':
+      return logoVest;
+    case 'frameFr':
+      return logoFrameFr;
     default:
       return undefined;
   }

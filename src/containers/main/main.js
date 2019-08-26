@@ -40,20 +40,22 @@ class Main extends PureComponent {
     hashHistory.push('home');
   }
 
-  resolveWaveColor() {
-    const { color } = this.props;
-    if (!color) {
-      return 'gray';
-    }
-    switch (color.toLowerCase()) {
-      case '#0272ba':
-        return 'blue';
-      case '#662d91':
-        return 'purple';
-      default:
-        return 'gray';
-    }
-  }
+  // resolveWaveColor() {
+  //   const { color } = this.props;
+  //   if (!color) {
+  //     return 'gray';
+  //   }
+  //   switch (color.toLowerCase()) {
+  //     case '#0272ba':
+  //       return 'blue';
+  //     case '#662d91':
+  //       return 'purple';
+  //     case '#ed1c24':
+  //       return 'red';
+  //     default:
+  //       return 'gray';
+  //   }
+  // }
 
   render() {
     const show = this.props.pathname !== '/product';
@@ -89,7 +91,7 @@ class Main extends PureComponent {
                     >
                       <img className={styles.logoImg} src={logo} />
                     </Button >
-                    {!['viola', 'frame'].includes(pathname.split('/').pop()) &&
+                    {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/').pop()) &&
                     <img className={styles.logoText} src={vgs} style={springs} />}
                   </Fragment>
                 )}

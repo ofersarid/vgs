@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { Spring } from 'react-spring/renderprops';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
+import camelCase from 'lodash/camelCase';
 import autoBind from 'auto-bind';
 import { Button, SnapScroll } from '/src/shared';
 import services from '/src/services';
 import SubMenu from './sub-menu';
 import styles from '../styles.scss';
-import camelCase from 'lodash/camelCase';
 
 class SideMenu extends PureComponent {
   constructor(props) {

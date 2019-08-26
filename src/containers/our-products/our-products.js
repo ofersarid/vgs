@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import autoBind from 'auto-bind';
+import camelCase from 'lodash/camelCase';
 import cx from 'classnames';
 import { hashHistory } from 'react-router';
 import LinesEllipsisLoose from 'react-lines-ellipsis/lib/loose';
@@ -40,7 +41,7 @@ const CarouselItem = ({ label, description, pic, className, deviceType }) => (
     <Button
       color
       onClick={() => {
-        hashHistory.push('our-products');
+        hashHistory.push(camelCase(label));
       }}
       waveColor="white"
       className={cx(styles.btn)}
