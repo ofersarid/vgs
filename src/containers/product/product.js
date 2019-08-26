@@ -221,3 +221,4 @@ const mapDispatch = dispatch => ({
 export default compose(
   connect(mapStateToProps, mapDispatch),
 )(Product);
+// trigger build
