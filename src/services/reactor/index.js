@@ -56,6 +56,18 @@ const connect = firestoreConnect(props => {
   return aggregated;
 });
 
+const preLoaded = [];
+
+const preloadImages = data => {
+  Object.keys(data).forEach(key => {
+    if (!preLoaded.includes(data[key]) && data[key].match && data[key].match(/^https?:\/\//)) {
+      const img = new Image();
+      img.src = data[key];
+      preLoaded.push(data[key]);
+    }
+  });
+};
+
 const selectors = {
   resourceList: state => {
     const isLoaded = state.get('reactor').data.users;
@@ -88,7 +100,9 @@ const selectors = {
     if (pages) {
       const pageId = Object.keys(pages).find(id => pages[id].name.toLowerCase() === name.toLowerCase());
       if (pageId) {
-        return pages[pageId].data;
+        const data = pages[pageId].data;
+        preloadImages(data);
+        return data;
       }
       console.warn(`page ${name} is loading or not found`);
     }

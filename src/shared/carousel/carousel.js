@@ -57,12 +57,14 @@ class Carousel extends PureComponent {
   }
 
   componentWillUnmount() {
+    const { disableScrollSnap } = this.props;
     this.listRef.removeEventListener('mouseenter', this.touchStartHandler, false);
     this.listRef.removeEventListener('mouseleave', this.touchEndHandler, false);
     this.listRef.removeEventListener('touchstart', this.touchStartHandler, false);
     this.listRef.removeEventListener('touchend', this.touchEndHandler, false);
     this.listRef.removeEventListener('wheel', this.onWheelHandler, false);
     this.listRef.removeEventListener('scroll', this.onScrollHandlerDB, false);
+    disableScrollSnap(false, false);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

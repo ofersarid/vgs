@@ -4,6 +4,10 @@
   height: 65%;
   display: flex;
   flex-direction: column;
+
+  @include media('>desktop') {
+    width: 80vw;
+  }
 }
 
 .item {
@@ -141,7 +145,7 @@
   }
 
   @include media('>desktop') {
-    height: 50%;
+    height: 560px;
   }
 }
 

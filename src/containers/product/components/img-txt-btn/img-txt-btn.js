@@ -8,7 +8,7 @@ import Device from '/src/shared/device';
 import autoBind from 'auto-bind';
 import services from '/src/services';
 import styles from './styles.scss';
-import { ScrollableArea, Button, FadeIn } from '/src/shared';
+import { ScrollableArea, Button, FadeIn, MediaLoader, RatioBox } from '/src/shared';
 import sharedStyles from '../../styles.scss';
 import Footnotes from '../footnotes/footnotes';
 
@@ -48,7 +48,11 @@ class ImgTxtBtn extends PureComponent {
       <FadeIn spread >
         <ScrollableArea disableScroll={isMobile && orientation === 'landscape'} className={cx(styles.container, sharedStyles.inner)} >
           <div className={cx(styles.img)} >
-            {img && <img src={img} className={styles.inner} onLoad={this.mediaReady} />}
+            {img && (
+              <RatioBox ratio={2 / 3} className={styles.inner} >
+                <MediaLoader src={img} />
+              </RatioBox >
+            )}
             {imgSubTitle && <div className={cx(styles.title)} >{imgSubTitle}</div >}
             {youtube && (
               <YouTubePlayer
