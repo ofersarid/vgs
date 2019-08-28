@@ -88,14 +88,14 @@ class Carousel extends PureComponent {
   touchStartHandler(e) {
     const { disableScrollSnap } = this.props;
     e.stopPropagation();
-    e.preventDefault();
+    // e.preventDefault();
     disableScrollSnap(true, true);
   }
 
   touchEndHandler(e) {
     const { disableScrollSnap } = this.props;
     e.stopPropagation();
-    e.preventDefault();
+    // e.preventDefault();
     disableScrollSnap(false, false);
   }
 

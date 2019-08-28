@@ -90,7 +90,7 @@ const selectors = {
       if (pageId) {
         return pages[pageId].data;
       }
-      console.warn(`page ${name} not found`);
+      console.warn(`page ${name} is loading or not found`);
     }
   },
 };

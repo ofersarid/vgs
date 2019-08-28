@@ -64,19 +64,10 @@ class OurProducts extends PureComponent {
     autoBind(this);
     props.resetFrame();
     props.setColor('#005728');
-    this.state = {
-      activeTab: 'vascular',
-    };
-  }
-
-  switchTab() {
-    const { activeTab } = this.state;
-    this.setState({ activeTab: activeTab === 'vascular' ? 'cardiac' : 'vascular' });
   }
 
   render() {
-    const { data, deviceType } = this.props;
-    const { activeTab } = this.state;
+    const { data, deviceType, setProductsActiveTab, productsActiveTab } = this.props;
     return data ? (
       <FadeIn spread >
         <Header index={0} text="PRODUCTS" />
@@ -89,9 +80,9 @@ class OurProducts extends PureComponent {
               >
                 {spring => <Fragment >
                   <li
-                    onClick={this.switchTab}
+                    onClick={() => setProductsActiveTab('vascular')}
                     className={cx({
-                      [styles.active]: activeTab === 'vascular',
+                      [styles.active]: productsActiveTab === 'vascular',
                     })}
                     style={{
                       transform: `translateX(${spring.x}px)`,
@@ -99,7 +90,8 @@ class OurProducts extends PureComponent {
                   >VASCULAR
                   </li >
                   <li
-                    onClick={this.switchTab} className={cx({ [styles.active]: activeTab === 'cardiac' })}
+                    onClick={() => setProductsActiveTab('cardiac')}
+                    className={cx({ [styles.active]: productsActiveTab === 'cardiac' })}
                     style={{
                       transform: `translateX(-${spring.x}px)`,
                     }}
@@ -109,7 +101,7 @@ class OurProducts extends PureComponent {
               </Spring >
             </ul >
             <Carousel className={styles.carousel} >
-              {activeTab === 'cardiac' && (
+              {productsActiveTab === 'cardiac' && (
                 <CarouselItem
                   deviceType={deviceType}
                   wrapperClass={styles.item}
@@ -118,7 +110,7 @@ class OurProducts extends PureComponent {
                   description={data.violaDescription}
                   pic={data.violaPic} />
               )}
-              {activeTab === 'cardiac' && (
+              {productsActiveTab === 'cardiac' && (
                 <CarouselItem
                   deviceType={deviceType}
                   wrapperClass={styles.item}
@@ -127,7 +119,7 @@ class OurProducts extends PureComponent {
                   description={data.vestDescription}
                   pic={data.vestPic} />
               )}
-              {activeTab === 'vascular' && (
+              {productsActiveTab === 'vascular' && (
                 <CarouselItem
                   deviceType={deviceType}
                   wrapperClass={styles.item}
@@ -136,7 +128,7 @@ class OurProducts extends PureComponent {
                   description={data.frameDescription}
                   pic={data.framePic} />
               )}
-              {activeTab === 'vascular' && (
+              {productsActiveTab === 'vascular' && (
                 <CarouselItem
                   deviceType={deviceType}
                   wrapperClass={cx(styles.item)}
@@ -158,16 +150,20 @@ OurProducts.propTypes = {
   resetFrame: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
   deviceType: PropTypes.string.isRequired,
+  productsActiveTab: PropTypes.string.isRequired,
+  setProductsActiveTab: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: services.reactor.selectors.pageData(state, 'our products'),
   deviceType: Device.selectors.deviceType(state),
+  productsActiveTab: services.vgs.selectors.productsActiveTab(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
+  setProductsActiveTab: tab => dispatch(services.vgs.actions.setProductsActiveTab(tab)),
 });
 
 export default compose(
