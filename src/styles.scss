@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+@import '/src/shared/styles/media-query-mixins.scss';
 @import 'colors';
 
 body {
@@ -30,9 +31,11 @@ $placeholderColor: #9f9b9b;
   font-style: italic;
 }
 
+
 ::-moz-placeholder { /* Firefox 19+ */
   color: $placeholderColor;
   font-style: italic;
+
 }
 
 :-ms-input-placeholder { /* IE 10+ */
@@ -46,13 +49,22 @@ $placeholderColor: #9f9b9b;
 }
 
 ::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+  width: 0;
+  height: 0;
+
+  @include media('>tablet') {
+    width: 2px;
+    height: 2px;
+  }
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
+  background: transparent;
+
+  @include media('>tablet') {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+  }
 }
 
 h1 {

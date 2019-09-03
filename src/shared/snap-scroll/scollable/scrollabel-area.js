@@ -23,16 +23,22 @@ class ScrollableArea extends PureComponent {
 
   componentDidMount() {
     this.checkOverflow(this.$el);
+    this.handleScrollSnap();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { frame, orientation } = this.props;
+    const { hasOverflow } = this.state;
     const $current = this.$el.current;
     if (frame !== prevProps.frame) {
       $current.scrollTo(0, 0);
     }
     if (orientation !== prevProps.orientation) {
       this.checkOverflow(this.$el);
+    }
+
+    if (hasOverflow !== prevState.hasOverflow) {
+      this.handleScrollSnap();
     }
   }
 
@@ -52,8 +58,10 @@ class ScrollableArea extends PureComponent {
   handleScrollSnap(e) {
     const { disableScrollSnap } = this.props;
     const { hasOverflow } = this.state;
-    const $current = e.currentTarget;
-    e.stopPropagation();
+    const $current = this.$el.current;
+    if (e) {
+      e.stopPropagation();
+    }
     if (hasOverflow) {
       if (Math.ceil($current.clientHeight + $current.scrollTop) >= $current.scrollHeight) {
         disableScrollSnap(false, true);
@@ -65,12 +73,12 @@ class ScrollableArea extends PureComponent {
     }
   };
 
-  mouseLeaveHandler() {
-    const { disableScrollSnap } = this.props;
-    if (this.hasOverflow) {
-      disableScrollSnap(false, false);
-    }
-  }
+  // mouseLeaveHandler() {
+  //   const { disableScrollSnap } = this.props;
+  //   if (hasOverflow) {
+  //     disableScrollSnap(false, false);
+  //   }
+  // }
 
   render() {
     const { children, className, isMobile, style } = this.props;
@@ -79,10 +87,10 @@ class ScrollableArea extends PureComponent {
       <div
         ref={this.$el}
         className={cx(styles.scrollableArea, className, { [styles.hasOverflow]: hasOverflow })}
-        onMouseLeave={this.mouseLeaveHandler}
+        // onMouseLeave={this.mouseLeaveHandler}
         onTouchStart={this.handleScrollSnap}
         onTouchEnd={this.handleScrollSnap}
-        onScroll={(this.hasOverflow && !isMobile) ? this.handleScrollSnap : undefined}
+        onScroll={(hasOverflow && !isMobile) ? this.handleScrollSnap : undefined}
         style={style}
       >{children}</div >
     );
