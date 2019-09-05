@@ -80,7 +80,6 @@ class SideMenu extends PureComponent {
                   </Fragment >
                 ))}
               </SubMenu >
-              <Button tag="li" onClick={this.navigate} waveColor="white" >News & Events</Button >
               <Button tag="li" onClick={this.navigate} waveColor="white" >About</Button >
               <Button tag="li" onClick={this.navigate} waveColor="white" >Contact</Button >
             </ul >

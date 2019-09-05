@@ -11,7 +11,7 @@ class SubMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      expand: false,
+      expand: true,
     };
     autoBind(this);
   }
