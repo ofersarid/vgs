@@ -31,8 +31,8 @@ class Home extends PureComponent {
           <div className={styles.coverPic} style={{ backgroundImage: `url(${homeCoverPic})` }} />
           <div className={styles.gradientOverLay} />
         </FadeInOut >
-        <Header index={2} text="OUR PRODUCTS" />
-        <Header index={3} text="GLOBAL IMPACT" />
+        <Header index={2} text="GLOBAL IMPACT" />
+        <Header index={3} text="OUR PRODUCTS" />
         <SnapScroll >
           <Cover
             footer={{
@@ -45,8 +45,6 @@ class Home extends PureComponent {
           />
           <SingleParagraph
             text={data.synopsis} />
-          <OurProducts
-            text={data.ourProductsBody} />
           <GlobalImpact
             regions={[{
               pic: data.globalImpactImage1,
@@ -62,6 +60,8 @@ class Home extends PureComponent {
               label: data.globalImpactImageSubtitle4,
             }]}
             text={data.globalImpactBody} />
+          <OurProducts
+            text={data.ourProductsBody} />
         </SnapScroll >
       </Fragment >
     ) : null;
