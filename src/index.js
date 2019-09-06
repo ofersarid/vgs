@@ -26,6 +26,8 @@ export const store = createStore(
   services.reactor.middleware,
 );
 
+window.dispatch = store.dispatch;
+
 ReactDOM.render(
   <Provider store={store} >
     <Router history={hashHistory} routes={routesMap} />

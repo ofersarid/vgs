@@ -7,6 +7,7 @@ import { Spring } from 'react-spring/renderprops';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
 import Device from '/src/shared/device';
+import Reader from '/src/services/reader/reader';
 import { hashHistory } from 'react-router';
 import services from '/src/services';
 import FrameIndicator from './components/frame-indicator';
@@ -101,6 +102,7 @@ class Main extends PureComponent {
             </div >}
           </Spring >
         </ReduxRoutes >
+        <Reader />
       </Fragment >
     );
   }

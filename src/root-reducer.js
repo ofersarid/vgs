@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   device,
   reactor: services.reactor.reducer,
   vgs: services.vgs.reducer,
+  reader: services.reader.reducer,
   // fireBase,
   snapScroll,
 });
