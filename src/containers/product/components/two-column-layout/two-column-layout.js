@@ -20,17 +20,22 @@ const TwoColumnLayout = ({ article, footNotes, isMobile, title, color }) => {
   return (
     <FadeIn spread >
       <section className={cx(layout.inner)} >
-        <ReadMoreSection
-          html={getHtml}
-          more={(
-            <Fragment>
-              <h1 style={{ color }}>{title}</h1>
-              {getHtml}
-            </Fragment>
-          )}
-        />
-        {/*{isMobile && <Footnotes footNotes={footNotes} />}*/}
-        {!isMobile && <Footnotes footNotes={footNotes} />}
+        {isMobile ? (
+          <ReadMoreSection
+            html={getHtml}
+            more={(
+              <Fragment >
+                <h1 style={{ color }} >{title}</h1 >
+                {getHtml}
+              </Fragment >
+            )}
+          />
+        ) : (
+          <Fragment>
+            <div className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
+            <Footnotes footNotes={footNotes} />
+          </Fragment>
+        )}
       </section >
     </FadeIn >
   );
