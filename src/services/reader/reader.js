@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 import { connect } from 'react-redux';
@@ -17,16 +17,28 @@ const Reader = ({ isOpen, content, close, color }) => {
 
   const { y } = resolveSpring();
 
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current.scrollTop = 0;
+  }, []);
+
+  if (isOpen && ref.current.scrollTop) {
+    ref.current.scrollTop = 0;
+  }
+
   return (
     <animated.div className={styles.reader} style={{
       transform: y.interpolate(y => `translateY(${y}%)`)
     }} >
-      <div className={styles.content}>
+      <div className={styles.content} ref={ref} >
         {content}
       </div>
       <Button
         className={cx(styles.closeBtn)}
-        onClick={close}
+        onClick={() => {
+          close();
+        }}
         style={{
           background: color,
         }}

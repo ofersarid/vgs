@@ -25,7 +25,8 @@ class ReadMoreSection extends React.PureComponent {
   }
 
   onClick() {
-    const { open, set } = this.props;
+    const { open, set, clear } = this.props;
+    clear();
     set();
     open();
   }
@@ -63,6 +64,7 @@ ReadMoreSection.propTypes = {
   color: PropTypes.string.isRequired,
   open: PropTypes.func.isRequired,
   set: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
   html: PropTypes.any,
   className: PropTypes.string,
   more: PropTypes.any,
@@ -77,6 +79,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   open: () => dispatch(services.reader.actions.open()),
   set: () => dispatch(services.reader.actions.set(ownProps.more)),
+  clear: () => dispatch(services.reader.actions.clear()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReadMoreSection);
