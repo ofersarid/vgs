@@ -34,7 +34,7 @@ const FadeIn = ({ children, slideFrom, spread, className, config }) => {
 
 FadeIn.propTypes = {
   children: PropTypes.any,
-  slideFrom: PropTypes.oneOfType(['right', 'left']),
+  slideFrom: PropTypes.oneOf(['right', 'left']),
   spread: PropTypes.bool,
   className: PropTypes.string,
   config: PropTypes.oneOf(['default', 'slow', 'gentle', 'wobbly', 'stiff', 'slow', 'molasses']),
