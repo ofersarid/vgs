@@ -6,12 +6,24 @@
   top: 0;
   z-index: 2;
   transform: translateY(100%);
+  background: rgb(248, 248, 248);
+  box-sizing: border-box;
 }
 
 .content {
   height: calc(100% - 58px);
   width: 100%;
   overflow: hidden auto;
+  padding: 20px 40px;
+  box-sizing: border-box;
+
+  h1 {
+    font-size: 15px;
+    text-transform: uppercase;
+    line-height: 15px;
+    margin: 15px 0;
+    font-weight: normal;
+  }
 }
 
 .closeBtn {

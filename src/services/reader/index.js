@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 
 const reducer = (state = fromJS({
-  isOpen: true,
+  isOpen: false,
   content: '',
 }), action) => {
   switch (action.type) {

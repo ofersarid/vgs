@@ -12,3 +12,4 @@ export { default as TwoColumnLayout } from './two-column-layout/two-column-layou
 export { default as Carousel } from './carousel/carousel';
 export { default as Paragraph } from './paragraph/paragraph';
 export { default as MediaLoader } from './media-loader/media-loader';
+export { default as ReadMoreSection } from './read-more-section/read-more-section';

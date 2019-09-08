@@ -84,22 +84,6 @@ class Product extends PureComponent {
     }
   }
 
-  resolveArt() {
-    const { name } = this.props;
-    switch (name) {
-      case 'FRAME':
-        return '#0272BA';
-      case 'VIOLA':
-        return '#662D91';
-      case 'VEST':
-        return '#ED1C24';
-      case 'FRAME FR':
-        return '#22B0AF';
-      default:
-        return '';
-    }
-  }
-
   getBullets() {
     const { data, isMobile } = this.props;
     if (isMobile) {
@@ -146,6 +130,7 @@ class Product extends PureComponent {
             <TwoColumnLayout
               article={data.screen1Body}
               footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
+              title={data.screen1Title}
             />
           )}
           {data.screen2Published && (
