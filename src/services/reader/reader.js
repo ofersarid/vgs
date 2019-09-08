@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import 'babel-polyfill';
 import services from '/src/services';
 import styles from './styles.scss';
+import cx from 'classnames';
+import { Button } from '/src/shared';
 
-const Reader = ({ isOpen, content }) => {
+const Reader = ({ isOpen, content, close, color }) => {
   const resolveSpring = () => {
     return useSpring({
       y: isOpen ? 0 : 100,
@@ -19,7 +21,18 @@ const Reader = ({ isOpen, content }) => {
     <animated.div className={styles.reader} style={{
       transform: y.interpolate(y => `translateY(${y}%)`)
     }} >
-      {content}
+      <div className={styles.content}>
+        {content}
+      </div>
+      <Button
+        className={cx(styles.closeBtn)}
+        onClick={close}
+        style={{
+          background: color,
+        }}
+      >
+        CLOSE
+      </Button >
     </animated.div >
   );
 };
@@ -27,13 +40,18 @@ const Reader = ({ isOpen, content }) => {
 Reader.propTypes = {
   content: PropTypes.any,
   isOpen: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   isOpen: services.reader.selectors.isOpen(state),
   content: services.reader.selectors.content(state),
+  color: services.vgs.selectors.color(state),
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  close: () => dispatch(services.reader.actions.close()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reader);
