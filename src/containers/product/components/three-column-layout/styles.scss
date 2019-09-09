@@ -45,7 +45,7 @@
   @include media('>phone') {
     margin-bottom: 0;
     width: 45%;
-    height: calc(70% / 3);
+    //height: calc(70% / 3);
     overflow: hidden;
 
     &:nth-of-type(odd) {

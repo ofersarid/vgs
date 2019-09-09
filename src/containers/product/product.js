@@ -141,6 +141,7 @@ class Product extends PureComponent {
               pdfSrc={data.screen2PDF}
               imgSubTitle={data.screen2ImageSubtitle}
               themeColor={color}
+              title={data.screen2Title}
             />
           )}
           {data.screen3Published && (
@@ -149,6 +150,7 @@ class Product extends PureComponent {
               txt={data.screen3Body}
               footNotes={[data.screen3Footnote1, data.screen3Footnote2, data.screen3Footnote3]}
               themeColor={color}
+              title={data.screen3Title}
             />
           )}
           {data.screen4Published && (

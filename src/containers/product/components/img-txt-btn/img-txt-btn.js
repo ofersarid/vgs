@@ -8,7 +8,7 @@ import Device from '/src/shared/device';
 import autoBind from 'auto-bind';
 import services from '/src/services';
 import styles from './styles.scss';
-import { ScrollableArea, Button, FadeIn, MediaLoader, RatioBox } from '/src/shared';
+import { Button, FadeIn, MediaLoader, RatioBox, ReadMoreSection } from '/src/shared';
 import sharedStyles from '../../styles.scss';
 import Footnotes from '../footnotes/footnotes';
 
@@ -28,6 +28,10 @@ class ImgTxtBtn extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+  }
+
   mediaReady() {
     this.setState({ isLoaded: true });
   }
@@ -40,21 +44,23 @@ class ImgTxtBtn extends PureComponent {
 
   render() {
     const {
-      imgSubTitle, img, youtube, txt,
+      imgSubTitle, img, youtube, txt, color, title,
       pdfSrc, themeColor, footNotes, orientation, isMobile
     } = this.props;
     const { isLoaded } = this.state;
     return (
       <FadeIn spread >
-        <ScrollableArea disableScroll={isMobile && orientation === 'landscape'} className={cx(styles.container, sharedStyles.inner)} >
-          <div className={cx(styles.img)} >
-            {img && (
-              <RatioBox ratio={2 / 3} className={styles.inner} >
+        <div className={cx(styles.container, sharedStyles.inner)} >
+          {img && !isMobile && (
+            <Fragment >
+              <RatioBox ratio={2 / 3} className={styles.img} >
                 <MediaLoader src={img} />
               </RatioBox >
-            )}
-            {imgSubTitle && <div className={cx(styles.title)} >{imgSubTitle}</div >}
-            {youtube && (
+              {imgSubTitle && <div className={cx(styles.title)} >{imgSubTitle}</div >}
+            </Fragment >
+          )}
+          {youtube && (
+            <RatioBox ratio={isMobile ? 1 : 2 / 3} className={cx(styles.img)} >
               <YouTubePlayer
                 url={youtube}
                 playing={isLoaded}
@@ -73,10 +79,44 @@ class ImgTxtBtn extends PureComponent {
                   [styles.fullScreen]: isMobile && orientation === 'landscape',
                 })}
               />
-            )}
-          </div >
-          {(orientation === 'landscape' && isMobile) ? null : (
-            <Fragment>
+            </RatioBox >
+          )}
+          {(orientation === 'portrait' && isMobile) && (
+            <ReadMoreSection
+              maxLines={youtube ? 0 : 10}
+              btnTxt="About this video"
+              html={(
+                <Fragment >
+                  <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
+                  {pdfSrc && (
+                    <Button
+                      tag="a"
+                      color
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={pdfSrc}
+                      waveColor="white"
+                      className={cx(styles.btn)}
+                      style={{
+                        background: themeColor,
+                      }}
+                    >
+                      PRODUCT PDF
+                    </Button >
+                  )}
+                </Fragment >
+              )}
+              more={(
+                <Fragment >
+                  <h1 style={{ color }} >{title}</h1 >
+                  <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
+                  <Footnotes footNotes={footNotes} />
+                </Fragment >
+              )}
+            />
+          )}
+          {!isMobile && (
+            <Fragment >
               <div className={cx(styles.rightCol)} >
                 <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
                 {pdfSrc && (
@@ -97,10 +137,10 @@ class ImgTxtBtn extends PureComponent {
                 )}
               </div >
               <Footnotes footNotes={footNotes} />
-            </Fragment>
+            </Fragment >
           )}
-        </ScrollableArea >
-      </FadeIn>
+        </div >
+      </FadeIn >
     );
   }
 }
@@ -117,11 +157,14 @@ ImgTxtBtn.propTypes = {
   enableBizCard: PropTypes.func.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   isMobile: PropTypes.bool.isRequired,
+  color: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   orientation: Device.selectors.orientation(state),
   isMobile: Device.selectors.isMobile(state),
+  color: services.vgs.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({

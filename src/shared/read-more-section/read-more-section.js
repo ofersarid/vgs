@@ -32,13 +32,13 @@ class ReadMoreSection extends React.PureComponent {
   }
 
   render() {
-    const { html, color, className } = this.props;
+    const { html, color, className, maxLines, btnTxt } = this.props;
     const { clamped } = this.state;
     return (
       <Fragment>
         <HTMLEllipsis
           unsafeHTML={renderToString(html)}
-          maxLine='10'
+          maxLine={maxLines}
           ellipsis="..."
           basedOn='letters'
           className={className}
@@ -52,7 +52,7 @@ class ReadMoreSection extends React.PureComponent {
               color,
             }}
           >
-            read more
+            {btnTxt}
           </Button >
         ) : null}
       </Fragment>
@@ -67,7 +67,14 @@ ReadMoreSection.propTypes = {
   clear: PropTypes.func.isRequired,
   html: PropTypes.any,
   className: PropTypes.string,
+  btnTxt: PropTypes.string.isRequired,
   more: PropTypes.any,
+  maxLines: PropTypes.number.isRequired,
+};
+
+ReadMoreSection.defaultProps = {
+  maxLines: 10,
+  btnTxt: 'Read More',
 };
 
 const mapStateToProps = state => ({

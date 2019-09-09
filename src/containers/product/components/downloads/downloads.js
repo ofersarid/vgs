@@ -2,9 +2,12 @@ import React, { PureComponent } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
-import { FadeIn, ScrollableArea, Button } from '/src/shared';
+import { FadeIn, Button } from '/src/shared';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
+import Device from '../../../../shared/device';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 class Downloads extends PureComponent {
   constructor(props) {
@@ -21,17 +24,20 @@ class Downloads extends PureComponent {
       patientCard,
       instructions,
       themeColor,
+      isMobile,
     } = this.props;
     return (
       <FadeIn spread >
-        <ScrollableArea
+        <div
           // hideOverflow
           className={cx(styles.container, sharedStyles.inner)}
         >
-          <div className={cx(styles.img)} >
-            <img src={image} className={styles.inner} />
-            <div className={cx(styles.title)} >{imageTitle}</div >
-          </div >
+          {!isMobile && (
+            <div className={cx(styles.img)} >
+              <img src={image} className={styles.inner} />
+              <div className={cx(styles.title)} >{imageTitle}</div >
+            </div >
+          )}
           <div className={cx(styles.rightCol)} >
             {brochure && (
               <Button
@@ -98,7 +104,7 @@ class Downloads extends PureComponent {
               </Button >
             )}
           </div >
-        </ScrollableArea >
+        </div >
       </FadeIn >
     );
   }
@@ -112,6 +118,15 @@ Downloads.propTypes = {
   patientCard: PropTypes.string,
   instructions: PropTypes.string,
   themeColor: PropTypes.string.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
-export default Downloads;
+const mapStateToProps = state => ({
+  isMobile: Device.selectors.isMobile(state),
+});
+
+const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+)(Downloads);
