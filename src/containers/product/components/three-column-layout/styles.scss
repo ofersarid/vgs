@@ -15,7 +15,6 @@
   display: inline-flex;
   flex-wrap: wrap;
   position: relative;
-  padding-left: 16px;
 
   @include media('>phone') {
     font-size: 18px;
@@ -41,6 +40,10 @@
   box-sizing: border-box;
   flex-shrink: 0;
   width: 100%;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   @include media('>phone') {
     margin-bottom: 0;
