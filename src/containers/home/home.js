@@ -8,7 +8,7 @@ import homeCoverPic from '/src/assets/home_cover.jpg';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
-import GlobalImpact from './components/global-impact/global-impact';
+// import GlobalImpact from './components/global-impact/global-impact';
 import Header from './components/header/header';
 import styles from './styles.scss';
 
@@ -31,8 +31,8 @@ class Home extends PureComponent {
           <div className={styles.coverPic} style={{ backgroundImage: `url(${homeCoverPic})` }} />
           <div className={styles.gradientOverLay} />
         </FadeInOut >
-        <Header index={2} text="GLOBAL IMPACT" />
-        <Header index={3} text="OUR PRODUCTS" />
+        {/*<Header index={2} text="GLOBAL IMPACT" />*/}
+        <Header index={2} text="OUR PRODUCTS" />
         <SnapScroll >
           <Cover
             footer={{
@@ -45,21 +45,21 @@ class Home extends PureComponent {
           />
           <SingleParagraph
             text={data.synopsis} />
-          <GlobalImpact
-            regions={[{
-              pic: data.globalImpactImage1,
-              label: data.globalImpactImageSubtitle1,
-            }, {
-              pic: data.globalImpactImage2,
-              label: data.globalImpactImageSubtitle2,
-            }, {
-              pic: data.globalImpactImage3,
-              label: data.globalImpactImageSubtitle3,
-            }, {
-              pic: data.globalImpactImage4,
-              label: data.globalImpactImageSubtitle4,
-            }]}
-            text={data.globalImpactBody} />
+          {/*<GlobalImpact*/}
+          {/*  regions={[{*/}
+          {/*    pic: data.globalImpactImage1,*/}
+          {/*    label: data.globalImpactImageSubtitle1,*/}
+          {/*  }, {*/}
+          {/*    pic: data.globalImpactImage2,*/}
+          {/*    label: data.globalImpactImageSubtitle2,*/}
+          {/*  }, {*/}
+          {/*    pic: data.globalImpactImage3,*/}
+          {/*    label: data.globalImpactImageSubtitle3,*/}
+          {/*  }, {*/}
+          {/*    pic: data.globalImpactImage4,*/}
+          {/*    label: data.globalImpactImageSubtitle4,*/}
+          {/*  }]}*/}
+          {/*  text={data.globalImpactBody} />*/}
           <OurProducts
             text={data.ourProductsBody} />
         </SnapScroll >
