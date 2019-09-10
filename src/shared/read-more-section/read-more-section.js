@@ -73,7 +73,7 @@ ReadMoreSection.propTypes = {
 };
 
 ReadMoreSection.defaultProps = {
-  maxLines: 10,
+  maxLines: 9,
   btnTxt: 'Read More',
 };
 
