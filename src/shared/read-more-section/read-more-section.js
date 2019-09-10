@@ -34,17 +34,18 @@ class ReadMoreSection extends React.PureComponent {
   render() {
     const { html, color, className, maxLines, btnTxt } = this.props;
     const { clamped } = this.state;
+    const htmlAsString = renderToString(html);
     return (
       <Fragment>
         <HTMLEllipsis
-          unsafeHTML={renderToString(html)}
+          unsafeHTML={htmlAsString}
           maxLine={maxLines}
           ellipsis="..."
           basedOn='letters'
           className={className}
           onReflow={this.onReflow}
         />
-        {clamped ? (
+        {(!htmlAsString || clamped) ? (
           <Button
             className={styles.readMoreBtn}
             onClick={this.onClick}

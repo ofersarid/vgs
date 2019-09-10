@@ -87,7 +87,7 @@ class ImgTxtBtn extends PureComponent {
               btnTxt="About this video"
               html={(
                 <Fragment >
-                  <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
+                  {youtube ? null : <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />}
                   {pdfSrc && (
                     <Button
                       tag="a"
