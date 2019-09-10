@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import { createSelector } from 'reselect';
 
 const reducer = (state = fromJS({
   bizCard: 'enabled',
@@ -49,6 +50,21 @@ const selectors = {
   color: state => state.getIn(['vgs', 'color']),
   productsActiveTab: state => state.getIn(['vgs', 'productsActiveTab']),
 };
+
+selectors.colorName = createSelector(selectors.color, color => {
+  switch (color.toUpperCase()) {
+    case '#0272BA':
+      return 'blue';
+    case '#662D91':
+      return 'purple';
+    case '#ED1C24':
+      return 'red';
+    case '#22B0AF':
+      return 'lagoon';
+    default:
+      return 'gray';
+  }
+});
 
 export default {
   reducer,

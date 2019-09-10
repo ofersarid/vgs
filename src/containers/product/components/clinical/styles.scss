@@ -5,7 +5,6 @@ $peek-mobile: 54px;
 
 .clinical {
   z-index: 1;
-  width: calc(100vw - #{$gutter-phone});
   position: fixed;
   box-sizing: border-box;
   display: flex;
@@ -53,11 +52,10 @@ $peek-mobile: 54px;
   .outerWrapper {
     //padding-right: 5vw;
     box-sizing: border-box;
-    padding-right: 4vw;
     flex-shrink: 0;
     //padding: 0 2%;
-    width: 63vw;
-    height: 100%;
+    width: 100%;
+    height: 34%;
 
     @include media('>phone') {
       height: 75%;
@@ -90,14 +88,12 @@ $peek-mobile: 54px;
 
   .date {
     color: #8F8F8F;
-    height: 10%;
-    line-height: 16px;
+    margin-bottom: 10px;
     font-weight: 400;
   }
 
   .header {
     height: 70%;
-    line-height: 37px;
     font-weight: 100;
     overflow: hidden;
     display: -webkit-box;
@@ -141,8 +137,19 @@ $peek-mobile: 54px;
   }
 
   .menuTrigger {
-    margin: 5px 0 30px 0;
+    margin: 5px 0 2px 0;
     flex-shrink: 0;
     align-self: start;
   }
+}
+
+.readMoreBtn {
+  padding: 10px 4px 20px;
+  line-height: unset;
+  min-height: 0;
+  height: 0;
+  border-bottom: 1px solid;
+  text-transform: capitalize;
+  font-weight: 400;
+  width: 43px;
 }

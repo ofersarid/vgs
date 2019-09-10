@@ -32,7 +32,7 @@ class ReadMoreSection extends React.PureComponent {
   }
 
   render() {
-    const { html, color, className, maxLines, btnTxt } = this.props;
+    const { html, color, className, maxLines, btnTxt, colorName } = this.props;
     const { clamped } = this.state;
     return (
       <Fragment>
@@ -48,6 +48,7 @@ class ReadMoreSection extends React.PureComponent {
           <Button
             className={styles.readMoreBtn}
             onClick={this.onClick}
+            waveColor={colorName}
             style={{
               color,
             }}
@@ -62,6 +63,7 @@ class ReadMoreSection extends React.PureComponent {
 
 ReadMoreSection.propTypes = {
   color: PropTypes.string.isRequired,
+  colorName: PropTypes.string.isRequired,
   open: PropTypes.func.isRequired,
   set: PropTypes.func.isRequired,
   clear: PropTypes.func.isRequired,
@@ -80,6 +82,7 @@ ReadMoreSection.defaultProps = {
 const mapStateToProps = state => ({
   // isMobile: Device.selectors.isMobile(state),
   color: services.vgs.selectors.color(state),
+  colorName: services.vgs.selectors.colorName(state),
   // deviceType: Device.selectors.deviceType(state),
 });
 
