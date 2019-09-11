@@ -2,6 +2,7 @@ import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import Device from '/src/shared/device';
 import { SnapScroll, IndexHeader, TwoColumnLayout } from '/src/shared';
 import services from '/src/services';
 import Cover from './components/cover/cover';
@@ -17,15 +18,15 @@ class About extends PureComponent {
   }
 
   render() {
-    const { data } = this.props; // eslint-disable-line
+    const { data, isMobile } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
         <IndexHeader index={1} header="ABOUT VGS" />
         {/*<Header index={3} text="GLOBAL IMPACT" />*/}
         <SnapScroll >
-          <Cover txt={data.coverBody} />
+          <Cover txt={isMobile ? data.coverBodyMobile : data.coverBody} />
           <TwoColumnLayout
-            article={data.aboutBody}
+            article={isMobile ? data.aboutBodyMobile : data.aboutBody}
             footNotes={[data.aboutBodyFootnote1, data.aboutBodyFootnote2, data.aboutBodyFootnote3]}
           />
         </SnapScroll >
@@ -39,11 +40,13 @@ About.propTypes = {
   data: PropTypes.object,
   resetFrame: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   // frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'about'),
+  isMobile: Device.selectors.isMobile(state),
 });
 
 const mapDispatchToProps = dispatch => ({

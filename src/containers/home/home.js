@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { SnapScroll, FadeInOut } from '/src/shared';
 import services from '/src/services';
 import homeCoverPic from '/src/assets/home_cover.jpg';
+import Device from '/src/shared/device';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
@@ -23,7 +24,7 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { data, frame } = this.props; // eslint-disable-line
+    const { data, frame, isMobile } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
         <div className={styles.grayBg} />
@@ -44,7 +45,7 @@ class Home extends PureComponent {
             }}
           />
           <SingleParagraph
-            text={data.synopsis} />
+            text={isMobile ? data.synopsisMobile : data.synopsis} />
           {/*<GlobalImpact*/}
           {/*  regions={[{*/}
           {/*    pic: data.globalImpactImage1,*/}
@@ -73,11 +74,13 @@ Home.propTypes = {
   data: PropTypes.object,
   resetFrame: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
+  isMobile: Device.selectors.isMobile(state),
 });
 
 const mapDispatchToProps = dispatch => ({

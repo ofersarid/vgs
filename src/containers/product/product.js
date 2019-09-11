@@ -136,7 +136,7 @@ class Product extends PureComponent {
           {data.screen2Published && (
             <ImgTxtBtn
               img={data.screen2Image}
-              txt={data.screen2Body}
+              txt={isMobile ? data.screen2BodyMobile : data.screen2Body}
               footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
               pdfSrc={data.screen2PDF}
               imgSubTitle={data.screen2ImageSubtitle}
