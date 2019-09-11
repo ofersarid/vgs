@@ -34,5 +34,3 @@ ReactDOM.render(
   </Provider >,
   $root
 );
-
-// trigger build

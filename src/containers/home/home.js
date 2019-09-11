@@ -7,7 +7,9 @@ import { hashHistory } from 'react-router';
 import { SnapScroll, FadeInOut, FadeIn } from '/src/shared';
 import services from '/src/services';
 import camelCase from 'lodash/camelCase';
-import homeCoverPic from '/src/assets/home_cover.jpg';
+import homeCoverPicMobile from '/src/assets/home_cover_art_mobile.jpg';
+import homeCoverPicTablet from '/src/assets/home_cover_art_tablet.jpg';
+import homeCoverPicDesktop from '/src/assets/home_cover_art_desktop.jpg';
 import Device from '/src/shared/device';
 import layout from '/src/shared/styles/layout.scss';
 import ourProductsArtMobile from '/src/assets/home_products_art_mobile.svg';
@@ -38,14 +40,23 @@ class Home extends PureComponent {
     resetFrame();
   }
 
+  resolvePic() {
+    const { isMobile, isTouchDevice } = this.props;
+    if (isMobile) {
+      return homeCoverPicMobile;
+    } else if (isTouchDevice) {
+      return homeCoverPicTablet;
+    }
+    return homeCoverPicDesktop;
+  }
+
   render() {
     const { data, frame, isMobile } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
         <div className={styles.grayBg} />
         <FadeInOut show={frame < 2} className={styles.bgWrap} spread >
-          <div className={styles.coverPic} style={{ backgroundImage: `url(${homeCoverPic})` }} />
-          <div className={styles.gradientOverLay} />
+          <div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />
         </FadeInOut >
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}
         <Header index={2} text={isMobile ? 'ABOUT OUR PRODUCTS' : 'OUR PRODUCTS'} />
@@ -85,12 +96,12 @@ class Home extends PureComponent {
             </FadeIn >
           )}
           {isMobile && (
-            <Fragment>
+            <Fragment >
               <img src={ourProductsArtMobile} className={styles.ourProductsArt} />
               <FadeIn className={layout.inner} >
                 <ProductsShelf />
               </FadeIn >
-            </Fragment>
+            </Fragment >
           )}
           {!isMobile && (
             <OurProducts
@@ -108,12 +119,14 @@ Home.propTypes = {
   resetFrame: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  isTouchDevice: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
   isMobile: Device.selectors.isMobile(state),
+  isTouchDevice: Device.selectors.isTouchDevice(state),
 });
 
 const mapDispatchToProps = dispatch => ({
