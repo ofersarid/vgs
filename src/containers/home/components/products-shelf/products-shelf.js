@@ -1,14 +1,15 @@
 import React from 'react';
 import cx from 'classnames';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { hashHistory } from 'react-router';
-import { Button } from '/src/shared';
+import { Button, SnapScroll } from '/src/shared';
 import camelCase from 'lodash/camelCase';
 import styles from './styles.scss';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-const ProductsShelf = () => {
+const ProductsShelf = ({ resetFrame }) => {
   const navigate = e => {
-    const { resetFrame } = this.props;
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
     hashHistory.push(camelCase(txt));
@@ -64,6 +65,16 @@ const ProductsShelf = () => {
   );
 };
 
-ProductsShelf.propTypes = {};
+ProductsShelf.propTypes = {
+  resetFrame: PropTypes.func.isRequired,
+};
 
-export default ProductsShelf;
+const mapStateToProps = state => ({}); // eslint-disable-line
+
+const mapDispatchToProps = dispatch => ({
+  resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
+});
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+)(ProductsShelf);

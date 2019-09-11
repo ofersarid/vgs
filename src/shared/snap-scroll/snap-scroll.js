@@ -81,11 +81,14 @@ class SnapScroll extends React.Component {
   componentDidUpdate(prevProps) {
     const { frame, disableScrollSnap } = this.props;
     const { children } = this.state;
-    if (frame === 0 && frame !== prevProps.frame) {
+    if (frame > 0 && frame < children.length - 1) {
       disableScrollSnap(false, false);
-    }
-    if (frame !== prevProps.frame) {
-      disableScrollSnap(frame === children.length - 1, frame === 0);
+    } else if (frame === 0) {
+      disableScrollSnap(false, true);
+    } else if (frame === children.length - 1) {
+      disableScrollSnap(true, false);
+    } else {
+      disableScrollSnap(true, true);
     }
   }
 
