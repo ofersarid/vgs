@@ -1,18 +1,22 @@
 @import "/src/media-query-mixins";
 @import "/src/colors";
 
-.paragraph {
+.ourProducts {
   color: $black;
   font-size: 16px;
   line-height: 35px;
   height: 65%;
-  top: 27%;
+  top: 27% !important;
 
   @include media('>phone') {
     top: 30%;
     font-size: 22px;
     line-height: 37px;
     height: 60%;
+
+    @include orientation('landscape') {
+      display: flex;
+    }
   }
 
   @include media('>tablet') {
@@ -24,6 +28,15 @@
     top: 35%;
     font-size: 34px;
     line-height: 43px;
+  }
+}
+
+.text {
+  @include media('>phone') {
+    @include orientation('landscape') {
+      width: 50%;
+      padding-right: 5%;
+    }
   }
 }
 
@@ -40,22 +53,7 @@
 }
 
 .art {
-  height: 20%;
-  bottom: 0;
-  right: 10vw;
   position: absolute;
-
-  @include media('>phone') {
-    height: 40%;
-  }
-
-  @include media('>tablet') {
-    height: 50%;
-    right: 5vw;
-  }
-
-  @include media('>desktop') {
-    height: 55%;
-  }
-
+  bottom: 0;
+  width: 100%;
 }

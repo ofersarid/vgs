@@ -14,3 +14,33 @@
   src: url('./calibre/Calibre-Thin.ttf') format('truetype');
   font-weight: 100;
 }
+
+@font-face {
+  font-family: 'calibre';
+  src: url('./calibre/Calibre-Light.ttf') format('truetype');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'calibre';
+  src: url('./calibre/Calibre-Regular.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'calibre';
+  src: url('./calibre/Calibre-Medium.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'calibre';
+  src: url('./calibre/Calibre-Semibold.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'calibre';
+  src: url('./calibre/Calibre-Bold.ttf') format('truetype');
+  font-weight: 600;
+}

@@ -2,15 +2,21 @@ import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { SnapScroll, FadeInOut } from '/src/shared';
+import autoBind from 'auto-bind';
+import { hashHistory } from 'react-router';
+import { SnapScroll, FadeInOut, FadeIn } from '/src/shared';
 import services from '/src/services';
+import camelCase from 'lodash/camelCase';
 import homeCoverPic from '/src/assets/home_cover.jpg';
 import Device from '/src/shared/device';
+import layout from '/src/shared/styles/layout.scss';
+import ourProductsArtMobile from '/src/assets/home_products_art_mobile.svg';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
 // import GlobalImpact from './components/global-impact/global-impact';
 import Header from './components/header/header';
+import ProductsShelf from './components/products-shelf/products-shelf';
 import styles from './styles.scss';
 
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -21,6 +27,15 @@ class Home extends PureComponent {
     super(props);
     props.resetFrame();
     props.setColor('#005728');
+    autoBind(this);
+  }
+
+  navigate(e) {
+    const { resetFrame } = this.props;
+    e.stopPropagation();
+    const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
+    hashHistory.push(camelCase(txt));
+    resetFrame();
   }
 
   render() {
@@ -33,7 +48,8 @@ class Home extends PureComponent {
           <div className={styles.gradientOverLay} />
         </FadeInOut >
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}
-        <Header index={2} text="OUR PRODUCTS" />
+        <Header index={2} text={isMobile ? 'ABOUT OUR PRODUCTS' : 'OUR PRODUCTS'} />
+        <Header index={3} text="OUR PRODUCTS" />
         <SnapScroll >
           <Cover
             footer={{
@@ -61,8 +77,25 @@ class Home extends PureComponent {
           {/*    label: data.globalImpactImageSubtitle4,*/}
           {/*  }]}*/}
           {/*  text={data.globalImpactBody} />*/}
-          <OurProducts
-            text={data.ourProductsBody} />
+          {isMobile && (
+            <FadeIn className={layout.inner} >
+              <div
+                dangerouslySetInnerHTML={{ __html: data.ourProductsBodyMobile.replace(/\n\r?/g, '<br />') }}
+              />
+            </FadeIn >
+          )}
+          {isMobile && (
+            <Fragment>
+              <img src={ourProductsArtMobile} className={styles.ourProductsArt} />
+              <FadeIn className={layout.inner} >
+                <ProductsShelf />
+              </FadeIn >
+            </Fragment>
+          )}
+          {!isMobile && (
+            <OurProducts
+              text={data.ourProductsBody} />
+          )}
         </SnapScroll >
       </Fragment >
     ) : null;
