@@ -323,3 +323,34 @@
     border-radius: 10px;
   }
 }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: rgba(white, 0.8);
+  z-index: 1;
+  height: 53px;
+  padding: 5px 7.5vw 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 200;
+  font-size: 12px;
+  line-height: 0;
+  opacity: 0;
+  transform: translateY(100%);
+
+  @include media('>phone') {
+    padding: 5px 20vw 0;
+  }
+
+  @include media('>tablet') {
+    padding: 5px 13vw 0;
+  }
+
+  @include media('>desktop') {
+    //padding: 5px $gutter-tablet 0;
+  }
+}
