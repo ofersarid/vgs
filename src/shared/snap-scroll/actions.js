@@ -23,9 +23,15 @@ const reset = count => ({
   count,
 });
 
+const setIsLastFrame = bool => ({
+  type: C.ACTIONS.IS_LAST_FRAME,
+  bool,
+});
+
 export default {
   updateFrameIndex,
   disable,
   count,
   reset,
+  setIsLastFrame,
 };

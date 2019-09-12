@@ -46,6 +46,7 @@ class SnapScroll extends React.Component {
       disableNext: PropTypes.bool.isRequired,
       disablePrev: PropTypes.bool.isRequired,
       count: PropTypes.func.isRequired,
+      setIsLastFrame: PropTypes.func.isRequired,
     };
   }
 
@@ -79,7 +80,7 @@ class SnapScroll extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { frame, disableScrollSnap } = this.props;
+    const { frame, disableScrollSnap, setIsLastFrame } = this.props;
     const { children } = this.state;
     if (frame > 0 && frame < children.length - 1) {
       disableScrollSnap(false, false);
@@ -89,6 +90,11 @@ class SnapScroll extends React.Component {
       disableScrollSnap(true, false);
     } else {
       disableScrollSnap(true, true);
+    }
+    if (frame === children.length - 1) {
+      setIsLastFrame(true);
+    } else {
+      setIsLastFrame(false);
     }
   }
 
@@ -202,6 +208,7 @@ const mapDispatchToProps = dispatch => ({
   updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
   disableScrollSnap: (...props) => dispatch(actions.disable(...props)),
   count: (...props) => dispatch(actions.count(...props)),
+  setIsLastFrame: bool => dispatch(actions.setIsLastFrame(bool)),
 });
 
 export default compose(

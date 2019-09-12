@@ -5,6 +5,7 @@ const initialState = fromJS({
   frame: 0,
   count: 0,
   firstLook: true,
+  isLastFrame: false,
   disable: {
     next: false,
     prev: false,
@@ -24,6 +25,9 @@ const reducer = (state = initialState, action) => {
 
     case C.ACTIONS.RESET:
       return initialState;
+
+    case C.ACTIONS.IS_LAST_FRAME:
+      return state.set('isLastFrame', action.bool);
 
     default:
       return state;
