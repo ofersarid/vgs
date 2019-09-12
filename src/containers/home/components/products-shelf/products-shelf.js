@@ -2,18 +2,20 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { hashHistory } from 'react-router';
-import { Button, SnapScroll } from '/src/shared';
+import { Button } from '/src/shared';
 import camelCase from 'lodash/camelCase';
 import styles from './styles.scss';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import services from '../../../../services';
 
-const ProductsShelf = ({ resetFrame }) => {
+const ProductsShelf = ({ updateLastFrame }) => {
   const navigate = e => {
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
-    hashHistory.push(camelCase(txt));
-    resetFrame();
+    const CCtext = camelCase(txt);
+    hashHistory.push(CCtext);
+    updateLastFrame(0, CCtext);
   };
 
   return (
@@ -66,13 +68,13 @@ const ProductsShelf = ({ resetFrame }) => {
 };
 
 ProductsShelf.propTypes = {
-  resetFrame: PropTypes.func.isRequired,
+  updateLastFrame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 
 const mapDispatchToProps = dispatch => ({
-  resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
+  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

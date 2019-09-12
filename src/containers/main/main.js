@@ -39,7 +39,9 @@ class Main extends PureComponent {
   }
 
   goToHome() {
+    const { updateLastFrame } = this.props;
     hashHistory.push('home');
+    updateLastFrame(0, 'home');
   }
 
   // resolveWaveColor() {
@@ -123,6 +125,7 @@ Main.propTypes = {
   setOrientation: PropTypes.func.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
+  updateLastFrame: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
@@ -142,6 +145,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setOrientation: orientation => dispatch(services.vgs.actions.setOrientation(orientation)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
+  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

@@ -6,7 +6,7 @@ import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import camelCase from 'lodash/camelCase';
 import autoBind from 'auto-bind';
-import { Button, SnapScroll } from '/src/shared';
+import { Button } from '/src/shared';
 import services from '/src/services';
 import SubMenu from './sub-menu';
 import styles from '../styles.scss';
@@ -29,11 +29,12 @@ class SideMenu extends PureComponent {
   }
 
   navigate(e) {
-    const { resetFrame } = this.props;
+    const { updateLastFrame } = this.props;
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
-    hashHistory.push(camelCase(txt));
-    resetFrame();
+    const CCtext = camelCase(txt);
+    hashHistory.push(CCtext);
+    updateLastFrame(0, CCtext);
     this.toggleMenu();
   }
 
@@ -121,8 +122,8 @@ SideMenu.propTypes = {
     category: PropTypes.string.isRequired,
   })),
   categories: PropTypes.arrayOf(PropTypes.string),
-  resetFrame: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
+  updateLastFrame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -132,7 +133,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  resetFrame: () => dispatch(SnapScroll.actions.reset()),
+  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SnapScroll, IndexHeader } from '/src/shared';
+import Routes from '/src/routes';
 import {
   TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
 } from './components';
@@ -27,15 +28,26 @@ class Product extends PureComponent {
   }
 
   componentDidMount() {
+    const { updateFrameIndex, lastFrame, setColor } = this.props;
     this.didMount = true;
-    this.props.setColor(this.resolveColor());
-    this.props.resetFrames();
+    setColor(this.resolveColor());
+    updateFrameIndex(lastFrame);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.name !== this.props.name) {
-      this.props.setColor(this.resolveColor());
+    const { name, updateLastFrame, setColor, pathname, updateFrameIndex } = this.props;
+    if (prevProps.name !== name) {
+      setColor(this.resolveColor());
     }
+    if (prevProps.name !== name) {
+      updateLastFrame(0, pathname);
+      updateFrameIndex(0);
+    }
+  }
+
+  componentWillUnmount() {
+    const { updateLastFrame, frame, name } = this.props;
+    updateLastFrame(frame, name);
   }
 
   resolveSummeryPic() {
@@ -201,6 +213,10 @@ Product.propTypes = {
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
   resetFrames: PropTypes.func.isRequired,
+  updateFrameIndex: PropTypes.func.isRequired,
+  updateLastFrame: PropTypes.func.isRequired,
+  lastFrame: PropTypes.number.isRequired,
+  pathname: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
@@ -210,11 +226,15 @@ const mapStateToProps = state => ({
   name: services.products.selectors.name(state),
   isMobile: Device.selectors.isMobile(state),
   orientation: Device.selectors.orientation(state),
+  lastFrame: services.vgs.selectors.lastFrame(state, Routes.selectors.pathname(state)),
+  pathname: Routes.selectors.pathname(state),
 });
 
 const mapDispatch = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
   resetFrames: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
+  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
+  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

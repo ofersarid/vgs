@@ -27,9 +27,13 @@ import styles from './styles.scss';
 class Home extends PureComponent {
   constructor(props) {
     super(props);
-    props.resetFrame();
     props.setColor('#005728');
     autoBind(this);
+  }
+
+  componentDidMount() {
+    const { updateFrameIndex, lastFrame } = this.props;
+    updateFrameIndex(lastFrame);
   }
 
   componentWillUnmount() {
@@ -38,11 +42,9 @@ class Home extends PureComponent {
   }
 
   navigate(e) {
-    const { resetFrame } = this.props;
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
     hashHistory.push(camelCase(txt));
-    resetFrame();
   }
 
   resolvePic() {
@@ -121,7 +123,7 @@ class Home extends PureComponent {
 Home.propTypes = {
   frame: PropTypes.number.isRequired,
   data: PropTypes.object,
-  resetFrame: PropTypes.func.isRequired,
+  updateFrameIndex: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
   updateLastFrame: PropTypes.func.isRequired,
   lastFrame: PropTypes.number.isRequired,
@@ -137,8 +139,8 @@ const mapStateToProps = state => ({
   isTouchDevice: Device.selectors.isTouchDevice(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
   updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });

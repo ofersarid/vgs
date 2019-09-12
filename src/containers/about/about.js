@@ -13,8 +13,17 @@ import Cover from './components/cover/cover';
 class About extends PureComponent {
   constructor(props) {
     super(props);
-    props.resetFrame();
     props.setColor('#005728');
+  }
+
+  componentDidMount() {
+    const { updateFrameIndex, lastFrame } = this.props;
+    updateFrameIndex(lastFrame);
+  }
+
+  componentWillUnmount() {
+    const { updateLastFrame, frame } = this.props;
+    updateLastFrame(frame, 'about');
   }
 
   render() {
@@ -38,20 +47,26 @@ class About extends PureComponent {
 About.propTypes = {
   // frame: PropTypes.number.isRequired,
   data: PropTypes.object,
-  resetFrame: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  updateFrameIndex: PropTypes.func.isRequired,
+  updateLastFrame: PropTypes.func.isRequired,
+  frame: PropTypes.number.isRequired,
+  lastFrame: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
   // frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'about'),
   isMobile: Device.selectors.isMobile(state),
+  lastFrame: services.vgs.selectors.lastFrame(state, 'about'),
+  frame: SnapScroll.selectors.frame(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
+  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
+  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

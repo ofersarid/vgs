@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
+import camelCase from 'lodash/camelCase';
 
 const reducer = (state = fromJS({
   bizCard: 'enabled',
@@ -22,7 +23,7 @@ const reducer = (state = fromJS({
     case 'SET_PRODUCTS_ACTIVE_TAB':
       return state.set('productsActiveTab', action.tab);
     case 'UPDATE_LAST_FRAME':
-      return state.setIn(['lastFrame', action.context], action.frame);
+      return state.setIn(['lastFrame', camelCase(action.context)], action.frame);
     default:
       return state;
   }
@@ -59,7 +60,7 @@ const selectors = {
   orientation: state => state.getIn(['vgs', 'orientation']),
   color: state => state.getIn(['vgs', 'color']),
   productsActiveTab: state => state.getIn(['vgs', 'productsActiveTab']),
-  lastFrame: (state, context) => state.getIn(['vgs', 'lastFrame', context]) || 0,
+  lastFrame: (state, context) => state.getIn(['vgs', 'lastFrame', camelCase(context)]) || 0,
 };
 
 selectors.colorName = createSelector(selectors.color, color => {
