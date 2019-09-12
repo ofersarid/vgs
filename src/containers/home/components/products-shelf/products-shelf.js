@@ -48,7 +48,7 @@ const ProductsShelf = ({ resetFrame }) => {
             className={cx(styles.productBtn)}
             onClick={navigate}
           >
-            Frame
+            FRAME
           </Button
           >
           <Button
@@ -57,7 +57,7 @@ const ProductsShelf = ({ resetFrame }) => {
             className={cx(styles.productBtn)}
             onClick={navigate}
           >
-            FrameFR
+            FRAME FR
           </Button >
         </div >
       </section >
