@@ -7,7 +7,6 @@ export default (
   <Route path="/" component={Main} >
     <IndexRedirect to="home" />
     <Route path="home" component={Pages.Home} />
-    <Route path="our-products" component={Pages.OurProducts} />
     <Route path="frame" component={Pages.Product} />
     <Route path="viola" component={Pages.Product} />
     <Route path="frameFr" component={Pages.Product} />

@@ -32,6 +32,11 @@ class Home extends PureComponent {
     autoBind(this);
   }
 
+  componentWillUnmount() {
+    const { updateLastFrame, frame } = this.props;
+    updateLastFrame(frame, 'home');
+  }
+
   navigate(e) {
     const { resetFrame } = this.props;
     e.stopPropagation();
@@ -51,7 +56,7 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { data, frame, isMobile } = this.props; // eslint-disable-line
+    const { data, isMobile, frame } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
         <div className={styles.grayBg} />
@@ -118,6 +123,8 @@ Home.propTypes = {
   data: PropTypes.object,
   resetFrame: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
+  updateLastFrame: PropTypes.func.isRequired,
+  lastFrame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
   isTouchDevice: PropTypes.bool.isRequired,
 };
@@ -125,6 +132,7 @@ Home.propTypes = {
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
+  lastFrame: services.vgs.selectors.lastFrame(state, 'home'),
   isMobile: Device.selectors.isMobile(state),
   isTouchDevice: Device.selectors.isTouchDevice(state),
 });
@@ -132,6 +140,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   resetFrame: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
+  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

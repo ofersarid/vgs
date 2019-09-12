@@ -10,6 +10,7 @@ import Device from '/src/shared/device';
 import Reader from '/src/services/reader/reader';
 import { hashHistory } from 'react-router';
 import services from '/src/services';
+import utils from '/src/utils';
 import FrameIndicator from './components/frame-indicator';
 import styles from './styles.scss';
 import vgs from './assets/vgs_blue.svg';
@@ -60,8 +61,8 @@ class Main extends PureComponent {
 
   render() {
     const show = this.props.pathname !== '/product';
-    const { isMobile, pathname, logo, bizCard, orientation } = this.props;
-
+    const { pathname, logo, bizCard, orientation } = this.props;
+    const isMobile = utils.isMobile();
     return (
       <Fragment >
         <Device />

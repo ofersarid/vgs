@@ -13,4 +13,11 @@ a.button.color {
 
 .button {
   cursor: pointer;
+  transition: .2s ease-out;
+
+  &.disable {
+    cursor: none;
+    opacity: 0.2;
+    pointer-events: none;
+  }
 }

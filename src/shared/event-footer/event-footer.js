@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Spring, config } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 import cx from 'classnames';
+import services from '/src/services';
 import PropTypes from 'prop-types';
 import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
@@ -26,29 +27,29 @@ class Cover extends PureComponent {
   }
 
   render() {
-    const { footer, themeColor } = this.props;
+    const { footer, color } = this.props;
     const { reverseAnimation } = this.state;
     const justOneDay = _isEqual(footer.dateFrom, footer.dateTo);
     return (
       <Button
         waveColor="white"
         className={cx(styles.footer)}
-        style={{ background: themeColor }}
+        style={{ background: color }}
         tag="a"
         href={footer.linkTo}
         target="_blank"
       >
-        <div className={styles.text}>
+        <div className={styles.text} >
           <div className={styles.title} >{footer.title}</div >
           <div className={styles.date} >
             {moment(footer.dateFrom.toDate()).format('MMMM Do')}
-            {!justOneDay && <span>&nbsp;&mdash;&nbsp;</span>}
+            {!justOneDay && <span >&nbsp;&mdash;&nbsp;</span >}
             {!justOneDay && moment(footer.dateTo.toDate()).format('MMMM Do')}
           </div >
-          <div className={styles.address}>
+          <div className={styles.address} >
             <LocationOn />
-            <span className={styles.addressText}>{footer.address}</span>
-          </div>
+            <span className={styles.addressText} >{footer.address}</span >
+          </div >
         </div >
         <Spring
           from={{ transform: 'translateX(-10%)' }}
@@ -65,7 +66,7 @@ class Cover extends PureComponent {
 }
 
 Cover.propTypes = {
-  themeColor: PropTypes.string,
+  color: PropTypes.string.isRequired,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
     dateFrom: PropTypes.object.isRequired,
@@ -75,7 +76,9 @@ Cover.propTypes = {
   }),
 };
 
-const mapStateToProps = state => ({}); // eslint-disable-line
+const mapStateToProps = state => ({
+  color: services.vgs.selectors.color(state),
+});
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 

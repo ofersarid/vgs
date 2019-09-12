@@ -5,75 +5,22 @@ $peek-mobile: 54px;
 
 .clinical {
   z-index: 1;
-  width: calc(100vw - #{$gutter-phone});
-  position: fixed;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   height: 62%;
   bottom: 10%;
 
   @include media('>phone') {
     height: 64%;
     bottom: 15%;
-    width: calc(100vw - #{$gutter-tablet});
-  }
-
-  @include media('>tablet') {
-    height: 54%;
-    bottom: 24%;
-    width: calc(100vw - #{$gutter-desktop});
-  }
-
-  @include media('>desktop') {
-    width: calc(100vw - #{$gutter-wide-screen});
-  }
-
-  .carousel {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-
-    @include media('>tablet') {
-      padding-bottom: 10px;
-      height: 74%;
-      flex-grow: 0;
-    }
-    //left: #{-$peek-mobile};
-
-    //& > div {
-    //  transform: translateX(-$peek-mobile);
-    //}
   }
 
   .outerWrapper {
-    //padding-right: 5vw;
-    box-sizing: border-box;
-    padding-right: 4vw;
-    flex-shrink: 0;
-    //padding: 0 2%;
-    width: 63vw;
+    width: 100%;
     height: 100%;
-
-    @include media('>phone') {
-      height: 75%;
-      width: 35vw;
-      padding-right: 3vw;
-    }
-
-    @include media('>tablet') {
-      width: 25vw;
-      padding-right: 2.5vw;
-      height: 100%;
-    }
-
-    @include media('>desktop') {
-      width: 17.5vw;
-    }
   }
 
   .innerWrapper {
@@ -97,7 +44,7 @@ $peek-mobile: 54px;
 
   .header {
     height: 70%;
-    line-height: 37px;
+    line-height: 23px;
     font-weight: 100;
     overflow: hidden;
     display: -webkit-box;
@@ -121,28 +68,24 @@ $peek-mobile: 54px;
     //height: #{23 * 3}px;
   }
 
-  .disable {
-    //pointer-events: none;
-  }
-
-  .arrow {
-    color: #0272BA;
-    position: absolute;
-    right: 30px;
-    bottom: -44px;
-    margin-top: 20px;
-    margin-right: 25px;
-    border-radius: 10px;
-    width: 25px;
-
-    //@include media('>tablet') {
-    //  display: none;
-    //}
-  }
-
   .menuTrigger {
     margin: 5px 0 30px 0;
     flex-shrink: 0;
     align-self: start;
+  }
+}
+
+.clinicalCarousel {
+  width: calc(100% + 80px);
+
+  @include media('>phone') {
+    height: 50%;
+    transform: translateY(-50%);
+
+    :global {
+      .prev {
+        transform: translateY(-15px);
+      }
+    }
   }
 }

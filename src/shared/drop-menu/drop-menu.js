@@ -5,6 +5,8 @@ import Button from '../button/button';
 import { ChevronDown } from 'styled-icons/boxicons-regular/ChevronDown';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
+import services from '/src/services';
+import { connect } from 'react-redux';
 
 const defaultDecorator = option => <div key={option.value} className={styles.defaultDecorator} >{option.display}</div >;
 
@@ -23,14 +25,14 @@ class DropMenu extends PureComponent {
   }
 
   render() {
-    const { options, decorator, selected, triggerClass, color } = this.props;
+    const { options, decorator, selected, triggerClass, color, colorName } = this.props;
     const { open } = this.state;
     return (
       <Fragment >
-        <Button className={cx(styles.trigger, triggerClass)} onClick={this.toggle} style={{
+        <Button textColor={color} className={cx(styles.trigger, triggerClass)} onClick={this.toggle} style={{
           color,
           borderColor: color,
-        }} waveColor={color === '#0272BA' ? 'blue' : 'purple'} >
+        }} waveColor={colorName} >
           <p >{selected.display}</p >
           <ChevronDown className={cx(styles.arrow, { [styles.flip]: open })} />
         </Button >
@@ -55,10 +57,17 @@ DropMenu.propTypes = {
   selected: option,
   triggerClass: PropTypes.string,
   color: PropTypes.string.isRequired,
+  colorName: PropTypes.string.isRequired,
 };
 
 DropMenu.defaultProps = {
   decorator: defaultDecorator,
 };
 
-export default DropMenu;
+const mapStateToProps = state => ({
+  colorName: services.vgs.selectors.colorName(state),
+});
+
+const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropMenu);

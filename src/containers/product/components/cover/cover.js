@@ -29,7 +29,7 @@ class Cover extends PureComponent {
             <div dangerouslySetInnerHTML={{ __html: description.replace(/\n\r?/g, '<br />') }} />
           </h1 >
           <img src={art} className={styles.art} />
-          {footer ? <EventFooter footer={footer} themeColor={themeColor} /> : null}
+          {footer ? <EventFooter footer={footer} /> : null}
         </div >
       </FadeIn >
     );

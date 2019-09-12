@@ -42,7 +42,7 @@ class Downloads extends PureComponent {
             {brochure && (
               <Button
                 tag="a"
-                color
+                textColor="white"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={brochure}
@@ -58,7 +58,7 @@ class Downloads extends PureComponent {
             {ifu && (
               <Button
                 tag="a"
-                color
+                textColor="white"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={ifu}
@@ -74,7 +74,7 @@ class Downloads extends PureComponent {
             {patientCard && (
               <Button
                 tag="a"
-                color
+                textColor="white"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={patientCard}
@@ -90,7 +90,7 @@ class Downloads extends PureComponent {
             {instructions && (
               <Button
                 tag="a"
-                color
+                textColor="white"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={instructions}

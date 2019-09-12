@@ -1,20 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Spring } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
-import animateScrollTo from 'animated-scroll-to';
 import cx from 'classnames';
-import debounce from 'lodash/debounce';
-import isEqual from 'lodash/isEqual';
+import throttle from 'lodash/throttle';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import compact from 'lodash/compact';
-import flattenDeep from 'lodash/flattenDeep';
-import { Swipeable } from 'react-swipeable';
-import { LongArrowAltRight } from 'styled-icons/fa-solid/LongArrowAltRight';
-import { LongArrowAltLeft } from 'styled-icons/fa-solid/LongArrowAltLeft';
-
-import Device from '/src/shared/device';
-import { SnapScroll } from '/src/shared';
+import { Transition, config } from 'react-spring/renderprops';
+import { ChevronRight } from 'styled-icons/evil/ChevronRight';
+import { ChevronLeft } from 'styled-icons/evil/ChevronLeft';
+import { SnapScroll, Button } from '/src/shared';
 import services from '/src/services';
 
 import styles from './styles.scss';
@@ -23,208 +16,96 @@ class Carousel extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      reverseAnimation: false,
-      slide: 0,
-      start: true,
-      end: false,
-      children: [],
+      group: 0,
+      groupCount: 0,
+      orientation: 'next',
     };
     autoBind(this);
-    this.slidesRefs = [];
-
-    this.onScrollHandlerDB = debounce(this.onScrollHandler, 250);
-  }
-
-  static getDerivedStateFromProps(nextProps) {
-    const children = compact(Array.isArray(nextProps.children) ? flattenDeep(nextProps.children) : [nextProps.children]);
-    return {
-      children,
-    };
+    this.nextThrottle = throttle(this.next, 500, { trailing: true, leading: true });
+    this.prevThrottle = throttle(this.prev, 500, { trailing: true, leading: true });
   }
 
   componentDidMount() {
-    this.listRef.addEventListener('mouseenter', this.touchStartHandler, false);
-    this.listRef.addEventListener('mouseleave', this.touchEndHandler, false);
-    this.listRef.addEventListener('scroll', this.onScrollHandlerDB, false);
-    this.listRef.addEventListener('wheel', this.onWheelHandler, false);
-    this.listRef.addEventListener('touchstart', this.touchStartHandler, false);
-    this.listRef.addEventListener('touchend', this.touchEndHandler, false);
-    this.listRef.scrollLeft = 0;
-    this.setState({
-      start: this.listRef.clientWidth < this.listRef.scrollWidth,
-    });
-    this.updateSlidesRef();
+    this.countGroups();
   }
 
-  componentWillUnmount() {
-    const { disableScrollSnap } = this.props;
-    this.listRef.removeEventListener('mouseenter', this.touchStartHandler, false);
-    this.listRef.removeEventListener('mouseleave', this.touchEndHandler, false);
-    this.listRef.removeEventListener('touchstart', this.touchStartHandler, false);
-    this.listRef.removeEventListener('touchend', this.touchEndHandler, false);
-    this.listRef.removeEventListener('wheel', this.onWheelHandler, false);
-    this.listRef.removeEventListener('scroll', this.onScrollHandlerDB, false);
-    disableScrollSnap(false, false);
+  countGroups() {
+    const { children, displayVolume } = this.props;
+    const count = Math.ceil(children.length / displayVolume);
+    this.setState({ groupCount: count });
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    const { slide, children } = this.state;
-    const { isTouchDevice } = this.props;
-    // this.listRef.scrollLeft = this.getSlideScrollPosition();
-    if (isTouchDevice && slide !== prevState.slide) {
-      animateScrollTo(this.slidesRefs[slide].current, { element: this.listRef, horizontal: true });
-    }
-    if (!isEqual(children, prevState.children)) {
-      this.updateSlidesRef();
-    }
-  }
-
-  updateSlidesRef() {
-    const { children } = this.state;
-    this.slidesRefs = [];
-    children.forEach(() => {
-      this.slidesRefs.push(React.createRef());
-    });
-  }
-
-  touchStartHandler(e) {
-    const { disableScrollSnap } = this.props;
+  next(e) {
     e.stopPropagation();
-    // e.preventDefault();
-    disableScrollSnap(true, true);
-  }
-
-  touchEndHandler(e) {
-    const { disableScrollSnap } = this.props;
-    e.stopPropagation();
-    // e.preventDefault();
-    disableScrollSnap(false, false);
-  }
-
-  onScrollHandler() {
-    const { disableScrollSnap } = this.props;
-    const { slide } = this.state;
-    disableScrollSnap(true, true);
-    if (this.listRef.scrollLeft + this.listRef.clientWidth >= this.listRef.scrollWidth - 10) {
-      // end reached
-      this.setState({ end: true, start: false });
-    } else if (this.listRef.scrollLeft === 0) {
-      // start reached
-      this.setState({ start: true, end: false });
-    } else if (slide !== 1) {
-      // somewhere in the middle
-      this.setState({ start: false, end: false });
+    const { group, groupCount } = this.state;
+    if (group < groupCount) {
+      this.setState({ group: group + 1, orientation: 'next' });
     }
   }
 
-  onWheelHandler(e) {
-    const deltaY = e.wheelDeltaY;
-    e.preventDefault();
-    if (Math.abs(deltaY) > 0) this.listRef.scrollLeft -= deltaY;
-  }
-
-  reverseAnimation() {
-    const { reverseAnimation } = this.state;
-    this.setState({ reverseAnimation: !reverseAnimation });
-  }
-
-  renderData() {
-    const { children } = this.state;
-    const dom = children.map((child, i) => (
-      <div ref={this.slidesRefs[i]} className={cx(child.props.wrapperClass)} key={i} >
-        {child}
-      </div >
-    ));
-    return dom;
-  }
-
-  onSwipedLeftHandler() {
-    const { slide, children } = this.state;
-    const nextSlide = Math.min(slide + 1, children.length - 1);
-    this.setState({
-      slide: nextSlide,
-      start: nextSlide === 0,
-      end: nextSlide === children.length - 1,
-    });
-  }
-
-  onSwipedRightHandler() {
-    const { slide, children } = this.state;
-    const nextSlide = Math.max(slide - 1, 0);
-    this.setState({
-      slide: nextSlide,
-      start: nextSlide === 0,
-      end: nextSlide === children.length - 1,
-    });
-  }
-
-  onSwipedHandler() {
-    const { disableScrollSnap, disableNext, disablePrev } = this.props;
-    if (disableNext || disablePrev) {
-      disableScrollSnap(disableNext, disablePrev);
+  prev(e) {
+    e.stopPropagation();
+    const { group } = this.state;
+    if (group > 0) {
+      this.setState({ group: group - 1, orientation: 'prev' });
     }
   }
 
   render() {
-    const { isTouchDevice, color, className } = this.props;
-    const { start, end } = this.state;
+    const { children, displayVolume, className, color, colorName } = this.props;
+    const { group, groupCount, orientation } = this.state;
     return (
-      <Spring
-        from={{
-          arrowRightOpacity: start ? 0 : 1,
-          arrowLeftOpacity: end ? 0 : 1
-        }}
-        to={{
-          arrowRightOpacity: start ? 1 : 0,
-          arrowLeftOpacity: end ? 1 : 0
-        }}
-      >
-        {props => <div className={cx(styles.carousel, className)} >
-          <Swipeable
-            className={cx(styles.inner)}
-            innerRef={ref => {
-              this.listRef = ref;
-            }}
-            style={{
-              overflow: isTouchDevice ? 'hidden' : 'auto',
-            }}
-            onSwipedLeft={this.onSwipedLeftHandler}
-            onSwipedRight={this.onSwipedRightHandler}
-            onSwiped={this.onSwipedHandler}
-            preventDefaultTouchmoveEvent={true}
-            trackTouch={true}
+      <div className={cx(styles.carousel, className)} >
+        <Button
+          className={cx('prev', styles.btn, styles.left)}
+          waveColor={colorName}
+          textColor={color}
+          onClick={this.prevThrottle}
+          disable={group === 0}
+        >
+          <ChevronLeft />
+        </Button >
+        <div className={styles.content}>
+          <Transition
+            config={config.default}
+            items={group}
+            from={{ transform: `translate3d(${orientation === 'next' ? '' : '-'}100%,0,0)`, opacity: 0 }}
+            enter={{ transform: `translate3d(0,0,0)`, opacity: 1 }}
+            leave={{ transform: `translate3d(${orientation === 'next' ? '-' : ''}100%,0,0)`, opacity: 0 }}
           >
-            {this.renderData()}
-          </Swipeable >
-          <LongArrowAltRight className={cx(styles.arrow)} style={{
-            opacity: props.arrowRightOpacity,
-            color,
-          }} />
-          <LongArrowAltLeft className={cx(styles.arrow)} style={{
-            opacity: props.arrowLeftOpacity,
-            color,
-          }} />
-        </div >}
-      </Spring >
+            {group => springs => <div className={styles.itemGroup} key={group} style={springs} >
+              {children.slice(group * displayVolume, (group * displayVolume) + displayVolume).map((child, i) => (
+                <div key={`${group}-${i}`} style={{
+                  width: `calc(${100 / displayVolume}% - 20px)`,
+                }}>{child}</div >
+              ))}
+            </div >}
+          </Transition >
+        </div >
+        <Button
+          className={cx('next', styles.btn, styles.right)}
+          waveColor={colorName}
+          textColor={color}
+          onClick={this.nextThrottle}
+          disable={group === groupCount - 1}
+        >
+          <ChevronRight />
+        </Button >
+      </div >
     );
   }
 }
 
 Carousel.propTypes = {
-  disableScrollSnap: PropTypes.func.isRequired,
-  isTouchDevice: PropTypes.bool.isRequired,
-  disableNext: PropTypes.bool.isRequired,
-  disablePrev: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
+  colorName: PropTypes.string.isRequired,
   children: PropTypes.any.isRequired,
+  displayVolume: PropTypes.number.isRequired,
   className: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
-  isTouchDevice: Device.selectors.isTouchDevice(state),
-  disableNext: SnapScroll.selectors.disableNext(state),
-  disablePrev: SnapScroll.selectors.disablePrev(state),
-  color: services.vgs.selectors.color(state),
+  colorName: services.vgs.selectors.colorName(state),
 });
 
 const mapDispatchToProps = dispatch => ({

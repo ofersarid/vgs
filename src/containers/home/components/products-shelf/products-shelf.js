@@ -22,7 +22,7 @@ const ProductsShelf = ({ resetFrame }) => {
         <h2 >Cardiac</h2 >
         <div className={styles.btnGroup} >
           <Button
-            color
+            textColor="white"
             waveColor="white"
             className={cx(styles.productBtn)}
             onClick={navigate}
@@ -30,7 +30,7 @@ const ProductsShelf = ({ resetFrame }) => {
             VEST
           </Button >
           <Button
-            color
+            textColor="white"
             waveColor="white"
             className={cx(styles.productBtn)}
             onClick={navigate}
@@ -43,7 +43,7 @@ const ProductsShelf = ({ resetFrame }) => {
         <h2 >Vascular</h2 >
         <div className={styles.btnGroup} >
           <Button
-            color
+            textColor="white"
             waveColor="white"
             className={cx(styles.productBtn)}
             onClick={navigate}
@@ -52,7 +52,7 @@ const ProductsShelf = ({ resetFrame }) => {
           </Button
           >
           <Button
-            color
+            textColor="white"
             waveColor="white"
             className={cx(styles.productBtn)}
             onClick={navigate}

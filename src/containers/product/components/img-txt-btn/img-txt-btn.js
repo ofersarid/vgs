@@ -91,7 +91,7 @@ class ImgTxtBtn extends PureComponent {
                   {pdfSrc && (
                     <Button
                       tag="a"
-                      color
+                      textColor="white"
                       target="_blank"
                       rel="noopener noreferrer"
                       href={pdfSrc}
@@ -122,7 +122,7 @@ class ImgTxtBtn extends PureComponent {
                 {pdfSrc && (
                   <Button
                     tag="a"
-                    color
+                    textColor="white"
                     target="_blank"
                     rel="noopener noreferrer"
                     href={pdfSrc}

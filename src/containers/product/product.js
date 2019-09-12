@@ -28,6 +28,8 @@ class Product extends PureComponent {
 
   componentDidMount() {
     this.didMount = true;
+    this.props.setColor(this.resolveColor());
+    this.props.resetFrames();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -198,6 +200,7 @@ Product.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
+  resetFrames: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -211,6 +214,7 @@ const mapStateToProps = state => ({
 
 const mapDispatch = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
+  resetFrames: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
 });
 
 export default compose(
