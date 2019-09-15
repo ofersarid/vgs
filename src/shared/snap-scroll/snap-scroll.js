@@ -64,8 +64,8 @@ class SnapScroll extends React.Component {
       index: 0,
       direction: DIRECTION.FORWARD,
       children: [],
+      lock: false,
     };
-    this.lock = false;
     // props.disableScrollSnap(props.frame === this.children.length - 1, props.frame === 0);
   }
 
@@ -115,10 +115,9 @@ class SnapScroll extends React.Component {
   }
 
   snap(direction) {
-    if (this.lock) return;
-    this.lock = true;
-    if (this.isTouchDevice) {
-    }
+    const { lock } = this.state;
+    if (lock) return;
+    this.setState({ lock: true });
     switch (direction) {
       case -1:
         this.next();
@@ -133,19 +132,19 @@ class SnapScroll extends React.Component {
 
   mouseScrollHandler(e) {
     clearTimeout(this.to);
-    const delta = e.wheelDelta;
+    const delta = e.wheelDelta || e.deltaY;
     this.isTouchDevice = false;
     if (Math.abs(delta) > THRESHHOLD) {
       this.snap(delta < 0 ? -1 : 1);
     }
     this.to = setTimeout(() => {
-      this.lock = false;
+      this.setState({ lock: false });
     }, 100);
   };
 
   touchStartHandler(e) {
     const { disableScrollSnap } = this.props;
-    this.lock = false;
+    this.setState({ lock: false });
     this.yDown = e.touches[0].clientY;
     disableScrollSnap(false, false);
     this.isTouchDevice = true;
