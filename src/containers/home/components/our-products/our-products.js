@@ -6,7 +6,7 @@ import Device from '/src/shared/device';
 import { FadeIn } from '/src/shared';
 import cx from 'classnames';
 import layout from '/src/shared/styles/layout.scss';
-import artTablet from '/src/assets/home_products_art_mobile.svg';
+import artTablet from '/src/assets/home_products_art_tablet.svg';
 import artDesktop from '/src/assets/home_products_art_desktop.svg';
 import { hashHistory } from 'react-router';
 import ProductsShelf from '../products-shelf/products-shelf';
