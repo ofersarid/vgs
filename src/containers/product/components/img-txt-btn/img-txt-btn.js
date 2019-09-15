@@ -1,6 +1,5 @@
 import React, { Fragment, PureComponent } from 'react';
 import cx from 'classnames';
-import YouTubePlayer from 'react-player/lib/players/YouTube';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -8,7 +7,7 @@ import Device from '/src/shared/device';
 import autoBind from 'auto-bind';
 import services from '/src/services';
 import styles from './styles.scss';
-import { Button, FadeIn, MediaLoader, RatioBox, ReadMoreSection } from '/src/shared';
+import { Button, FadeIn, MediaLoader, RatioBox, ReadMoreSection, Youtube } from '/src/shared';
 import sharedStyles from '../../styles.scss';
 import Footnotes from '../footnotes/footnotes';
 
@@ -16,9 +15,13 @@ class ImgTxtBtn extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = {
-      isLoaded: false,
-    };
+  }
+
+  componentDidMount() {
+    const { youtube, disableBizCard } = this.props;
+    if (youtube) {
+      disableBizCard();
+    }
   }
 
   componentWillUnmount() {
@@ -28,26 +31,11 @@ class ImgTxtBtn extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-
-  }
-
-  mediaReady() {
-    this.setState({ isLoaded: true });
-  }
-
-  onYouTubeReady() {
-    const { disableBizCard } = this.props;
-    this.mediaReady();
-    disableBizCard();
-  }
-
   render() {
     const {
       imgSubTitle, img, youtube, txt, color, title,
       pdfSrc, themeColor, footNotes, orientation, isMobile
     } = this.props;
-    const { isLoaded } = this.state;
     return (
       <FadeIn spread >
         <div className={cx(styles.container, sharedStyles.inner)} >
@@ -60,60 +48,45 @@ class ImgTxtBtn extends PureComponent {
             </Fragment >
           )}
           {youtube && (
-            <RatioBox ratio={isMobile ? 1 : 2 / 3} className={cx(styles.img)} >
-              <YouTubePlayer
-                url={youtube}
-                playing={isLoaded}
-                config={{
-                  youtube: {
-                    playerVars: { rel: 0 },
-                    preload: true,
-                  }
-                }}
-                onReady={this.onYouTubeReady}
-                controls
-                width="100%"
-                height="100%"
-                className={cx(styles.youtube, styles.inner, {
-                  [styles.ready]: isLoaded,
-                  [styles.fullScreen]: isMobile && orientation === 'landscape',
-                })}
-              />
-            </RatioBox >
+            <Youtube
+              ratio={9 / 16}
+              className={styles.img}
+              url={youtube}
+              fullScreen={isMobile && orientation === 'landscape'}
+              color={color}
+            />
           )}
           {(orientation === 'portrait' && isMobile) && (
-            <ReadMoreSection
-              maxLines={youtube ? 0 : 10}
-              btnTxt="About this video"
-              html={(
-                <Fragment >
-                  {youtube ? null : <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />}
-                  {pdfSrc && (
-                    <Button
-                      tag="a"
-                      textColor="white"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={pdfSrc}
-                      waveColor="white"
-                      className={cx(styles.btn)}
-                      style={{
-                        background: themeColor,
-                      }}
-                    >
-                      PRODUCT PDF
-                    </Button >
-                  )}
-                </Fragment >
+            <Fragment >
+              <ReadMoreSection
+                maxLines={youtube ? 0 : 10}
+                btnTxt="About this video"
+                html={youtube ? null : <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />}
+                more={(
+                  <Fragment >
+                    <h1 style={{ color }} >{title}</h1 >
+                    <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
+                    <Footnotes footNotes={footNotes} />
+                  </Fragment >
+                )}
+              />
+              {pdfSrc && (
+                <Button
+                  tag="a"
+                  textColor="white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={pdfSrc}
+                  waveColor="white"
+                  className={cx(styles.btn)}
+                  style={{
+                    background: themeColor,
+                  }}
+                >
+                  PRODUCT PDF
+                </Button >
               )}
-              more={(
-                <Fragment >
-                  <h1 style={{ color }} >{title}</h1 >
-                  <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
-                  <Footnotes footNotes={footNotes} />
-                </Fragment >
-              )}
-            />
+            </Fragment >
           )}
           {!isMobile && (
             <Fragment >

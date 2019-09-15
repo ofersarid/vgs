@@ -1,0 +1,44 @@
+.youtube {
+  opacity: 0;
+  transition: .5s ease-out;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+
+  &.playing {
+    opacity: 1;
+  }
+}
+
+.fullScreen {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.concealer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 1;
+  transition: .5s ease-out;
+  background: white;
+
+  svg {
+    height: 50%;
+  }
+}
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
