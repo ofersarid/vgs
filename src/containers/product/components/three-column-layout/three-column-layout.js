@@ -11,7 +11,7 @@ const ThreeColumnLayout = ({ data }) => {
       <section className={cx(styles.content, sharedStyles.inner)} >
         <div className={styles.list} >
           {data.map(item => item ? (
-            <div key={item} className={styles.listItem} >{item}</div >
+            <p key={item} className={styles.listItem} >{item}</p >
           ) : null)}
         </div >
       </section >

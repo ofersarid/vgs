@@ -44,7 +44,7 @@ class ImgTxtBtn extends PureComponent {
               <RatioBox ratio={2 / 3} className={styles.img} >
                 <MediaLoader src={img} />
               </RatioBox >
-              {imgSubTitle && <div className={cx(styles.title)} >{imgSubTitle}</div >}
+              {imgSubTitle && <div className={cx('caption')} >{imgSubTitle}</div >}
             </Fragment >
           )}
           {youtube && (

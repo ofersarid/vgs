@@ -3,20 +3,18 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Device from '/src/shared/device';
-import { ScrollableArea, FadeIn } from '/src/shared';
+import { FadeIn } from '/src/shared';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
-import Footnotes from '../footnotes/footnotes';
+// import Footnotes from '../footnotes/footnotes';
 
-const TwoColumnLayout = ({ article, footNotes, isMobile }) => {
+const TwoColumnLayout = ({ article, footNotes, isMobile }) => { // eslint-disable-line
   return (
     <FadeIn spread >
       <section className={cx(layout.inner)} >
-        <ScrollableArea >
-          <div className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
-          {isMobile && <Footnotes footNotes={footNotes} />}
-        </ScrollableArea >
-        {!isMobile && <Footnotes footNotes={footNotes} />}
+        <p className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
+        {/*{isMobile && <Footnotes footNotes={footNotes} />}*/}
+        {/*{!isMobile && <Footnotes footNotes={footNotes} />}*/}
       </section >
     </FadeIn >
   );

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FadeIn, ScrollableArea, RatioBox } from '/src/shared';
+import { FadeIn, RatioBox } from '/src/shared';
 import styles from './styles.scss';
 import cx from 'classnames';
 import logoGreen from '/src/assets/logo_green.svg';
@@ -24,9 +24,7 @@ class Cover extends PureComponent {
             COMPANY
           </h1 >
           <div className={cx(styles.paragraph, layout.inner)} >
-            <ScrollableArea >
-              <div className={styles.body} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
-            </ScrollableArea >
+            <p dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
           </div >
         </div >
         <FadeIn slideFrom="right" className={styles.art} slow >

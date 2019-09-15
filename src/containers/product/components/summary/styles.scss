@@ -12,8 +12,6 @@
 }
 
 .list {
-  font-size: 18px;
-  line-height: 24px;
   box-sizing: border-box;
   position: relative;
   padding: 0;
@@ -45,7 +43,7 @@
   flex-grow: 0;
   flex-shrink: 0;
   margin-right: 10px;
-  transform: translate(-1vw, -2px);
+  transform: translate(-1vw, -7px);
 
   @include media('>phone') {
     width: 36px;

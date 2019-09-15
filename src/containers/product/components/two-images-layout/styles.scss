@@ -1,11 +1,11 @@
 @import "/src/media-query-mixins";
 @import "/src/utils";
 
-//.inner {
-//  @include media('>tablet') {
-//    height: 62%;
-//  }
-//}
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .content {
   display: flex;
@@ -50,12 +50,6 @@
   @include gradient-vertical(#f0f1f5, #ffffff);
 }
 
-.description {
-  font-size: 12px;
-  text-transform: capitalize;
-  line-height: 20px;
-}
-
 .footNotes {
   margin: 56px 0 0 0;
   padding: 17px 0 0 0;
@@ -80,10 +74,6 @@
       display: inline-block;
     }
   }
-}
-
-.bottom {
-  margin-bottom: 0;
 }
 
 .spacer {

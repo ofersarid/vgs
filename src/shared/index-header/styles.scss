@@ -2,11 +2,8 @@
 @import "/src/shared/styles/layout";
 
 .header {
-  font-size: 15px;
   text-transform: uppercase;
-  line-height: 15px;
   margin: 0;
-  font-weight: normal;
   position: fixed;
   width: 66vw;
   top: 27%;
@@ -27,16 +24,12 @@
     width: 74vw;
     top: 23%;
     left: $gutter-desktop;
-    font-size: 18px;
-    line-height: 18px;
   }
 
   @include media('>desktop') {
     width: 60vw;
     top: 22%;
     left: $gutter-wide-screen;
-    font-size: 20px;
-    line-height: 20px;
   }
 }
 

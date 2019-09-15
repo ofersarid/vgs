@@ -33,19 +33,16 @@ $peek-mobile: 54px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    letter-spacing: unset;
   }
 
   .date {
     color: #8F8F8F;
     height: 10%;
-    line-height: 16px;
-    font-weight: 400;
   }
 
   .header {
     height: 70%;
-    line-height: 23px;
-    font-weight: 100;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -62,10 +59,8 @@ $peek-mobile: 54px;
   }
 
   .source {
-    line-height: 23px;
-    font-weight: 100;
     height: 20%;
-    //height: #{23 * 3}px;
+    verflow: hidden;
   }
 
   .menuTrigger {
@@ -79,13 +74,19 @@ $peek-mobile: 54px;
   width: calc(100% + 80px);
 
   @include media('>phone') {
-    height: 50%;
-    transform: translateY(-50%);
+    height: 65%;
+    transform: translateY(-15%);
+    width: calc(100% + 24vw);
 
     :global {
       .prev {
         transform: translateY(-15px);
       }
+    }
+
+    @include media('>phone') {
+      transform: translateY(-10%);
+      width: calc(100% + 17vw);
     }
   }
 }

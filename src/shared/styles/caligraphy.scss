@@ -1,0 +1,98 @@
+@import "./media-query-mixins";
+
+h1 {
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin: 0;
+
+  @include media('>tablet') {
+    font-size: 50px;
+    line-height: 58px;
+    font-weight: 200;
+  }
+
+  @include media('>dektop') {
+    font-size: 65px;
+    line-height: 65px;
+  }
+}
+
+
+h2 {
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 400;
+  margin: 0;
+
+  @include media('>tablet') {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  @include media('>desktop') {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+
+h3 {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+  margin: 0;
+
+  @include media('>phone') {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  @include media('>tablet') {
+    font-size: 18px;
+  }
+
+  @include media('>desktop') {
+    font-size: 20px;
+  }
+}
+
+p {
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 300;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global {
+  p.small {
+    font-size: 16px;
+  }
+
+  p.smaller {
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 24px;
+  }
+
+  .caption {
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 16px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .bullet {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 24px;
+  }
+}

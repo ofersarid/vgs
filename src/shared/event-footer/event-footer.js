@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Spring, config } from 'react-spring/renderprops';
+// import { Spring, config } from 'react-spring/renderprops';
 import autoBind from 'auto-bind';
 import cx from 'classnames';
 import services from '/src/services';
@@ -8,27 +8,27 @@ import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
 import { LocationOn } from 'styled-icons/material/LocationOn';
 import moment from 'moment';
-import { RightArrowAlt } from 'styled-icons/boxicons-regular/RightArrowAlt';
+// import { RightArrowAlt } from 'styled-icons/boxicons-regular/RightArrowAlt';
 import { Button } from '/src/shared';
 import styles from './styles.scss';
 
 class Cover extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      reverseAnimation: false,
-    };
+    // this.state = {
+    //   reverseAnimation: false,
+    // };
     autoBind(this);
   }
 
-  reverseAnimation() {
-    const { reverseAnimation } = this.state;
-    this.setState({ reverseAnimation: !reverseAnimation });
-  }
+  // reverseAnimation() {
+  //   const { reverseAnimation } = this.state;
+  //   this.setState({ reverseAnimation: !reverseAnimation });
+  // }
 
   render() {
     const { footer, color } = this.props;
-    const { reverseAnimation } = this.state;
+    // const { reverseAnimation } = this.state;
     const justOneDay = _isEqual(footer.dateFrom, footer.dateTo);
     return (
       <Button
@@ -39,27 +39,27 @@ class Cover extends PureComponent {
         href={footer.linkTo}
         target="_blank"
       >
-        <div className={styles.text} >
-          <div className={styles.title} >{footer.title}</div >
-          <div className={styles.date} >
+        <p className={cx('smaller', styles.text)} >
+          <span className={styles.title} >{footer.title}</span >
+          <span className={styles.date} >
             {moment(footer.dateFrom.toDate()).format('MMMM Do')}
             {!justOneDay && <span >&nbsp;&mdash;&nbsp;</span >}
             {!justOneDay && moment(footer.dateTo.toDate()).format('MMMM Do')}
-          </div >
-          <div className={styles.address} >
+          </span >
+          <span className={styles.address} >
             <LocationOn />
             <span className={styles.addressText} >{footer.address}</span >
-          </div >
-        </div >
-        <Spring
-          from={{ transform: 'translateX(-10%)' }}
-          to={{ transform: 'translateX(10%)' }}
-          config={reverseAnimation ? Object.assign({}, config.slow, { duration: 200 }) : config.slow}
-          reset
-          reverse={reverseAnimation}
-          onRest={this.reverseAnimation} >
-          {props => <RightArrowAlt className={styles.arrow} style={props} />}
-        </Spring >
+          </span >
+        </p >
+        {/*<Spring*/}
+        {/*  from={{ transform: 'translateX(-10%)' }}*/}
+        {/*  to={{ transform: 'translateX(10%)' }}*/}
+        {/*  config={reverseAnimation ? Object.assign({}, config.slow, { duration: 200 }) : config.slow}*/}
+        {/*  reset*/}
+        {/*  reverse={reverseAnimation}*/}
+        {/*  onRest={this.reverseAnimation} >*/}
+        {/*  {props => <RightArrowAlt className={styles.arrow} style={props} />}*/}
+        {/*</Spring >*/}
       </Button >
     );
   }

@@ -12,7 +12,7 @@ import Footnotes from '../footnotes/footnotes';
 const TwoColumnLayout = ({ article, footNotes, isMobile, title, color }) => {
   const getHtml = (
     <Fragment>
-      <div className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
+      <p className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
       <Footnotes footNotes={footNotes} />
     </Fragment>
   );
@@ -32,7 +32,7 @@ const TwoColumnLayout = ({ article, footNotes, isMobile, title, color }) => {
           />
         ) : (
           <Fragment>
-            <div className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
+            <p className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
             <Footnotes footNotes={footNotes} />
           </Fragment>
         )}

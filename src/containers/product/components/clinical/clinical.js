@@ -31,9 +31,9 @@ class Clinical extends PureComponent {
           href={m.link}
           waveColor={color === '#0272BA' ? 'blue' : 'purple'}
         >
-          <div className={styles.date} >{moment(m.dateTime.toDate()).format('MMMM Do, YYYY')}</div >
-          <div className={styles.header} style={{ color }} >{m.description}</div >
-          <div className={styles.source} >{m.source}</div >
+          <h3 className={styles.date} >{moment(m.dateTime.toDate()).format('MMMM Do, YYYY')}</h3 >
+          <p className={cx('small', styles.header)} style={{ color }} >{m.description}</p >
+          <p className={cx('small', styles.source)} >{m.source}</p >
         </Button >
       </div >
     ));

@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { FadeIn, ScrollableArea } from '/src/shared';
+import { FadeIn } from '/src/shared';
 import styles from './styles.scss';
 import sharedStyles from '../../styles.scss';
 
@@ -15,17 +15,15 @@ const TwoImagesLayout = (
   return (
     <FadeIn spread >
       <section className={cx(styles.inner, sharedStyles.inner)} >
-        <ScrollableArea className={styles.content} >
-          <div className={styles.container} >
-            <img src={image1} className={styles.image} />
-            <div className={cx(styles.description)} >{img1Description}</div >
-          </div >
-          {/*{isTouchDevice ? null : <div className={styles.spacer}/>}*/}
-          <div className={styles.container} >
-            <img src={image2} className={styles.image} />
-            <div className={cx(styles.bottom, styles.description)} >{img2Description}</div >
-          </div >
-        </ScrollableArea >
+        <div className={styles.container} >
+          <img src={image1} className={styles.image} />
+          <div className={cx('caption')} >{img1Description}</div >
+        </div >
+        {/*{isTouchDevice ? null : <div className={styles.spacer}/>}*/}
+        <div className={styles.container} >
+          <img src={image2} className={styles.image} />
+          <div className={cx('caption')} >{img2Description}</div >
+        </div >
       </section >
     </FadeIn >
   );

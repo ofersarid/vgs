@@ -18,7 +18,7 @@ class SingleParagraph extends PureComponent {
     return (
       <FadeIn spread >
         <div className={cx(styles.paragraph, layout.inner)} >
-          <div
+          <p
             dangerouslySetInnerHTML={{ __html: text.replace(/\n\r?/g, '<br />') }}
           />
         </div >

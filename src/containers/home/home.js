@@ -97,7 +97,7 @@ class Home extends PureComponent {
           {/*  text={data.globalImpactBody} />*/}
           {isMobile && (
             <FadeIn className={layout.inner} >
-              <div
+              <p
                 dangerouslySetInnerHTML={{ __html: data.ourProductsBodyMobile.replace(/\n\r?/g, '<br />') }}
               />
             </FadeIn >

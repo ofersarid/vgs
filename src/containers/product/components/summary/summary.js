@@ -13,7 +13,7 @@ const Summary = ({ data, art }) => {
       <section className={cx(styles.content, sharedStyles.inner)} >
         <ul className={styles.list} >
           {data.map(item => (
-            <li key={item} className={styles.listItem} >
+            <li key={item} className={cx('bullet', styles.listItem)} >
               <Check className={styles.check} />
               <div >{item}</div >
             </li >
