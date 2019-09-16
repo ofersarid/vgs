@@ -7,9 +7,8 @@ import Device from '/src/shared/device';
 import autoBind from 'auto-bind';
 import services from '/src/services';
 import styles from './styles.scss';
-import { Button, FadeIn, MediaLoader, RatioBox, ReadMoreSection, Youtube } from '/src/shared';
+import { Button, FadeIn, MediaLoader, RatioBox, ReadMoreSection, Youtube, Footnotes } from '/src/shared';
 import sharedStyles from '../../styles.scss';
-import Footnotes from '../footnotes/footnotes';
 
 class ImgTxtBtn extends PureComponent {
   constructor(props) {

@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Device from '/src/shared/device';
 import services from '/src/services';
-import { FadeIn, ReadMoreSection } from '/src/shared';
+import { FadeIn, ReadMoreSection, Footnotes } from '/src/shared';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
-import Footnotes from '../footnotes/footnotes';
 
 const TwoColumnLayout = ({ article, footNotes, isMobile, title, color }) => {
   const getHtml = (
