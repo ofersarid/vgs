@@ -87,6 +87,10 @@
 .logo, .logoText {
   @include media('>phone') {
     left: 10%;
+
+    @include orientation('landscape') {
+      left: calc(#{$gutter-desktop / 2});
+    }
   }
 
   @include media('>tablet') {
@@ -119,6 +123,10 @@
 
   @include media('>phone') {
     right: 10%;
+
+    @include orientation('landscape') {
+      right: calc(#{$gutter-desktop / 2});
+    }
   }
 
   @include media('>tablet') {
@@ -307,6 +315,10 @@
     justify-content: center;
     height: auto;
     padding: 6px;
+
+    @include orientation('landscape') {
+      left: calc(#{$gutter-desktop / 2})
+    }
   }
 
   @include media('>tablet') {

@@ -205,7 +205,6 @@ Product.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
-  resetFrames: PropTypes.func.isRequired,
   updateFrameIndex: PropTypes.func.isRequired,
   updateLastFrame: PropTypes.func.isRequired,
   lastFrame: PropTypes.number.isRequired,
@@ -219,13 +218,13 @@ const mapStateToProps = state => ({
   name: services.products.selectors.name(state),
   isMobile: Device.selectors.isMobile(state),
   orientation: Device.selectors.orientation(state),
-  lastFrame: services.vgs.selectors.lastFrame(state, Routes.selectors.pathname(state)),
+  // lastFrame: services.vgs.selectors.lastFrame(state, Routes.selectors.pathname(state)),
+  lastFrame: 8,
   pathname: Routes.selectors.pathname(state),
 });
 
 const mapDispatch = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
-  resetFrames: () => dispatch(SnapScroll.actions.updateFrameIndex(0)),
   updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
   updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });

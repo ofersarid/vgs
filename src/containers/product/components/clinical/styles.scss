@@ -23,16 +23,21 @@ $peek-mobile: 54px;
   }
 
   .innerWrapper {
-    background: #F9F9F9;
-    border-radius: 10px;
-    padding: 4vh 17px;
+    border-radius: 2px;
     font-size: 16px;
     height: 100%;
+    padding: 15px;
     //width: 65vw;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     letter-spacing: unset;
+
+    @include media('>phone') {
+      border-radius: 10px;
+      padding: 4vh 17px;
+      background: #F9F9F9;
+    }
   }
 
   .date {
@@ -41,13 +46,14 @@ $peek-mobile: 54px;
   }
 
   .header {
-    height: 70%;
+    height: 50%;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 
     @include media('>phone') {
+      height: 70%;
       -webkit-line-clamp: 7;
     }
 
@@ -58,8 +64,12 @@ $peek-mobile: 54px;
   }
 
   .source {
-    height: 20%;
+    height: 40%;
     verflow: hidden;
+
+    @include media('>phone') {
+      height: 20%;
+    }
   }
 
   .menuTrigger {
@@ -70,21 +80,29 @@ $peek-mobile: 54px;
 }
 
 .clinicalCarousel {
-  width: calc(100% + 80px);
+  height: 70%;
+  transform: translateY(-15%);
 
   @include media('>phone') {
     height: 65%;
-    transform: translateY(-15%);
-    width: calc(100% + 24vw);
+    width: calc(100% + 17vw);
+    transform: translateY(-10%);
+
+    @include orientation('landscape') {
+      width: calc(100% + 10vw);
+    }
 
     :global {
       .prev {
         transform: translateY(-15px);
       }
     }
+  }
 
-    @include media('>phone') {
-      transform: translateY(-10%);
+  @include media('>tablet') {
+    width: calc(100% + 14vw);
+
+    @include orientation('portrait') {
       width: calc(100% + 17vw);
     }
   }

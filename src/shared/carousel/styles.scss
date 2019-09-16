@@ -8,6 +8,10 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+
+  &.bottom {
+    flex-direction: column;
+  }
 }
 
 .inner {
@@ -21,7 +25,7 @@
 
 .btn {
   height: 80px;
-  width: 40px;
+  width: 30px;
   flex-shrink: 0;
   z-index: 1;
 
@@ -32,13 +36,13 @@
 
 .right {
   svg {
-    transform: translate(-28px, -4px);
+    transform: translate(-33px, -4px);
   }
 }
 
 .left {
   svg {
-    transform: translate(-23px, -4px);
+    transform: translate(-28px, -4px);
   }
 }
 
@@ -60,5 +64,61 @@
   height: 100%;
   overflow: hidden;
   position: relative;
+
+  &.content-bottom {
+    width: 100%;
+  }
+}
+
+.navWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 0 0 0;
+  margin-top: 1px;
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0 16px;
+    font-size: 16px;
+    border-radius: 2px;
+
+    svg {
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    &.right {
+      svg {
+        transform: translate(0, -1px);
+      }
+    }
+
+    &.left {
+      svg {
+        transform: translate(0, -1px);
+      }
+    }
+  }
+
+  .clipIcon {
+    height: 35px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btnTxt {
+    transform: translateY(2px);
+  }
 }
 

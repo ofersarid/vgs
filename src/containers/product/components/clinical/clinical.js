@@ -52,7 +52,7 @@ class Clinical extends PureComponent {
   }
 
   render() {
-    const { color } = this.props;
+    const { color, isMobile } = this.props;
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
       <FadeIn spread >
@@ -62,6 +62,9 @@ class Clinical extends PureComponent {
             displayVolume={this.resolveVolume()}
             className={styles.clinicalCarousel}
             color={color}
+            navLocation={isMobile ? 'bottom' : 'horizontal'}
+            prevBtnTxt="New"
+            nextBtnTxt="Old"
           >
             {this.renderData()}
           </Carousel >
@@ -75,6 +78,7 @@ Clinical.propTypes = {
   themeColor: PropTypes.string.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
   isTablet: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   disableNext: PropTypes.bool.isRequired,
   disablePrev: PropTypes.bool.isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({
@@ -88,6 +92,7 @@ Clinical.propTypes = {
 
 const mapStateToProps = state => ({
   isTablet: Device.selectors.isTablet(state),
+  isMobile: Device.selectors.isMobile(state),
   disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),
   color: services.vgs.selectors.color(state),
