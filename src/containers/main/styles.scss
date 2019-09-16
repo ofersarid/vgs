@@ -212,7 +212,9 @@
     }
 
     li {
-      font-size: 28px;
+      font-size: 30px;
+      line-height: 0;
+      font-weight: 200;
       display: flex;
       flex-direction: column;
       padding: 15px 25px 7px;
@@ -230,6 +232,10 @@
       li {
         color: #00DBE3;
         pointer-events: all;
+
+        @include media('>desktop') {
+          font-size: 35px;
+        }
       }
     }
 
@@ -237,12 +243,16 @@
       overflow: hidden;
 
       label {
-        font-size: 19px;
-        line-height: 19px;
+        font-size: 20px;
+        line-height: 0;
         text-transform: capitalize;
         color: #8CC740;
         padding: 15px 25px 7px;
         display: inline-block;
+
+        @include media('>desktop') {
+          font-size: 22px;
+        }
       }
     }
 
@@ -259,10 +269,11 @@
   bottom: 4%;
   padding: 10px 30px 7px;
   transform: translate(45px, 0px);
-  font-weight: 100;
+  font-size: 20px;
+  line-height: 0;
+  font-weight: 200;
   border-radius: 30px;
   z-index: 1;
-  font-size: 28px;
 
   @include media('>phone') {
     right: 10%;
@@ -274,6 +285,7 @@
 
   @include media('>desktop') {
     right: 8%;
+    font-size: 22px;
   }
 }
 
@@ -336,21 +348,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 200;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 0;
+  font-weight: 200;
   opacity: 0;
   transform: translateY(100%);
 
   @include media('>phone') {
     padding: 5px 20vw 0;
+    font-size: 16px;
   }
 
   @include media('>tablet') {
     padding: 5px 13vw 0;
-  }
-
-  @include media('>desktop') {
-    //padding: 5px $gutter-tablet 0;
+    font-size: 18px;
   }
 }

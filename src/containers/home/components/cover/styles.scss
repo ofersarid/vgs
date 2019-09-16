@@ -15,27 +15,30 @@
     left: $gutter-phone;
     width: 66%;
     font-size: 50px;
-    line-height: 58px;
+    line-height: 53px;
+    font-weight: 200;
     text-transform: uppercase;
-    font-weight: lighter;
     z-index: 1;
     color: $green;
 
     @include media('>phone') {
       font-size: 91px;
       line-height: 90px;
+      font-weight: 100;
       left: $gutter-tablet;
       width: 60%;
     }
 
     @include media('>tablet') {
+      font-size: 110px;
+      line-height: 100px;
       left: 35vw;
       width: 55%;
     }
 
     @include media('>desktop') {
-      font-size: 127px;
-      line-height: 128px;
+      font-size: 135px;
+      line-height: 125px;
     }
   }
 

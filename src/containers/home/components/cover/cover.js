@@ -16,11 +16,11 @@ class Cover extends PureComponent {
     return (
       <FadeIn spread >
         <div className={styles.cover} >
-          <h1 className={styles.header} >
+          <div className={styles.header} >
             VASCULAR<br/>
             GRAFT<br/>
             SOLUTIONS
-          </h1 >
+          </div >
           {footer ? <EventFooter footer={footer} /> : null}
         </div >
       </FadeIn >
