@@ -37,7 +37,7 @@ class OurProducts extends PureComponent {
       <FadeIn spread >
         <img src={this.resolveArt()} className={styles.art} />
         <div className={cx(styles.ourProducts, layout.inner)} >
-          <div
+          <p
             className={styles.text}
             dangerouslySetInnerHTML={{ __html: text.replace(/\n\r?/g, '<br />') }}
           />

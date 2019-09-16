@@ -64,6 +64,11 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 
+  @include media('>phone') {
+    font-weight: 200;
+    line-height: 1.7em;
+  }
+
   @include media('>desktop') {
     font-size: 22px;
   }
