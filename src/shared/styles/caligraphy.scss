@@ -58,19 +58,14 @@ h3 {
 
 p {
   font-size: 18px;
-  line-height: 32px;
+  line-height: 1.5em;
   font-weight: 300;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @include media('>phone') {
-    line-height: 35px;
-  }
-
   @include media('>desktop') {
     font-size: 22px;
-    line-height: 40px;
   }
 }
 
