@@ -19,7 +19,6 @@ h1 {
   }
 }
 
-
 h2 {
   font-size: 15px;
   line-height: 15px;
@@ -36,7 +35,6 @@ h2 {
     line-height: 20px;
   }
 }
-
 
 h3 {
   font-size: 16px;
@@ -65,34 +63,82 @@ p {
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include media('>phone') {
+    line-height: 35px;
+  }
+
+  @include media('>desktop') {
+    font-size: 22px;
+    line-height: 40px;
+  }
 }
 
 :global {
   p.small {
     font-size: 16px;
+
+    @include media('>phone') {
+      line-height: 23px;
+    }
+
+    @include media('>tablet') {
+      font-size: 18px;
+      line-height: 25px;
+    }
+
+    @include media('>desktop') {
+      font-size: 20px;
+      line-height: 28px;
+    }
   }
 
   p.smaller {
     font-size: 16px;
     font-weight: 200;
     line-height: 24px;
+
+    @include media('>phone') {
+      font-size: 18px;
+    }
   }
 
   .caption {
     font-size: 14px;
     font-weight: 200;
-    line-height: 16px;
+    line-height: 14px;
     margin-bottom: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
     display: inline-block;
+
+    @include media('>tablet') {
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 300;
+    }
+
+    @include media('>desktop') {
+      font-size: 18px;
+      line-height: 18px;
+    }
   }
 
   .bullet {
     font-size: 18px;
-    font-weight: 300;
     line-height: 24px;
+    font-weight: 300;
+
+    @include media('>phone') {
+      font-size: 28px;
+      line-height: 37px;
+    }
+
+    @include media('>desktop') {
+      font-size: 35px;
+      line-height: 46px;
+    }
   }
 }

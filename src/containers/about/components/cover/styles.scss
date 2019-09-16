@@ -9,31 +9,21 @@
   background: #F2F2F2;
 
   .paragraph {
-    font-size: 16px;
-    line-height: 35px;
     height: 35%;
     top: 42%;
 
-    @include media('>phone') {
-      top: 45%;
-      font-size: 18px;
-      line-height: 37px;
-    }
-
+    //@include media('>phone') {
+    //  top: 45%;
+    //}
+    //
     @include media('>tablet') {
-      top: 45%;
-      font-size: 18px;
+      top: 50%;
       width: 30%;
-
-      @include orientation(portrait) {
-        top: 40%;
-        font-size: 28px;
-      }
-    }
-
-    @include media('>desktop') {
-      font-size: 22px;
-      left: 13vw;
+      left: $gutter-desktop;
+    //
+    //  @include orientation(portrait) {
+    //    top: 40%;
+    //  }
     }
   }
 

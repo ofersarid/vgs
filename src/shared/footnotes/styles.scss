@@ -10,13 +10,21 @@
   line-height: 20px;
   font-weight: 200;
 
-  &.hideTopLine {
-    border-top: none;
-  }
-
   @include media('>phone') {
     position: absolute;
-    bottom: 0
+    bottom: 0;
+    font-size: 14px;
+    line-height: 23px;
+  }
+
+  @include media('>desktop') {
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 300;
+  }
+
+  &.hideTopLine {
+    border-top: none;
   }
 
   li {
