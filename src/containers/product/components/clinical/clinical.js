@@ -9,7 +9,7 @@ import Device from '/src/shared/device';
 import { SnapScroll, FadeIn, DropMenu, Button } from '/src/shared';
 import services from '/src/services';
 import utils from '/src/utils';
-import sharedStyles from '../../styles.scss';
+import layout from '/src/shared/styles/layout.scss';
 import styles from './styles.scss';
 import Carousel from '../../../../shared/carousel/carousel';
 
@@ -56,7 +56,7 @@ class Clinical extends PureComponent {
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
       <FadeIn spread >
-        <div className={cx(styles.clinical, sharedStyles.inner)} >
+        <div className={cx(styles.clinical, layout.inner)} >
           <DropMenu options={menuOptions} selected={menuOptions[0]} triggerClass={styles.menuTrigger} color={color} />
           <Carousel
             displayVolume={this.resolveVolume()}

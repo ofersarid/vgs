@@ -16,16 +16,22 @@
   height: calc(100% - 58px);
   width: 100%;
   overflow: hidden auto;
-  padding: 20px 40px;
+  padding: 20px 40px 130px;
   box-sizing: border-box;
   color: $black;
 
   h1 {
-    font-size: 15px;
+    font-size: 17px;
     text-transform: uppercase;
     line-height: 15px;
     margin: 15px 0;
-    font-weight: normal;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 17px;
+    font-weight: 400;
+    margin: 15px 0 45px;
   }
 }
 

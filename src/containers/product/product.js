@@ -98,14 +98,6 @@ class Product extends PureComponent {
     }
   }
 
-  getBullets() {
-    const { data, isMobile } = this.props;
-    if (isMobile) {
-      return [data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3];
-    }
-    return [data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6];
-  }
-
   render() {
     const { color, data, name, orientation, isMobile } = this.props;
     if (!data) {
@@ -169,7 +161,8 @@ class Product extends PureComponent {
           )}
           {data.screen4Published && (
             <ThreeColumnLayout
-              data={this.getBullets()}
+              data={[data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6]}
+              title={data.screen4Title}
             />
           )}
           {data.screen5Published && (

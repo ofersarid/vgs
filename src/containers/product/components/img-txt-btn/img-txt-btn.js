@@ -8,7 +8,7 @@ import autoBind from 'auto-bind';
 import services from '/src/services';
 import styles from './styles.scss';
 import { Button, FadeIn, MediaLoader, RatioBox, ReadMoreSection, Youtube, Footnotes } from '/src/shared';
-import sharedStyles from '../../styles.scss';
+import layout from '/src/shared/styles/layout.scss';
 
 class ImgTxtBtn extends PureComponent {
   constructor(props) {
@@ -32,12 +32,12 @@ class ImgTxtBtn extends PureComponent {
 
   render() {
     const {
-      imgSubTitle, img, youtube, txt, color, title,
+      imgSubTitle, img, youtube, txt, color, title, name,
       pdfSrc, themeColor, footNotes, orientation, isMobile
     } = this.props;
     return (
       <FadeIn spread >
-        <div className={cx(styles.container, sharedStyles.inner)} >
+        <div className={cx(styles.container, layout.inner)} >
           {img && !isMobile && (
             <Fragment >
               <RatioBox ratio={2 / 3} className={styles.img} >
@@ -63,7 +63,8 @@ class ImgTxtBtn extends PureComponent {
                 html={youtube ? null : <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />}
                 more={(
                   <Fragment >
-                    <h1 style={{ color }} >{title}</h1 >
+                    <h1 style={{ color }} >{name}</h1 >
+                    <h2 style={{ color }} >{title}</h2 >
                     <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
                     <Footnotes footNotes={footNotes} />
                   </Fragment >
@@ -131,12 +132,14 @@ ImgTxtBtn.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   orientation: Device.selectors.orientation(state),
   isMobile: Device.selectors.isMobile(state),
   color: services.vgs.selectors.color(state),
+  name: services.products.selectors.name(state),
 });
 
 const mapDispatchToProps = dispatch => ({

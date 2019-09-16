@@ -1,6 +1,6 @@
 .trigger {
   text-transform: uppercase;
-  padding: 5px 20px;
+  padding-right: 40px;
   border-radius: 30px;
   border: 1px solid;
   display: inline-flex;
@@ -8,20 +8,15 @@
   justify-content: center;
   cursor: pointer;
 
-  p {
-    margin: 0;
-    height: 11px;
-    font-size: 14px;
-    font-weight: normal;
-  }
-
   .arrow {
     height: 33px;
-    position: relative;
-    bottom: 1px;
     margin-left: 10px;
     margin-right: -8px;
     transition: .2s ease-out;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
 
     &.flip {
       transform: scaleY(-1);

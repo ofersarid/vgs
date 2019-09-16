@@ -32,7 +32,7 @@ class ReadMoreSection extends React.PureComponent {
   }
 
   render() {
-    const { html, color, className, maxLines, btnTxt, colorName } = this.props;
+    const { html, color, className, maxLines, btnTxt, colorName, forceShowTrigger } = this.props;
     const { clamped } = this.state;
     const htmlAsString = renderToString(html);
     return (
@@ -45,7 +45,7 @@ class ReadMoreSection extends React.PureComponent {
           className={className}
           onReflow={this.onReflow}
         />
-        {(!htmlAsString || clamped) ? (
+        {(!htmlAsString || clamped || forceShowTrigger) ? (
           <Button
             className={styles.readMoreBtn}
             onClick={this.onClick}
@@ -73,6 +73,7 @@ ReadMoreSection.propTypes = {
   btnTxt: PropTypes.string.isRequired,
   more: PropTypes.any,
   maxLines: PropTypes.number.isRequired,
+  forceShowTrigger: PropTypes.bool
 };
 
 ReadMoreSection.defaultProps = {

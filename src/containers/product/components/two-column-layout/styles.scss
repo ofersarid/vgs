@@ -1,4 +1,4 @@
-@import "/src/media-query-mixins";
+@import "/src/shared/styles";
 
 .twoColumnLayout {
   position: absolute;
@@ -11,7 +11,7 @@
 }
 
 .article {
-  margin-bottom: 12px;
+  margin-bottom: 90px;
 
   @include media('>tablet') {
     column-count: 2;

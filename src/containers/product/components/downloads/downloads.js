@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import { FadeIn, Button } from '/src/shared';
 import styles from './styles.scss';
-import sharedStyles from '../../styles.scss';
+import layout from '/src/shared/styles/layout.scss';
 import Device from '../../../../shared/device';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -30,7 +30,7 @@ class Downloads extends PureComponent {
       <FadeIn spread >
         <div
           // hideOverflow
-          className={cx(styles.container, sharedStyles.inner)}
+          className={cx(styles.container, layout.inner)}
         >
           {!isMobile && (
             <div className={cx(styles.img)} >
@@ -100,7 +100,7 @@ class Downloads extends PureComponent {
                   background: themeColor,
                 }}
               >
-                REPROCESSING INSTRUCTIONS
+                REPROCESSING PDF
               </Button >
             )}
           </div >

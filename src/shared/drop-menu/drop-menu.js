@@ -33,7 +33,7 @@ class DropMenu extends PureComponent {
           color,
           borderColor: color,
         }} waveColor={colorName} >
-          <p >{selected.display}</p >
+          <span >{selected.display}</span >
           <ChevronDown className={cx(styles.arrow, { [styles.flip]: open })} />
         </Button >
         {open && (

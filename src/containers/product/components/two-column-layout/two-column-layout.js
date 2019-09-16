@@ -8,7 +8,7 @@ import { FadeIn, ReadMoreSection, Footnotes } from '/src/shared';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
 
-const TwoColumnLayout = ({ article, footNotes, isMobile, title, color }) => {
+const TwoColumnLayout = ({ article, footNotes, isMobile, title, color, name }) => {
   const getHtml = (
     <Fragment>
       <p className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
@@ -24,7 +24,8 @@ const TwoColumnLayout = ({ article, footNotes, isMobile, title, color }) => {
             html={getHtml}
             more={(
               <Fragment >
-                <h1 style={{ color }} >{title}</h1 >
+                <h1 style={{ color }} >{name}</h1 >
+                <h2 style={{ color }} >{title}</h2 >
                 {getHtml}
               </Fragment >
             )}
@@ -46,13 +47,13 @@ TwoColumnLayout.propTypes = {
   footNotes: PropTypes.arrayOf(PropTypes.string),
   isMobile: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  // deviceType: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
   isMobile: Device.selectors.isMobile(state),
-  // deviceType: Device.selectors.deviceType(state),
+  name: services.products.selectors.name(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

@@ -1,9 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { FadeIn } from '/src/shared';
+import { FadeIn, MediaLoader, RatioBox } from '/src/shared';
 import styles from './styles.scss';
-import sharedStyles from '../../styles.scss';
+import layout from '/src/shared/styles/layout.scss';
 
 const TwoImagesLayout = (
   {
@@ -14,16 +14,16 @@ const TwoImagesLayout = (
   }) => {
   return (
     <FadeIn spread >
-      <section className={cx(styles.inner, sharedStyles.inner)} >
-        <div className={styles.container} >
-          <img src={image1} className={styles.image} />
-          <div className={cx('caption')} >{img1Description}</div >
-        </div >
+      <section className={cx(layout.inner, styles.inner)} >
+        <RatioBox ratio={2 / 3} className={styles.container} >
+          <MediaLoader src={image1} />
+          <div className={cx('caption', styles.caption)} >{img1Description}</div >
+        </RatioBox>
         {/*{isTouchDevice ? null : <div className={styles.spacer}/>}*/}
-        <div className={styles.container} >
-          <img src={image2} className={styles.image} />
-          <div className={cx('caption')} >{img2Description}</div >
-        </div >
+        <RatioBox ratio={2 / 3} className={styles.container} >
+          <MediaLoader src={image2} />
+          <div className={cx('caption', styles.caption)} >{img2Description}</div >
+        </RatioBox >
       </section >
     </FadeIn >
   );

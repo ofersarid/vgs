@@ -46,7 +46,6 @@ RatioBox.propTypes = {
   className: PropTypes.string,
   children: PropTypes.any,
   style: PropTypes.object,
-  image: PropTypes.string,
   orientation: PropTypes.string.isRequired,
 };
 
