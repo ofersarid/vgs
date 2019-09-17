@@ -31,7 +31,7 @@
   }
 
   @include media('>tablet') {
-    width: 30vw;
+    width: calc(50% - 15px);
     float: left;
   }
 }
@@ -72,7 +72,7 @@
 .rightCol {
   @include media('>phone') {
     @include orientation(landscape) {
-      margin-left: 10vh;
+      margin-left: 40PX;
 
       p {
         margin: 0 0 25px 0;
@@ -81,7 +81,7 @@
   }
 
   @include media('>tablet') {
-    width: 35vw;
+    width: 50%;
     float: right;
     display: flex;
     flex-direction: column;
@@ -90,11 +90,6 @@
     p {
       margin: 0 0 25px 0;
     }
-  }
-
-  @include media('>desktop') {
-    width: 26vw;
-    height: 30vh;
   }
 }
 
