@@ -26,7 +26,7 @@ const IndexHeader = ({ index, frame, header, isMobile, color }) => {
     <h2 className={styles.header} style={{ color: color }}>
       <animated.span className={styles.index} style={{
         opacity: o,
-        transform: isMobile ? x.interpolate(x => `translateX(${x}px)`) : x.interpolate(x => `translateY(${-x}px)`),
+        transform: x.interpolate(x => `translateY(${-x}px)`),
       }} >0{index + 1}</animated.span >
       <div className={styles.divider} style={{
         backgroundColor: color,
@@ -34,7 +34,7 @@ const IndexHeader = ({ index, frame, header, isMobile, color }) => {
       }} />
       <animated.span className={styles.label} style={{
         opacity: o,
-        transform: isMobile ? x.interpolate(x => `translateX(${-x}px)`) : x.interpolate(x => `translateY(${x}px)`),
+        transform: x.interpolate(x => `translateY(${x}px)`),
       }} >
         {header}
       </animated.span >

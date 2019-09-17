@@ -19,7 +19,7 @@
   @include media('>phone') {
     font-size: 18px;
     line-height: 37px;
-    padding: 15% 0 15% 16px;
+    //padding: 15% 0 15% 16px;
     width: 100%;
   }
 
@@ -39,6 +39,7 @@
   box-sizing: border-box;
   flex-shrink: 0;
   margin-bottom: 30px;
+  margin-top: 7px;
   width: 100%;
 
   &:last-of-type {

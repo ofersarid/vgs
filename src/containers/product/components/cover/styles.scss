@@ -14,6 +14,10 @@
     width: 66%;
     z-index: 1;
 
+    @include media('>phone') {
+      left: $gutter-tablet;
+    }
+
     @include media('>tablet') {
       left: $gutter-desktop;
     }

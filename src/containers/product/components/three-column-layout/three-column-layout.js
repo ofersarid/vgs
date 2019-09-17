@@ -20,18 +20,20 @@ const ThreeColumnLayout = ({ data, isMobile, color, title, name }) => {
     <FadeIn spread >
       <section className={cx(styles.content, layout.inner)} >
         <div className={styles.list} >
-          <ReadMoreSection
-            html={renderBullets(isMobile ? 3 : 6)}
-            more={(
-              <Fragment >
-                <h1 style={{ color }}>{name}</h1>
-                <h2 style={{ color }} >{title}</h2 >
-                {renderBullets(6)}
-              </Fragment >
-            )}
-            forceShowTrigger
-            btnTxt="MORE FEATURES"
-          />
+          {isMobile ? (
+            <ReadMoreSection
+              html={renderBullets(3)}
+              more={(
+                <Fragment >
+                  <h1 style={{ color }} >{name}</h1 >
+                  <h2 style={{ color }} >{title}</h2 >
+                  {renderBullets(6)}
+                </Fragment >
+              )}
+              forceShowTrigger
+              btnTxt="MORE FEATURES"
+            />
+          ) : renderBullets(6)}
         </div >
       </section >
     </FadeIn >

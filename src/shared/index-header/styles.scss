@@ -5,63 +5,71 @@
   text-transform: uppercase;
   margin: 0;
   position: fixed;
-  width: 66vw;
-  top: 27%;
-  transform: translateY(-55px);
-  height: 37px;
+  width: calc(100vw - #{2 * $gutter-phone});
+  top: 21%;
+  height: 12px;
   z-index: 1;
   left: $gutter-phone;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  line-height: 1.18em;
 
   @include media('>phone') {
-    width: 58vw;
-    height: 12px;
-    top: 22%;
+    width: calc(100vw - #{2 * $gutter-tablet});
+    display: inline-block;
+    top: 18%;
     left: $gutter-tablet;
+
+    @include orientation('landscape') {
+
+    }
   }
 
   @include media('>tablet') {
-    width: 74vw;
-    top: 23%;
+    width: calc(100vw - #{2 * $gutter-desktop});
+    //top: 23%;
     left: $gutter-desktop;
   }
 
   @include media('>desktop') {
-    width: 60vw;
+    width: calc(100vw - #{2 * $gutter-wide-screen});
     top: 22%;
     left: $gutter-wide-screen;
   }
 }
 
 .index {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: inline-block;
 }
 
 .label {
-  position: absolute;
-  top: 26px;
-  left: 0;
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  //align-items: center;
+  //margin-left: 10px;
 
   @include media('>phone') {
     top: 0;
-    left: 130px;
+    display: inline-block;
+    //left: 130px;
   }
 }
 
 .divider {
-  display: none;
+  //display: none;
   height: 1px;
-  width: 68px;
-  margin-right: 25px;
-  position: absolute;
-  top: 7px;
-  left: 40px;
+  display: inline-block;
+  width: 25px;
+  position: relative;
+  bottom: 2px;
+  flex-shrink: 0;
+  margin: 0 15px;
 
   @include media('>phone') {
+    width: 68px;
     display: inline-block;
+    position: relative;
+    bottom: 4px;
+    margin: 0 25px;
   }
 }
