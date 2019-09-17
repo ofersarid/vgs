@@ -18,8 +18,12 @@ $peek-mobile: 54px;
   }
 
   .outerWrapper {
-    width: 100%;
-    height: 100%;
+    //width: 100%;
+    //height: 100%;
+
+    //@include media('>phone') {
+    //  width: 90%;
+    //}
   }
 
   .innerWrapper {
@@ -86,25 +90,7 @@ $peek-mobile: 54px;
 
   @include media('>phone') {
     height: 65%;
-    width: calc(100% + 17vw);
+    width: 100%;
     transform: translateY(-10%);
-
-    @include orientation('landscape') {
-      width: calc(100% + 10vw);
-    }
-
-    :global {
-      .prev {
-        transform: translateY(-15px);
-      }
-    }
-  }
-
-  @include media('>tablet') {
-    width: calc(100% + 14vw);
-
-    @include orientation('portrait') {
-      width: calc(100% + 17vw);
-    }
   }
 }

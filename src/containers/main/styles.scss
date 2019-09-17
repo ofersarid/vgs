@@ -1,5 +1,4 @@
-@import "/src/media-query-mixins";
-@import "/src/dimentions";
+@import "/src/shared/styles";
 
 .container {
 }
@@ -316,17 +315,17 @@
     height: auto;
     padding: 6px;
 
-    @include orientation('landscape') {
-      left: calc(#{$gutter-desktop / 2})
-    }
+    //@include orientation('landscape') {
+    //  left: calc(#{$gutter-desktop / 2})
+    //}
   }
 
   @include media('>tablet') {
-    left: 5%;
+    left: calc(#{$gutter-desktop / 2});
   }
 
   @include media('>desktop') {
-    left: 8%;
+    left: calc(#{$gutter-wide-screen / 2});
   }
 
   li {

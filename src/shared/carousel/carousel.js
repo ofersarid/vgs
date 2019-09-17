@@ -78,7 +78,7 @@ class Carousel extends PureComponent {
             {group => springs => <div className={styles.itemGroup} key={group} style={springs} >
               {children.slice(group * displayVolume, (group * displayVolume) + displayVolume).map((child, i) => (
                 <div key={`${group}-${i}`} style={{
-                  width: navLocation === 'bottom' ? '100%' : `calc(${100 / displayVolume}% - 20px)`,
+                  width: `calc(${100 / displayVolume}% - 20px)`,
                 }} >{child}</div >
               ))}
             </div >}

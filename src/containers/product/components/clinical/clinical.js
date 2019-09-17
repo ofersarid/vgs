@@ -52,7 +52,7 @@ class Clinical extends PureComponent {
   }
 
   render() {
-    const { color, isMobile } = this.props;
+    const { color, isMobile, isTablet } = this.props;
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
       <FadeIn spread >
@@ -62,7 +62,7 @@ class Clinical extends PureComponent {
             displayVolume={this.resolveVolume()}
             className={styles.clinicalCarousel}
             color={color}
-            navLocation={isMobile ? 'bottom' : 'horizontal'}
+            navLocation={isMobile || isTablet ? 'bottom' : 'horizontal'}
             prevBtnTxt="New"
             nextBtnTxt="Old"
           >
