@@ -9,32 +9,35 @@ import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
 
 const TwoColumnLayout = ({ article, footNotes, isMobile, title, color, name }) => {
-  const getHtml = (
-    <Fragment>
-      <p className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
-      <Footnotes footNotes={footNotes} />
-    </Fragment>
-  );
+  const getHtml = forReader => {
+    return (
+      <Fragment >
+        <p className={cx(styles.article, { [styles.articleForReader]: forReader })} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
+        {forReader && <Footnotes footNotes={footNotes} />}
+      </Fragment >
+    );
+  };
 
   return (
     <FadeIn spread >
       <section className={cx(layout.inner)} >
         {isMobile ? (
           <ReadMoreSection
-            html={getHtml}
+            html={getHtml(false)}
+            forceShowTrigger={footNotes.length > 0}
             more={(
               <Fragment >
                 <h1 style={{ color }} >{name}</h1 >
                 <h2 style={{ color }} >{title}</h2 >
-                {getHtml}
+                {getHtml(true)}
               </Fragment >
             )}
           />
         ) : (
-          <Fragment>
+          <Fragment >
             <p className={styles.article} dangerouslySetInnerHTML={{ __html: article.replace(/\n\r?/g, '<br />') }} />
             <Footnotes footNotes={footNotes} />
-          </Fragment>
+          </Fragment >
         )}
       </section >
     </FadeIn >

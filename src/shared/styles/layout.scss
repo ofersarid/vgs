@@ -10,6 +10,9 @@
   left: $gutter-phone;
   color:  #707070;
   line-height: 1.5em;
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: space-between;
 
   :global {
     @include media('>phone') {

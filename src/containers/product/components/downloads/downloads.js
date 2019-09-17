@@ -42,15 +42,13 @@ class Downloads extends PureComponent {
             {brochure && (
               <Button
                 tag="a"
-                textColor="white"
+                withBorder
+                textColor={themeColor}
                 target="_blank"
                 rel="noopener noreferrer"
                 href={brochure}
                 waveColor="white"
                 className={cx(styles.btn)}
-                style={{
-                  background: themeColor,
-                }}
               >
                 BROCHURE
               </Button >
@@ -58,15 +56,13 @@ class Downloads extends PureComponent {
             {ifu && (
               <Button
                 tag="a"
-                textColor="white"
+                withBorder
+                textColor={themeColor}
                 target="_blank"
                 rel="noopener noreferrer"
                 href={ifu}
                 waveColor="white"
                 className={cx(styles.btn)}
-                style={{
-                  background: themeColor,
-                }}
               >
                 IFU
               </Button >
@@ -74,15 +70,13 @@ class Downloads extends PureComponent {
             {patientCard && (
               <Button
                 tag="a"
-                textColor="white"
+                withBorder
+                textColor={themeColor}
                 target="_blank"
                 rel="noopener noreferrer"
                 href={patientCard}
                 waveColor="white"
                 className={cx(styles.btn)}
-                style={{
-                  background: themeColor,
-                }}
               >
                 PATIENT CARD
               </Button >
@@ -90,15 +84,13 @@ class Downloads extends PureComponent {
             {instructions && (
               <Button
                 tag="a"
-                textColor="white"
+                withBorder
+                textColor={themeColor}
                 target="_blank"
                 rel="noopener noreferrer"
                 href={instructions}
                 waveColor="white"
                 className={cx(styles.btn)}
-                style={{
-                  background: themeColor,
-                }}
               >
                 REPROCESSING PDF
               </Button >

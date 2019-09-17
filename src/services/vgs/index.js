@@ -73,6 +73,8 @@ selectors.colorName = createSelector(selectors.color, color => {
       return 'red';
     case '#22B0AF':
       return 'lagoon';
+    case '#005728':
+      return 'green';
     default:
       return 'gray';
   }

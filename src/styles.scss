@@ -115,8 +115,19 @@ h1 {
     background: radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
 
   }
+
   .waves-effect.waves-lagoon .waves-ripple {
     $c: #22B0AF;
+    background: rgba($c, 0.4);
+    background: -webkit-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -o-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: -moz-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+    background: radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
+
+  }
+
+  .waves-effect.waves-green .waves-ripple {
+    $c: #005728;
     background: rgba($c, 0.4);
     background: -webkit-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);
     background: -o-radial-gradient(rgba($c, 0.2) 0, rgba($c, 0.3) 40%, rgba($c, 0.4) 50%, rgba($c, 0.5) 60%, rgba($c, 0) 70%);

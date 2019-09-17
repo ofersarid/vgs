@@ -37,7 +37,7 @@ class Button extends PureComponent {
   }
 
   render() {
-    const { children, className, tag, waveColor, textColor, disable, style } = this.props;
+    const { children, className, tag, waveColor, textColor, disable, style, withBorder } = this.props;
     const Tag = tag;
     const copyProps = Object.assign({}, this.props);
     delete copyProps.color;
@@ -47,6 +47,12 @@ class Button extends PureComponent {
     delete copyProps.waveColor;
     delete copyProps.textColor;
     delete copyProps.disable;
+    const withBorderStyles = withBorder ? {
+      borderRadius: 3,
+      textAlign: 'center',
+      boxSizing: 'border-box',
+      border: '1px solid',
+    } : {};
     return (
       <Tag
         {...copyProps}
@@ -61,6 +67,7 @@ class Button extends PureComponent {
         style={{
           color: textColor,
           ...style,
+          ...withBorderStyles,
         }}
       >
         {children}
@@ -78,6 +85,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   waveColor: PropTypes.oneOf(['white', 'blue', 'purple', 'gray', 'red']),
   disable: PropTypes.bool,
+  withBorder: PropTypes.bool,
   style: PropTypes.object,
 };
 
@@ -86,6 +94,7 @@ Button.defaultProps = {
   disable: false,
   tag: 'div',
   waveColor: 'white',
+  withBorder: false,
 };
 
 export default Button;

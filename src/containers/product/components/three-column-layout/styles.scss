@@ -34,12 +34,16 @@
 }
 
 .listItem {
-  margin-bottom: 40px;
-  padding-top: 20px;
+  padding-top: 10px;
   border-top: 1px solid;
   box-sizing: border-box;
   flex-shrink: 0;
+  margin-bottom: 30px;
   width: 100%;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   @include media('>phone') {
     margin-bottom: 0;

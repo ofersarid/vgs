@@ -10,9 +10,11 @@
   justify-content: center;
 }
 
-.article {
+.articleForReader {
   margin-bottom: 90px;
+}
 
+.article {
   @include media('>tablet') {
     column-count: 2;
     column-gap: 4vw;

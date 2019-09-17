@@ -29,15 +29,10 @@
 }
 
 .productBtn {
-  background: $green;
   text-decoration: none;
-  box-sizing: border-box;
-  //padding: 16px 0 9px;
   width: 90%;
   left: 5%;
-  border-radius: 30px;
   flex-shrink: 0;
-  text-align: center;
   margin-bottom: 10px;
 
   &:last-of-type {

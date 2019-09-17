@@ -17,10 +17,10 @@
     right: 14px;
     top: 50%;
     transform: translateY(-50%);
+    margin-top: -1px;
 
     &.flip {
-      transform: scaleY(-1);
-      bottom: -1px;
+      transform: scaleY(-1) translateY(14px);
     }
   }
 }

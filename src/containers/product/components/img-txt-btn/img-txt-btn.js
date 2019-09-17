@@ -73,15 +73,13 @@ class ImgTxtBtn extends PureComponent {
               {pdfSrc && (
                 <Button
                   tag="a"
-                  textColor="white"
+                  textColor={themeColor}
                   target="_blank"
                   rel="noopener noreferrer"
                   href={pdfSrc}
                   waveColor="white"
                   className={cx(styles.btn)}
-                  style={{
-                    background: themeColor,
-                  }}
+                  withBorder
                 >
                   PRODUCT PDF
                 </Button >
@@ -95,15 +93,13 @@ class ImgTxtBtn extends PureComponent {
                 {pdfSrc && (
                   <Button
                     tag="a"
-                    textColor="white"
+                    textColor={themeColor}
                     target="_blank"
                     rel="noopener noreferrer"
                     href={pdfSrc}
                     waveColor="white"
                     className={cx(styles.btn)}
-                    style={{
-                      background: themeColor,
-                    }}
+                    withBorder
                   >
                     PRODUCT PDF
                   </Button >

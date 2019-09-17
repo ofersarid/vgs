@@ -30,6 +30,7 @@ const ThreeColumnLayout = ({ data, isMobile, color, title, name }) => {
               </Fragment >
             )}
             forceShowTrigger
+            btnTxt="MORE FEATURES"
           />
         </div >
       </section >

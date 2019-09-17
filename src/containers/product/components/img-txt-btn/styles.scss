@@ -60,14 +60,9 @@
 
 .btn {
   text-decoration: none;
-  color: white;
-  border-radius: 30px;
   display: inline-block;
   flex-shrink: 0;
-  width: 80%;
-  margin: 0 10%;
-  box-sizing: border-box;
-  text-align: center;
+  width: 100%;
 
   @include media('>phone') {
     margin: 0;
