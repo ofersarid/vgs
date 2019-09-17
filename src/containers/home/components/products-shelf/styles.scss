@@ -38,6 +38,10 @@
   &:last-of-type {
     margin-bottom: 0;
   }
+
+  @include media('>tablet') {
+    margin-bottom: 0;
+  }
 }
 
 .btnGroup {
@@ -48,9 +52,9 @@
 
       .productBtn {
         width: 47%;
-        padding: 10px 0 2px;
+        //padding: 10px 0 2px;
         left: 0;
-        height: 37px;
+        //height: 37px;
       }
     }
   }
