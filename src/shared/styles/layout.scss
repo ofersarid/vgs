@@ -2,7 +2,7 @@
 @import './media-query-mixins';
 
 .inner {
-  width: 78vw;
+  width: calc(100vw - #{2 * $gutter-phone});
   box-sizing: border-box;
   height: 61%;
   bottom: 10%;
@@ -17,26 +17,28 @@
   :global {
     @include media('>phone') {
       width: calc(100vw - #{2 * $gutter-tablet});
-      height: 67%;
       left: $gutter-tablet;
+      height: 67%;
       @include orientation(landscape) {
-        width: 60vw;
-        left: calc((100vw - 60vw)/2);
-
+        //width: 60vw;
+        //left: calc((100vw - 60vw)/2);
       }
     }
 
     @include media('>tablet') {
-      @include orientation(landscape) {
-        width: 74vw;
-        left: calc((100vw - 74vw)/2);
+      width: calc(100vw - #{2 * $gutter-desktop});
+      left: $gutter-desktop;
 
-      }
+      //@include orientation(landscape) {
+      //  width: 74vw;
+      //  left: calc((100vw - 74vw)/2);
+      //
+      //}
     }
 
     @include media('>desktop') {
-      width: 60vw;
-      left: calc((100vw - 60vw)/2);
+      width: calc(100vw - #{2 * $gutter-wide-screen});
+      left: $gutter-wide-screen;
     }
   }
 }

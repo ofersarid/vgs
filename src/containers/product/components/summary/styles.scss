@@ -39,19 +39,21 @@
 
 .square {
   height: 34px;
-  width: 22px;
+  width: 24px;
   flex-grow: 0;
   flex-shrink: 0;
   margin-right: 10px;
   transform: translate(-1vw, -7px);
 
   @include media('>phone') {
-    width: 36px;
+    transform: translate(-0.5vw, -2px);
+  }
+
+  @include media('>tablet') {
     transform: translate(-1.5vw, -2px);
   }
 
   @include media('>desktop') {
-    width: 43px;
     transform: translate(-1.5vw, -5px);
   }
 }

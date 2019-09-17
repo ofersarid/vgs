@@ -17,9 +17,9 @@
 
   @include media('>phone') {
     width: calc(100vw - #{2 * $gutter-tablet});
+    left: $gutter-tablet;
     display: inline-block;
     top: 18%;
-    left: $gutter-tablet;
 
     @include orientation('landscape') {
 
@@ -28,7 +28,6 @@
 
   @include media('>tablet') {
     width: calc(100vw - #{2 * $gutter-desktop});
-    //top: 23%;
     left: $gutter-desktop;
   }
 
