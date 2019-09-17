@@ -218,8 +218,8 @@ const mapStateToProps = state => ({
   name: services.products.selectors.name(state),
   isMobile: Device.selectors.isMobile(state),
   orientation: Device.selectors.orientation(state),
-  // lastFrame: services.vgs.selectors.lastFrame(state, Routes.selectors.pathname(state)),
-  lastFrame: 7,
+  lastFrame: services.vgs.selectors.lastFrame(state, Routes.selectors.pathname(state)),
+  // lastFrame: 7,
   pathname: Routes.selectors.pathname(state),
 });
 
