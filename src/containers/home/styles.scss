@@ -31,11 +31,11 @@
 }
 
 .paragraph {
-  color: $black;
-  font-size: 16px;
-  line-height: 30px;
-  height: 65%;
-  top: 27%;
+  //color: $black;
+  //font-size: 16px;
+  //line-height: 30px;
+  //height: 65%;
+  //top: 27%;
 
   @include media('>phone') {
     top: 22%;
@@ -52,4 +52,9 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.homeParagraph {
+  height: 57%;
+  top: 26.4%;
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import autoBind from 'auto-bind';
+import cx from 'classnames';
 import { hashHistory } from 'react-router';
 import { SnapScroll, FadeInOut, FadeIn } from '/src/shared';
 import services from '/src/services';
@@ -96,7 +97,7 @@ class Home extends PureComponent {
           {/*  }]}*/}
           {/*  text={data.globalImpactBody} />*/}
           {isMobile && (
-            <FadeIn className={layout.inner} >
+            <FadeIn className={cx(layout.inner, styles.homeParagraph)} >
               <p
                 dangerouslySetInnerHTML={{ __html: data.ourProductsBodyMobile.replace(/\n\r?/g, '<br />') }}
               />

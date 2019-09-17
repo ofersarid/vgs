@@ -2,9 +2,8 @@
 @import "/src/colors";
 
 .paragraph {
-  color: $black;
-  height: 65%;
-  top: 27%;
+  height: 57%;
+  top: 26.4%;
 
   @include media('>phone') {
     font-size: 28px;
