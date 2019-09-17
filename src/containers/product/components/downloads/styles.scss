@@ -1,7 +1,7 @@
 @import "/src/media-query-mixins";
 
 .container {
-  top: 33%;
+  //top: 33%;
 
   @include media('>phone') {
     @include orientation(landscape) {
