@@ -1,12 +1,19 @@
 @import '/src/shared/styles';
 
 .shelf {
+  @include media('>phone') {
+    height: 50%;
 
+    @include orientation('landscape') {
+      height: 100%;
+    }
+  }
 }
 
 .innerWrapper {
   width: 100%;
   height: 100%;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -22,9 +29,9 @@
   justify-content: end;
 
   svg {
-    height: 28px;
+    height: 24px;
     margin-left: 10px;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
   }
 }
 
@@ -36,12 +43,35 @@
 
 .img {
   border: 1px solid;
+  //margin-top: 0px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.p {
+  font-size: 18px;
+  line-height: 1.5em;
+  font-weight: 300;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include media('>phone') {
+    font-weight: 200;
+    line-height: 1.7em;
+  }
+
+  @include media('>desktop') {
+    font-size: 22px;
+  }
 }
 
 .vest {
   .name {
     color: #ED1C24;
   }
+
   .img {
     border-color: #ED1C24;
   }
@@ -51,6 +81,7 @@
   .name {
     color: #662D91;
   }
+
   .img {
     border-color: #662D91;
   }
@@ -60,6 +91,7 @@
   .name {
     color: #0272BA;
   }
+
   .img {
     border-color: #0272BA;
   }
@@ -69,6 +101,7 @@
   .name {
     color: #22B0AF;
   }
+
   .img {
     border-color: #22B0AF;
   }

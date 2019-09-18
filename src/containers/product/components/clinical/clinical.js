@@ -63,8 +63,8 @@ class Clinical extends PureComponent {
             className={styles.clinicalCarousel}
             color={color}
             navLocation={isMobile || isTablet ? 'bottom' : 'horizontal'}
-            prevBtnTxt="New"
-            nextBtnTxt="Old"
+            prevBtnTxt="NEW"
+            nextBtnTxt="OLD"
           >
             {this.renderData()}
           </Carousel >

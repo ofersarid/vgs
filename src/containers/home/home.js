@@ -95,14 +95,14 @@ class Home extends PureComponent {
           {/*  }]}*/}
           {/*  text={data.globalImpactBody} />*/}
           {isMobile && (
-            <FadeIn className={cx(layout.inner, styles.homeParagraph)} >
+            <FadeIn className={cx(layout.inner, styles.homeInner)} >
               <p
                 dangerouslySetInnerHTML={{ __html: data.ourProductsBodyMobile.replace(/\n\r?/g, '<br />') }}
               />
             </FadeIn >
           )}
           {isMobile && (
-            <FadeIn className={layout.inner} >
+            <FadeIn className={cx(layout.inner, styles.homeInner)} >
               <ProductsShelf />
             </FadeIn >
           )}

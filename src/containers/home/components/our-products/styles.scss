@@ -11,16 +11,17 @@
     top: 30%;
     font-size: 22px;
     line-height: 37px;
-    height: 60%;
+    height: 70%;
 
     @include orientation('landscape') {
-      display: flex;
+      //display: flex;
+      height: 45%;
     }
   }
 
   @include media('>tablet') {
     top: 30%;
-    height: 65%;
+    height: 50%;
   }
 
   @include media('>desktop') {
@@ -32,9 +33,10 @@
 
 .text {
   @include media('>phone') {
+    margin-bottom: 8%;
+
     @include orientation('landscape') {
-      width: 50%;
-      padding-right: 5%;
+      margin-bottom: 4%;
     }
   }
 }
