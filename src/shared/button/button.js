@@ -47,6 +47,7 @@ class Button extends PureComponent {
     delete copyProps.waveColor;
     delete copyProps.textColor;
     delete copyProps.disable;
+    delete copyProps.withBorder;
     const withBorderStyles = withBorder ? {
       borderRadius: 3,
       textAlign: 'center',
@@ -83,7 +84,7 @@ Button.propTypes = {
   tag: PropTypes.string,
   textColor: PropTypes.string,
   onClick: PropTypes.func,
-  waveColor: PropTypes.oneOf(['white', 'blue', 'purple', 'gray', 'red']),
+  waveColor: PropTypes.oneOf(['white', 'blue', 'purple', 'gray', 'red', 'green', 'lagoon']),
   disable: PropTypes.bool,
   withBorder: PropTypes.bool,
   style: PropTypes.object,

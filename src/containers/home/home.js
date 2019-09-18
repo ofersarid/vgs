@@ -13,7 +13,6 @@ import homeCoverPicTablet from '/src/assets/home_cover_art_tablet.jpg';
 import homeCoverPicDesktop from '/src/assets/home_cover_art_desktop.jpg';
 import Device from '/src/shared/device';
 import layout from '/src/shared/styles/layout.scss';
-import ourProductsArtMobile from '/src/assets/home_products_art_mobile.svg';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
@@ -62,7 +61,6 @@ class Home extends PureComponent {
     const { data, isMobile, frame } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
-        <div className={styles.grayBg} />
         <FadeInOut show={frame < 2} className={styles.bgWrap} spread >
           <div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />
         </FadeInOut >
@@ -104,12 +102,9 @@ class Home extends PureComponent {
             </FadeIn >
           )}
           {isMobile && (
-            <Fragment >
-              <img src={ourProductsArtMobile} className={styles.ourProductsArt} />
-              <FadeIn className={layout.inner} >
-                <ProductsShelf />
-              </FadeIn >
-            </Fragment >
+            <FadeIn className={layout.inner} >
+              <ProductsShelf />
+            </FadeIn >
           )}
           {!isMobile && (
             <OurProducts

@@ -6,8 +6,6 @@ import Device from '/src/shared/device';
 import { FadeIn } from '/src/shared';
 import cx from 'classnames';
 import layout from '/src/shared/styles/layout.scss';
-import artTablet from '/src/assets/home_products_art_tablet.svg';
-import artDesktop from '/src/assets/home_products_art_desktop.svg';
 import { hashHistory } from 'react-router';
 import ProductsShelf from '../products-shelf/products-shelf';
 import styles from './styles.scss';
@@ -22,20 +20,10 @@ class OurProducts extends PureComponent {
     hashHistory.push('our-products');
   }
 
-  resolveArt() {
-    const { isTouchDevice } = this.props;
-    if (isTouchDevice) {
-      return artTablet;
-    } else {
-      return artDesktop;
-    }
-  }
-
   render() {
     const { text } = this.props;
     return (
       <FadeIn spread >
-        <img src={this.resolveArt()} className={styles.art} />
         <div className={cx(styles.ourProducts, layout.inner)} >
           <p
             className={styles.text}

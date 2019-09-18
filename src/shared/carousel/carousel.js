@@ -105,7 +105,7 @@ class Carousel extends PureComponent {
               disable={group === 0}
             >
               <div className={styles.clipIcon}><ChevronLeft /></div>
-              <span className={styles.btnTxt}>{prevBtnTxt}</span >
+              {prevBtnTxt && <span className={styles.btnTxt}>{prevBtnTxt}</span >}
             </Button >
             < Button
               className={cx('next', styles.btn, styles.right)}
@@ -114,7 +114,7 @@ class Carousel extends PureComponent {
               onClick={this.nextThrottle}
               disable={group === groupCount - 1}
             >
-              <span className={styles.btnTxt}>{nextBtnTxt}</span >
+              {nextBtnTxt && <span className={styles.btnTxt}>{nextBtnTxt}</span >}
               <div className={styles.clipIcon} ><ChevronRight /></div>
             </Button >
           </div >
@@ -137,8 +137,6 @@ Carousel.propTypes = {
 
 Carousel.defaultProps = {
   navLocation: 'horizontal',
-  prevBtnTxt: 'Prev',
-  nextBtnTxt: 'Next',
 };
 
 const mapStateToProps = state => ({

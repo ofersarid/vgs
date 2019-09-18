@@ -8,15 +8,19 @@ import logoFrameFr from './logo_frame_fr.svg';
 const list = () => [{
   category: 'Cardiac',
   name: 'Viola',
+  color: '#0272BA',
 }, {
   category: 'Cardiac',
   name: 'Vest',
+  color: '#662D91',
 }, {
   category: 'Vascular',
   name: 'Frame',
+  color: '#ED1C24',
 }, {
   category: 'Vascular',
   name: 'Frame FR',
+  color: '#22B0AF',
 }];
 
 const categories = createSelector(list, products => {

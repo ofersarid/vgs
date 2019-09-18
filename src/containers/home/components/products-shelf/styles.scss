@@ -1,65 +1,76 @@
 @import '/src/shared/styles';
 
 .shelf {
-  @include media('>phone') {
-    width: 60%;
-    left: 20%;
-    position: relative;
-    margin-top: 30px;
 
-    @include orientation('landscape') {
-      width: 50%;
-      left: 0;
-      padding-left: 5%;
-      box-sizing: border-box;
-      margin-top: 0;
-    }
-  }
-  h2 {
-    font-size: 20px;
-    line-height: 20px;
-    color: #8F8F8F;
-    font-weight: 200;
-    margin: 0 0 16px;
-  }
+}
 
-  section:first-of-type {
-    margin-bottom: 40px;
+.innerWrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerRight {
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+
+  svg {
+    height: 28px;
+    margin-left: 10px;
+    transform: translateY(-2px);
   }
 }
 
-.productBtn {
-  text-decoration: none;
-  width: 90%;
-  left: 5%;
-  flex-shrink: 0;
-  margin-bottom: 10px;
+.name {
+  font-size: 23px;
+  line-height: 23px;
+  font-weight: 300;
+}
 
-  &:last-of-type {
-    margin-bottom: 0;
+.img {
+  border: 1px solid;
+}
+
+.vest {
+  .name {
+    color: #ED1C24;
   }
-
-  @include media('>tablet') {
-    margin-bottom: 0;
-
-    @include orientation('portrait') {
-      margin-bottom: 10px;
-    }
+  .img {
+    border-color: #ED1C24;
   }
 }
 
-.btnGroup {
-  @include media('>phone') {
-    @include orientation('landscape') {
-      display: flex;
-      justify-content: space-around;
-
-      .productBtn {
-        width: 47%;
-        //padding: 10px 0 2px;
-        left: 0;
-        //height: 37px;
-      }
-    }
+.viola {
+  .name {
+    color: #662D91;
+  }
+  .img {
+    border-color: #662D91;
   }
 }
+
+.frame {
+  .name {
+    color: #0272BA;
+  }
+  .img {
+    border-color: #0272BA;
+  }
+}
+
+.frameFr {
+  .name {
+    color: #22B0AF;
+  }
+  .img {
+    border-color: #22B0AF;
+  }
+}
+
