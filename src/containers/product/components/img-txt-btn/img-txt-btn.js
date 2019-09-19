@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import Device from '/src/shared/device';
 import autoBind from 'auto-bind';
 import services from '/src/services';
+import utils from '/src/utils';
 import styles from './styles.scss';
-import { Button, FadeIn, MediaLoader, RatioBox, ReadMoreSection, Youtube, Footnotes } from '/src/shared';
+import { FadeIn, MediaLoader, RatioBox, ReadMoreSection, Youtube, Footnotes } from '/src/shared';
 import layout from '/src/shared/styles/layout.scss';
 
 class ImgTxtBtn extends PureComponent {
@@ -23,9 +24,16 @@ class ImgTxtBtn extends PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { enableBizCard, youtube } = this.props;
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { youtube, disableBizCard } = this.props;
     if (youtube) {
+      disableBizCard();
+    }
+  }
+
+  componentWillUnmount() {
+    const { enableBizCard } = this.props;
+    if (!utils.isDesktop()) {
       enableBizCard();
     }
   }
@@ -33,12 +41,12 @@ class ImgTxtBtn extends PureComponent {
   render() {
     const {
       imgSubTitle, img, youtube, txt, color, title, name,
-      pdfSrc, themeColor, footNotes, orientation, isMobile
+      footNotes, orientation, isMobile, readeMoreTxt,
     } = this.props;
     return (
       <FadeIn spread >
         <div className={cx(styles.container, layout.inner)} >
-          {img && !isMobile && (
+          {img && (
             <Fragment >
               <RatioBox ratio={2 / 3} className={styles.img} >
                 <MediaLoader src={img} />
@@ -48,7 +56,7 @@ class ImgTxtBtn extends PureComponent {
           )}
           {youtube && (
             <Youtube
-              ratio={9 / 16}
+              ratio={isMobile && orientation === 'landscape' ? window.innerWidth / window.innerHeight : 9 / 16}
               className={styles.img}
               url={youtube}
               fullScreen={isMobile && orientation === 'landscape'}
@@ -58,52 +66,23 @@ class ImgTxtBtn extends PureComponent {
           {(orientation === 'portrait' && isMobile) && (
             <Fragment >
               <ReadMoreSection
-                maxLines={youtube ? 0 : 10}
-                btnTxt="About this video"
-                html={youtube ? null : <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />}
+                maxLines={(img || youtube) ? 3 : 10}
+                html={<p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />}
                 more={(
                   <Fragment >
                     <h1 style={{ color }} >{name}</h1 >
                     <h2 style={{ color }} >{title}</h2 >
-                    <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
+                    <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: readeMoreTxt.replace(/\n\r?/g, '<br />') }} />
                     <Footnotes footNotes={footNotes} />
                   </Fragment >
                 )}
               />
-              {pdfSrc && (
-                <Button
-                  tag="a"
-                  textColor={themeColor}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={pdfSrc}
-                  waveColor="white"
-                  className={cx(styles.btn)}
-                  withBorder
-                >
-                  PRODUCT PDF
-                </Button >
-              )}
             </Fragment >
           )}
           {!isMobile && (
             <Fragment >
               <div className={cx(styles.rightCol)} >
                 <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
-                {pdfSrc && (
-                  <Button
-                    tag="a"
-                    textColor={themeColor}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={pdfSrc}
-                    waveColor="white"
-                    className={cx(styles.btn)}
-                    withBorder
-                  >
-                    PRODUCT PDF
-                  </Button >
-                )}
               </div >
               <Footnotes footNotes={footNotes} />
             </Fragment >
@@ -119,8 +98,8 @@ ImgTxtBtn.propTypes = {
   youtube: PropTypes.string,
   imgSubTitle: PropTypes.string,
   txt: PropTypes.string.isRequired,
+  readeMoreTxt: PropTypes.string,
   footNotes: PropTypes.arrayOf(PropTypes.string).isRequired,
-  pdfSrc: PropTypes.string,
   themeColor: PropTypes.string.isRequired,
   disableBizCard: PropTypes.func.isRequired,
   enableBizCard: PropTypes.func.isRequired,

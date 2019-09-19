@@ -64,6 +64,7 @@ class Youtube extends PureComponent {
           />
           <Button className={cx(styles.concealer, {
             [styles.hide]: playing,
+            [styles.fullScreen]: fullScreen,
           })} onClick={this.play} textColor={color}>
             <Play3 />
           </Button>

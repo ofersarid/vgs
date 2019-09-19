@@ -28,8 +28,12 @@ class Main extends PureComponent {
   }
 
   componentDidMount() {
+    const { disableBizCard } = this.props;
     window.addEventListener('orientationchange', this.onOrientationchange, false);
     this.onOrientationchange();
+    if (utils.isDesktop()) {
+      disableBizCard();
+    }
   }
 
   onOrientationchange() {
@@ -64,8 +68,7 @@ class Main extends PureComponent {
 
   render() {
     const show = this.props.pathname !== '/product';
-    const { pathname, logo, bizCard, orientation, isLastFrame, color, frame } = this.props;
-    const isMobile = utils.isMobile();
+    const { pathname, logo, bizCard, orientation, isLastFrame, color, frame, isMobile } = this.props;
     return (
       <Fragment >
         <Device />
@@ -74,7 +77,7 @@ class Main extends PureComponent {
             from={{ opacity: show ? 0 : 1 }}
             to={{ opacity: show ? 1 : 0 }}
           >
-            {springs => (bizCard && orientation === 'landscape' && isMobile) ? <Card
+            {springs => (bizCard && orientation === 'landscape') ? <Card
               logo={logoGreen}
               underLogo={vgsGreen}
               address="24 Raul Wallenberg st."
@@ -86,7 +89,7 @@ class Main extends PureComponent {
               {(orientation === 'landscape' && isMobile)
                 ? null
                 : (
-                  <Fragment>
+                  <Fragment >
                     <Button
                       waveColor="gray"
                       className={cx(styles.logo)}
@@ -98,7 +101,7 @@ class Main extends PureComponent {
                     </Button >
                     {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/').pop()) &&
                     <img className={styles.logoText} src={vgs} style={springs} />}
-                  </Fragment>
+                  </Fragment >
                 )}
               {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
               {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
@@ -111,11 +114,11 @@ class Main extends PureComponent {
                 {springs => <div style={{
                   ...springs,
                   background: color,
-                }} className={styles.footer}>
-                  <span>&copy;2019 all rights reserved to VGS</span>
-                  <span>Produced by</span>
-                </div>}
-              </Spring>
+                }} className={styles.footer} >
+                  <span >&copy;2019 all rights reserved to VGS</span >
+                  <span >Produced by</span >
+                </div >}
+              </Spring >
               {this.props.children}
             </div >}
           </Spring >
@@ -144,6 +147,7 @@ Main.propTypes = {
   updateLastFrame: PropTypes.func.isRequired,
   frame: PropTypes.number.isRequired,
   updateFrameIndex: PropTypes.func.isRequired,
+  disableBizCard: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
@@ -167,6 +171,7 @@ const mapDispatchToProps = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
   updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
   updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
+  disableBizCard: () => dispatch(services.vgs.actions.disableBizCard()),
 });
 
 export default compose(

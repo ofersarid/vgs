@@ -143,8 +143,8 @@ class Product extends PureComponent {
             <ImgTxtBtn
               img={data.screen2Image}
               txt={isMobile ? data.screen2BodyMobile : data.screen2Body}
+              readeMoreTxt={data.screen2Body}
               footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
-              pdfSrc={data.screen2PDF}
               imgSubTitle={data.screen2ImageSubtitle}
               themeColor={color}
               title={data.screen2Title}
@@ -154,6 +154,7 @@ class Product extends PureComponent {
             <ImgTxtBtn
               youtube={data.screen3Videolink}
               txt={data.screen3Body}
+              readeMoreTxt={data.screen3Body}
               footNotes={[data.screen3Footnote1, data.screen3Footnote2, data.screen3Footnote3]}
               themeColor={color}
               title={data.screen3Title}
