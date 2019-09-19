@@ -54,6 +54,7 @@ class Carousel extends PureComponent {
   render() {
     const { children, displayVolume, className, color, colorName, navLocation, prevBtnTxt, nextBtnTxt } = this.props;
     const { group, groupCount, orientation } = this.state;
+    const isLastGroup = group === groupCount - 1;
     return (
       <div className={cx(styles.carousel, className, styles[navLocation])} >
         {navLocation === 'horizontal' && (
@@ -75,10 +76,10 @@ class Carousel extends PureComponent {
             enter={{ transform: `translate3d(0,0,0)`, opacity: 1 }}
             leave={{ transform: `translate3d(${orientation === 'next' ? '-' : ''}100%,0,0)`, opacity: 0 }}
           >
-            {group => springs => <div className={styles.itemGroup} key={group} style={springs} >
+            {group => springs => <div className={cx(styles.itemGroup)} key={group} style={springs} >
               {children.slice(group * displayVolume, (group * displayVolume) + displayVolume).map((child, i) => (
-                <div key={`${group}-${i}`} style={{
-                  width: `calc(${100 / displayVolume}% - 20px)`,
+                <div key={`${group}-${i}`} className={cx('carousel-item', styles.itemWrapper)} style={{
+                  width: `calc(${100 / displayVolume}%)`,
                 }} >{child}</div >
               ))}
             </div >}
@@ -104,18 +105,18 @@ class Carousel extends PureComponent {
               onClick={this.prevThrottle}
               disable={group === 0}
             >
-              <div className={styles.clipIcon}><ChevronLeft /></div>
-              {prevBtnTxt && <span className={styles.btnTxt}>{prevBtnTxt}</span >}
+              <div className={styles.clipIcon} ><ChevronLeft /></div >
+              {prevBtnTxt && <span className={styles.btnTxt} >{prevBtnTxt}</span >}
             </Button >
             < Button
               className={cx('next', styles.btn, styles.right)}
               waveColor={colorName}
               textColor={color}
               onClick={this.nextThrottle}
-              disable={group === groupCount - 1}
+              disable={isLastGroup}
             >
-              {nextBtnTxt && <span className={styles.btnTxt}>{nextBtnTxt}</span >}
-              <div className={styles.clipIcon} ><ChevronRight /></div>
+              {nextBtnTxt && <span className={styles.btnTxt} >{nextBtnTxt}</span >}
+              <div className={styles.clipIcon} ><ChevronRight /></div >
             </Button >
           </div >
         )}

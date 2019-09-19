@@ -21,7 +21,7 @@ class Clinical extends PureComponent {
 
   renderData() {
     const { articles, color } = this.props;
-    const dom = articles.map((m, i) => (
+    const dom = articles.map(m => (
       <div className={cx(styles.outerWrapper)} key={m.link} >
         <Button
           className={styles.innerWrapper}
@@ -33,6 +33,7 @@ class Clinical extends PureComponent {
         >
           <h3 className={styles.date} >{moment(m.dateTime.toDate()).format('MMMM Do, YYYY')}</h3 >
           <p className={cx('small', styles.header)} style={{ color }} >{m.description}</p >
+          <div className={styles.divider} />
           <p className={cx('small', styles.source)} >{m.source}</p >
         </Button >
       </div >
@@ -52,7 +53,7 @@ class Clinical extends PureComponent {
   }
 
   render() {
-    const { color, isMobile, isTablet } = this.props;
+    const { color } = this.props;
     const menuOptions = [{ display: 'publications', value: 'publications' }];
     return (
       <FadeIn spread >
@@ -62,7 +63,7 @@ class Clinical extends PureComponent {
             displayVolume={this.resolveVolume()}
             className={styles.clinicalCarousel}
             color={color}
-            navLocation={isMobile || isTablet ? 'bottom' : 'horizontal'}
+            navLocation="bottom"
             prevBtnTxt="NEW"
             nextBtnTxt="OLD"
           >
@@ -77,8 +78,6 @@ class Clinical extends PureComponent {
 Clinical.propTypes = {
   themeColor: PropTypes.string.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
-  isTablet: PropTypes.bool.isRequired,
-  isMobile: PropTypes.bool.isRequired,
   disableNext: PropTypes.bool.isRequired,
   disablePrev: PropTypes.bool.isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({
@@ -92,8 +91,6 @@ Clinical.propTypes = {
 
 const mapStateToProps = state => ({
   isTablet: Device.selectors.isTablet(state),
-  isMobile: Device.selectors.isMobile(state),
-  disableNext: SnapScroll.selectors.disableNext(state),
   disablePrev: SnapScroll.selectors.disablePrev(state),
   color: services.vgs.selectors.color(state),
   articles: _sortBy(services.reactor.selectors.collectionData(

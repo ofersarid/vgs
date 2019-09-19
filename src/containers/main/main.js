@@ -39,9 +39,10 @@ class Main extends PureComponent {
   }
 
   goToHome() {
-    const { updateLastFrame } = this.props;
+    const { updateLastFrame, updateFrameIndex } = this.props;
     hashHistory.push('home');
     updateLastFrame(0, 'home');
+    updateFrameIndex(0);
   }
 
   // resolveWaveColor() {
@@ -142,6 +143,7 @@ Main.propTypes = {
   setColor: PropTypes.func.isRequired,
   updateLastFrame: PropTypes.func.isRequired,
   frame: PropTypes.number.isRequired,
+  updateFrameIndex: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
@@ -164,6 +166,7 @@ const mapDispatchToProps = dispatch => ({
   setOrientation: orientation => dispatch(services.vgs.actions.setOrientation(orientation)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
   updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
+  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
 });
 
 export default compose(

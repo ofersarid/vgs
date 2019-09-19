@@ -1,5 +1,6 @@
-@import './dimentions';
+@import 'dimentions';
 @import './media-query-mixins';
+@import 'colors';
 
 .inner {
   width: calc(100vw - #{2 * $gutter-phone});
@@ -8,7 +9,7 @@
   bottom: 10%;
   position: fixed;
   left: $gutter-phone;
-  color:  #707070;
+  color: $gray;
   line-height: 1.5em;
   //justify-content: space-between;
 

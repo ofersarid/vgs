@@ -52,7 +52,7 @@
   height: 100%;
   left: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
 
   & > div {
     height: 100%;
@@ -124,5 +124,9 @@
     line-height: 26px;
     font-weight: 300;
   }
+}
+
+.itemWrapper {
+  //width: 100%;
 }
 
