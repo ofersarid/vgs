@@ -8,14 +8,13 @@ import camelCase from 'lodash/camelCase';
 import autoBind from 'auto-bind';
 import { Button } from '/src/shared';
 import services from '/src/services';
-import SubMenu from './sub-menu';
 import styles from '../styles.scss';
 
 class SideMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      openMenu: false,
+      openMenu: true,
       immediate: true,
     };
     autoBind(this);
@@ -38,19 +37,8 @@ class SideMenu extends PureComponent {
     this.toggleMenu();
   }
 
-  resolveWaveColor(color) {
-    switch (color.toLowerCase()) {
-      case '#0272ba':
-        return 'blue';
-      case '#662d91':
-        return 'purple';
-      default:
-        return 'gray';
-    }
-  }
-
   render() {
-    const { products, categories, color } = this.props;
+    const { color, colorName } = this.props;
     const { openMenu, immediate } = this.state;
     return (
       <Fragment >
@@ -63,34 +51,32 @@ class SideMenu extends PureComponent {
           }}
         >
           {props => <div className={styles.menuContainer} style={props} >
-            <ul className={styles.list} >
-              <Button onClick={this.navigate} tag="li" waveColor="white" >Home</Button >
-              <SubMenu label="Products" >
-                {categories.map(category => (
-                  <Fragment key={category} >
-                    <label >{category}</label >
-                    {products.map(product => {
-                      return product.category === category
-                        ? <Button
-                          tag="li"
-                          key={product.name}
-                          waveColor="white"
-                          onClick={this.navigate} >{product.name}</Button >
-                        : null;
-                    })}
-                  </Fragment >
-                ))}
-              </SubMenu >
-              <Button tag="li" onClick={this.navigate} waveColor="white" >About</Button >
-              <Button tag="li" onClick={this.navigate} waveColor="white" >Contact</Button >
-            </ul >
-            <Button tag="a" className={cx(styles.legal)} onClick={this.navigate} waveColor="white" >Legal</Button >
-          </div >}
+            <div className={styles.inner}>
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >Home</Button >
+              <div className={styles.divider} />
+              <p className={styles.category} >Cardiac Solutions</p >
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >VEST</Button >
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >VIOLA</Button >
+              <div className={styles.divider} />
+              <p className={styles.category} >Vascular Solutions</p >
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME</Button >
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME FR</Button >
+              <div className={styles.divider} />
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >NEWS & EVENTS</Button >
+              <div className={styles.divider} />
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >ABOUT</Button >
+              <div className={styles.divider} />
+              <Button onClick={this.navigate} tag="h1" waveColor="white" >CONTACT</Button >
+              <Button tag="a" onClick={this.navigate} waveColor="white" >Privacy policy</Button >
+              <Button tag="a" onClick={this.navigate} waveColor="white" >Terms & Conditions</Button >
+            </div>
+          </div >
+          }
         </Spring >
         <Button
           className={cx(styles.menuToggle)}
           onClick={this.toggleMenu}
-          waveColor={openMenu ? 'white' : this.resolveWaveColor(color)}
+          waveColor={colorName}
         >
           <Spring
             from={{ transform: 'rotate(0deg)', left: '0px', background: color }}
@@ -117,19 +103,14 @@ class SideMenu extends PureComponent {
 }
 
 SideMenu.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-  })),
-  categories: PropTypes.arrayOf(PropTypes.string),
   color: PropTypes.string.isRequired,
+  colorName: PropTypes.string.isRequired,
   updateLastFrame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  products: services.products.selectors.list(state),
-  categories: services.products.selectors.categories(state),
   color: services.vgs.selectors.color(state),
+  colorName: services.vgs.selectors.colorName(state),
 });
 
 const mapDispatchToProps = dispatch => ({
