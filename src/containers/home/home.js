@@ -5,12 +5,9 @@ import { compose } from 'redux';
 import autoBind from 'auto-bind';
 import cx from 'classnames';
 import { hashHistory } from 'react-router';
-import { SnapScroll, FadeInOut, FadeIn } from '/src/shared';
+import { SnapScroll, FadeIn } from '/src/shared';
 import services from '/src/services';
 import camelCase from 'lodash/camelCase';
-import homeCoverPicMobile from '/src/assets/home_cover_art_mobile.jpg';
-import homeCoverPicTablet from '/src/assets/home_cover_art_tablet.jpg';
-import homeCoverPicDesktop from '/src/assets/home_cover_art_desktop.jpg';
 import Device from '/src/shared/device';
 import layout from '/src/shared/styles/layout.scss';
 import Cover from './components/cover/cover';
@@ -47,24 +44,12 @@ class Home extends PureComponent {
     hashHistory.push(camelCase(txt));
   }
 
-  resolvePic() {
-    const { isMobile, isTouchDevice } = this.props;
-    if (isMobile) {
-      return homeCoverPicMobile;
-    } else if (isTouchDevice) {
-      return homeCoverPicTablet;
-    }
-    return homeCoverPicDesktop;
-  }
-
   render() {
-    const { data, isMobile, frame } = this.props; // eslint-disable-line
+    const { data, isMobile } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
-        <FadeInOut show={frame < 2} className={styles.bgWrap} spread >
-          <div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />
-        </FadeInOut >
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}
+        <Header index={1} text="VISIONARY SURGICAL TECHNOLOGY" />
         <Header index={2} text={isMobile ? 'ABOUT OUR PRODUCTS' : 'OUR PRODUCTS'} />
         <Header index={3} text="OUR PRODUCTS" />
         <SnapScroll >
@@ -124,7 +109,6 @@ Home.propTypes = {
   updateLastFrame: PropTypes.func.isRequired,
   lastFrame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  isTouchDevice: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -132,7 +116,6 @@ const mapStateToProps = state => ({
   data: services.reactor.selectors.pageData(state, 'home'),
   lastFrame: services.vgs.selectors.lastFrame(state, 'home'),
   isMobile: Device.selectors.isMobile(state),
-  isTouchDevice: Device.selectors.isTouchDevice(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

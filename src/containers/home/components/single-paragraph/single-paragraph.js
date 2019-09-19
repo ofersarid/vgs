@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FadeIn } from '/src/shared';
+import { FadeIn, RatioBox, MediaLoader } from '/src/shared';
 import cx from 'classnames';
+import pic from '/src/assets/vector_heart.png';
+import layout from '/src/shared/styles/layout.scss';
 import styles from './styles.scss';
-import layout from '../../../../shared/styles/layout.scss';
+import homeStyles from '../../styles.scss';
 
 class SingleParagraph extends PureComponent {
   constructor(props) {
@@ -17,11 +19,14 @@ class SingleParagraph extends PureComponent {
     const { text } = this.props;
     return (
       <FadeIn spread >
-        <div className={cx(styles.paragraph, layout.inner)} >
+        <div className={cx(styles.paragraph, layout.inner, homeStyles.homeInner)} >
           <p
             dangerouslySetInnerHTML={{ __html: text.replace(/\n\r?/g, '<br />') }}
           />
         </div >
+        <RatioBox ratio={0.94} className={styles.art}>
+          <MediaLoader src={pic} />
+        </RatioBox >
       </FadeIn >
     );
   }

@@ -2,24 +2,27 @@
 @import "/src/colors";
 
 .paragraph {
-  height: 57%;
-  top: 26.4%;
+  //height: 57%;
+  //top: 26.4%;
 
   @include media('>phone') {
-    font-size: 28px;
-    line-height: 37px;
+
   }
 
   @include media('>tablet') {
-    top: 35%;
-    left: 35%;
-    width: 55%;
-    font-size: 28px;
-    line-height: 37px;
+    //top: 35%;
+    width: calc(50% - 6vw);
   }
 
   @include media('>desktop') {
-    font-size: 34px;
-    line-height: 43px;
+
   }
+}
+
+.art {
+  position: absolute;
+  bottom: 0;
+  right: 2vw;
+  width: 50%;
+  transform: translateY(25%);
 }

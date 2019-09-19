@@ -42,16 +42,10 @@
     }
   }
 
-  .art {
-    height: 50%;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-
-    @include media('>tablet') {
-      height: 70%;
-      bottom: 8%;
-    }
-
+  .coverPic {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%
   }
 }
