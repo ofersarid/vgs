@@ -3,6 +3,7 @@ import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FadeIn, RatioBox, MediaLoader } from '/src/shared';
+import utils from '/src/utils';
 import cx from 'classnames';
 import pic from '/src/assets/vector_heart.png';
 import layout from '/src/shared/styles/layout.scss';
@@ -24,9 +25,11 @@ class SingleParagraph extends PureComponent {
             dangerouslySetInnerHTML={{ __html: text.replace(/\n\r?/g, '<br />') }}
           />
         </div >
-        <RatioBox ratio={0.94} className={styles.art}>
-          <MediaLoader src={pic} />
-        </RatioBox >
+        {!utils.isMobile() && (
+          <RatioBox ratio={0.94} className={styles.art} >
+            <MediaLoader src={pic} />
+          </RatioBox >
+        )}
       </FadeIn >
     );
   }

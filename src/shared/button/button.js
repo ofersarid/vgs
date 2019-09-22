@@ -37,7 +37,7 @@ class Button extends PureComponent {
   }
 
   render() {
-    const { children, className, tag, waveColor, textColor, disable, style, withBorder } = this.props;
+    const { children, className, tag, textColor, disable, style, withBorder } = this.props;
     const Tag = tag;
     const copyProps = Object.assign({}, this.props);
     delete copyProps.color;
@@ -64,7 +64,8 @@ class Button extends PureComponent {
         onTouchEnd={this.calm}
         onMouseUp={this.calm}
         onMouseLeave={this.calm}
-        className={cx(`ripple waves-effect waves-${waveColor}`, styles.button, className, { [styles.disable]: disable })}
+        // className={cx(`ripple waves-effect waves-${waveColor}`, styles.button, className, { [styles.disable]: disable })}
+        className={cx(styles.button, className, { [styles.disable]: disable })}
         style={{
           color: textColor,
           ...style,
