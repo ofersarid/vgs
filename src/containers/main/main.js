@@ -98,9 +98,9 @@ class Main extends PureComponent {
                       target="_blank"
                     >
                       <img className={styles.logoImg} src={logo} />
+                      {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/').pop()) &&
+                      <img className={styles.logoText} src={vgs} style={springs} />}
                     </Button >
-                    {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/').pop()) &&
-                    <img className={styles.logoText} src={vgs} style={springs} />}
                   </Fragment >
                 )}
               {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
