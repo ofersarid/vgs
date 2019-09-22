@@ -29,6 +29,7 @@
   @include media('>tablet') {
     width: calc(100vw - #{2 * $gutter-desktop});
     left: $gutter-desktop;
+    top: 23%;
   }
 
   @include media('>desktop') {

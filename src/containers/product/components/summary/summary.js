@@ -3,6 +3,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Square } from 'styled-icons/boxicons-solid/Square';
 import { FadeIn } from '/src/shared';
+import utils from '/src/utils';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
 import services from '/src/services';
@@ -12,7 +13,7 @@ import { connect } from 'react-redux';
 const Summary = ({ data, art, color }) => { // eslint-disable-line
   return (
     <FadeIn spread >
-      {/*<img className={styles.art} src={art} />*/}
+      {!utils.isMobile() && <img className={styles.art} src={art} />}
       <section className={cx(styles.content, layout.inner)} >
         <ul className={styles.list} >
           {data.map(item => (

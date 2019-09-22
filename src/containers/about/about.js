@@ -34,7 +34,7 @@ class About extends PureComponent {
     const { data, isMobile, color } = this.props; // eslint-disable-line
     return data ? (
       <Fragment >
-        <IndexHeader index={1} header="ABOUT VGS" />
+        <IndexHeader index={1} header="ABOUT VGS" hideIndex />
         {/*<Header index={3} text="GLOBAL IMPACT" />*/}
         <SnapScroll >
           <Cover txt={isMobile ? data.coverBodyMobile : data.coverBody} />
@@ -56,7 +56,7 @@ class About extends PureComponent {
             />
           ) : (
             <TwoColumnLayout
-              article={isMobile ? data.aboutBodyMobile : data.aboutBodyMobile}
+              article={data.aboutBody}
             />
           )}
         </SnapScroll >

@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useSpring, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import services from '/src/services';
-import Device from '/src/shared/device';
 import { SnapScroll } from '/src/shared';
 import styles from './styles.scss';
 
-const IndexHeader = ({ index, frame, header, isMobile, color }) => {
+const IndexHeader = ({ index, frame, header, hideIndex, color }) => {
   const forward = frame >= index;
 
   const resolveSpring = () => {
@@ -24,14 +23,18 @@ const IndexHeader = ({ index, frame, header, isMobile, color }) => {
 
   return (
     <h2 className={styles.header} style={{ color: color }}>
-      <animated.span className={styles.index} style={{
-        opacity: o,
-        transform: x.interpolate(x => `translateY(${-x}px)`),
-      }} >0{index + 1}</animated.span >
-      <div className={styles.divider} style={{
-        backgroundColor: color,
-        opacity: frame === index ? 1 : 0,
-      }} />
+      {!hideIndex && (
+        <Fragment>
+          <animated.span className={styles.index} style={{
+            opacity: o,
+            transform: x.interpolate(x => `translateY(${-x}px)`),
+          }} >0{index + 1}</animated.span >
+          <div className={styles.divider} style={{
+            backgroundColor: color,
+            opacity: frame === index ? 1 : 0,
+          }} />
+        </Fragment>
+      )}
       <animated.span className={styles.label} style={{
         opacity: o,
         transform: x.interpolate(x => `translateY(${x}px)`),
@@ -46,13 +49,12 @@ IndexHeader.propTypes = {
   header: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
-  isMobile: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
+  hideIndex: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  isMobile: Device.selectors.isMobile(state),
   color: services.vgs.selectors.color(state),
 });
 

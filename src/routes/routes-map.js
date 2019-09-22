@@ -12,6 +12,7 @@ export default (
     <Route path="frameFr" component={Pages.Product} />
     <Route path="vest" component={Pages.Product} />
     <Route path="about" component={Pages.About} />
+    <Route path="contact" component={Pages.Contact} />
     <Redirect from="*" to="home" />
   </Route >
 );

@@ -7,7 +7,6 @@
     height: 65%;
     width: 35vw;
     left: 48vw;
-    top: 23%;
   }
 }
 
@@ -69,6 +68,6 @@
   }
 
   @include media('>tablet') {
-    height: 75%
+    height: 70%
   }
 }

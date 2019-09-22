@@ -47,26 +47,25 @@
   width: 100%;
 }
 
-.homeInner {
-  height: 60%;
-  top: 27% !important;
-
-  @include media('>phone') {
-    top: 30%;
-    height: 70%;
-
-    @include orientation('landscape') {
-      //display: flex;
-      height: 45%;
-    }
-  }
-
-  @include media('>tablet') {
-    top: 30%;
-    height: 50%;
-  }
-
-  @include media('>desktop') {
-    top: 35%;
-  }
-}
+//.homeInner {
+//  height: 60%;
+//
+//  @include media('>phone') {
+//    top: 30%;
+//    height: 70%;
+//
+//    @include orientation('landscape') {
+//      //display: flex;
+//      height: 45%;
+//    }
+//  }
+//
+//  @include media('>tablet') {
+//    top: 30%;
+//    height: 50%;
+//  }
+//
+//  @include media('>desktop') {
+//    top: 30%;
+//  }
+//}

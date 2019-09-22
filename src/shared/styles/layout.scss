@@ -27,6 +27,7 @@
     @include media('>tablet') {
       width: calc(100vw - #{2 * $gutter-desktop});
       left: $gutter-desktop;
+      top: 30%;
 
       //@include orientation(landscape) {
       //  width: 74vw;

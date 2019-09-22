@@ -1,0 +1,81 @@
+@import "/src/shared/styles";
+
+.cover {
+  z-index: 1;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #F2F2F2;
+
+  .paragraph {
+    height: 35%;
+    top: 42%;
+
+    //@include media('>phone') {
+    //  top: 45%;
+    //}
+    //
+    @include media('>tablet') {
+      top: 50%;
+      width: 30%;
+      left: $gutter-desktop;
+    //
+    //  @include orientation(portrait) {
+    //    top: 40%;
+    //  }
+    }
+  }
+
+  .header {
+    position: absolute;
+    top: 25%;
+    left: $gutter-phone;
+    width: 66%;
+    font-size: 50px;
+    line-height: 58px;
+    text-transform: uppercase;
+    font-weight: lighter;
+    z-index: 1;
+    color: $green;
+
+    @include media('>phone') {
+      font-size: 91px;
+      line-height: 90px;
+      left: $gutter-tablet;
+      width: 60%;
+    }
+
+    @include media('>tablet') {
+      left: $gutter-desktop;
+    }
+
+    @include media('>desktop') {
+      font-size: 127px;
+      line-height: 128px;
+    }
+  }
+}
+
+.art {
+  width: 50%;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    transform: translate(-15%, 25%);
+
+    @include media('>phone') {
+      transform: translate(-25%, 25%);
+    }
+  }
+
+  @include media('>phone') {
+    width: 38%;
+  }
+
+}
