@@ -5,30 +5,7 @@
   position: absolute;
 }
 
-//.gradientOverLay {
-//  position: fixed;
-//  left: 0;
-//  top: 0;
-//  right: 0;
-//  bottom: 0;
-//  background: linear-gradient(45deg, rgba(#808080, 0.03) 0%, rgba(#ffffff, 0.85) 50%, rgba(#ffffff, 1) 100%);
-//}
-
-//.grayBg {
-//  position: fixed;
-//  left: 0;
-//  top: 0;
-//  right: 0;
-//  bottom: 0;
-//  background: #F3F3F3;
-//}
-
 .paragraph {
-  //color: $black;
-  //font-size: 16px;
-  //line-height: 30px;
-  //height: 65%;
-  //top: 27%;
 
   @include media('>phone') {
     top: 22%;
@@ -46,26 +23,3 @@
   bottom: 0;
   width: 100%;
 }
-
-//.homeInner {
-//  height: 60%;
-//
-//  @include media('>phone') {
-//    top: 30%;
-//    height: 70%;
-//
-//    @include orientation('landscape') {
-//      //display: flex;
-//      height: 45%;
-//    }
-//  }
-//
-//  @include media('>tablet') {
-//    top: 30%;
-//    height: 50%;
-//  }
-//
-//  @include media('>desktop') {
-//    top: 30%;
-//  }
-//}

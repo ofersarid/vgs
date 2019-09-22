@@ -23,7 +23,6 @@ a.button.color {
   letter-spacing: 0.08ch;
 
   @include media('>tablet') {
-    //font-weight: 300;
   }
 
   &.disable {

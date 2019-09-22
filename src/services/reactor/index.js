@@ -38,8 +38,6 @@ const connect = firestoreConnect(props => {
         doc: id,
         subcollections: [{
           collection: 'data',
-          // where: [['active', '==', true]],
-          // orderBy: ['displayOrder', 'desc'],
         }],
       });
       return list;

@@ -7,7 +7,6 @@ import services from '/src/services';
 import styles from './styles.scss';
 import Button from '../button/button';
 import { connect } from 'react-redux';
-// import Device from '../device';
 
 class ReadMoreSection extends React.PureComponent {
   constructor(props) {
@@ -82,10 +81,8 @@ ReadMoreSection.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  // isMobile: Device.selectors.isMobile(state),
   color: services.vgs.selectors.color(state),
   colorName: services.vgs.selectors.colorName(state),
-  // deviceType: Device.selectors.deviceType(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

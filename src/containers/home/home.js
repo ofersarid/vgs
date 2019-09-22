@@ -13,12 +13,8 @@ import layout from '/src/shared/styles/layout.scss';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
-// import GlobalImpact from './components/global-impact/global-impact';
 import ProductsShelf from './components/products-shelf/products-shelf';
 import styles from './styles.scss';
-
-// import { firestoreConnect } from 'react-redux-firebase';
-// trigger build
 
 class Home extends PureComponent {
   constructor(props) {
@@ -44,7 +40,7 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { data, isMobile } = this.props; // eslint-disable-line
+    const { data, isMobile } = this.props;
     return data ? (
       <Fragment >
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}

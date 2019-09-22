@@ -45,18 +45,14 @@
 
 .label {
   display: inline-block;
-  //align-items: center;
-  //margin-left: 10px;
 
   @include media('>phone') {
     top: 0;
     display: inline-block;
-    //left: 130px;
   }
 }
 
 .divider {
-  //display: none;
   height: 1px;
   display: inline-block;
   width: 25px;

@@ -17,31 +17,3 @@
     @media screen and (orientation:portrait) { @content; }
   }
 }
-
-//@mixin device($device) {
-//  @if $device == "phone-protrait" {
-//    @media (max-width: 767px) and (orientation: portrait) {
-//      @content;
-//    }
-//  } @else if $device == "phone-landscape" {
-//    @media (max-width: 767px) and (orientation: landscape) {
-//      @content;
-//    }
-//  } @else if $device == "tablet-portrait" {
-//    @media (max-width: 1023px) and (orientation: portrait) {
-//      @content;
-//    }
-//  } @else if $device == "tablet-landscape" {
-//    @media (max-width: 1023px) and (orientation: landscape) {
-//      @content;
-//    }
-//  } @else if $device == "tablet-pro-portrait" {
-//    @media (max-width: 1023px) and (orientation: portrait) {
-//      @content;
-//    }
-//  } @else if $device == "tablet-pro-landscape" {
-//    @media (max-width: 1023px) and (orientation: landscape) {
-//      @content;
-//    }
-//  }
-//}
