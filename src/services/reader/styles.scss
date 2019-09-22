@@ -3,22 +3,32 @@
 .reader {
   width: 100vw;
   height: 100%;
-  background: white;
   position: fixed;
   top: 0;
   z-index: 2;
   transform: translateY(100%);
   background: rgb(248, 248, 248);
   box-sizing: border-box;
+  //-webkit-overflow-scrolling: auto;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+  }
 }
 
 .content {
   height: calc(100% - 58px);
   width: 100%;
-  overflow: hidden auto;
+  //overflow: hidden auto;
   padding: 20px 40px 130px;
   box-sizing: border-box;
   color: $black;
+  overflow: auto;
+  //-webkit-overflow-scrolling: auto;
 
   h1 {
     font-size: 17px;
