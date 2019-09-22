@@ -18,6 +18,8 @@ class SideMenu extends PureComponent {
       immediate: true,
     };
     autoBind(this);
+
+    this.ref = React.createRef();
   }
 
   toggleMenu() {
@@ -25,6 +27,7 @@ class SideMenu extends PureComponent {
       immediate: false,
       openMenu: !this.state.openMenu,
     });
+    this.ref.current.scrollTop = 0;
   }
 
   navigate(e) {
@@ -51,7 +54,7 @@ class SideMenu extends PureComponent {
           }}
         >
           {props => <div className={styles.menuContainer} style={props} >
-            <div className={styles.inner}>
+            <div className={styles.inner} ref={this.ref}>
               <Button onClick={this.navigate} tag="h1" waveColor="white" >Home</Button >
               <div className={styles.divider} />
               <p className={styles.category} >Cardiac Solutions</p >
