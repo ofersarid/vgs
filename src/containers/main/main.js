@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
-import { Spring, config } from 'react-spring/renderprops';
+import { Spring } from 'react-spring/renderprops';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
 import Device from '/src/shared/device';
@@ -11,14 +11,15 @@ import Reader from '/src/services/reader/reader';
 import { hashHistory } from 'react-router';
 import services from '/src/services';
 import utils from '/src/utils';
+import cx from 'classnames';
+import { Button, SnapScroll } from '/src/shared';
+import { logoGreen, vgsGreen } from './assets';
 import FrameIndicator from './components/frame-indicator';
+import Footer from './components/footer';
 import styles from './styles.scss';
 import vgs from './assets/vgs_blue.svg';
 import SideMenu from './components/side-menu';
 import Card from './components/card';
-import { logoGreen, vgsGreen } from './assets';
-import cx from 'classnames';
-import { Button, SnapScroll } from '/src/shared';
 
 class Main extends PureComponent {
   constructor(props) {
@@ -49,26 +50,9 @@ class Main extends PureComponent {
     updateFrameIndex(0);
   }
 
-  // resolveWaveColor() {
-  //   const { color } = this.props;
-  //   if (!color) {
-  //     return 'gray';
-  //   }
-  //   switch (color.toLowerCase()) {
-  //     case '#0272ba':
-  //       return 'blue';
-  //     case '#662d91':
-  //       return 'purple';
-  //     case '#ed1c24':
-  //       return 'red';
-  //     default:
-  //       return 'gray';
-  //   }
-  // }
-
   render() {
     const show = this.props.pathname !== '/product';
-    const { pathname, logo, bizCard, orientation, isLastFrame, color, frame, isMobile } = this.props;
+    const { pathname, logo, bizCard, orientation, isMobile } = this.props;
     return (
       <Fragment >
         <Device />
@@ -105,20 +89,7 @@ class Main extends PureComponent {
                 )}
               {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
               {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
-              <Spring
-                from={{ opacity: isLastFrame ? 0 : 1, transform: `translateY(${isLastFrame ? '100%' : '0%'})` }}
-                to={{ opacity: isLastFrame ? 1 : 0, transform: `translateY(${isLastFrame ? '0%' : '100%'})` }}
-                config={config.slow}
-                immediate={frame === 0}
-              >
-                {springs => <div style={{
-                  ...springs,
-                  background: color,
-                }} className={styles.footer} >
-                  <span >&copy;2019 all rights reserved to VGS</span >
-                  <span >Produced by</span >
-                </div >}
-              </Spring >
+              <Footer />
               {this.props.children}
             </div >}
           </Spring >
@@ -132,9 +103,7 @@ class Main extends PureComponent {
 Main.propTypes = {
   children: PropTypes.any,
   pathname: PropTypes.string,
-  color: PropTypes.string,
   isMobile: PropTypes.bool.isRequired,
-  isLastFrame: PropTypes.bool.isRequired,
   logo: PropTypes.string,
   resourceList: PropTypes.shape({
     collections: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -145,7 +114,6 @@ Main.propTypes = {
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
   updateLastFrame: PropTypes.func.isRequired,
-  frame: PropTypes.number.isRequired,
   updateFrameIndex: PropTypes.func.isRequired,
   disableBizCard: PropTypes.func.isRequired,
 };
@@ -161,9 +129,6 @@ const mapStateToProps = state => ({
   resourceList: services.reactor.selectors.resourceList(state),
   bizCard: services.vgs.selectors.bizCard(state),
   orientation: services.vgs.selectors.orientation(state),
-  color: services.vgs.selectors.color(state),
-  isLastFrame: SnapScroll.selectors.isLastFrame(state),
-  frame: SnapScroll.selectors.frame(state),
 });
 
 const mapDispatchToProps = dispatch => ({

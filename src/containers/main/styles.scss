@@ -496,4 +496,19 @@
     padding: 5px 13vw 0;
     font-size: 18px;
   }
+
+  .right {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 18px;
+      transform: translateY(-0.2em);
+      margin-left: 3px;
+
+      @include media('>tablet') {
+        height: 24px;
+      }
+    }
+  }
 }
