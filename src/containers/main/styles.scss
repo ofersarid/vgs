@@ -158,7 +158,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
 
   :global {
     ::-webkit-scrollbar-thumb {
@@ -172,12 +172,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 65%;
+    height: 83%;
+    padding: 0 0 40px 0;
+    margin-top: 30%;
     overflow-y: auto;
     overflow-x: hidden;
 
     @include media('>phone') {
-      width: 81vw;
+      width: 45vw;
+      margin-top: 20%;
+      padding: 0 0 20px 0;
     }
 
     & > * {
@@ -211,6 +215,12 @@
     margin-top: -15px;
     margin-bottom: -10px;
     color: rgba(white, 0.5);
+
+    @include media('>phone') {
+      //position: absolute;
+      margin-bottom: -20px;
+      display: inline-block;
+    }
   }
 
   h1 {
