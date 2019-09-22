@@ -29,6 +29,12 @@ class Carousel extends PureComponent {
     this.countGroups();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.children.length !== this.props.children.length) {
+      this.countGroups();
+    }
+  }
+
   countGroups() {
     const { children, displayVolume } = this.props;
     const count = Math.ceil(children.length / displayVolume);
@@ -36,7 +42,7 @@ class Carousel extends PureComponent {
   }
 
   next(e) {
-    e.stopPropagation();
+    e.persist();
     const { group, groupCount } = this.state;
     if (group < groupCount) {
       this.setState({ group: group + 1, orientation: 'next' });
@@ -44,7 +50,7 @@ class Carousel extends PureComponent {
   }
 
   prev(e) {
-    e.stopPropagation();
+    e.persist();
     const { group } = this.state;
     if (group > 0) {
       this.setState({ group: group - 1, orientation: 'prev' });

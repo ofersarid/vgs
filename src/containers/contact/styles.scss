@@ -1,0 +1,100 @@
+@import '/src/shared/styles';
+
+.inner {
+  p {
+    margin-bottom: 15%;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.itemInner {
+  padding-right: 3vw;
+  p {
+    margin-bottom: 2%;
+  }
+
+  .country {
+    color: #68A11E;
+  }
+
+  .products {
+    color: #004B46;
+  }
+}
+
+.link {
+  color: $green;
+
+  &:visited {
+    color: $green;
+  }
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  margin-top: 7%;
+
+  a {
+    padding: 7px;
+    color: $green;
+    margin-right: 20px;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.onePager {
+  display: flex;
+  flex-direction: column;
+
+  h1, h2 {
+    color: $green;
+    margin-bottom: 2%;
+
+    @include orientation('portrait') {
+      margin-bottom: 4%;
+    }
+  }
+
+}
+
+.spacer {
+  width: 10px;
+  display: inline-block;
+}
+
+.pipe {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.spaceBottom {
+  margin-bottom: 6%;
+
+  @include orientation('portrait') {
+    margin-bottom: 12%;
+  }
+}
+
+.carousel {
+  height: 280px;
+
+  @include media('>phone') {
+    height: 300px;
+  }
+
+  @include media('>desktop') {
+    height: 350px;
+  }
+}

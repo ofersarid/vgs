@@ -8,6 +8,7 @@
     "history": "^4.7.2",
     "immutable": "^4.0.0-rc.12",
     "is-touch-device": "^1.0.1",
+    "json5": "^2.1.0",
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "node-waves": "^0.7.6",
@@ -60,12 +61,15 @@
     "react-scripts": "^2.1.1",
     "sass": "^1.15.1",
     "sass-loader": "^7.1.0",
+    "sass-unused": "^0.3.0",
+    "uncss": "^0.17.2",
     "url-loader": "^1.1.2"
   },
   "scripts": {
     "start": "parcel index.html",
     "lint": "esw src/",
     "lint-watch": "esw src/ -w",
+    "sass-unused": "sass-unused 'src/**/*.scss'",
     "build": "rimraf ./docs && NODE_ENV=dev parcel build index.html --public-url '.' --out-dir docs && copyfiles -f CNAME ./docs/",
     "publish": "yarn build && git add . && git commit -am \"publish\" && git push",
     "push-empty": "git commit -m 'rebuild pages' --allow-empty && git push origin master",

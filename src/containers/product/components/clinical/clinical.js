@@ -78,8 +78,6 @@ class Clinical extends PureComponent {
 Clinical.propTypes = {
   themeColor: PropTypes.string.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
-  disableNext: PropTypes.bool.isRequired,
-  disablePrev: PropTypes.bool.isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({
     dateTime: PropTypes.object.isRequired,
     description: PropTypes.string.isRequired,
@@ -91,7 +89,6 @@ Clinical.propTypes = {
 
 const mapStateToProps = state => ({
   isTablet: Device.selectors.isTablet(state),
-  disablePrev: SnapScroll.selectors.disablePrev(state),
   color: services.vgs.selectors.color(state),
   articles: _sortBy(services.reactor.selectors.collectionData(
     state,

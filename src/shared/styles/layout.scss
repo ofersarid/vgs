@@ -27,13 +27,12 @@
     @include media('>tablet') {
       width: calc(100vw - #{2 * $gutter-desktop});
       left: $gutter-desktop;
-      top: 30%;
+      top: 20%;
 
-      //@include orientation(landscape) {
-      //  width: 74vw;
-      //  left: calc((100vw - 74vw)/2);
-      //
-      //}
+      @include orientation(landscape) {
+        top: 23%;
+
+      }
     }
 
     @include media('>desktop') {

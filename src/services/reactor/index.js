@@ -92,7 +92,6 @@ const selectors = {
           return dataArray;
         }, []);
       }
-      console.warn(`collection ${name} not found`);
     }
   },
   pageData: (state, name) => {
@@ -104,7 +103,6 @@ const selectors = {
         preloadImages(data);
         return data;
       }
-      console.warn(`page ${name} is loading or not found`);
     }
   },
 };

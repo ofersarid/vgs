@@ -1,36 +1,6 @@
 @import "/src/media-query-mixins";
 @import "/src/colors";
 
-.ourProducts {
-  font-size: 16px;
-  line-height: 35px;
-  height: 65%;
-  top: 27% !important;
-
-  @include media('>phone') {
-    top: 30%;
-    font-size: 22px;
-    line-height: 37px;
-    height: 70%;
-
-    @include orientation('landscape') {
-      //display: flex;
-      height: 45%;
-    }
-  }
-
-  @include media('>tablet') {
-    top: 30%;
-    height: 50%;
-  }
-
-  @include media('>desktop') {
-    top: 35%;
-    font-size: 34px;
-    line-height: 43px;
-  }
-}
-
 .text {
   @include media('>phone') {
     margin-bottom: 8%;

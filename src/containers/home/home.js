@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import autoBind from 'auto-bind';
 import cx from 'classnames';
 import { hashHistory } from 'react-router';
-import { SnapScroll, FadeIn } from '/src/shared';
+import { SnapScroll, FadeIn, IndexHeader } from '/src/shared';
 import services from '/src/services';
 import camelCase from 'lodash/camelCase';
 import Device from '/src/shared/device';
@@ -14,7 +14,6 @@ import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
 // import GlobalImpact from './components/global-impact/global-impact';
-import Header from './components/header/header';
 import ProductsShelf from './components/products-shelf/products-shelf';
 import styles from './styles.scss';
 
@@ -49,9 +48,9 @@ class Home extends PureComponent {
     return data ? (
       <Fragment >
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}
-        <Header index={1} text="VISIONARY SURGICAL TECHNOLOGY" />
-        <Header index={2} text={isMobile ? 'ABOUT OUR PRODUCTS' : 'OUR PRODUCTS'} />
-        <Header index={3} text="OUR PRODUCTS" />
+        <IndexHeader index={1} header="VISIONARY SURGICAL TECHNOLOGY" hideIndex />
+        <IndexHeader index={2} header={isMobile ? 'ABOUT OUR PRODUCTS' : 'OUR PRODUCTS'} hideIndex />
+        <IndexHeader index={3} header="OUR PRODUCTS" hideIndex />
         <SnapScroll >
           <Cover
             footer={{

@@ -52,7 +52,7 @@ class Main extends PureComponent {
 
   render() {
     const show = this.props.pathname !== '/product';
-    const { pathname, logo, bizCard, orientation, isMobile } = this.props;
+    const { pathname, logo, bizCard, orientation, isMobile, children } = this.props;
     return (
       <Fragment >
         <Device />
@@ -89,8 +89,8 @@ class Main extends PureComponent {
                 )}
               {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
               {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
+              {children}
               <Footer />
-              {this.props.children}
             </div >}
           </Spring >
         </ReduxRoutes >

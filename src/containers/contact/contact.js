@@ -1,66 +1,71 @@
-import React, { Fragment, PureComponent } from 'react'; // eslint-disable-line
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import Device from '/src/shared/device';
-import utils from '/src/utils'; // eslint-disable-line
-import { SnapScroll, IndexHeader, TwoColumnLayout, ReadMoreSection } from '/src/shared'; // eslint-disable-line
+// import utils from '/src/utils';
+import { SnapScroll, IndexHeader } from '/src/shared';
+import isEqual from 'lodash/isEqual';
 import services from '/src/services';
-import Cover from './components/cover/cover'; // eslint-disable-line
-import cx from 'classnames'; // eslint-disable-line
-import styles from '../product/components/img-txt-btn/styles.scss'; // eslint-disable-line
-import layout from '/src/shared/styles/layout.scss'; // eslint-disable-line
+import utils from '/src/utils';
+import cx from 'classnames';
+import layout from '/src/shared/styles/layout.scss';
+import HeadOffice from './head-office';
+import Distributors from './distributors';
+import styles from './styles.scss';
 
-// import { firestoreConnect } from 'react-redux-firebase';
-// trigger build
-
-class Contact extends PureComponent {
+class Contact extends Component {
   constructor(props) {
     super(props);
     props.setColor('#005728');
+    props.updateFrameIndex(0);
   }
 
-  componentDidMount() {
-    const { updateFrameIndex, lastFrame } = this.props;
-    updateFrameIndex(lastFrame);
-  }
-
-  componentWillUnmount() {
-    const { updateLastFrame, frame } = this.props;
-    updateLastFrame(frame, 'contact.js');
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return !isEqual(nextProps.data, this.props.data) || nextProps.frame !== this.props.frame;
   }
 
   render() {
-    const { data, isMobile, color } = this.props; // eslint-disable-line
-    return <div></div>;
+    const { data } = this.props; // eslint-disable-line
+    return (
+      <Fragment >
+        {utils.isMobile() && (
+          <Fragment >
+            <IndexHeader index={0} header="HEAD OFFICE" hideIndex />
+            <IndexHeader index={1} header="DISTRIBUTORS" hideIndex />
+          </Fragment >
+        )}
+        <SnapScroll >
+          {utils.isMobile() && <HeadOffice />}
+          {utils.isMobile() && <Distributors data={data} />}
+          {!utils.isMobile() && (
+            <div className={cx(layout.inner, styles.onePager)} >
+              <h1 >CONTACT US</h1 >
+              <HeadOffice />
+              <h2 >DISTRIBUTORS</h2 >
+              <Distributors data={data} />
+            </div >
+          )}
+        </SnapScroll >
+      </Fragment >
+    );
   }
 }
 
 Contact.propTypes = {
-  // frame: PropTypes.number.isRequired,
-  data: PropTypes.object,
+  data: PropTypes.array,
   setColor: PropTypes.func.isRequired,
-  isMobile: PropTypes.bool.isRequired,
-  updateFrameIndex: PropTypes.func.isRequired,
-  updateLastFrame: PropTypes.func.isRequired,
   frame: PropTypes.number.isRequired,
-  lastFrame: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
+  updateFrameIndex: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  // frame: SnapScroll.selectors.frame(state),
-  data: services.reactor.selectors.pageData(state, 'distributors'),
-  isMobile: Device.selectors.isMobile(state),
-  lastFrame: services.vgs.selectors.lastFrame(state, 'contact'),
+  data: services.reactor.selectors.collectionData(state, 'distributors'),
   frame: SnapScroll.selectors.frame(state),
-  color: services.vgs.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
   updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
-  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

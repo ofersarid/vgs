@@ -11,9 +11,6 @@ import cx from 'classnames';
 import styles from '../product/components/img-txt-btn/styles.scss';
 import layout from '/src/shared/styles/layout.scss';
 
-// import { firestoreConnect } from 'react-redux-firebase';
-// trigger build
-
 class About extends PureComponent {
   constructor(props) {
     super(props);

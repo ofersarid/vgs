@@ -50,7 +50,7 @@ IndexHeader.propTypes = {
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
-  hideIndex: PropTypes.string,
+  hideIndex: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({

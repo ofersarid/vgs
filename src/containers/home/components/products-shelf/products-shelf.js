@@ -40,7 +40,7 @@ const ProductsShelf = ({ updateLastFrame, color, data }) => {
       prevBtnTxt={utils.isMobile() ? undefined : 'BACK'}
       nextBtnTxt={utils.isMobile() ? undefined : 'MORE'}
     >
-      <div className={cx(styles.outerWrapper)} key="item-vest" >
+      <div key="item-vest" >
         <Button
           className={cx(styles.innerWrapper, styles.vest)}
           onClick={() => navigate('vest')}
