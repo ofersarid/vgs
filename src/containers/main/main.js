@@ -14,12 +14,12 @@ import utils from '/src/utils';
 import cx from 'classnames';
 import { Button, SnapScroll } from '/src/shared';
 import { logoGreen, vgsGreen } from './assets';
-import FrameIndicator from './components/frame-indicator';
-import Footer from './components/footer';
+import FrameIndicator from './frame-indicator';
+import Footer from './footer';
 import styles from './styles.scss';
 import vgs from './assets/vgs_blue.svg';
-import SideMenu from './components/side-menu';
-import Card from './components/card';
+import SideMenu from './side-menu';
+import Card from './card';
 
 class Main extends PureComponent {
   constructor(props) {

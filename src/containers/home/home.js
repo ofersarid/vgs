@@ -15,6 +15,7 @@ import SingleParagraph from './components/single-paragraph/single-paragraph';
 import OurProducts from './components/our-products/our-products';
 import ProductsShelf from './components/products-shelf/products-shelf';
 import styles from './styles.scss';
+import Splash from './splash';
 
 class Home extends PureComponent {
   constructor(props) {
@@ -91,6 +92,7 @@ class Home extends PureComponent {
               text={data.ourProductsBody} />
           )}
         </SnapScroll >
+        {data.splashPublished && <Splash src={data.splash} />}
       </Fragment >
     ) : null;
   }

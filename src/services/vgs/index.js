@@ -9,7 +9,8 @@ const reducer = (state = fromJS({
   productsActiveTab: 'vascular',
   lastFrame: {
     home: 0,
-  }
+  },
+  splash: false,
 }), action) => {
   switch (action.type) {
     case 'DISABLE_BIZ_CARD':
@@ -24,6 +25,10 @@ const reducer = (state = fromJS({
       return state.set('productsActiveTab', action.tab);
     case 'UPDATE_LAST_FRAME':
       return state.setIn(['lastFrame', camelCase(action.context)], action.frame);
+    case 'SHOW_SPLASH':
+      return state.set('splash', true);
+    case 'HIDE_SPLASH':
+      return state.set('splash', false);
     default:
       return state;
   }
@@ -32,6 +37,12 @@ const reducer = (state = fromJS({
 const actions = {
   disableBizCard: () => ({
     type: 'DISABLE_BIZ_CARD',
+  }),
+  showSplash: () => ({
+    type: 'SHOW_SPLASH',
+  }),
+  hideSplash: () => ({
+    type: 'HIDE_SPLASH',
   }),
   enableBizCard: () => ({
     type: 'ENABLE_BIZ_CARD',
@@ -61,6 +72,7 @@ const selectors = {
   color: state => state.getIn(['vgs', 'color']),
   productsActiveTab: state => state.getIn(['vgs', 'productsActiveTab']),
   lastFrame: (state, context) => state.getIn(['vgs', 'lastFrame', camelCase(context)]) || 0,
+  splash: state => state.getIn(['vgs', 'splash']),
 };
 
 selectors.colorName = createSelector(selectors.color, color => {
