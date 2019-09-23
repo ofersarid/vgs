@@ -1,5 +1,4 @@
-@import "/src/media-query-mixins";
-@import "/src/colors";
+@import "/src/shared/styles";
 
 .bgWrap {
   position: absolute;
@@ -28,7 +27,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  left: 0;
+  width: 100vw;
   bottom: 0;
   background: white;
   z-index: 2;
@@ -40,6 +39,13 @@
   transform: translateX(100%);
   opacity: 0;
   color: $green;
+  box-sizing: border-box;
+
+  @include media('>phone') {
+    padding: 80px;
+    width: calc(#{1/1.5 * 100}vh);
+  }
+
 }
 
 .closeSplashBtn {

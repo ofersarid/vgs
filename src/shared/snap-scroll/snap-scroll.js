@@ -43,8 +43,8 @@ class SnapScroll extends React.Component {
       updateFrameIndex: PropTypes.func.isRequired,
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       disableScrollSnap: PropTypes.func.isRequired,
-      disableNext: PropTypes.bool.isRequired,
-      disablePrev: PropTypes.bool.isRequired,
+      disableNext: PropTypes.bool,
+      disablePrev: PropTypes.bool,
       count: PropTypes.func.isRequired,
       setIsLastFrame: PropTypes.func.isRequired,
     };

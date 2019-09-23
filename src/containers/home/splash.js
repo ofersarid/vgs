@@ -35,16 +35,16 @@ class Splash extends PureComponent {
         reset={splash}
       >
         {springs => <div className={cx(styles.splash)} style={springs} >
-          <RatioBox ratio={1.55}>
+          <RatioBox ratio={1.5} >
             <MediaLoader src={src} />
-          </RatioBox>
+          </RatioBox >
           <Button
             onClick={hideSplash}
             withBorder
             className={styles.closeSplashBtn}
           >
             CLOSE
-          </Button>
+          </Button >
         </div >}
       </Spring >
     );
