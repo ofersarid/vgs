@@ -172,6 +172,7 @@ class Product extends PureComponent {
               image2={data.screen5Image2}
               img1Description={data.screen5Image1Subtitle}
               img2Description={data.screen5Image2Subtitle}
+              color={color}
             />
           )}
           {data.screen6Published && (

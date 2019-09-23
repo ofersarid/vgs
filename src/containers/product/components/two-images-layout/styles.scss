@@ -87,5 +87,11 @@
 }
 
 .caption {
-  margin-top: 10px;
+  position: absolute;
+  bottom: -10px;
+  transform: translateY(100%);
+}
+
+.carousel {
+  height: 80%;
 }
