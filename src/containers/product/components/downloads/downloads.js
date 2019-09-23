@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
-import { FadeIn, Button } from '/src/shared';
+import { FadeIn, Button, RatioBox, MediaLoader } from '/src/shared';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
 import Device from '../../../../shared/device';
@@ -33,10 +33,11 @@ class Downloads extends PureComponent {
           className={cx(styles.container, layout.inner)}
         >
           {!isMobile && (
-            <div className={cx(styles.img)} >
-              <img src={image} className={styles.inner} />
+            <RatioBox ratio={2 / 3} className={cx(styles.img)} >
+              <MediaLoader src={image} />
+              {/*<img src={image} className={styles.inner} />*/}
               <div className={cx(styles.title)} >{imageTitle}</div >
-            </div >
+            </RatioBox >
           )}
           <div className={cx(styles.rightCol)} >
             {brochure && (

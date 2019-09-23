@@ -12,18 +12,10 @@
     height: 35%;
     top: 42%;
 
-    //@include media('>phone') {
-    //  top: 45%;
-    //}
-    //
     @include media('>tablet') {
       top: 50%;
       width: 30%;
       left: $gutter-desktop;
-    //
-    //  @include orientation(portrait) {
-    //    top: 40%;
-    //  }
     }
   }
 
