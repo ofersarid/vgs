@@ -29,7 +29,7 @@
 
   .header {
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: $gutter-phone;
     width: 66%;
     font-size: 50px;
@@ -40,6 +40,7 @@
     color: $green;
 
     @include media('>phone') {
+      top: 21%;
       font-size: 91px;
       line-height: 90px;
       left: $gutter-tablet;

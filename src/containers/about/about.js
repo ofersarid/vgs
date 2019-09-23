@@ -15,16 +15,7 @@ class About extends PureComponent {
   constructor(props) {
     super(props);
     props.setColor('#005728');
-  }
-
-  componentDidMount() {
-    const { updateFrameIndex, lastFrame } = this.props;
-    updateFrameIndex(lastFrame);
-  }
-
-  componentWillUnmount() {
-    const { updateLastFrame, frame } = this.props;
-    updateLastFrame(frame, 'about');
+    props.updateFrameIndex(0);
   }
 
   render() {
@@ -68,7 +59,6 @@ About.propTypes = {
   setColor: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
   updateFrameIndex: PropTypes.func.isRequired,
-  updateLastFrame: PropTypes.func.isRequired,
   frame: PropTypes.number.isRequired,
   lastFrame: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
@@ -86,7 +76,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
   updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
-  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

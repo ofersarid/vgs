@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
+import cx from 'classnames';
 import { renderToString } from 'react-dom/server';
 import autoBind from 'auto-bind';
 import services from '/src/services';
@@ -41,7 +42,7 @@ class ReadMoreSection extends React.PureComponent {
           maxLine={maxLines}
           ellipsis="..."
           basedOn='letters'
-          className={className}
+          className={cx(styles.readMoreSection, className)}
           onReflow={this.onReflow}
         />
         {(!htmlAsString || clamped || forceShowTrigger) ? (
