@@ -37,23 +37,25 @@
 }
 
 .square {
-  height: 34px;
-  width: 24px;
+  height: 17px;
+  width: 12px;
   flex-grow: 0;
   flex-shrink: 0;
   margin-right: 10px;
-  transform: translate(-1vw, -7px);
+  transform: translate(-0.5vw, 1px);
 
   @include media('>phone') {
-    transform: translate(-0.5vw, -2px);
+    transform: translate(-0.25vw, 5px);
+    margin-right: 15px;
   }
 
   @include media('>tablet') {
-    transform: translate(-1.5vw, -2px);
+    transform: translate(0, 30%);
+    margin-right: 20px;
   }
 
   @include media('>desktop') {
-    transform: translate(-1.5vw, -5px);
+    transform: translate(0, 60%);
   }
 }
 
