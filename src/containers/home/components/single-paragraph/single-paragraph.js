@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FadeIn, RatioBox, MediaLoader } from '/src/shared';
+import { FadeIn } from '/src/shared';
 import utils from '/src/utils';
 import cx from 'classnames';
-import pic from '/src/assets/vector_heart.png';
+import pic from '/src/assets/vector_heart.svg';
 import layout from '/src/shared/styles/layout.scss';
 import styles from './styles.scss';
 import homeStyles from '../../styles.scss';
@@ -26,9 +26,7 @@ class SingleParagraph extends PureComponent {
           />
         </div >
         {!utils.isMobile() && (
-          <RatioBox ratio={0.94} className={styles.art} >
-            <MediaLoader src={pic} />
-          </RatioBox >
+          <img className={styles.art} src={pic} />
         )}
       </FadeIn >
     );

@@ -2,15 +2,7 @@
 @import "/src/colors";
 
 .paragraph {
-  //height: 57%;
-  //top: 26.4%;
-
-  @include media('>phone') {
-
-  }
-
   @include media('>tablet') {
-    //top: 35%;
     width: calc(50% - 6vw);
   }
 
@@ -22,7 +14,14 @@
 .art {
   position: absolute;
   bottom: 0;
-  right: 2vw;
+  right: 0;
   width: 50%;
-  transform: translateY(25%);
+
+  @include media('>phone') {
+    width: 60%;
+
+    @include orientation('landscape') {
+      width: 50%;
+    }
+  }
 }
