@@ -47,12 +47,12 @@ class ImgTxtBtn extends PureComponent {
       <FadeIn spread >
         <div className={cx(styles.container, layout.inner)} >
           {img && (
-            <Fragment >
-              <RatioBox ratio={2 / 3} className={styles.img} >
+            <div className={styles.img} >
+              <RatioBox ratio={2 / 3} >
                 <MediaLoader src={img} />
               </RatioBox >
               {imgSubTitle && <div className={cx('caption')} >{imgSubTitle}</div >}
-            </Fragment >
+            </div >
           )}
           {youtube && (
             <Youtube
