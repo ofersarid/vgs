@@ -43,7 +43,7 @@ class Splash extends PureComponent {
             withBorder
             className={styles.closeSplashBtn}
           >
-            CLOSE
+            Got it!
           </Button >
         </div >}
       </Spring >
