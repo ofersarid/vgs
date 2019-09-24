@@ -11,6 +11,8 @@
 }
 
 .article {
+  pointer-events: none;
+
   @include media('>tablet') {
     column-count: 2;
     column-gap: 4vw;

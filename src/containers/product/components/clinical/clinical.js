@@ -21,7 +21,7 @@ class Clinical extends PureComponent {
 
   renderData() {
     const { articles, color } = this.props;
-    const dom = articles.map(m => (
+    const dom = _sortBy(articles, item => item.dateTime.toDate()).reverse().map(m => (
       <div className={cx(styles.outerWrapper)} key={m.link} >
         <Button
           className={styles.innerWrapper}
@@ -90,10 +90,6 @@ Clinical.propTypes = {
 const mapStateToProps = state => ({
   isTablet: Device.selectors.isTablet(state),
   color: services.vgs.selectors.color(state),
-  articles: _sortBy(services.reactor.selectors.collectionData(
-    state,
-    `publications - ${services.products.selectors.name(state)}`
-  ), item => item.dateTime.toDate()).reverse(),
 });
 
 const mapDispatchToProps = dispatch => ({

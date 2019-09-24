@@ -18,8 +18,6 @@ import violaSummeryPic from '/src/assets/viola_summery.png';
 import vestSummeryPic from '/src/assets/vest_summery.png';
 import frameFrSummeryPic from '/src/assets/frame_fr_summery.png';
 
-// import { firestoreConnect } from 'react-redux-firebase';
-
 class Product extends PureComponent {
   constructor(props) {
     super(props);
@@ -99,7 +97,7 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { color, data, name, orientation, isMobile } = this.props;
+    const { color, data, name, orientation, isMobile, articles } = this.props;
     if (!data) {
       return null;
     }
@@ -192,7 +190,7 @@ class Product extends PureComponent {
               art={this.resolveSummeryPic()}
               data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
           )}
-          <Clinical themeColor={color} />
+          {articles && articles.length && <Clinical themeColor={color} articles={articles} />}
         </SnapScroll >
       </Fragment >
     );
@@ -211,6 +209,7 @@ Product.propTypes = {
   updateLastFrame: PropTypes.func.isRequired,
   lastFrame: PropTypes.number.isRequired,
   pathname: PropTypes.string,
+  articles: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = state => ({
@@ -221,8 +220,8 @@ const mapStateToProps = state => ({
   isMobile: Device.selectors.isMobile(state),
   orientation: Device.selectors.orientation(state),
   lastFrame: services.vgs.selectors.lastFrame(state, Routes.selectors.pathname(state)),
-  // lastFrame: 7,
   pathname: Routes.selectors.pathname(state),
+  articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
 });
 
 const mapDispatch = dispatch => ({
