@@ -5,9 +5,10 @@ import { RatioBox, MediaLoader, Button } from '/src/shared';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import services from '/src/services';
-import styles from './styles.scss';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import store from 'store';
+import styles from './styles.scss';
 
 class Splash extends PureComponent {
   constructor(props) {
@@ -25,21 +26,31 @@ class Splash extends PureComponent {
     }
   }
 
+  gotIt() {
+    const { hideSplash } = this.props;
+    hideSplash();
+    setTimeout(() => {
+      store.set('splash-got-it', true);
+    }, 2000);
+  }
+
   render() {
-    const { src, splash, hideSplash } = this.props;
+    const { src, splash } = this.props;
+    const show = splash && !store.get('splash-got-it');
     return (
       <Spring
-        from={{ opacity: splash ? 0 : 1, transform: `translateX(${splash ? 100 : 0}%)` }}
-        to={{ opacity: splash ? 1 : 0, transform: `translateX(${splash ? 0 : 100}%)` }}
-        delay={splash ? 1500 : 0}
-        reset={splash}
+        from={{ opacity: show ? 0 : 1, transform: `translateX(${show ? 100 : 0}%)` }}
+        to={{ opacity: show ? 1 : 0, transform: `translateX(${show ? 0 : 100}%)` }}
+        delay={show ? 1500 : 0}
+        reset={show}
+        immediate={store.get('splash-got-it')}
       >
         {springs => <div className={cx(styles.splash)} style={springs} >
           <RatioBox ratio={1.5} className={styles.art} >
             <MediaLoader src={src} />
           </RatioBox >
           <Button
-            onClick={hideSplash}
+            onClick={this.gotIt}
             withBorder
             className={styles.closeSplashBtn}
           >

@@ -8459,6 +8459,10 @@ react-swipeable@^5.2.3:
   dependencies:
     prop-types "^15.6.2"
 
+react-use-localstorage@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-use-localstorage/-/react-use-localstorage-3.2.1.tgz#adbc34e4b90e64a00646c23c5415a2e7abe05ad9"
+
 react@>=15.3.0:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
@@ -9413,6 +9417,10 @@ stdout-stream@^1.4.0:
 stealthy-require@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
+
+store@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/store/-/store-2.0.12.tgz#8c534e2a0b831f72b75fc5f1119857c44ef5d593"
 
 stream-browserify@^2.0.1:
   version "2.0.2"
