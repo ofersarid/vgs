@@ -143,7 +143,9 @@ Carousel.propTypes = {
 };
 
 Carousel.defaultProps = {
-  navLocation: 'horizontal',
+  navLocation: 'bottom',
+  prevBtnTxt: 'BACK',
+  nextBtnTxt: 'MORE',
 };
 
 const mapStateToProps = state => ({

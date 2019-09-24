@@ -1,12 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import LinesEllipsisLoose from 'react-lines-ellipsis/lib/loose';
 import { FadeIn, MediaLoader, RatioBox, Carousel } from '/src/shared';
 import utils from '/src/utils';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
 
-const TwoImagesLayout = ({ image1, image2, img1Description, img2Description, color }) => {
+const TwoImagesLayout = ({ pics, color }) => {
   const resolveVolume = () => {
     switch (true) {
       case utils.isMobile():
@@ -14,53 +15,39 @@ const TwoImagesLayout = ({ image1, image2, img1Description, img2Description, col
       case utils.isTablet():
         return 2;
       default:
-        return 3;
+        return 2;
     }
   };
 
   return (
-    <FadeIn spread >
-      <section className={cx(layout.inner, styles.inner)} >
-        {utils.isMobile() ? (
-          <Carousel
-            displayVolume={resolveVolume()}
-            className={styles.carousel}
-            color={color}
-            navLocation="bottom"
-          >
+    <FadeIn className={cx(layout.inner, styles.inner)} >
+      <Carousel
+        displayVolume={resolveVolume()}
+        className={styles.carousel}
+        color={color}
+        navLocation="bottom"
+      >
+        {pics.map(pic => (
+          <div key={pic.description.replace(' ', '-')} className={styles.itemWrapper}>
             <RatioBox ratio={2 / 3} className={styles.container} >
-              <MediaLoader src={image1} />
-              <div className={cx('caption', styles.caption)} >{img1Description}</div >
+              <MediaLoader src={pic.pic} />
             </RatioBox >
-            <RatioBox ratio={2 / 3} className={styles.container} >
-              <MediaLoader src={image2} />
-              <div className={cx('caption', styles.caption)} >{img2Description}</div >
-            </RatioBox >
-          </Carousel >
-        ) : (
-          <Fragment >
-            <RatioBox ratio={2 / 3} className={styles.container} >
-              <MediaLoader src={image1} />
-              <div className={cx('caption', styles.caption)} >{img1Description}</div >
-            </RatioBox >
-            <RatioBox ratio={2 / 3} className={styles.container} >
-              <MediaLoader src={image2} />
-              <div className={cx('caption', styles.caption)} >{img2Description}</div >
-            </RatioBox >
-          </Fragment >
-        )}
-      </section >
+            <LinesEllipsisLoose
+              text={pic.description}
+              maxLine='4'
+              lineHeight='1.5em'
+              className={cx('caption', styles.caption)}
+            />
+          </div>
+        ))}
+      </Carousel >
     </FadeIn >
   );
 };
 
 TwoImagesLayout.propTypes = {
-  image1: PropTypes.string.isRequired,
-  image2: PropTypes.string.isRequired,
-  img1Description: PropTypes.string,
-  img2Description: PropTypes.string,
-  footNotes: PropTypes.arrayOf(PropTypes.string),
   color: PropTypes.string.isRequired,
+  pics: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default TwoImagesLayout;

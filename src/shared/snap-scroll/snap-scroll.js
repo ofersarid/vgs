@@ -80,10 +80,10 @@ class SnapScroll extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { frame, disableScrollSnap, setIsLastFrame } = this.props;
     const { children } = this.state;
-    if (frame !== prevProps.frame) {
+    if (frame !== prevProps.frame || children.length !== prevState.children.length) {
       if (frame > 0 && frame < children.length - 1) {
         disableScrollSnap(false, false);
       } else if (frame === 0) {
@@ -116,10 +116,12 @@ class SnapScroll extends React.Component {
   }
 
   componentWillUnmount() {
+    const { disableScrollSnap } = this.props;
     this.$node.removeEventListener('wheel', this.mouseScrollHandler, true);
     this.$node.removeEventListener('touchstart', this.touchStartHandler, true);
     this.$node.removeEventListener('touchend', this.touchEndHandler, true);
     this.$node.removeEventListener('touchmove', this.touchMoveHandler, true);
+    disableScrollSnap(false, false);
   }
 
   snap(direction) {

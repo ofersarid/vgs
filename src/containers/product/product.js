@@ -26,12 +26,13 @@ class Product extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    const { frame, color, name, data, isMobile, orientation, articles } = this.props;
+    const { frame, color, name, data, isMobile, orientation, articles, carouselPics } = this.props;
     return (frame !== nextProps.frame ||
       color !== nextProps.color ||
       name !== nextProps.name ||
       !isEqual(data, nextProps.data) ||
       !isEqual(articles, nextProps.articles) ||
+      !isEqual(carouselPics, nextProps.carouselPics) ||
       isMobile !== nextProps.isMobile ||
       orientation !== nextProps.orientation
     );
@@ -99,7 +100,7 @@ class Product extends Component {
   }
 
   render() {
-    const { color, data, name, orientation, isMobile, articles } = this.props;
+    const { color, data, name, orientation, isMobile, articles, carouselPics } = this.props;
     if (!data) {
       return null;
     }
@@ -166,12 +167,9 @@ class Product extends Component {
               title={data.screen4Title}
             />
           )}
-          {data.screen5Published && (
+          {carouselPics && carouselPics.length && (
             <TwoImagesLayout
-              image1={data.screen5Image1}
-              image2={data.screen5Image2}
-              img1Description={data.screen5Image1Subtitle}
-              img2Description={data.screen5Image2Subtitle}
+              pics={carouselPics}
               color={color}
             />
           )}
@@ -208,6 +206,7 @@ Product.propTypes = {
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
   articles: PropTypes.arrayOf(PropTypes.object),
+  carouselPics: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = state => ({
@@ -218,6 +217,7 @@ const mapStateToProps = state => ({
   isMobile: Device.selectors.isMobile(state),
   orientation: Device.selectors.orientation(state),
   articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
+  carouselPics: services.reactor.selectors.collectionData(state, `${services.products.selectors.name(state)} - carousel pics`),
 });
 
 const mapDispatch = dispatch => ({
