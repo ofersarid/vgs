@@ -32,7 +32,7 @@ const categories = createSelector(list, products => {
 });
 
 const name = createSelector(Routes.selectors.pathname, pathname => {
-  switch (pathname.split('/').pop()) {
+  switch (pathname.split('/')[0]) {
     case 'frame':
       return 'FRAME';
     case 'viola':
@@ -47,7 +47,7 @@ const name = createSelector(Routes.selectors.pathname, pathname => {
 });
 
 const logo = createSelector(Routes.selectors.pathname, pathname => {
-  switch (pathname.split('/').pop()) {
+  switch (pathname.split('/')[0]) {
     case 'frame':
       return logoFrame;
     case 'viola':

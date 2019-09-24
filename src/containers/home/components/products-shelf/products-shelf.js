@@ -14,10 +14,9 @@ import styles from './styles.scss';
 
 const GOLDEN_RATIO = 1 / 1.6;
 
-const ProductsShelf = ({ updateLastFrame, color, data }) => {
+const ProductsShelf = ({ color, data }) => {
   const navigate = to => {
     hashHistory.push(to);
-    updateLastFrame(0, to);
   };
 
   const resolveVolume = () => {
@@ -43,7 +42,7 @@ const ProductsShelf = ({ updateLastFrame, color, data }) => {
       <div key="item-vest" >
         <Button
           className={cx(styles.innerWrapper, styles.vest)}
-          onClick={() => navigate('vest')}
+          onClick={() => navigate('/vest/0')}
           waveColor="red"
         >
           <section className={styles.header} >
@@ -67,7 +66,7 @@ const ProductsShelf = ({ updateLastFrame, color, data }) => {
       <div className={cx(styles.outerWrapper)} key="item-viola" >
         <Button
           className={cx(styles.innerWrapper, styles.viola)}
-          onClick={() => navigate('viola')}
+          onClick={() => navigate('/viola/0')}
           waveColor="purple"
         >
           <section className={styles.header} >
@@ -91,7 +90,7 @@ const ProductsShelf = ({ updateLastFrame, color, data }) => {
       <div className={cx(styles.outerWrapper)} key="item-frame" >
         <Button
           className={cx(styles.innerWrapper, styles.frame)}
-          onClick={() => navigate('frame')}
+          onClick={() => navigate('/frame/0')}
           waveColor="blue"
         >
           <section className={styles.header} >
@@ -115,7 +114,7 @@ const ProductsShelf = ({ updateLastFrame, color, data }) => {
       <div className={cx(styles.outerWrapper)} key="item-frameFR" >
         <Button
           className={cx(styles.innerWrapper, styles.frameFr)}
-          onClick={() => navigate('frameFr')}
+          onClick={() => navigate('/frameFr/0')}
           waveColor="lagoon"
         >
           <section className={styles.header} >
@@ -141,7 +140,6 @@ const ProductsShelf = ({ updateLastFrame, color, data }) => {
 };
 
 ProductsShelf.propTypes = {
-  updateLastFrame: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
   data: PropTypes.object,
 
@@ -153,7 +151,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

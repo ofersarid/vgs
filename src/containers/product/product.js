@@ -1,9 +1,9 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import isEqual from 'lodash/isEqual';
 import { compose } from 'redux';
 import { SnapScroll, IndexHeader } from '/src/shared';
-import Routes from '/src/routes';
 import {
   TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
 } from './components';
@@ -18,34 +18,36 @@ import violaSummeryPic from '/src/assets/viola_summery.png';
 import vestSummeryPic from '/src/assets/vest_summery.png';
 import frameFrSummeryPic from '/src/assets/frame_fr_summery.png';
 
-class Product extends PureComponent {
+class Product extends Component {
   constructor(props) {
     super(props);
     this.didMount = false;
     props.setColor(this.resolveColor());
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    const { frame, color, name, data, isMobile, orientation, articles } = this.props;
+    return (frame !== nextProps.frame ||
+      color !== nextProps.color ||
+      name !== nextProps.name ||
+      !isEqual(data, nextProps.data) ||
+      !isEqual(articles, nextProps.articles) ||
+      isMobile !== nextProps.isMobile ||
+      orientation !== nextProps.orientation
+    );
+  }
+
   componentDidMount() {
-    const { updateFrameIndex, lastFrame, setColor } = this.props;
+    const { setColor } = this.props;
     this.didMount = true;
     setColor(this.resolveColor());
-    updateFrameIndex(lastFrame);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { name, updateLastFrame, setColor, pathname, updateFrameIndex } = this.props;
+    const { name, setColor } = this.props;
     if (prevProps.name !== name) {
       setColor(this.resolveColor());
     }
-    if (prevProps.name !== name) {
-      updateLastFrame(0, pathname);
-      updateFrameIndex(0);
-    }
-  }
-
-  componentWillUnmount() {
-    const { updateLastFrame, frame, name } = this.props;
-    updateLastFrame(frame, name);
   }
 
   resolveSummeryPic() {
@@ -205,10 +207,6 @@ Product.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
-  updateFrameIndex: PropTypes.func.isRequired,
-  updateLastFrame: PropTypes.func.isRequired,
-  lastFrame: PropTypes.number.isRequired,
-  pathname: PropTypes.string,
   articles: PropTypes.arrayOf(PropTypes.object),
 };
 
@@ -219,15 +217,11 @@ const mapStateToProps = state => ({
   name: services.products.selectors.name(state),
   isMobile: Device.selectors.isMobile(state),
   orientation: Device.selectors.orientation(state),
-  lastFrame: services.vgs.selectors.lastFrame(state, Routes.selectors.pathname(state)),
-  pathname: Routes.selectors.pathname(state),
   articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
 });
 
 const mapDispatch = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
-  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
-  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

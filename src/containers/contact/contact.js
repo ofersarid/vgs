@@ -17,7 +17,6 @@ class Contact extends Component {
   constructor(props) {
     super(props);
     props.setColor('#005728');
-    props.updateFrameIndex(0);
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -55,7 +54,6 @@ Contact.propTypes = {
   data: PropTypes.array,
   setColor: PropTypes.func.isRequired,
   frame: PropTypes.number.isRequired,
-  updateFrameIndex: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -65,7 +63,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
-  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
 });
 
 export default compose(

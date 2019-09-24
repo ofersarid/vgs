@@ -24,20 +24,10 @@ class Home extends PureComponent {
     autoBind(this);
   }
 
-  componentDidMount() {
-    const { updateFrameIndex, lastFrame } = this.props;
-    updateFrameIndex(lastFrame);
-  }
-
-  componentWillUnmount() {
-    const { updateLastFrame, frame } = this.props;
-    updateLastFrame(frame, 'home');
-  }
-
   navigate(e) {
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
-    hashHistory.push(camelCase(txt));
+    hashHistory.push(`${camelCase(txt)}/0`);
   }
 
   render() {
@@ -101,24 +91,18 @@ class Home extends PureComponent {
 Home.propTypes = {
   frame: PropTypes.number.isRequired,
   data: PropTypes.object,
-  updateFrameIndex: PropTypes.func.isRequired,
   setColor: PropTypes.func.isRequired,
-  updateLastFrame: PropTypes.func.isRequired,
-  lastFrame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
-  lastFrame: services.vgs.selectors.lastFrame(state, 'home'),
   isMobile: Device.selectors.isMobile(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
-  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
 });
 
 export default compose(

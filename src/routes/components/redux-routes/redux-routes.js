@@ -10,16 +10,19 @@ class ReduxRoutes extends Component {
   constructor(props) {
     super(props);
     props.update(props.location);
-    this.state = {};
+    this.state = {
+      pathname: '',
+    };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (!isEqual(nextProps.location.pathname, prevState.pathname)) {
       nextProps.update(Object.assign({}, { params: nextProps.params }, nextProps.location));
+      return {
+        pathname: nextProps.location.pathname,
+      };
     }
-    return {
-      pathname: nextProps.location.pathname,
-    };
+    return null;
   }
 
   render() {

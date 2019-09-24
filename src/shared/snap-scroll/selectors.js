@@ -1,4 +1,4 @@
-const frame = state => state.getIn(['snapScroll', 'frame']);
+const frame = state => parseInt(state.getIn(['router', 'params', 'frame']));
 const count = state => state.getIn(['snapScroll', 'count']);
 const disableNext = state => state.getIn(['snapScroll', 'disable', 'next']);
 const disablePrev = state => state.getIn(['snapScroll', 'disable', 'prev']);

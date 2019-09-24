@@ -1,10 +1,5 @@
 import C from './consts';
 
-const updateFrameIndex = index => ({
-  type: C.ACTIONS.UPDATE_FRAME_INDEX,
-  index,
-});
-
 const disable = (disableNext, disablePrev) => ({
   type: C.ACTIONS.DISABLE,
   disable: {
@@ -29,7 +24,6 @@ const setIsLastFrame = bool => ({
 });
 
 export default {
-  updateFrameIndex,
   disable,
   count,
   reset,

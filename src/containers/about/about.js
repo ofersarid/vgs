@@ -15,7 +15,6 @@ class About extends PureComponent {
   constructor(props) {
     super(props);
     props.setColor('#005728');
-    props.updateFrameIndex(0);
   }
 
   render() {
@@ -58,9 +57,7 @@ About.propTypes = {
   data: PropTypes.object,
   setColor: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  updateFrameIndex: PropTypes.func.isRequired,
   frame: PropTypes.number.isRequired,
-  lastFrame: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
 };
 
@@ -68,14 +65,12 @@ const mapStateToProps = state => ({
   // frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'about'),
   isMobile: Device.selectors.isMobile(state),
-  lastFrame: services.vgs.selectors.lastFrame(state, 'about'),
   frame: SnapScroll.selectors.frame(state),
   color: services.vgs.selectors.color(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
-  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
 });
 
 export default compose(

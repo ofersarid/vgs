@@ -1,6 +1,6 @@
 // import { createSelector } from 'reselect';
 
-const pathname = state => state.getIn(['router', 'pathname']);
+const pathname = state => state.getIn(['router', 'pathname']).replace(/^\//, '');
 
 // const isCMS = createSelector(pathname, _pathName => {
 //   const isIt = Boolean(_pathName.match(/cms/));

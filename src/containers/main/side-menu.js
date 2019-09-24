@@ -31,12 +31,10 @@ class SideMenu extends PureComponent {
   }
 
   navigate(e) {
-    const { updateLastFrame } = this.props;
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
     const CCtext = camelCase(txt);
-    hashHistory.push(CCtext);
-    updateLastFrame(0, CCtext);
+    hashHistory.push(`${CCtext}/0`);
     this.toggleMenu();
   }
 
@@ -108,7 +106,6 @@ class SideMenu extends PureComponent {
 SideMenu.propTypes = {
   color: PropTypes.string.isRequired,
   colorName: PropTypes.string.isRequired,
-  updateLastFrame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -116,8 +113,6 @@ const mapStateToProps = state => ({
   colorName: services.vgs.selectors.colorName(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
-});
+const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);

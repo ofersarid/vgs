@@ -12,7 +12,7 @@ import { hashHistory } from 'react-router';
 import services from '/src/services';
 import utils from '/src/utils';
 import cx from 'classnames';
-import { Button, SnapScroll } from '/src/shared';
+import { Button } from '/src/shared';
 import { logoGreen, vgsGreen } from './assets';
 import FrameIndicator from './frame-indicator';
 import Footer from './footer';
@@ -44,10 +44,7 @@ class Main extends PureComponent {
   }
 
   goToHome() {
-    const { updateLastFrame, updateFrameIndex } = this.props;
-    hashHistory.push('home');
-    updateLastFrame(0, 'home');
-    updateFrameIndex(0);
+    hashHistory.push('home/0');
   }
 
   render() {
@@ -82,7 +79,7 @@ class Main extends PureComponent {
                       target="_blank"
                     >
                       <img className={styles.logoImg} src={logo} />
-                      {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/').pop()) &&
+                      {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/')[0]) &&
                       <img className={styles.logoText} src={vgs} style={springs} />}
                     </Button >
                   </Fragment >
@@ -113,8 +110,6 @@ Main.propTypes = {
   setOrientation: PropTypes.func.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
-  updateLastFrame: PropTypes.func.isRequired,
-  updateFrameIndex: PropTypes.func.isRequired,
   disableBizCard: PropTypes.func.isRequired,
 };
 
@@ -134,8 +129,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setOrientation: orientation => dispatch(services.vgs.actions.setOrientation(orientation)),
   setColor: color => dispatch(services.vgs.actions.setColor(color)),
-  updateLastFrame: (frame, context) => dispatch(services.vgs.actions.updateLastFrame(frame, context)),
-  updateFrameIndex: index => dispatch(SnapScroll.actions.updateFrameIndex(index)),
   disableBizCard: () => dispatch(services.vgs.actions.disableBizCard()),
 });
 

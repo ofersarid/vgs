@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import flattenDeep from 'lodash/flattenDeep';
 import compact from 'lodash/compact';
+import { hashHistory } from 'react-router';
+import Routes from '/src/routes';
 import actions from './actions';
 import selectors from './selectors';
 import styles from './styles.scss';
@@ -40,13 +42,13 @@ class SnapScroll extends React.Component {
         PropTypes.arrayOf(PropTypes.node)
       ]).isRequired,
       frame: PropTypes.number.isRequired,
-      updateFrameIndex: PropTypes.func.isRequired,
       orientation: PropTypes.oneOf(['vertical', 'horizontal']),
       disableScrollSnap: PropTypes.func.isRequired,
       disableNext: PropTypes.bool,
       disablePrev: PropTypes.bool,
       count: PropTypes.func.isRequired,
       setIsLastFrame: PropTypes.func.isRequired,
+      pathname: PropTypes.string,
     };
   }
 
@@ -100,12 +102,17 @@ class SnapScroll extends React.Component {
   }
 
   componentDidMount() {
-    const { updateFrameIndex } = this.props;
+    const { frame, setIsLastFrame } = this.props;
+    const { children } = this.state;
     this.$node.addEventListener('wheel', this.mouseScrollHandler, true);
     this.$node.addEventListener('touchstart', this.touchStartHandler, true);
     this.$node.addEventListener('touchend', this.touchEndHandler, true);
     this.$node.addEventListener('touchmove', this.touchMoveHandler, true);
-    updateFrameIndex(this.state.index);
+    if (frame === children.length - 1) {
+      setIsLastFrame(true);
+    } else {
+      setIsLastFrame(false);
+    }
   }
 
   componentWillUnmount() {
@@ -163,19 +170,26 @@ class SnapScroll extends React.Component {
     }
   };
 
+  navigateToFrame(frame) {
+    const { pathname } = this.props;
+    const splitPath = pathname.split('/');
+    splitPath.splice(1, 1, [frame]);
+    hashHistory.push(splitPath.join('/'));
+  }
+
   next() {
     const { disableNext } = this.props;
     const { children } = this.state;
     if (disableNext) return;
     const index = Math.min(this.state.index + 1, children.length - 1);
-    this.props.updateFrameIndex(index);
+    this.navigateToFrame(index);
   };
 
   prev() {
     const { disablePrev } = this.props;
     if (disablePrev) return;
     const index = Math.max(0, this.state.index - 1);
-    this.props.updateFrameIndex(index);
+    this.navigateToFrame(index);
   };
 
   renderChildren() {
@@ -202,10 +216,10 @@ const mapStateToProps = state => ({
   frame: selectors.frame(state),
   disableNext: selectors.disableNext(state),
   disablePrev: selectors.disablePrev(state),
+  pathname: Routes.selectors.pathname(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateFrameIndex: (...props) => dispatch(actions.updateFrameIndex(...props)),
   disableScrollSnap: (...props) => dispatch(actions.disable(...props)),
   count: (...props) => dispatch(actions.count(...props)),
   setIsLastFrame: bool => dispatch(actions.setIsLastFrame(bool)),

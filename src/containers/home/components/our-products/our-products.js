@@ -6,7 +6,6 @@ import Device from '/src/shared/device';
 import { FadeIn } from '/src/shared';
 import cx from 'classnames';
 import layout from '/src/shared/styles/layout.scss';
-import { hashHistory } from 'react-router';
 import ProductsShelf from '../products-shelf/products-shelf';
 import styles from './styles.scss';
 
@@ -14,10 +13,6 @@ class OurProducts extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-  }
-
-  goToProductsCarousel() {
-    hashHistory.push('our-products');
   }
 
   render() {
