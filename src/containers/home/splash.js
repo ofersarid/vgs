@@ -19,19 +19,32 @@ class Splash extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    this.handleStorage();
+    this.didMount = true;
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { src, showSplash } = this.props;
-    if (src !== prevProps.src) {
+    const storedSrc = store.get('splash-got-it');
+    if (src && (src !== prevProps.src || src !== storedSrc)) {
       showSplash();
+    }
+    this.handleStorage();
+  }
+
+  handleStorage() {
+    const { src } = this.props;
+    const storedSrc = store.get('splash-got-it');
+    if (src !== storedSrc) {
+      store.set('splash-got-it', '');
     }
   }
 
   gotIt() {
-    const { hideSplash } = this.props;
+    const { hideSplash, src } = this.props;
     hideSplash();
-    setTimeout(() => {
-      store.set('splash-got-it', true);
-    }, 2000);
+    store.set('splash-got-it', src);
   }
 
   render() {
@@ -43,7 +56,7 @@ class Splash extends PureComponent {
         to={{ opacity: show ? 1 : 0, transform: `translateX(${show ? 0 : 100}%)` }}
         delay={show ? 1500 : 0}
         reset={show}
-        immediate={store.get('splash-got-it')}
+        immediate={!this.didMount}
       >
         {springs => <div className={cx(styles.splash)} style={springs} >
           <RatioBox ratio={1.5} className={styles.art} >
