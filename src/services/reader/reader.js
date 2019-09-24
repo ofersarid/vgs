@@ -43,7 +43,7 @@ const Reader = ({ isOpen, content, close, color }) => {
           background: color,
         }}
       >
-        CLOSE
+        BACK
       </Button >
     </animated.div >
   );
