@@ -60,7 +60,7 @@
 
   h1, h2 {
     color: $green;
-    margin-bottom: 2vh;
+    margin-bottom: 2%;
 
     @include orientation('portrait') {
       margin-bottom: 4%;
@@ -80,7 +80,7 @@
 }
 
 .spaceBottom {
-  margin-bottom: 2vh;
+  margin-bottom: 4%;
 
   @include orientation('portrait') {
     margin-bottom: 12%;
