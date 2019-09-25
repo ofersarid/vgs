@@ -62,7 +62,6 @@
     justify-content: space-around;
     align-items: center;
     box-sizing: border-box;
-    font-weight: 200;
 
     @include media('>phone') {
       height: 127px;
@@ -76,7 +75,6 @@
 
     @include media('>desktop') {
       font-size: 91px;
-      font-weight: 300;
     }
   }
 
@@ -131,6 +129,7 @@
   position: absolute;
   bottom: 151px;
   left: $gutter-phone;
+  font-weight: 200;
 
   @include media('>phone') {
     font-size: 14px;
