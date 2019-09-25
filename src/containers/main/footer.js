@@ -21,7 +21,7 @@ const Footer = ({ frame, isLastFrame, color }) => (
       ...springs,
       background: color,
     }} className={styles.footer} >
-      <span >&copy;2019 all rights reserved to VGS</span >
+      <span >&copy;2019 VGS. Last update, Sep 2019.</span >
       <span className={styles.right}>Produced by
         <img src={utils.isMobile() ? R : Rechter }/>
       </span >
