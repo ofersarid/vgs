@@ -30,7 +30,7 @@ const ProductsShelf = ({ color, data }) => {
     }
   };
 
-  return (
+  return data ? (
     <Carousel
       displayVolume={resolveVolume()}
       className={styles.shelf}
@@ -136,7 +136,7 @@ const ProductsShelf = ({ color, data }) => {
         </Button >
       </div >
     </Carousel >
-  );
+  ) : null;
 };
 
 ProductsShelf.propTypes = {
