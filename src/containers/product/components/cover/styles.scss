@@ -20,11 +20,12 @@
 
     @include media('>tablet') {
       left: $gutter-desktop;
+      width: 66%;
     }
 
     @include media('>desktop') {
       left: $gutter-wide-screen;
-      width: 55%;
+      width: 30%;
     }
   }
 
@@ -34,9 +35,19 @@
     right: 0;
     position: absolute;
 
+    @include media('>phone') {
+      height: 60%;
+      right: -4%;
+    }
+
     @include media('>tablet') {
       height: 70%;
-      bottom: 8%;
+      bottom: 4%;
+      right: unset;
+
+      @include orientation('portrait') {
+        height: 55%;
+      }
     }
 
   }
@@ -48,18 +59,15 @@
     bottom: 0;
     z-index: 2;
     display: flex;
-    //padding: 0 $gutter-phone;
     justify-content: space-around;
     align-items: center;
     box-sizing: border-box;
 
     @include media('>phone') {
       height: 127px;
-      //padding: 0 $gutter-tablet;
     }
 
     @include media('>tablet') {
-      //padding: 0 100px;
       left: 35%;
       right: 10%;
       width: auto;
@@ -71,7 +79,6 @@
   }
 
   .text {
-    //width: 240px;
     text-align: left;
     line-height: 1.5em;
     font-size: 16px;
@@ -90,20 +97,9 @@
   }
 
   .arrow {
-    //position: absolute;
-    //top: 50%;
-    //right: $gutter-phone;
     color: white;
     height: 46px;
     position: relative;
-
-    //@include media('>phone') {
-    //  right: $gutter-tablet;
-    //}
-    //
-    //@include media('>tablet') {
-    //  right: 100px;
-    //}
   }
 }
 
@@ -124,4 +120,48 @@
   overflow: hidden;
   text-overflow: ellipsis;
   width: calc(100% - 25px);
+}
+
+.footnote {
+  font-size: 12px;
+  line-height: 1.5em;
+  width: 30vw;
+  position: absolute;
+  bottom: 151px;
+  left: $gutter-phone;
+
+  @include media('>phone') {
+    font-size: 14px;
+    left: $gutter-tablet;
+    bottom: 20%;
+    width: 35vw;
+  }
+
+  @include media('>tablet') {
+    left: $gutter-desktop;
+    bottom: 25%;
+
+    @include orientation('portrait') {
+      bottom: 20%;
+    }
+  }
+
+  @include media('>desktop') {
+    font-size: 16px;
+    font-weight: 300;
+    left: $gutter-wide-screen;
+    top: 50%;
+    bottom: unset;
+  }
+
+  .divider {
+    height: 1px;
+    width: 30vw;
+    background: $gray;
+    margin-bottom: 1em;
+
+    @include media('>phone') {
+      width: 15vw;
+    }
+  }
 }

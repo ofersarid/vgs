@@ -132,6 +132,7 @@ class Product extends Component {
               address: data.eventAddress,
               linkTo: data.eventLinkTo,
             }}
+            footnote={data.coverFootnote}
           />
           {data.screen1Published && (
             <TwoColumnLayout

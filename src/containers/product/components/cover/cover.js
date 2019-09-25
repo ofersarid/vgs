@@ -20,7 +20,7 @@ class Cover extends PureComponent {
   }
 
   render() {
-    const { footer, themeColor, name, description, art } = this.props;
+    const { footer, themeColor, name, description, art, footnote } = this.props;
     return (
       <FadeIn spread >
         <div className={styles.cover} >
@@ -28,6 +28,12 @@ class Cover extends PureComponent {
             <div style={{ color: themeColor }} >{name}</div >
             <div dangerouslySetInnerHTML={{ __html: description.replace(/\n\r?/g, '<br />') }} />
           </h1 >
+          {footnote && (
+            <div className={styles.footnote} >
+              <div className={styles.divider} />
+              <div className={styles.footnoteTxt} >{footnote}</div >
+            </div >
+          )}
           <img src={art} className={styles.art} />
           {footer ? <EventFooter footer={footer} /> : null}
         </div >
@@ -41,6 +47,7 @@ Cover.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   themeColor: PropTypes.string.isRequired,
+  footnote: PropTypes.string,
   footer: PropTypes.shape({
     title: PropTypes.string.isRequired,
     dateFrom: PropTypes.object.isRequired,
