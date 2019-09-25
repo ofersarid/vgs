@@ -43,12 +43,11 @@
   box-shadow: -6px 0 16px rgba(0, 0, 0, 0.1);
 
   @include media('>phone') {
-    width: calc(#{1/1.5 * 100}vh);
+    width: 62vh;
   }
 
   @include media('>tablet') {
     padding: 5vh;
-    width: calc(#{1/1.5 * 100}vh);
   }
 
 }
@@ -60,7 +59,6 @@
 
 .art {
   @include media('>tablet') {
-    margin-bottom: 5vh;
     flex-shrink: 1;
   }
 }
