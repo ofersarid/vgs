@@ -300,10 +300,6 @@
     justify-content: center;
     height: auto;
     padding: 6px;
-
-    //@include orientation('landscape') {
-    //  left: calc(#{$gutter-desktop / 2})
-    //}
   }
 
   @include media('>tablet') {
@@ -320,6 +316,7 @@
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
+    @extend %scaleIn;
 
     @include media('>phone') {
       width: 8px;
@@ -341,6 +338,7 @@
     left: 0;
     transition: 1s ease-out;
     will-change: top;
+    @extend %fadeIn;
 
     @include media('>phone') {
       transition: .2s ease-out;
