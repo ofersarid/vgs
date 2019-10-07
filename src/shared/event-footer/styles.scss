@@ -1,6 +1,4 @@
-@import "/src/media-query-mixins";
-@import "/src/dimentions";
-@import "/src/colors";
+@import "/src/shared/styles";
 
 .footer {
   height: 15%;
@@ -14,6 +12,10 @@
   box-sizing: border-box;
   background: $green;
   padding: 0;
+  opacity: 0;
+  transform: translateY(100%);
+  @extend %slideInBottom;
+  animation-delay: 0.5s;
 
   @include media('>phone') {
     height: 127px;

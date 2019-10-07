@@ -63,11 +63,15 @@
 
   .logoImg {
     width: 52px;
+    @extend %spin;
   }
 }
 
 .logoText {
   margin-left: 15px;
+  opacity: 0;
+  @extend %fadeIn;
+  animation-delay: 1s;
 }
 
 .logo, .logoText {
@@ -106,6 +110,9 @@
   justify-content: center;
   padding: 10px;
   border-radius: 10px;
+  @extend %fadeIn;
+  animation-delay: 1s;
+  opacity: 0;
 
   @include media('>phone') {
     right: 10%;

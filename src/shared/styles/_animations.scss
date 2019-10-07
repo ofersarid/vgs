@@ -1,0 +1,42 @@
+@keyframes spinHorizontal {
+  from {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(calc(360deg * 3));
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+%spin {
+  animation: spinHorizontal 2s forwards ease-out;
+}
+
+%slideInBottom {
+  animation: slideInBottom 1s forwards ease-out;
+}
+
+%fadeIn {
+  animation: fadeIn 2s forwards ease-out;
+}

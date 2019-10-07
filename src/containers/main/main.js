@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
-import { Spring } from 'react-spring/renderprops';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
 import Device from '/src/shared/device';
@@ -54,11 +53,8 @@ class Main extends PureComponent {
       <Fragment >
         <Device />
         <ReduxRoutes >
-          <Spring
-            from={{ opacity: show ? 0 : 1 }}
-            to={{ opacity: show ? 1 : 0 }}
-          >
-            {springs => (bizCard && orientation === 'landscape') ? <Card
+          {(bizCard && orientation === 'landscape') ? (
+            <Card
               logo={logoGreen}
               underLogo={vgsGreen}
               address="24 Raul Wallenberg st."
@@ -66,7 +62,9 @@ class Main extends PureComponent {
               state="ISRAEL"
               zip={6971921}
               phone="+972 3 549 9054"
-            /> : <div className={styles.container} >
+            />
+          ) : (
+            <div className={styles.container} >
               {(orientation === 'landscape' && isMobile)
                 ? null
                 : (
@@ -79,8 +77,8 @@ class Main extends PureComponent {
                       target="_blank"
                     >
                       <img className={styles.logoImg} src={logo} />
-                      {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/')[0]) &&
-                      <img className={styles.logoText} src={vgs} style={springs} />}
+                      {!['viola', 'frame', 'vest', 'frameFr'].includes(pathname.split('/')[0]) && show &&
+                      <img className={styles.logoText} src={vgs} />}
                     </Button >
                   </Fragment >
                 )}
@@ -88,8 +86,8 @@ class Main extends PureComponent {
               {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
               {children}
               <Footer />
-            </div >}
-          </Spring >
+            </div >
+          )}
         </ReduxRoutes >
         <Reader />
       </Fragment >

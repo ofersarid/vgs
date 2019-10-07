@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
+import { Spring, config } from 'react-spring/renderprops';
 import { connect } from 'react-redux';
-import { EventFooter, FadeIn } from '/src/shared';
+import { EventFooter, MediaLoader } from '/src/shared';
 import homeCoverPicMobile from '/src/assets/home_cover_art_mobile.jpg';
 import homeCoverPicTablet from '/src/assets/home_cover_art_tablet.jpg';
 import homeCoverPicDesktop from '/src/assets/home_cover_art_desktop.jpg';
@@ -28,17 +29,24 @@ class Cover extends PureComponent {
   render() {
     const { footer } = this.props;
     return (
-      <FadeIn spread >
-        <div className={styles.cover} >
-          <div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />
-          <div className={styles.header} >
-            VASCULAR<br />
-            GRAFT<br />
-            SOLUTIONS
-          </div >
-          {footer ? <EventFooter footer={footer} /> : null}
+      <div className={styles.cover} >
+        <MediaLoader src={this.resolvePic()} />
+        {/*<div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />*/}
+        <div className={styles.header} >
+          <Spring
+            from={{ opacity: 0, transform: 'translateX(50%)' }}
+            to={{ opacity: 1, transform: 'translateX(0%)' }}
+            config={config.slow}
+          >
+            {springs => <Fragment >
+              <span style={springs} >VASCULAR</span ><br />
+              <span style={springs} >GRAFT</span ><br />
+              <span style={springs} >SOLUTIONS</span >
+            </Fragment >}
+          </Spring >
         </div >
-      </FadeIn >
+        {footer ? <EventFooter footer={footer} /> : null}
+      </div >
     );
   }
 }

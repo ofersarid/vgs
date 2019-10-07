@@ -1,6 +1,4 @@
-@import "/src/media-query-mixins";
-@import "/src/dimentions";
-@import "/src/colors";
+@import "/src/shared/styles";
 
 .cover {
   z-index: 1;
@@ -39,6 +37,10 @@
     @include media('>desktop') {
       font-size: 135px;
       line-height: 125px;
+    }
+
+    span {
+      display: inline-block;
     }
   }
 
