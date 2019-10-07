@@ -1,7 +1,6 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
-import { Spring, config } from 'react-spring/renderprops';
 import { connect } from 'react-redux';
 import { EventFooter, MediaLoader } from '/src/shared';
 import homeCoverPicMobile from '/src/assets/home_cover_art_mobile.jpg';
@@ -33,17 +32,9 @@ class Cover extends PureComponent {
         <MediaLoader src={this.resolvePic()} preferWidth={!isMobile} />
         {/*<div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />*/}
         <div className={styles.header} >
-          <Spring
-            from={{ opacity: 0, transform: 'translateX(50%)' }}
-            to={{ opacity: 1, transform: 'translateX(0%)' }}
-            config={config.slow}
-          >
-            {springs => <Fragment >
-              <span style={springs} >VASCULAR</span ><br />
-              <span style={springs} >GRAFT</span ><br />
-              <span style={springs} >SOLUTIONS</span >
-            </Fragment >}
-          </Spring >
+          VASCULAR<br />
+          GRAFT<br />
+          SOLUTIONS
         </div >
         {footer ? <EventFooter footer={footer} /> : null}
       </div >

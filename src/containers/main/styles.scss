@@ -63,7 +63,7 @@
 
   .logoImg {
     width: 52px;
-    @extend %spin;
+    @extend %fadeIn;
   }
 }
 
@@ -71,7 +71,7 @@
   margin-left: 15px;
   opacity: 0;
   @extend %fadeIn;
-  animation-delay: 1s;
+  //animation-delay: 1s;
 }
 
 .logo, .logoText {
@@ -111,7 +111,7 @@
   padding: 10px;
   border-radius: 10px;
   @extend %fadeIn;
-  animation-delay: 1s;
+  //animation-delay: 1s;
   opacity: 0;
 
   @include media('>phone') {
