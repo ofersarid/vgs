@@ -18,8 +18,9 @@
     text-transform: uppercase;
     z-index: 1;
     color: $green;
+    opacity: 0;
     @extend %fadeIn;
-    animation-duration: 1s;
+    animation-delay: 0.5s;
 
     @include media('>phone') {
       font-size: 91px;
