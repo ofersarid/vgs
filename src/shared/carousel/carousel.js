@@ -19,6 +19,7 @@ class Carousel extends PureComponent {
       group: 0,
       groupCount: 0,
       orientation: 'next',
+      immediate: true,
     };
     autoBind(this);
     this.nextThrottle = throttle(this.next, 500, { trailing: true, leading: true });
@@ -47,6 +48,7 @@ class Carousel extends PureComponent {
     if (group < groupCount) {
       this.setState({ group: group + 1, orientation: 'next' });
     }
+    this.setState({ immediate: false });
   }
 
   prev(e) {
@@ -55,11 +57,12 @@ class Carousel extends PureComponent {
     if (group > 0) {
       this.setState({ group: group - 1, orientation: 'prev' });
     }
+    this.setState({ immediate: false });
   }
 
   render() {
     const { children, displayVolume, className, color, colorName, navLocation, prevBtnTxt, nextBtnTxt } = this.props;
-    const { group, groupCount, orientation } = this.state;
+    const { group, groupCount, orientation, immediate } = this.state;
     const isLastGroup = group === groupCount - 1;
     return (
       <div className={cx(styles.carousel, className, styles[navLocation])} >
@@ -76,11 +79,12 @@ class Carousel extends PureComponent {
         )}
         <div className={cx(styles.content, styles[`content-${navLocation}`])} >
           <Transition
-            config={config.default}
+            config={config.slow}
             items={group}
             from={{ transform: `translate3d(${orientation === 'next' ? '' : '-'}100%,0,0)`, opacity: 0 }}
             enter={{ transform: `translate3d(0,0,0)`, opacity: 1 }}
             leave={{ transform: `translate3d(${orientation === 'next' ? '-' : ''}100%,0,0)`, opacity: 0 }}
+            immediate={immediate}
           >
             {group => springs => <div className={cx(styles.itemGroup)} key={group} style={springs} >
               {children.slice(group * displayVolume, (group * displayVolume) + displayVolume).map((child, i) => (

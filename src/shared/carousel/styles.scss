@@ -1,4 +1,4 @@
-@import "/src/media-query-mixins";
+@import "/src/shared/styles";
 
 .carousel {
   display: flex;
@@ -28,6 +28,9 @@
   width: 30px;
   flex-shrink: 0;
   z-index: 1;
+  opacity: 0 !important;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
 
   svg {
     width: 90px;
@@ -35,12 +38,14 @@
 }
 
 .right {
+  @extend %slideInLeft;
   svg {
     transform: translate(-33px, -4px);
   }
 }
 
 .left {
+  @extend %slideInRight;
   svg {
     transform: translate(-28px, -4px);
   }
