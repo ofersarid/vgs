@@ -118,7 +118,7 @@ class Carousel extends PureComponent {
               <div className={styles.clipIcon} ><ChevronLeft /></div >
               {prevBtnTxt && <span className={styles.btnTxt} >{prevBtnTxt}</span >}
             </Button >
-            < Button
+            <Button
               className={cx('next', styles.btn, styles.right)}
               waveColor={colorName}
               textColor={color}
