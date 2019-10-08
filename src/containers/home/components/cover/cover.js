@@ -26,10 +26,10 @@ class Cover extends PureComponent {
   }
 
   render() {
-    const { footer, isMobile } = this.props;
+    const { footer } = this.props;
     return (
       <div className={styles.cover} >
-        <MediaLoader src={this.resolvePic()} preferWidth={!isMobile} />
+        <MediaLoader src={this.resolvePic()} preferWidth />
         {/*<div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />*/}
         <div className={styles.header} >
           VASCULAR<br />

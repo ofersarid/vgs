@@ -316,7 +316,6 @@
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
-    @extend %scaleIn;
 
     @include media('>phone') {
       width: 8px;
