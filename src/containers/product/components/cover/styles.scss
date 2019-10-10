@@ -13,6 +13,9 @@
     left: $gutter-phone;
     width: 66%;
     z-index: 1;
+    opacity: 0;
+    @extend %fadeIn;
+    animation-delay: 0.75s;
 
     @include media('>phone') {
       left: $gutter-tablet;
@@ -34,6 +37,9 @@
     bottom: 0;
     right: 0;
     position: absolute;
+    opacity: 0;
+    @extend %slideInRightEasy;
+    animation-delay: 1s;
 
     @include media('>phone') {
       height: 60%;
@@ -42,7 +48,6 @@
 
     @include media('>tablet') {
       height: 70%;
-      bottom: 4%;
       right: 0;
 
       @include orientation('portrait') {
@@ -130,6 +135,9 @@
   bottom: 151px;
   left: $gutter-phone;
   font-weight: 200;
+  opacity: 0;
+  @extend %fadeIn;
+  animation-delay: 0.75s;
 
   @include media('>phone') {
     font-size: 14px;

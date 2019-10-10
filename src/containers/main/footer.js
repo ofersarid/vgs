@@ -10,12 +10,12 @@ import R from '/src/assets/R.svg';
 import Rechter from '/src/assets/Rechter.svg';
 import styles from './styles.scss';
 
-const Footer = ({ frame, isLastFrame, color }) => (
+const Footer = ({ isLastFrame, color }) => (
   <Spring
     from={{ opacity: isLastFrame ? 0 : 1, transform: `translateY(${isLastFrame ? '100%' : '0%'})` }}
     to={{ opacity: isLastFrame ? 1 : 0, transform: `translateY(${isLastFrame ? '0%' : '100%'})` }}
     config={config.slow}
-    immediate={frame === 0}
+    immediate={!isLastFrame}
   >
     {springs => <div style={{
       ...springs,
@@ -32,13 +32,11 @@ const Footer = ({ frame, isLastFrame, color }) => (
 Footer.propTypes = {
   isLastFrame: PropTypes.bool.isRequired,
   color: PropTypes.string,
-  frame: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
   isLastFrame: SnapScroll.selectors.isLastFrame(state),
   color: services.vgs.selectors.color(state),
-  frame: SnapScroll.selectors.frame(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

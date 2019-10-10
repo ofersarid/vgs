@@ -13,9 +13,8 @@
   background: $green;
   padding: 0;
   opacity: 0;
-  transform: translateY(100%);
-  @extend %slideInBottom;
-  animation-delay: 1s;
+  @extend %fadeIn;
+  animation-delay: .5s;
 
   @include media('>phone') {
     height: 127px;

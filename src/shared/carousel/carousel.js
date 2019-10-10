@@ -66,13 +66,12 @@ class Carousel extends PureComponent {
     const isLastGroup = group === groupCount - 1;
     return (
       <div className={cx(styles.carousel, className, styles[navLocation])} >
-        {navLocation === 'horizontal' && (
+        {navLocation === 'horizontal' && group !== 0 && (
           <Button
             className={cx('prev', styles.btn, styles.left)}
             waveColor={colorName}
             textColor={color}
             onClick={this.prevThrottle}
-            disable={group === 0}
           >
             <ChevronLeft />
           </Button >
@@ -95,39 +94,36 @@ class Carousel extends PureComponent {
             </div >}
           </Transition >
         </div >
-        {navLocation === 'horizontal' && (
+        {navLocation === 'horizontal' && group !== groupCount - 1 && (
           <Button
             className={cx('next', styles.btn, styles.right)}
             waveColor={colorName}
             textColor={color}
             onClick={this.nextThrottle}
-            disable={group === groupCount - 1}
           >
             <ChevronRight />
           </Button >
         )}
         {navLocation === 'bottom' && (
           <div className={styles.navWrapper} >
-            <Button
+            {group !== 0 && <Button
               className={cx('prev', styles.btn, styles.left)}
               waveColor={colorName}
               textColor={color}
               onClick={this.prevThrottle}
-              disable={group === 0}
             >
               <div className={styles.clipIcon} ><ChevronLeft /></div >
               {prevBtnTxt && <span className={styles.btnTxt} >{prevBtnTxt}</span >}
-            </Button >
-            <Button
+            </Button >}
+            {!isLastGroup && <Button
               className={cx('next', styles.btn, styles.right)}
               waveColor={colorName}
               textColor={color}
               onClick={this.nextThrottle}
-              disable={isLastGroup}
             >
               {nextBtnTxt && <span className={styles.btnTxt} >{nextBtnTxt}</span >}
               <div className={styles.clipIcon} ><ChevronRight /></div >
-            </Button >
+            </Button >}
           </div >
         )}
       </div >

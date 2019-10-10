@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Spring } from 'react-spring/renderprops';
+import { Spring, config } from 'react-spring/renderprops';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import camelCase from 'lodash/camelCase';
@@ -47,6 +47,7 @@ class SideMenu extends PureComponent {
           from={{ transform: `translateX(${openMenu ? '100vw' : '0vw'})`, opacity: openMenu ? 0 : 1 }}
           to={{ transform: `translateX(${openMenu ? '0vw' : '100vw'})`, opacity: openMenu ? 1 : 0 }}
           immediate={immediate}
+          config={config.slow}
           onRest={() => {
             this.setState({ immediate: true });
           }}

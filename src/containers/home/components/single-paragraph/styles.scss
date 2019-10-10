@@ -1,5 +1,4 @@
-@import "/src/media-query-mixins";
-@import "/src/colors";
+@import "/src/shared/styles";
 
 .paragraph {
   @include media('>tablet') {
@@ -16,6 +15,10 @@
   bottom: 0;
   right: 0;
   width: 50%;
+  opacity: 0;
+  @extend %fadeIn;
+  animation-delay: .5s;
+  animation-duration: 2s;
 
   @include media('>phone') {
     width: 60%;
