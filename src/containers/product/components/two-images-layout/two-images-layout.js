@@ -12,8 +12,6 @@ const TwoImagesLayout = ({ pics, color }) => {
     switch (true) {
       case utils.isMobile():
         return 1;
-      case utils.isTablet():
-        return 2;
       default:
         return 2;
     }

@@ -37,7 +37,7 @@ const IndexHeader = ({ index, frame, header, hideIndex, color }) => {
       )}
       <animated.span className={styles.label} style={{
         opacity: o,
-        transform: x.interpolate(x => `translateY(${x}px)`),
+        transform: x.interpolate(x => `translateY(${-x}px)`),
       }} >
         {header}
       </animated.span >

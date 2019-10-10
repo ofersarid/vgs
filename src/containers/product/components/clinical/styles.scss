@@ -17,8 +17,8 @@
 }
 
 .clinicalCarousel {
-  height: 70%;
-  transform: translateY(-15%);
+  //height: 70%;
+  //transform: translateY(-15%);
   width: calc(78vw + 30px);
 
   @include media('>phone') {
@@ -60,21 +60,14 @@
 }
 
 .header {
-  //height: 50%;
+  line-clamp: 2;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 
-  //@include media('>phone') {
-  //  height: 70%;
-  //  -webkit-line-clamp: 7;
-  //}
-  //
-  //@include media('>tablet') {
-  //  -webkit-line-clamp: 6;
-  //}
-
+  @include media('>phone') {
+    line-clamp: 4;
+  }
 }
 
 .source {
@@ -87,7 +80,7 @@
 }
 
 .menuTrigger {
-  margin: 5px 0 30px 0;
+  margin: 5px 0 10px 0;
   flex-shrink: 0;
   align-self: start;
 }

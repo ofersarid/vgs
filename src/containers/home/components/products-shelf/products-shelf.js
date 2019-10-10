@@ -11,10 +11,11 @@ import { Heart } from 'styled-icons/evil/Heart';
 import utils from '/src/utils';
 import LinesEllipsisLoose from 'react-lines-ellipsis/lib/loose';
 import styles from './styles.scss';
+import Device from '../../../../shared/device';
 
 const GOLDEN_RATIO = 1 / 1.6;
 
-const ProductsShelf = ({ color, data }) => {
+const ProductsShelf = ({ color, data, orientation }) => {
   const navigate = to => {
     hashHistory.push(to);
   };
@@ -142,12 +143,14 @@ const ProductsShelf = ({ color, data }) => {
 ProductsShelf.propTypes = {
   color: PropTypes.string.isRequired,
   data: PropTypes.object,
+  orientation: PropTypes.oneOf(['portrait', 'landscape']),
 
 };
 
 const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
   data: services.reactor.selectors.pageData(state, 'our products'),
+  orientation: Device.selectors.orientation(state),
 });
 
 const mapDispatchToProps = dispatch => ({

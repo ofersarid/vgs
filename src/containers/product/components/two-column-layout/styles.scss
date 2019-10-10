@@ -22,6 +22,10 @@
     column-fill: auto;
     height: 80%;
   }
+
+  @include orientation('portrait') {
+    column-count: 1;
+  }
 }
 
 .footNotes {

@@ -172,6 +172,7 @@ class Product extends Component {
             <TwoImagesLayout
               pics={carouselPics}
               color={color}
+              orientation={orientation}
             />
           )}
           {data.screen6Published && (
