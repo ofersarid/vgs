@@ -9,7 +9,7 @@
     height: 400px;
 
     @include orientation('landscape') {
-      height: 22vw;
+      height: 65%;
     }
   }
 
@@ -82,9 +82,7 @@
 }
 
 .vest {
-  .name {
-    color: #ED1C24;
-  }
+  color: #ED1C24;
 
   .img {
     border-color: #ED1C24;
@@ -92,9 +90,7 @@
 }
 
 .viola {
-  .name {
-    color: #662D91;
-  }
+  color: #662D91;
 
   .img {
     border-color: #662D91;
@@ -102,9 +98,7 @@
 }
 
 .frame {
-  .name {
-    color: #0272BA;
-  }
+  color: #0272BA;
 
   .img {
     border-color: #0272BA;
@@ -112,9 +106,7 @@
 }
 
 .frameFr {
-  .name {
-    color: #22B0AF;
-  }
+  color: #22B0AF;
 
   .img {
     border-color: #22B0AF;
