@@ -34,7 +34,7 @@
 
   @include media('>desktop') {
     width: calc(100vw - #{2 * $gutter-wide-screen});
-    top: 22%;
+    top: 17%;
     left: $gutter-wide-screen;
   }
 }
