@@ -65,6 +65,10 @@
   bottom: 0;
   z-index: -1;
 
+  img {
+    width: auto;
+  }
+
   @include media('>phone') {
     height: 40%
   }
