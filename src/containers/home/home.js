@@ -31,7 +31,7 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { data, isMobile } = this.props;
+    const { data, isMobile, productsData } = this.props;
     return data ? (
       <Fragment >
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}
@@ -74,12 +74,13 @@ class Home extends PureComponent {
           )}
           {isMobile && (
             <FadeIn className={cx(layout.inner, styles.homeInner)} >
-              <ProductsShelf />
+              <ProductsShelf data={productsData} />
             </FadeIn >
           )}
           {!isMobile && (
-            <OurProducts
-              text={data.ourProductsBody} />
+            <OurProducts text={data.ourProductsBody} >
+              <ProductsShelf data={productsData} />
+            </OurProducts>
           )}
         </SnapScroll >
         {data.splashPublished && <Splash src={data.splash} />}
@@ -91,6 +92,7 @@ class Home extends PureComponent {
 Home.propTypes = {
   frame: PropTypes.number.isRequired,
   data: PropTypes.object,
+  productsData: PropTypes.object,
   setColor: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };
@@ -98,6 +100,7 @@ Home.propTypes = {
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
+  productsData: services.reactor.selectors.pageData(state, 'our products'),
   isMobile: Device.selectors.isMobile(state),
 });
 

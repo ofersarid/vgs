@@ -72,7 +72,8 @@
     "lint": "esw src/",
     "lint-watch": "esw src/ -w",
     "sass-unused": "sass-unused 'src/**/*.scss'",
-    "build": "rimraf ./docs && NODE_ENV=dev parcel build index.html --public-url '.' --out-dir docs && copyfiles -f CNAME ./docs/",
+    "IEMessage": "node ie-message.js",
+    "build": "rimraf ./docs && NODE_ENV=dev parcel build index.html --public-url '.' --out-dir docs && copyfiles -f CNAME ./docs/ && yarn IEMessage",
     "publish": "yarn build && git add . && git commit -am \"publish\" && git push",
     "push-empty": "git commit -m 'rebuild pages' --allow-empty && git push origin master",
     "depcheck": "depcheck"

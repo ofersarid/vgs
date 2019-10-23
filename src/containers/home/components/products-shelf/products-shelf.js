@@ -149,7 +149,6 @@ ProductsShelf.propTypes = {
 
 const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
-  data: services.reactor.selectors.pageData(state, 'our products'),
   orientation: Device.selectors.orientation(state),
 });
 

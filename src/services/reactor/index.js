@@ -58,7 +58,9 @@ const preLoaded = [];
 
 const preloadImages = data => {
   Object.keys(data).forEach(key => {
-    if (!preLoaded.includes(data[key]) && data[key].match && data[key].match(/^https?:\/\//)) {
+    if (!preLoaded.includes(data[key]) &&
+    key.toLowerCase().match(/\b(\w*image\w*)\b|\b(\w*pic\w*)\b/) &&
+    data[key].match && data[key].toLowerCase().match(/^https?:\/\//)) {
       const img = new Image();
       img.src = data[key];
       preLoaded.push(data[key]);
@@ -86,6 +88,7 @@ const selectors = {
         if (!data) return [];
         return order.reduce((dataArray, key) => {
           if (data[key] && !data[key].published) return dataArray;
+          preloadImages(data[key]);
           dataArray.push(Object.assign({}, data[key], { id: key }));
           return dataArray;
         }, []);

@@ -6,7 +6,6 @@ import Device from '/src/shared/device';
 import { FadeIn } from '/src/shared';
 import cx from 'classnames';
 import layout from '/src/shared/styles/layout.scss';
-import ProductsShelf from '../products-shelf/products-shelf';
 import styles from './styles.scss';
 
 class OurProducts extends PureComponent {
@@ -16,7 +15,7 @@ class OurProducts extends PureComponent {
   }
 
   render() {
-    const { text } = this.props;
+    const { text, children } = this.props;
     return (
       <FadeIn spread >
         <div className={cx(styles.ourProducts, layout.inner)} >
@@ -24,7 +23,7 @@ class OurProducts extends PureComponent {
             className={styles.text}
             dangerouslySetInnerHTML={{ __html: text.replace(/\n\r?/g, '<br />') }}
           />
-          <ProductsShelf />
+          {children}
         </div >
       </FadeIn >
     );
@@ -34,6 +33,7 @@ class OurProducts extends PureComponent {
 OurProducts.propTypes = {
   text: PropTypes.string.isRequired,
   isTouchDevice: PropTypes.bool.isRequired,
+  children: PropTypes.any,
 };
 
 const mapStateToProps = state => ({
