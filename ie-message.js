@@ -39,8 +39,8 @@ fs.readFile('docs/index.html', 'utf8', (err, data) => {
   }
   const hash = data.match(/src\..*\.js/)[0].split('.')[1];
   console.log(hash);
-  const replacement = data.replace(/<script src="\/src\..*\.js"><\/script>/, func(hash));
-  fs.writeFile('dist/index.html', replacement, 'utf8', (err) => {
+  const replacement = data.replace(/<script src="src\..*\.js"><\/script>/, func(hash));
+  fs.writeFile('docs/index.html', replacement, 'utf8', (err) => {
     if (err) return console.log(err);
   });
 });
