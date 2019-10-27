@@ -27,7 +27,7 @@ function detectIE() {
   return false;
 };
 if (detectIE()) {
-    document.write('IE Browser is not supported, please open in a modern browser');
+    document.write('<img src="ie-message.svg" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);"/>');
 } else {
     document.write('<script src="src.${hash}.js"><\\/script>')
 }
