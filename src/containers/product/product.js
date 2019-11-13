@@ -7,7 +7,6 @@ import { SnapScroll, IndexHeader } from '/src/shared';
 import {
   TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
 } from './components';
-import Device from '/src/shared/device';
 import services from '/src/services';
 import frameCoverPic from '/src/assets/frame_cover.png';
 import violaCoverPic from '/src/assets/viola_cover.png';
@@ -216,8 +215,8 @@ const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
   data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
-  isMobile: Device.selectors.isMobile(state),
-  orientation: Device.selectors.orientation(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
+  orientation: services.device.selectors.orientation(state),
   articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
   carouselPics: services.reactor.selectors.collectionData(state, `${services.products.selectors.name(state)} - carousel pics`),
 });

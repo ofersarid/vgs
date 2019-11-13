@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Device from '/src/shared/device';
 import services from '/src/services';
 import { FadeIn, ReadMoreSection, Footnotes } from '/src/shared';
 import styles from './styles.scss';
@@ -55,7 +54,7 @@ TwoColumnLayout.propTypes = {
 
 const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
   name: services.products.selectors.name(state),
 });
 

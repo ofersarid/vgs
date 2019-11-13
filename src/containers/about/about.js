@@ -2,7 +2,6 @@ import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import Device from '/src/shared/device';
 import utils from '/src/utils';
 import { SnapScroll, IndexHeader, TwoColumnLayout, ReadMoreSection } from '/src/shared';
 import services from '/src/services';
@@ -64,7 +63,7 @@ About.propTypes = {
 const mapStateToProps = state => ({
   // frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'about'),
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
   frame: SnapScroll.selectors.frame(state),
   color: services.vgs.selectors.color(state),
 });

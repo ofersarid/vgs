@@ -4,6 +4,7 @@ import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import YouTubePlayer from 'react-player/lib/players/YouTube';
 import { Play3 } from 'styled-icons/icomoon/Play3';
+import noop from 'lodash/noop';
 import { RatioBox, Button } from '../index';
 import styles from './styles.scss';
 
@@ -27,10 +28,12 @@ class Youtube extends PureComponent {
 
   play() {
     this.setState({ playing: true });
+    this.props.onPlay();
   }
 
   onPause() {
     this.setState({ playing: false });
+    this.props.onPause();
   }
 
   render() {
@@ -80,12 +83,16 @@ Youtube.propTypes = {
   url: PropTypes.string.isRequired,
   fullScreen: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
+  onPlay: PropTypes.func,
+  onPause: PropTypes.func,
 };
 
 Youtube.deafultProps = {
   ratio: 1,
   fullScreen: false,
   color: 'black',
+  onPlay: noop,
+  onPause: noop,
 };
 
 export default Youtube;

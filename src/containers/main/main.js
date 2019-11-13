@@ -5,7 +5,6 @@ import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import ReduxRoutes from '/src/routes/components/redux-routes/redux-routes';
 import Routes from '/src/routes';
-import Device from '/src/shared/device';
 import Reader from '/src/services/reader/reader';
 import { hashHistory } from 'react-router';
 import services from '/src/services';
@@ -48,10 +47,9 @@ class Main extends PureComponent {
 
   render() {
     const show = this.props.pathname !== '/product';
-    const { pathname, logo, bizCard, orientation, isMobile, children } = this.props;
+    const { pathname, logo, bizCard, orientation, isDesktop, children } = this.props;
     return (
       <Fragment >
-        <Device />
         <ReduxRoutes >
           {(bizCard && orientation === 'landscape') ? (
             <Card
@@ -65,7 +63,7 @@ class Main extends PureComponent {
             />
           ) : (
             <div className={styles.container} >
-              {(orientation === 'landscape' && isMobile)
+              {(orientation === 'landscape' && !isDesktop)
                 ? null
                 : (
                   <Fragment >
@@ -82,8 +80,8 @@ class Main extends PureComponent {
                     </Button >
                   </Fragment >
                 )}
-              {(orientation === 'landscape' && isMobile) ? null : <SideMenu />}
-              {(orientation === 'landscape' && isMobile) ? null : <FrameIndicator />}
+              {(orientation === 'landscape' && !isDesktop) ? null : <SideMenu />}
+              {(orientation === 'landscape' && !isDesktop) ? null : <FrameIndicator />}
               {children}
               <Footer />
             </div >
@@ -98,7 +96,7 @@ class Main extends PureComponent {
 Main.propTypes = {
   children: PropTypes.any,
   pathname: PropTypes.string,
-  isMobile: PropTypes.bool.isRequired,
+  isDesktop: PropTypes.bool.isRequired,
   logo: PropTypes.string,
   resourceList: PropTypes.shape({
     collections: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -117,7 +115,7 @@ Main.defaultProps = {
 
 const mapStateToProps = state => ({
   pathname: Routes.selectors.pathname(state),
-  isMobile: Device.selectors.isMobile(state),
+  isDesktop: services.device.selectors.type(state) === 'desktop',
   logo: services.products.selectors.logo(state),
   resourceList: services.reactor.selectors.resourceList(state),
   bizCard: services.vgs.selectors.bizCard(state),
@@ -131,6 +129,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
+  services.device.HOC,
   connect(mapStateToProps, mapDispatchToProps),
   services.reactor.connect,
 )(Main);

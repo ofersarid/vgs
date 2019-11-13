@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
+import utils from '/src/utils';
 
 const reducer = (state = fromJS({
   bizCard: 'enabled',
@@ -12,7 +13,7 @@ const reducer = (state = fromJS({
     case 'DISABLE_BIZ_CARD':
       return state.set('bizCard', 'disabled');
     case 'ENABLE_BIZ_CARD':
-      return state.set('bizCard', 'enabled');
+      return !utils.isDesktop() ? state.set('bizCard', 'enabled') : state;
     case 'SET_ORIENTATION':
       return state.set('orientation', action.orientation);
     case 'SET_COLOR':

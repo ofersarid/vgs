@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
-import Device from '/src/shared/device';
 import { connect } from 'react-redux';
 import { SnapScroll } from '/src/shared';
 import 'babel-polyfill';
@@ -50,7 +49,7 @@ const mapStateToProps = state => ({
   count: SnapScroll.selectors.count(state),
   frame: SnapScroll.selectors.frame(state),
   color: services.vgs.selectors.color(state),
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
 });
 
 const mapDispatchToProps = dispatch => ({});

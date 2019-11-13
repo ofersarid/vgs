@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _sortBy from 'lodash/sortBy';
 import moment from 'moment';
-import Device from '/src/shared/device';
 import { SnapScroll, FadeIn, DropMenu, Button } from '/src/shared';
 import services from '/src/services';
 import utils from '/src/utils';
@@ -88,7 +87,7 @@ Clinical.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isTablet: Device.selectors.isTablet(state),
+  isTablet: services.device.selectors.type(state) === 'tablet',
   color: services.vgs.selectors.color(state),
 });
 

@@ -6,7 +6,6 @@ import { FadeIn, ReadMoreSection } from '/src/shared';
 import services from '/src/services';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
-import Device from '../../../../shared/device';
 import { compose } from 'redux';
 
 const ThreeColumnLayout = ({ data, isMobile, color, title, name }) => {
@@ -49,7 +48,7 @@ ThreeColumnLayout.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
   color: services.vgs.selectors.color(state),
   name: services.products.selectors.name(state),
 });

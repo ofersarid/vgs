@@ -6,7 +6,7 @@ import { EventFooter, MediaLoader } from '/src/shared';
 import homeCoverPicMobile from '/src/assets/home_cover_art_mobile.jpg';
 import homeCoverPicTablet from '/src/assets/home_cover_art_tablet.jpg';
 import homeCoverPicDesktop from '/src/assets/home_cover_art_desktop.jpg';
-import Device from '/src/shared/device';
+import services from '/src/services';
 import styles from './styles.scss';
 
 class Cover extends PureComponent {
@@ -16,10 +16,10 @@ class Cover extends PureComponent {
   }
 
   resolvePic() {
-    const { isMobile, isTouchDevice } = this.props;
+    const { isMobile, isTablet } = this.props;
     if (isMobile) {
       return homeCoverPicMobile;
-    } else if (isTouchDevice) {
+    } else if (isTablet) {
       return homeCoverPicTablet;
     }
     return homeCoverPicDesktop;
@@ -51,12 +51,12 @@ Cover.propTypes = {
     linkTo: PropTypes.string.isRequired,
   }),
   isMobile: PropTypes.bool.isRequired,
-  isTouchDevice: PropTypes.bool.isRequired,
+  isTablet: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  isMobile: Device.selectors.isMobile(state),
-  isTouchDevice: Device.selectors.isTouchDevice(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
+  isTablet: services.device.selectors.type(state) === 'mobile',
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

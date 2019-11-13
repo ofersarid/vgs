@@ -2,11 +2,10 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Device from '/src/shared/device';
 import { FadeIn } from '/src/shared';
+import services from '/src/services';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
-// import Footnotes from '../footnotes/footnotes';
 
 const TwoColumnLayout = ({ article, footNotes, isMobile }) => { // eslint-disable-line
   return (
@@ -27,7 +26,7 @@ TwoColumnLayout.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

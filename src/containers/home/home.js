@@ -8,7 +8,6 @@ import { hashHistory } from 'react-router';
 import { SnapScroll, FadeIn, IndexHeader } from '/src/shared';
 import services from '/src/services';
 import camelCase from 'lodash/camelCase';
-import Device from '/src/shared/device';
 import layout from '/src/shared/styles/layout.scss';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
@@ -101,7 +100,7 @@ const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
   productsData: services.reactor.selectors.pageData(state, 'our products'),
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

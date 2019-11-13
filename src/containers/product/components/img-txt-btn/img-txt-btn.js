@@ -3,7 +3,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import Device from '/src/shared/device';
 import autoBind from 'auto-bind';
 import services from '/src/services';
 import utils from '/src/utils';
@@ -17,17 +16,19 @@ class ImgTxtBtn extends PureComponent {
     autoBind(this);
   }
 
-  componentDidMount() {
-    const { youtube, disableBizCard } = this.props;
-    if (youtube) {
-      disableBizCard();
-    }
-  }
+  // componentDidMount() {
+  //   const { youtube, disableBizCard, enableBizCard } = this.props;
+  //   if (youtube) {
+  //     disableBizCard();
+  //   } else if (!utils.isDesktop()) {
+  //     enableBizCard();
+  //   }
+  // }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { youtube, disableBizCard } = this.props;
-    if (youtube) {
-      disableBizCard();
+    const { youtube, enableBizCard, orientation } = this.props;
+    if (youtube && orientation === 'portrait' && prevProps.orientation === 'landscape') {
+      enableBizCard();
     }
   }
 
@@ -40,8 +41,8 @@ class ImgTxtBtn extends PureComponent {
 
   render() {
     const {
-      imgSubTitle, img, youtube, txt, color, title, name,
-      footNotes, orientation, isMobile, readeMoreTxt,
+      imgSubTitle, img, youtube, txt, color, title, name, disableBizCard, enableBizCard,
+      footNotes, orientation, isMobile, readeMoreTxt, isDesktop,
     } = this.props;
     return (
       <FadeIn spread >
@@ -56,11 +57,13 @@ class ImgTxtBtn extends PureComponent {
           )}
           {youtube && (
             <Youtube
-              ratio={isMobile && orientation === 'landscape' ? window.innerWidth / window.innerHeight : 9 / 16}
+              ratio={!isDesktop && orientation === 'landscape' ? window.innerWidth / window.innerHeight : 9 / 16}
               className={styles.img}
               url={youtube}
-              fullScreen={isMobile && orientation === 'landscape'}
+              fullScreen={!isDesktop && orientation === 'landscape'}
               color={color}
+              onPlay={disableBizCard}
+              onPause={orientation === 'portrait' ? enableBizCard : undefined}
             />
           )}
           {(orientation === 'portrait' && isMobile) && (
@@ -105,14 +108,16 @@ ImgTxtBtn.propTypes = {
   enableBizCard: PropTypes.func.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   isMobile: PropTypes.bool.isRequired,
+  isDesktop: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  orientation: Device.selectors.orientation(state),
-  isMobile: Device.selectors.isMobile(state),
+  orientation: services.device.selectors.orientation(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
+  isDesktop: services.device.selectors.type(state) === 'desktop',
   color: services.vgs.selectors.color(state),
   name: services.products.selectors.name(state),
 });

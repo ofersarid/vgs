@@ -4,7 +4,6 @@ import noop from 'lodash/noop';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
 import { connect } from 'react-redux';
-import Device from '/src/shared/device';
 import services from '/src/services';
 import styles from './styles.scss';
 import actions from '../actions';
@@ -108,7 +107,7 @@ ScrollableArea.defaultProps = {
 
 const mapStateToProps = state => ({
   frame: selectors.frame(state),
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
   orientation: services.vgs.selectors.orientation(state),
 });
 

@@ -3,9 +3,9 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import { FadeIn, Button, RatioBox, MediaLoader } from '/src/shared';
+import services from '/src/services';
 import styles from './styles.scss';
 import layout from '/src/shared/styles/layout.scss';
-import Device from '../../../../shared/device';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -115,7 +115,7 @@ Downloads.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

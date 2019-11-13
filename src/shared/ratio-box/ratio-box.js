@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import autoBind from 'auto-bind';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import services from '/src/services';
 import styles from './styles.scss';
-import Device from '../device';
 
 class RatioBox extends PureComponent {
   constructor(props) {
@@ -50,7 +50,7 @@ RatioBox.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  orientation: Device.selectors.orientation(state),
+  orientation: services.device.selectors.orientation(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

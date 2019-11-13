@@ -3,7 +3,6 @@ import { useSpring, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import services from '/src/services';
-import Device from '/src/shared/device';
 import { SnapScroll } from '/src/shared';
 import styles from './styles.scss';
 
@@ -43,7 +42,7 @@ Header.propTypes = {
 
 const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
-  isMobile: Device.selectors.isMobile(state),
+  isMobile: services.device.selectors.type(state) === 'mobile',
   color: services.vgs.selectors.color(state),
 });
 
