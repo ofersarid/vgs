@@ -99,14 +99,14 @@ class Product extends Component {
   }
 
   render() {
-    const { color, data, name, orientation, isMobile, articles, carouselPics } = this.props;
+    const { color, data, name, orientation, isDesktop, articles, carouselPics, isMobile } = this.props;
     if (!data) {
       return null;
     }
     let countPublishedScreen = 1;
     return (
       <Fragment >
-        {(orientation === 'landscape' && isMobile) ? null : (
+        {(orientation === 'landscape' && !isDesktop) ? null : (
           <Fragment >
             {data.screen1Published && <IndexHeader index={countPublishedScreen++} header={data.screen1Title} />}
             {data.screen2Published && <IndexHeader index={countPublishedScreen++} header={data.screen2Title} />}
@@ -203,6 +203,7 @@ Product.propTypes = {
   color: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   data: PropTypes.object,
+  isDesktop: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
@@ -215,6 +216,7 @@ const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
   data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
   name: services.products.selectors.name(state),
+  isDesktop: services.device.selectors.type(state) === 'desktop',
   isMobile: services.device.selectors.type(state) === 'mobile',
   orientation: services.device.selectors.orientation(state),
   articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),

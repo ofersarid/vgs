@@ -57,7 +57,7 @@ class ImgTxtBtn extends PureComponent {
           )}
           {youtube && (
             <Youtube
-              ratio={!isDesktop && orientation === 'landscape' ? window.innerWidth / window.innerHeight : 9 / 16}
+              ratio={9 / 16}
               className={styles.img}
               url={youtube}
               fullScreen={!isDesktop && orientation === 'landscape'}
