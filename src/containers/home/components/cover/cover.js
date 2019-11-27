@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { EventFooter, MediaLoader } from '/src/shared';
+import { EventFooter } from '/src/shared';
 import homeCoverPicMobile from '/src/assets/home_cover_art_mobile.jpg';
 import homeCoverPicTablet from '/src/assets/home_cover_art_tablet.jpg';
 import homeCoverPicDesktop from '/src/assets/home_cover_art_desktop.jpg';
@@ -29,8 +29,7 @@ class Cover extends PureComponent {
     const { footer } = this.props;
     return (
       <div className={styles.cover} >
-        <MediaLoader src={this.resolvePic()} preferWidth />
-        {/*<div className={styles.coverPic} style={{ backgroundImage: `url(${this.resolvePic()})` }} />*/}
+        <img src={this.resolvePic()} />
         <div className={styles.header} >
           VASCULAR<br />
           GRAFT<br />

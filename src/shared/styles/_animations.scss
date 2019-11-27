@@ -72,30 +72,32 @@
   }
 }
 
+$ease: cubic-bezier(0.23, 1, 0.32, 1);
+
 %spin {
-  animation: spinHorizontal 2s forwards ease-out;
+  animation: spinHorizontal 2s forwards $ease;
 }
 
 %slideInBottom {
-  animation: slideInBottom 1s forwards ease-out;
+  animation: slideInBottom 1s forwards $ease;
 }
 
 %slideInLeft {
-  animation: slideInLeft .75s forwards ease-out;
+  animation: slideInLeft .75s forwards $ease;
 }
 
 %slideInRight {
-  animation: slideInRight .75s forwards ease-out;
+  animation: slideInRight .75s forwards $ease;
 }
 
 %slideInRightEasy {
-  animation: slideInRightEasy 1s forwards ease-out;
+  animation: slideInRightEasy 1s forwards $ease;
 }
 
 %fadeIn {
-  animation: fadeIn 1s forwards ease-out;
+  animation: fadeIn 1s forwards $ease;
 }
 
 %scaleIn {
-  animation: scaleIn 2s forwards ease-out;
+  animation: scaleIn 2s forwards $ease;
 }
