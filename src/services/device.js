@@ -23,7 +23,7 @@ const reducer = (state = fromJS({
       };
       return fromJS({
         type: type(),
-        orientation: window.outerWidth > window.outerHeight ? 'landscape' : 'portrait',
+        orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
       });
     default:
       return state;
