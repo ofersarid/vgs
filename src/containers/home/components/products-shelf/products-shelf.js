@@ -53,7 +53,7 @@ const ProductsShelf = ({ color, data }) => {
             </span >
           </section >
           <RatioBox ratio={GOLDEN_RATIO} className={styles.img} >
-            <MediaLoader src={data.vestPic} />
+            <MediaLoader src={data['vestPic--pic']} />
           </RatioBox >
           <LinesEllipsisLoose
             text={data.vestDescription}
@@ -77,7 +77,7 @@ const ProductsShelf = ({ color, data }) => {
             </span >
           </section >
           <RatioBox ratio={GOLDEN_RATIO} className={styles.img} >
-            <MediaLoader src={data.violaPic} />
+            <MediaLoader src={data['violaPic--pic']} />
           </RatioBox >
           <LinesEllipsisLoose
             text={data.violaDescription}
@@ -101,7 +101,7 @@ const ProductsShelf = ({ color, data }) => {
             </span >
           </section >
           <RatioBox ratio={GOLDEN_RATIO} className={styles.img} >
-            <MediaLoader src={data.framePic} />
+            <MediaLoader src={data['framePic--pic']} />
           </RatioBox >
           <LinesEllipsisLoose
             text={data.frameDescription}
@@ -125,7 +125,7 @@ const ProductsShelf = ({ color, data }) => {
             </span >
           </section >
           <RatioBox ratio={GOLDEN_RATIO} className={styles.img} >
-            <MediaLoader src={data.frameFRPic} />
+            <MediaLoader src={data['frameFRPic--pic']} />
           </RatioBox >
           <LinesEllipsisLoose
             text={data.frameFRDescription}
