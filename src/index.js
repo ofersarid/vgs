@@ -13,7 +13,7 @@ import 'firebase/database';
 import './fonts/fonts.scss';
 import styles from './styles.scss';
 
-services.reactor.initialize('JRe2F6XCHTaBTIFAy0uL7EpkuzG2');
+services.reactor.initialize('8td7CS8xY7RjkaTQ46rbAkVAiEq2');
 
 const $root = document.getElementById('root');
 
