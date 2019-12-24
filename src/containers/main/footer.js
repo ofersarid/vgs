@@ -5,28 +5,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import services from '/src/services';
 import utils from '/src/utils';
-import { Spring, config } from 'react-spring/renderprops';
+import cx from 'classnames';
 import R from '/src/assets/R.svg';
 import Rechter from '/src/assets/Rechter.svg';
 import styles from './styles.scss';
 
 const Footer = ({ isLastFrame, color }) => (
-  <Spring
-    from={{ opacity: isLastFrame ? 0 : 1, transform: `translateY(${isLastFrame ? '100%' : '0%'})` }}
-    to={{ opacity: isLastFrame ? 1 : 0, transform: `translateY(${isLastFrame ? '0%' : '100%'})` }}
-    config={config.slow}
-    immediate={!isLastFrame}
+  <div
+    style={{ background: color, }}
+    className={cx(styles.footer, { [styles.show]: isLastFrame })}
   >
-    {springs => <div style={{
-      ...springs,
-      background: color,
-    }} className={styles.footer} >
-      <span >&copy;2019 VGS. Last update, Sep 2019.</span >
-      <span className={styles.right}>Produced by
-        <img src={utils.isMobile() ? R : Rechter }/>
-      </span >
-    </div >}
-  </Spring >
+    <span >&copy;2019 VGS. Last update, Sep 2019.</span >
+    <span className={styles.right} >Produced by
+      <img src={utils.isMobile() ? R : Rechter} />
+    </span >
+  </div >
 );
 
 Footer.propTypes = {

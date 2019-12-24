@@ -40,36 +40,38 @@ const HeadOffice = ({ data, color }) => {
             <div className={styles.itemInner} >
               <p className={styles.country} >{item.country}</p >
               <p className={styles.products} >{JSON5.parse(item.products).reduce((reuduced, itm) => {
-                reuduced.push(itm.view);
+                if (itm.active) {
+                  reuduced.push(itm.view);
+                }
                 return reuduced;
               }, []).join(' | ')}</p >
               <p >{item.distributor}</p >
               <p >{item.phone}</p >
               <section className={styles.btns} >
-                <Button
+                {item.email && (<Button
                   tag="a"
                   withBorder
                   target="_blank"
                   href={`mailto:${item.email}`}
                 >
                   <AtSign />
-                </Button >
-                <Button
+                </Button >)}
+                {item.link && (<Button
                   tag="a"
                   withBorder
                   target="_blank"
                   href={item.link}
                 >
                   <Globe />
-                </Button >
-                <Button
+                </Button >)}
+                {item.googleLocation && (<Button
                   tag="a"
                   withBorder
                   target="_blank"
                   href={item.googleLocation}
                 >
                   <MapPin />
-                </Button >
+                </Button >)}
               </section >
             </div >
           </div >

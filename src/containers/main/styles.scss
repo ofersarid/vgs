@@ -372,6 +372,12 @@
   font-weight: 200;
   opacity: 0;
   transform: translateY(100%);
+  transition: 1s $ease;
+
+  &.show {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 
   @include media('>phone') {
     padding: 5px 20vw 0;
