@@ -17,7 +17,7 @@ const DIRECTION = {
   REVERSE: 'reverse',
 };
 
-const THRESHHOLD = 10;
+const THRESHHOLD = 1;
 
 const Wrapper = ({ children, index, frame }) => (
   <div className={cx(styles.wrapper)} style={{ zIndex: frame === index ? 1 : 0 }} >
