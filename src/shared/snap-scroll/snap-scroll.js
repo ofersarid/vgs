@@ -142,7 +142,7 @@ class SnapScroll extends React.Component {
 
   mouseScrollHandler(e) {
     clearTimeout(this.to);
-    const delta = e.wheelDelta || e.deltaY;
+    const delta = e.wheelDelta || (e.originalEvent ? e.originalEvent.deltaY : e.deltaY);
     this.isTouchDevice = false;
     if (Math.abs(delta) > THRESHHOLD) {
       this.snap(delta < 0 ? -1 : 1);
