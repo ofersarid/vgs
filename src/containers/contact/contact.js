@@ -2,7 +2,6 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-// import utils from '/src/utils';
 import { SnapScroll, IndexHeader } from '/src/shared';
 import isEqual from 'lodash/isEqual';
 import services from '/src/services';

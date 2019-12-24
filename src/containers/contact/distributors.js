@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import sortBy from 'lodash/sortBy';
 import layout from '/src/shared/styles/layout.scss';
 import { Carousel, FadeIn, Button } from '/src/shared';
 import services from '/src/services';
@@ -13,7 +14,7 @@ import { MapPin } from 'styled-icons/feather/MapPin';
 import styles from './styles.scss';
 import utils from '../../utils';
 
-const HeadOffice = ({ data, color }) => {
+const Distributors = ({ data, color }) => {
   const resolveVolume = () => {
     switch (true) {
       case utils.isMobile():
@@ -25,7 +26,9 @@ const HeadOffice = ({ data, color }) => {
     }
   };
 
-  return data ? (
+  const dataSorted = sortBy(data, d => d.country);
+
+  return (
     <FadeIn className={cx({ [layout.inner]: utils.isMobile(), [styles.inner]: utils.isMobile() })} >
       <Carousel
         displayVolume={resolveVolume()}
@@ -35,7 +38,7 @@ const HeadOffice = ({ data, color }) => {
         prevBtnTxt={utils.isMobile() ? undefined : 'BACK'}
         nextBtnTxt={utils.isMobile() ? undefined : 'MORE'}
       >
-        {data.map(item => (
+        {dataSorted.map(item => (
           <div className={styles.item} key={item.distributor} >
             <div className={styles.itemInner} >
               <p className={styles.country} >{item.country}</p >
@@ -78,12 +81,16 @@ const HeadOffice = ({ data, color }) => {
         ))}
       </Carousel >
     </FadeIn >
-  ) : null;
+  );
 };
 
-HeadOffice.propTypes = {
+Distributors.propTypes = {
   color: PropTypes.string.isRequired,
   data: PropTypes.array,
+};
+
+Distributors.defaultProps = {
+  data: [],
 };
 
 const mapStateToProps = state => ({
@@ -94,4 +101,4 @@ const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-)(HeadOffice);
+)(Distributors);
