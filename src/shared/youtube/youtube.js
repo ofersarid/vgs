@@ -32,7 +32,6 @@ class Youtube extends PureComponent {
   }
 
   onPause() {
-    this.setState({ playing: false });
     this.props.onPause();
   }
 
