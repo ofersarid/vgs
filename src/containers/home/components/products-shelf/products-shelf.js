@@ -63,24 +63,24 @@ const ProductsShelf = ({ color, data }) => {
           />
         </Button >
       </div >
-      <div className={cx(styles.outerWrapper)} key="item-viola" >
+      <div className={cx(styles.outerWrapper)} key="item-frameFR" >
         <Button
-          className={cx(styles.innerWrapper, styles.viola)}
-          onClick={() => navigate('/viola/0')}
-          waveColor="purple"
+          className={cx(styles.innerWrapper, styles.frameFr)}
+          onClick={() => navigate('/frameFr/0')}
+          waveColor="lagoon"
         >
           <section className={styles.header} >
-            <span className={cx(styles.name)} >VIOLA</span >
+            <span className={cx(styles.name)} >FRAME FR</span >
             <span className={styles.headerRight} >
-              <p >Cardiac</p >
-              <Heart />
+              <p >Vascular</p >
+              <GitBranch />
             </span >
           </section >
           <RatioBox ratio={GOLDEN_RATIO} className={styles.img} >
-            <MediaLoader src={data['violaPic--pic']} />
+            <MediaLoader src={data['frameFRPic--pic']} />
           </RatioBox >
           <LinesEllipsisLoose
-            text={data.violaDescription}
+            text={data.frameFRDescription}
             maxLine='2'
             lineHeight='1.5em'
             className={styles.p}
@@ -111,24 +111,24 @@ const ProductsShelf = ({ color, data }) => {
           />
         </Button >
       </div >
-      <div className={cx(styles.outerWrapper)} key="item-frameFR" >
+      <div className={cx(styles.outerWrapper)} key="item-viola" >
         <Button
-          className={cx(styles.innerWrapper, styles.frameFr)}
-          onClick={() => navigate('/frameFr/0')}
-          waveColor="lagoon"
+          className={cx(styles.innerWrapper, styles.viola)}
+          onClick={() => navigate('/viola/0')}
+          waveColor="purple"
         >
           <section className={styles.header} >
-            <span className={cx(styles.name)} >FRAME FR</span >
+            <span className={cx(styles.name)} >VIOLA</span >
             <span className={styles.headerRight} >
-              <p >Vascular</p >
-              <GitBranch />
+              <p >Cardiac</p >
+              <Heart />
             </span >
           </section >
           <RatioBox ratio={GOLDEN_RATIO} className={styles.img} >
-            <MediaLoader src={data['frameFRPic--pic']} />
+            <MediaLoader src={data['violaPic--pic']} />
           </RatioBox >
           <LinesEllipsisLoose
-            text={data.frameFRDescription}
+            text={data.violaDescription}
             maxLine='2'
             lineHeight='1.5em'
             className={styles.p}
