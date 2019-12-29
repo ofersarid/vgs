@@ -89,18 +89,30 @@
 
 .carouselWrapper {
   @include media('>tablet') {
-    position: absolute;
-    width: 100%;
-    bottom: 50%;
-    transform: translateY(50%);
+    //position: absolute;
+    //width: 100%;
+    //bottom: 50%;
+    //transform: translateY(50%);
   }
 }
 
 .carousel {
-  height: 280px;
+  height: 70%;
+  top: 15%;
+  position: relative;
 
   @include media('>phone') {
     height: 300px;
+  }
+
+  @include media('>tablet') {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  h2 {
+    position: fixed;
+    top: 21%;
   }
 
   @include media('>desktop') {
@@ -143,6 +155,10 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .innerWrapper {
@@ -195,4 +211,15 @@
   height: 1px;
   background: $gray;
   margin: 15px 0 18px;
+  flex-shrink: 0;
+}
+
+.bgImg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1) saturate(0) blur(2px) opacity(0.05);
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -6,7 +6,9 @@ import { SnapScroll } from '/src/shared';
 import isEqual from 'lodash/isEqual';
 import services from '/src/services';
 import cx from 'classnames';
+import utils from '/src/utils';
 import layout from '/src/shared/styles/layout.scss';
+import bgPic from '/src/assets/news-events-bg.jpg';
 import EventCarousel from './event-carousel';
 import styles from './styles.scss';
 
@@ -23,12 +25,15 @@ class NewsAndEvents extends Component {
   render() {
     const { data } = this.props; // eslint-disable-line
     return (
-      <div className={cx(layout.inner, styles.onePager)} >
-        <h1 >NEWS & EVENTS</h1 >
-        <div className={styles.carouselWrapper} >
-          <EventCarousel data={data} />
+      <Fragment>
+        <img src={bgPic} className={styles.bgImg} alt="background image"/>
+        <div className={cx(layout.inner, styles.onePager)} >
+          {utils.isMobile() ? <h2 >NEWS & EVENTS</h2 > : <h1 >NEWS & EVENTS</h1 >}
+          <div className={styles.carouselWrapper} >
+            <EventCarousel data={data} />
+          </div >
         </div >
-      </div >
+      </Fragment>
     );
   }
 }

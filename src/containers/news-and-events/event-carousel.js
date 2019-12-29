@@ -23,9 +23,9 @@ const EventCarousel = ({ data, color }) => {
     }
   };
 
-  const dataSorted = sortBy(data, d => d.date.toDate());
+  const dataSorted = sortBy(data, d => d.date.toDate()).reverse();
   return (
-    <FadeIn className={cx({ [layout.inner]: utils.isMobile(), [styles.inner]: utils.isMobile() })} >
+    <FadeIn className={cx(layout.inner)} >
       <Carousel
         displayVolume={resolveVolume()}
         className={styles.carousel}

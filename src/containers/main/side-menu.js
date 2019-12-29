@@ -56,7 +56,7 @@ class SideMenu extends PureComponent {
             <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME</Button >
             <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME FR</Button >
             <div className={styles.divider} />
-            <Button onClick={this.navigate} tag="h1" waveColor="white" >NEWS & EVENTS</Button >
+            {/*<Button onClick={this.navigate} tag="h1" waveColor="white" >NEWS & EVENTS</Button >*/}
             {/*<div className={styles.divider} />*/}
             <Button onClick={this.navigate} tag="h1" waveColor="white" >ABOUT</Button >
             <div className={styles.divider} />

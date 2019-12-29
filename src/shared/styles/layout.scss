@@ -18,10 +18,6 @@
       width: calc(100vw - #{2 * $gutter-tablet});
       left: $gutter-tablet;
       height: 67%;
-      @include orientation(landscape) {
-        //width: 60vw;
-        //left: calc((100vw - 60vw)/2);
-      }
     }
 
     @include media('>tablet') {
