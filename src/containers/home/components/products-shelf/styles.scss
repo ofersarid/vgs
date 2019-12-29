@@ -3,6 +3,12 @@
 .shelf {
   @include media('>phone') {
     height: 300px;
+
+    :global {
+      .carousel-item {
+        padding-right: 4%;
+      }
+    }
   }
 
   @include media('>tablet') {
@@ -10,12 +16,6 @@
 
     @include orientation('landscape') {
       height: 65%;
-    }
-  }
-
-  :global {
-    .carousel-item {
-      padding-right: 4%;
     }
   }
 }
