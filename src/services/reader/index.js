@@ -13,8 +13,8 @@ const reducer = (state = fromJS({
       return state.set('content', action.content);
     case 'READER:CLEAR_CONTENT':
       return state.set('content', '');
-    case 'ROUTER/LOCATION_CHANGE':
-      return state.set('isOpen', false);
+    // case 'ROUTER/LOCATION_CHANGE':
+    //   return state.set('isOpen', false);
     default:
       return state;
   }

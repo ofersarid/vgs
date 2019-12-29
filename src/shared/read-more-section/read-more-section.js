@@ -32,26 +32,28 @@ class ReadMoreSection extends React.PureComponent {
   }
 
   render() {
-    const { html, color, className, maxLines, btnTxt, colorName, forceShowTrigger } = this.props;
+    const { html, color, className, maxLines, btnTxt, colorName, forceShowTrigger, btnTxtColor, btnClass } = this.props;
     const { clamped } = this.state;
-    const htmlAsString = renderToString(html);
+    const htmlAsString = html ? renderToString(html) : null;
     return (
       <Fragment>
-        <HTMLEllipsis
-          unsafeHTML={htmlAsString}
-          maxLine={maxLines}
-          ellipsis="..."
-          basedOn='letters'
-          className={cx(styles.readMoreSection, className)}
-          onReflow={this.onReflow}
-        />
+        {html ? (
+          <HTMLEllipsis
+            unsafeHTML={htmlAsString}
+            maxLine={maxLines}
+            ellipsis="..."
+            basedOn='letters'
+            className={cx(styles.readMoreSection, className)}
+            onReflow={this.onReflow}
+          />
+        ) : null}
         {(!htmlAsString || clamped || forceShowTrigger) ? (
           <Button
-            className={styles.readMoreBtn}
+            className={cx(styles.readMoreBtn, btnClass)}
             onClick={this.onClick}
             waveColor={colorName}
             style={{
-              color,
+              color: btnTxtColor || color,
             }}
           >
             {btnTxt}
@@ -70,7 +72,9 @@ ReadMoreSection.propTypes = {
   clear: PropTypes.func.isRequired,
   html: PropTypes.any,
   className: PropTypes.string,
+  btnClass: PropTypes.string,
   btnTxt: PropTypes.string.isRequired,
+  btnTxtColor: PropTypes.string,
   more: PropTypes.any,
   maxLines: PropTypes.number.isRequired,
   forceShowTrigger: PropTypes.bool

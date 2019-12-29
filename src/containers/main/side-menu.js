@@ -1,12 +1,13 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Spring, config } from 'react-spring/renderprops';
+import { Spring } from 'react-spring/renderprops';
+import { logoGreen } from '/src/containers/main/assets';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import camelCase from 'lodash/camelCase';
 import autoBind from 'auto-bind';
-import { Button } from '/src/shared';
+import { Button, ReadMoreSection } from '/src/shared';
 import services from '/src/services';
 import styles from './styles.scss';
 
@@ -39,42 +40,49 @@ class SideMenu extends PureComponent {
   }
 
   render() {
-    const { color, colorName } = this.props;
+    const { color, colorName, data, logo } = this.props;
     const { openMenu, immediate } = this.state;
     return (
       <Fragment >
-        <Spring
-          from={{ transform: `translateX(${openMenu ? '100vw' : '0vw'})`, opacity: openMenu ? 0 : 1 }}
-          to={{ transform: `translateX(${openMenu ? '0vw' : '100vw'})`, opacity: openMenu ? 1 : 0 }}
-          immediate={immediate}
-          config={config.slow}
-          onRest={() => {
-            this.setState({ immediate: true });
-          }}
-        >
-          {props => <div className={styles.menuContainer} style={props} >
-            <div className={styles.inner} ref={this.ref}>
-              <Button onClick={this.navigate} tag="h1" waveColor="white" >Home</Button >
-              <div className={styles.divider} />
-              <p className={styles.category} >Cardiac Solutions</p >
-              <Button onClick={this.navigate} tag="h1" waveColor="white" >VEST</Button >
-              <Button onClick={this.navigate} tag="h1" waveColor="white" >VIOLA</Button >
-              <div className={styles.divider} />
-              <p className={styles.category} >Vascular Solutions</p >
-              <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME</Button >
-              <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME FR</Button >
-              <div className={styles.divider} />
-              {/*<Button onClick={this.navigate} tag="h1" waveColor="white" >NEWS & EVENTS</Button >*/}
-              {/*<div className={styles.divider} />*/}
-              <Button onClick={this.navigate} tag="h1" waveColor="white" >ABOUT</Button >
-              <div className={styles.divider} />
-              <Button onClick={this.navigate} tag="h1" waveColor="white" >CONTACT</Button >
-              <Button tag="a" href="https://www.dropbox.com/s/mbbujxsl5rk1ozy/VGS_Privacy%20Policy_09.2019.pdf?dl=0" target="_blank" waveColor="white" >Privacy policy</Button >
-              {/*<Button tag="a" onClick={this.navigate} waveColor="white" >Terms & Conditions</Button >*/}
-            </div>
+        <div className={cx(styles.menuContainer, { [styles.open]: openMenu })} >
+          <div className={styles.inner} ref={this.ref} >
+            <Button onClick={this.navigate} tag="h1" waveColor="white" >Home</Button >
+            <div className={styles.divider} />
+            <p className={styles.category} >Cardiac Solutions</p >
+            <Button onClick={this.navigate} tag="h1" waveColor="white" >VEST</Button >
+            <Button onClick={this.navigate} tag="h1" waveColor="white" >VIOLA</Button >
+            <div className={styles.divider} />
+            <p className={styles.category} >Vascular Solutions</p >
+            <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME</Button >
+            <Button onClick={this.navigate} tag="h1" waveColor="white" >FRAME FR</Button >
+            <div className={styles.divider} />
+            {/*<Button onClick={this.navigate} tag="h1" waveColor="white" >NEWS & EVENTS</Button >*/}
+            {/*<div className={styles.divider} />*/}
+            <Button onClick={this.navigate} tag="h1" waveColor="white" >ABOUT</Button >
+            <div className={styles.divider} />
+            <Button onClick={this.navigate} tag="h1" waveColor="white" >CONTACT</Button >
+            {data && (<ReadMoreSection
+              forceShowTrigger
+              more={(
+                <div className={styles.policyContainer} >
+                  <div className={styles.innerContent} >
+                    <h1 style={{ color }} >PRIVACY POLICY</h1 >
+                    <div dangerouslySetInnerHTML={{ __html: data.terms.replace(/\n\r?/g, '<br />') }} />
+                  </div >
+                  <div className={styles.leftCol}>
+                    <div style={{ color }} className={styles.header} >Privacy<br />Policy</div >
+                    <img className={styles.logoImg} src={logo} />
+                  </div>
+                </div >
+              )}
+              btnTxt="Privacy policy"
+              btnTxtColor="white"
+              btnClass={styles.policy}
+            />)}
+            {/*<Button className={styles.policy} waveColor="white" onClick={this.showPolicy}>Privacy policy</Button >*/}
+            {/*<Button tag="a" onClick={this.navigate} waveColor="white" >Terms & Conditions</Button >*/}
           </div >
-          }
-        </Spring >
+        </div >
         <Button
           className={cx(styles.menuToggle)}
           onClick={this.toggleMenu}
@@ -107,12 +115,20 @@ class SideMenu extends PureComponent {
 SideMenu.propTypes = {
   color: PropTypes.string.isRequired,
   colorName: PropTypes.string.isRequired,
+  data: PropTypes.object,
+  logo: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
   colorName: services.vgs.selectors.colorName(state),
+  data: services.reactor.selectors.pageData(state, 'privacy policy'),
+  logo: services.products.selectors.logo(state),
 });
+
+SideMenu.defaultProps = {
+  logo: logoGreen,
+};
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
