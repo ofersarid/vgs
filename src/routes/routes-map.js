@@ -13,6 +13,7 @@ export default (
     <Route path="vest/:frame" component={Pages.Product} />
     <Route path="about/:frame" component={Pages.About} />
     <Route path="contact/:frame" component={Pages.Contact} />
+    <Route path="newsEvents/:frame" component={Pages.NewsAndEvents} />
     <Redirect from="*" to="home/0" />
   </Route >
 );
