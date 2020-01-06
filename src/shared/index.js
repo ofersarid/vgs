@@ -15,3 +15,4 @@ export { default as MediaLoader } from './media-loader/media-loader';
 export { default as ReadMoreSection } from './read-more-section/read-more-section';
 export { default as Youtube } from './youtube/youtube';
 export { default as Footnotes } from './footnotes/footnotes';
+export { default as VideoAsBg } from './video-as-bg/video-as-bg';
