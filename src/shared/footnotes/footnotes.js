@@ -10,11 +10,11 @@ const Footnotes = ({ footNotes }) => {
       isEmpty = false;
     }
   });
-  return (
+  return footNotes.length > 0 ? (
     <ol className={cx(styles.footNotes, { [styles.hideTopLine]: isEmpty })} >
       {footNotes.map((note, i) => note ? <li key={i} >{note}</li > : null)}
     </ol >
-  );
+  ) : null;
 };
 
 Footnotes.propTypes = {

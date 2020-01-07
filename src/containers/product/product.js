@@ -113,6 +113,7 @@ class Product extends Component {
             {data.screen3Published && <IndexHeader index={countPublishedScreen++} header={data.screen3Title} />}
             {data.screen4Published && <IndexHeader index={countPublishedScreen++} header={data.screen4Title} />}
             {data.screen5Published && <IndexHeader index={countPublishedScreen++} header={data.screen5Title} />}
+            {data.IFUVideoPublished === 'Publish' ? <IndexHeader index={countPublishedScreen++} header="IFU VIDEO" /> : null}
             {data.screen6Published && <IndexHeader index={countPublishedScreen++} header={data.screen6Title} />}
             {data.screen7Published && <IndexHeader index={countPublishedScreen++} header={data.screen7Title} />}
             <IndexHeader index={countPublishedScreen} header="Clinical" />
@@ -172,6 +173,15 @@ class Product extends Component {
               pics={carouselPics}
               color={color}
               orientation={orientation}
+            />
+          )}
+          {data.IFUVideoPublished === 'Publish' && (
+            <ImgTxtBtn
+              youtube={data.IFUVideoLink}
+              txt={data.IFUVideoBody}
+              readeMoreTxt={data.IFUVideoBody}
+              themeColor={color}
+              title="IFU VIDEO"
             />
           )}
           {data.screen6Published && (

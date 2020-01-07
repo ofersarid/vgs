@@ -76,7 +76,7 @@ class ImgTxtBtn extends PureComponent {
                     <h1 style={{ color }} >{name}</h1 >
                     <h2 style={{ color }} >{title}</h2 >
                     <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: readeMoreTxt.replace(/\n\r?/g, '<br />') }} />
-                    <Footnotes footNotes={footNotes} />
+                    {footNotes && <Footnotes footNotes={footNotes} />}
                   </Fragment >
                 )}
               />
@@ -87,7 +87,7 @@ class ImgTxtBtn extends PureComponent {
               <div className={cx(styles.rightCol)} >
                 <p className={cx(styles.txt)} dangerouslySetInnerHTML={{ __html: txt.replace(/\n\r?/g, '<br />') }} />
               </div >
-              <Footnotes footNotes={footNotes} />
+              {footNotes && <Footnotes footNotes={footNotes} />}
             </Fragment >
           )}
         </div >
@@ -102,7 +102,7 @@ ImgTxtBtn.propTypes = {
   imgSubTitle: PropTypes.string,
   txt: PropTypes.string.isRequired,
   readeMoreTxt: PropTypes.string,
-  footNotes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  footNotes: PropTypes.arrayOf(PropTypes.string),
   themeColor: PropTypes.string.isRequired,
   disableBizCard: PropTypes.func.isRequired,
   enableBizCard: PropTypes.func.isRequired,
