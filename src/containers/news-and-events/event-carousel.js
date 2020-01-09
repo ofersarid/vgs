@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 import sortBy from 'lodash/sortBy';
 import layout from '/src/shared/styles/layout.scss';
 import { Carousel, FadeIn, Button } from '/src/shared';
+// import { CalendarEvent } from 'styled-icons/boxicons-regular/CalendarEvent';
+import { News } from 'styled-icons/boxicons-regular/News';
+import { EventSeat } from 'styled-icons/material/EventSeat';
 import services from '/src/services';
 import styles from './styles.scss';
 import utils from '../../utils';
@@ -45,7 +48,10 @@ const EventCarousel = ({ data, color }) => {
                 href={item.link}
                 waveColor={color === '#0272BA' ? 'blue' : 'purple'}
               >
-                <h3 className={styles.date} >{moment(item.date.toDate()).format('MMMM Do, YYYY')}</h3 >
+                <h3 className={styles.date} >
+                  <EventSeat /> / <News />
+                  {moment(item.date.toDate()).format('MMMM Do, YYYY')}
+                </h3 >
                 <p className={cx('small', styles.header)} style={{ color }} >{item.body}</p >
                 <div className={styles.divider} />
                 <p className={cx('small', styles.source)} >{item.source}</p >

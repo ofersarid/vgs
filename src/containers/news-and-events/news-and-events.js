@@ -8,8 +8,8 @@ import services from '/src/services';
 import cx from 'classnames';
 import utils from '/src/utils';
 import layout from '/src/shared/styles/layout.scss';
-// import bgPic from '/src/assets/news-events-bg.jpg';
-import video from '/src/assets/news-and-events-bg.mp4';
+import bgPic from '/src/assets/news-events-bg.jpg';
+import video from '/src/assets/news-and-events-bg-4.mp4';
 import EventCarousel from './event-carousel';
 import styles from './styles.scss';
 
@@ -27,8 +27,8 @@ class NewsAndEvents extends Component {
     const { data } = this.props; // eslint-disable-line
     return (
       <Fragment>
-        {/*<img src={bgPic} className={styles.bgImg} alt="background image"/>*/}
         <VideoAsBg src={video} className={styles.video} />
+        <img src={bgPic} className={styles.bgImg} alt="background image"/>
         <div className={cx(layout.inner, styles.onePager)} >
           {utils.isMobile() ? <h2 >NEWS & EVENTS</h2 > : <h1 >NEWS & EVENTS</h1 >}
           <div className={styles.carouselWrapper} >

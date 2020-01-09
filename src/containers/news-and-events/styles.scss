@@ -178,6 +178,12 @@
   color: #434343;
   height: 10%;
   margin-bottom: 5px;
+
+  svg {
+    height: 25px;
+    margin-right: 10px;
+    transform: translateY(-2px);
+  }
 }
 
 .header {
@@ -198,7 +204,7 @@
   //@include media('>phone') {
   //  height: 20%;
   //}
-  color: #434343;
+  //color: #434343;
 }
 
 .menuTrigger {
@@ -215,18 +221,18 @@
   flex-shrink: 0;
 }
 
-//.bgImg {
-//  position: fixed;
-//  top: 0;
-//  left: 0;
-//  width: 100vw;
-//  height: 100%;
-//  object-fit: cover;
-//  filter: brightness(1) saturate(0) blur(2px) opacity(0.05);
-//  opacity: 0;
-//}
+.bgImg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1) saturate(0) blur(2px) opacity(0.05);
+  opacity: 0.6;
+}
 
 .video {
-  opacity: 0.25;
-  filter: grayscale(0.8) blur(4px);
+  opacity: 0.45;
+  filter: grayscale(1) blur(0px) brightness(123%);
 }
