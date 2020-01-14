@@ -108,14 +108,14 @@ class Product extends Component {
       <Fragment >
         {(orientation === 'landscape' && !isDesktop) ? null : (
           <Fragment >
-            {data.screen1Published && <IndexHeader index={countPublishedScreen++} header={data.screen1Title} />}
-            {data.screen2Published && <IndexHeader index={countPublishedScreen++} header={data.screen2Title} />}
-            {data.screen3Published && <IndexHeader index={countPublishedScreen++} header={data.screen3Title} />}
-            {data.screen4Published && <IndexHeader index={countPublishedScreen++} header={data.screen4Title} />}
-            {data.screen5Published && <IndexHeader index={countPublishedScreen++} header={data.screen5Title} />}
+            {data.screen1Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen1Title} />}
+            {data.screen2Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen2Title} />}
+            {data.screen3Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen3Title} />}
+            {data.screen4Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen4Title} />}
+            {data.screen5Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen5Title} />}
             {data.IFUVideoPublished === 'Publish' ? <IndexHeader index={countPublishedScreen++} header="IFU VIDEO" /> : null}
-            {data.screen6Published && <IndexHeader index={countPublishedScreen++} header={data.screen6Title} />}
-            {data.screen7Published && <IndexHeader index={countPublishedScreen++} header={data.screen7Title} />}
+            {data.screen6Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen6Title} />}
+            {data.screen7Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen7Title} />}
             <IndexHeader index={countPublishedScreen} header="Clinical" />
           </Fragment >
         )}
@@ -134,14 +134,14 @@ class Product extends Component {
             }}
             footnote={data.coverFootnote}
           />
-          {data.screen1Published && (
+          {data.screen1Published === 'Publish' && (
             <TwoColumnLayout
               article={data.screen1Body}
               footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
               title={data.screen1Title}
             />
           )}
-          {data.screen2Published && (
+          {data.screen2Published === 'Publish' && (
             <ImgTxtBtn
               img={data.screen2Image}
               txt={isMobile ? data.screen2BodyMobile : data.screen2Body}
@@ -152,7 +152,7 @@ class Product extends Component {
               title={data.screen2Title}
             />
           )}
-          {data.screen3Published && (
+          {data.screen3Published === 'Publish' && (
             <ImgTxtBtn
               youtube={data.screen3Videolink}
               txt={data.screen3Body}
@@ -162,7 +162,7 @@ class Product extends Component {
               title={data.screen3Title}
             />
           )}
-          {data.screen4Published && (
+          {data.screen4Published === 'Publish' && (
             <ThreeColumnLayout
               data={[data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6]}
               title={data.screen4Title}
@@ -184,7 +184,7 @@ class Product extends Component {
               title="IFU VIDEO"
             />
           )}
-          {data.screen6Published && (
+          {data.screen6Published === 'Publish' && (
             <Downloads
               image={data.screen6Image}
               imageTitle={data.screen6ImageSubtitle}
@@ -196,7 +196,7 @@ class Product extends Component {
 
             />
           )}
-          {data.screen7Published && (
+          {data.screen7Published === 'Publish' && (
             <Summary
               art={this.resolveSummeryPic()}
               data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
