@@ -87,7 +87,7 @@ const selectors = {
         const data = collections[collectionId].data;
         if (!data) return [];
         return order.reduce((dataArray, key) => {
-          if (data[key] && !data[key].published) return dataArray;
+          if (data[key] && data[key].published === 'Hide') return dataArray;
           preloadImages(data[key]);
           dataArray.push(Object.assign({}, data[key], { id: key }));
           return dataArray;
