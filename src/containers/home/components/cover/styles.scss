@@ -11,7 +11,7 @@
     position: absolute;
     top: 25%;
     left: $gutter-phone;
-    width: 66%;
+    width: 100%;
     font-size: 50px;
     line-height: 53px;
     font-weight: 200;
@@ -61,5 +61,30 @@
     background-size: cover;
     height: 100%;
     width: 100%
+  }
+}
+
+.cookies {
+  font-size: 21px;
+  color: $black;
+  width: 100%;
+  transition: 1s $ease;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  .txt {
+    text-transform: none;
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    color: $green;
+    background: $white;
+    border: 1px solid;
   }
 }

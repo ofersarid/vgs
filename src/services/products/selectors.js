@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import Routes from '/src/routes';
+import { logoGreen } from '/src/containers/main/assets';
 import logoFrame from './logo_frame.svg';
 import logoViola from './logo_viola.svg';
 import logoVest from './logo_vest.svg';
@@ -57,7 +58,7 @@ const logo = createSelector(Routes.selectors.pathname, pathname => {
     case 'frameFr':
       return logoFrameFr;
     default:
-      return undefined;
+      return logoGreen;
   }
 });
 

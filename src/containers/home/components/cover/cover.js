@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import autoBind from 'auto-bind';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { EventFooter } from '/src/shared';
+import { EventFooter, Terms } from '/src/shared';
 import homeCoverPicMobile from '/src/assets/home_cover_art_mobile.jpg';
 import homeCoverPicTablet from '/src/assets/home_cover_art_tablet.jpg';
 import homeCoverPicDesktop from '/src/assets/home_cover_art_desktop.jpg';
@@ -26,7 +27,7 @@ class Cover extends PureComponent {
   }
 
   render() {
-    const { footer } = this.props;
+    const { footer, termsAccepted, accept } = this.props;
     return (
       <div className={styles.cover} >
         <img src={this.resolvePic()} />
@@ -34,6 +35,15 @@ class Cover extends PureComponent {
           VASCULAR<br />
           GRAFT<br />
           SOLUTIONS
+          <section className={cx(styles.cookies, { [styles.hide]: termsAccepted })} >
+            <div className={styles.txt} >
+              <div >This site uses cookies.</div >
+              <Terms btnTxt="Read more" txtColor="black" />
+            </div >
+            <button onClick={accept} >
+              ACCEPT
+            </button >
+          </section >
         </div >
         {footer ? <EventFooter footer={footer} /> : null}
       </div >
@@ -51,13 +61,18 @@ Cover.propTypes = {
   }),
   isMobile: PropTypes.bool.isRequired,
   isTablet: PropTypes.bool.isRequired,
+  accept: PropTypes.func.isRequired,
+  termsAccepted: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   isMobile: services.device.selectors.type(state) === 'mobile',
   isTablet: services.device.selectors.type(state) === 'mobile',
+  termsAccepted: services.vgs.selectors.termsAccepted(state),
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = dispatch => ({
+  accept: () => dispatch(services.vgs.actions.acceptTerms())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cover);

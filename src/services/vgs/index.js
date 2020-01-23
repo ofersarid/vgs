@@ -8,6 +8,7 @@ const reducer = (state = fromJS({
   color: '#005728',
   productsActiveTab: 'vascular',
   splash: false,
+  termsAccepted: false,
 }), action) => {
   switch (action.type) {
     case 'DISABLE_BIZ_CARD':
@@ -24,6 +25,8 @@ const reducer = (state = fromJS({
       return state.set('splash', true);
     case 'HIDE_SPLASH':
       return state.set('splash', false);
+    case 'ACCEPT_TERMS':
+      return state.set('termsAccepted', true);
     default:
       return state;
   }
@@ -41,6 +44,9 @@ const actions = {
   }),
   enableBizCard: () => ({
     type: 'ENABLE_BIZ_CARD',
+  }),
+  acceptTerms: () => ({
+    type: 'ACCEPT_TERMS',
   }),
   setOrientation: orientation => ({
     type: 'SET_ORIENTATION',
@@ -62,6 +68,7 @@ const selectors = {
   color: state => state.getIn(['vgs', 'color']),
   productsActiveTab: state => state.getIn(['vgs', 'productsActiveTab']),
   splash: state => state.getIn(['vgs', 'splash']),
+  termsAccepted: state => state.getIn(['vgs', 'termsAccepted']),
 };
 
 selectors.colorName = createSelector(selectors.color, color => {
