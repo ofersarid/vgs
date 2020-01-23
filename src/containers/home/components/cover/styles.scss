@@ -20,7 +20,7 @@
     color: $green;
     opacity: 0;
     @extend %fadeIn;
-    animation-delay: 0.5s;
+    animation-delay: 0.25s;
 
     @include media('>phone') {
       font-size: 91px;
@@ -65,10 +65,18 @@
 }
 
 .cookies {
-  font-size: 21px;
+  font-size: 18px;
+  line-height: 18px;
   color: $black;
   width: 100%;
   transition: 1s $ease;
+  margin-top: 10px;
+
+  @include media('>tablet') {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 300;
+  }
 
   &.hide {
     opacity: 0;
@@ -86,5 +94,8 @@
     color: $green;
     background: $white;
     border: 1px solid;
+    font-weight: 400;
+    padding: 8px 18px;
+    margin-top: 10px;
   }
 }
