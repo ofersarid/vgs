@@ -32,7 +32,7 @@ class NewsAndEvents extends Component {
         <div className={cx(layout.inner, styles.onePager)} >
           {utils.isMobile() ? <h2 >NEWS & EVENTS</h2 > : <h1 >NEWS & EVENTS</h1 >}
           <div className={styles.carouselWrapper} >
-            <EventCarousel data={data} />
+            {data && <EventCarousel data={data} />}
           </div >
         </div >
       </Fragment>

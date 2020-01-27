@@ -69,10 +69,6 @@ EventCarousel.propTypes = {
   data: PropTypes.array,
 };
 
-EventCarousel.defaultProps = {
-  data: [],
-};
-
 const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
 });

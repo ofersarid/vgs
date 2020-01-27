@@ -76,6 +76,12 @@
     font-size: 20px;
     line-height: 20px;
     font-weight: 300;
+    position: fixed;
+    bottom: 137px;
+    right: 10vw;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
   }
 
   &.hide {
@@ -97,5 +103,11 @@
     font-weight: 400;
     padding: 8px 18px;
     margin-top: 10px;
+
+    @include media('>tablet') {
+      margin-top: 0;
+      margin-left: 20px;
+      transform: translateY(-2px);
+    }
   }
 }

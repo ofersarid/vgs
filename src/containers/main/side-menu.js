@@ -79,8 +79,6 @@ class SideMenu extends PureComponent {
               btnTxtColor="white"
               btnClass={styles.policy}
             />)}
-            {/*<Button className={styles.policy} waveColor="white" onClick={this.showPolicy}>Privacy policy</Button >*/}
-            {/*<Button tag="a" onClick={this.navigate} waveColor="white" >Terms & Conditions</Button >*/}
           </div >
         </div >
         <Button
