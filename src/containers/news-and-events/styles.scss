@@ -97,7 +97,7 @@
 }
 
 .carousel {
-  height: 70%;
+  height: 80%;
   top: 15%;
   position: relative;
 
@@ -155,6 +155,15 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
+
+  @include media('>phone') {
+    width: calc(100% / 2);
+  }
+
+  @include media('>tablet') {
+    width: calc(100% / 3);
+  }
 
   p {
     margin-bottom: 0;

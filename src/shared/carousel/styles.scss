@@ -67,10 +67,15 @@
 }
 
 .content {
-  width: calc(100% - 80px);
-  height: 100%;
-  overflow: hidden;
+  width: 100%;
+  height: calc(100% - 50px);
   position: relative;
+  display: flex;
+  transition: 1s $ease;
+
+  & > * {
+    flex-shrink: 0;
+  }
 
   @for $i from 1 to 10 {
     .itemWrapper:nth-child(#{$i}) {

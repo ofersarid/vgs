@@ -39,7 +39,7 @@ const EventCarousel = ({ data, color }) => {
       >
         {dataSorted.map(item => {
           return (
-            <div className={cx(styles.outerWrapper)} key={item.link} >
+            <div className={cx(styles.outerWrapper)} key={item.id} >
               <Button
                 className={styles.innerWrapper}
                 tag="a"
@@ -49,7 +49,7 @@ const EventCarousel = ({ data, color }) => {
                 waveColor={color === '#0272BA' ? 'blue' : 'purple'}
               >
                 <h3 className={styles.date} >
-                  <EventSeat /> / <News />
+                  {item.type === 'Event' ? <EventSeat /> : <News />}
                   {moment(item.date.toDate()).format('MMMM Do, YYYY')}
                 </h3 >
                 <p className={cx('small', styles.header)} style={{ color }} >{item.body}</p >

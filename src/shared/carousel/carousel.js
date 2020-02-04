@@ -4,7 +4,6 @@ import cx from 'classnames';
 import throttle from 'lodash/throttle';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Transition, config } from 'react-spring/renderprops';
 import { ChevronRight } from 'styled-icons/evil/ChevronRight';
 import { ChevronLeft } from 'styled-icons/evil/ChevronLeft';
 import { SnapScroll, Button } from '/src/shared';
@@ -18,8 +17,6 @@ class Carousel extends PureComponent {
     this.state = {
       group: 0,
       groupCount: 0,
-      orientation: 'next',
-      immediate: true,
     };
     autoBind(this);
     this.nextThrottle = throttle(this.next, 500, { trailing: true, leading: true });
@@ -46,7 +43,7 @@ class Carousel extends PureComponent {
     e.persist();
     const { group, groupCount } = this.state;
     if (group < groupCount) {
-      this.setState({ group: group + 1, orientation: 'next' });
+      this.setState({ group: group + 1 });
     }
     this.setState({ immediate: false });
   }
@@ -55,14 +52,14 @@ class Carousel extends PureComponent {
     e.persist();
     const { group } = this.state;
     if (group > 0) {
-      this.setState({ group: group - 1, orientation: 'prev' });
+      this.setState({ group: group - 1 });
     }
     this.setState({ immediate: false });
   }
 
   render() {
-    const { children, displayVolume, className, color, colorName, navLocation, prevBtnTxt, nextBtnTxt } = this.props;
-    const { group, groupCount, orientation, immediate } = this.state;
+    const { children, className, color, colorName, navLocation, prevBtnTxt, nextBtnTxt } = this.props;
+    const { group, groupCount } = this.state;
     const isLastGroup = group === groupCount - 1;
     return (
       <div className={cx(styles.carousel, className, styles[navLocation])} >
@@ -76,23 +73,13 @@ class Carousel extends PureComponent {
             <ChevronLeft />
           </Button >
         )}
-        <div className={cx(styles.content, styles[`content-${navLocation}`])} >
-          <Transition
-            config={config.slow}
-            items={group}
-            from={{ transform: `translate3d(${orientation === 'next' ? '' : '-'}100%,0,0)`, opacity: 0 }}
-            enter={{ transform: `translate3d(0,0,0)`, opacity: 1 }}
-            leave={{ transform: `translate3d(${orientation === 'next' ? '-' : ''}100%,0,0)`, opacity: 0 }}
-            immediate={immediate}
-          >
-            {group => springs => <div className={cx(styles.itemGroup)} key={group} style={springs} >
-              {children.slice(group * displayVolume, (group * displayVolume) + displayVolume).map((child, i) => (
-                <div key={`${group}-${i}`} className={cx('carousel-item', styles.itemWrapper)} style={{
-                  width: `calc(${100 / displayVolume}%)`,
-                }} >{child}</div >
-              ))}
-            </div >}
-          </Transition >
+        <div
+          className={cx(styles.content, styles[`content-${navLocation}`])}
+          style={{
+            transform: `translateX(${-100 * group}%)`
+          }}
+        >
+          {children}
         </div >
         {navLocation === 'horizontal' && group !== groupCount - 1 && (
           <Button
