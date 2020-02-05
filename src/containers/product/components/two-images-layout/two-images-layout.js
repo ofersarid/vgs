@@ -26,7 +26,7 @@ const TwoImagesLayout = ({ pics, color }) => {
         navLocation="bottom"
       >
         {pics.map(pic => (
-          <div key={pic.description.replace(' ', '-')} className={styles.itemWrapper}>
+          <div key={pic.id} className={styles.itemWrapper}>
             <RatioBox ratio={2 / 3} className={styles.container} >
               <MediaLoader src={pic.pic} />
             </RatioBox >

@@ -21,7 +21,7 @@ class Clinical extends PureComponent {
   renderData() {
     const { articles, color } = this.props;
     const dom = _sortBy(articles, item => item.dateTime.toDate()).reverse().map(m => (
-      <div className={cx(styles.outerWrapper)} key={m.link} >
+      <div className={cx(styles.outerWrapper)} key={m.id} >
         <Button
           className={styles.innerWrapper}
           tag="a"
