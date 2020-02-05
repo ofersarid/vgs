@@ -21,8 +21,10 @@ const Distributors = ({ data, color }) => {
         return 1;
       case utils.isTablet():
         return 2;
-      default:
+      case utils.isDesktop():
         return 3;
+      default:
+        return 4;
     }
   };
 

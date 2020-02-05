@@ -46,12 +46,14 @@ export const toggleFullScreen = () => {
 
 const isMobile = () => window.innerWidth < 768;
 const isTablet = () => (window.innerWidth >= 768 && window.innerWidth <= 1024 && window.innerHeight <= 1024);
-const isDesktop = () => window.innerWidth > 1024 || (window.innerWidth === 1024 && window.innerHeight > 1024);
+const isDesktop = () => (window.innerWidth < 1921 && window.innerWidth > 1024) || (window.innerWidth === 1024 && window.innerHeight > 1024);
+const isWideScreen = () => window.innerWidth > 1921;
 const orientation = () => window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
 
 export default {
   isMobile,
   isTablet,
   isDesktop,
+  isWideScreen,
   orientation
 };

@@ -10,6 +10,23 @@
   }
 }
 
+.item {
+  width: 100%;
+  position: relative;
+
+  @include media('>phone') {
+    width: calc(100% / 2);
+  }
+
+  @include media('>tablet') {
+    width: calc(100% / 3);
+  }
+
+  @include media('>desktop') {
+    width: calc(100% / 4);
+  }
+}
+
 .itemInner {
   padding-right: 3vw;
   p {

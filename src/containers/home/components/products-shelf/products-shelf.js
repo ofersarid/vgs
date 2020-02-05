@@ -39,7 +39,7 @@ const ProductsShelf = ({ color, data }) => {
       prevBtnTxt={utils.isMobile() ? undefined : 'BACK'}
       nextBtnTxt={utils.isMobile() ? undefined : 'MORE'}
     >
-      <div key="item-vest" >
+      <div key="item-vest" className={styles.outerWrapper} >
         <Button
           className={cx(styles.innerWrapper, styles.vest)}
           onClick={() => navigate('/vest/0')}

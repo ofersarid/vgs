@@ -20,13 +20,35 @@
   }
 }
 
-.innerWrapper {
+.outerWrapper {
   width: 100%;
+  position: relative;
+
+  @include media('>phone') {
+    width: calc(100% / 2);
+  }
+
+  @include media('>tablet') {
+    width: calc(100% / 3);
+  }
+}
+
+.innerWrapper {
+  width: 90%;
   height: 100%;
-  margin-right: 2vw;
+  margin-right: 10%;
   padding: 0;
   box-sizing: border-box;
   //border-bottom: 1px solid;
+
+  //.img {
+  //  transition: 1s $ease;
+  //  filter: brightness(0.98);
+  //
+  //  &:hover {
+  //    filter: brightness(1);
+  //  }
+  //}
 }
 
 .header {
