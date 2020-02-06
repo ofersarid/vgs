@@ -27,7 +27,7 @@ class Clinical extends PureComponent {
   renderData() {
     const { articles, color } = this.props;
     const { type } = this.state;
-    let dom = <div className={styles.empty} >No articles published yet</div >;
+    let dom = <div className={styles.empty} >No articles published yet!</div >;
     if (articles[type] && articles[type].length) {
       switch (type) {
         case 'publications':

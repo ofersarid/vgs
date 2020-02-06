@@ -117,3 +117,16 @@
   background: $gray;
   margin: 15px 0 18px;
 }
+
+.empty {
+  @extend %fadeIn;
+  font-size: 22px;
+  margin-top: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 200;
+
+  @include media('>phone') {
+    margin-top: 0;
+  }
+}
