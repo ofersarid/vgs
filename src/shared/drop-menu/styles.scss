@@ -27,9 +27,19 @@
 }
 
 .menu {
-  display: none;
+  font-family: 'calibre', sans-serif;
+  line-height: 1em;
+  text-transform: uppercase;
+  text-align: left;
+
+  li {
+    padding: 6px 15px;
+    cursor: pointer;
+  }
 }
 
-.defaultDecorator {
-
+:global {
+  .tippy-tooltip {
+    padding: 10px 0 7px;
+  }
 }

@@ -1,14 +1,14 @@
 import React, { PureComponent, Fragment } from 'react';
 import cx from 'classnames';
 import autoBind from 'auto-bind';
-import Button from '../button/button';
+import { Tooltip } from 'react-tippy';
 import { ChevronDown } from 'styled-icons/boxicons-regular/ChevronDown';
+import { connect } from 'react-redux';
+import 'react-tippy/dist/tippy.css';
+import Button from '../button/button';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import services from '/src/services';
-import { connect } from 'react-redux';
-
-const defaultDecorator = option => <div key={option.value} className={styles.defaultDecorator} >{option.display}</div >;
 
 class DropMenu extends PureComponent {
   constructor(props) {
@@ -24,41 +24,52 @@ class DropMenu extends PureComponent {
     this.setState({ open: !open });
   }
 
+  onOptionClick(e) {
+    const { onChange } = this.props;
+    onChange(e.currentTarget.innerText);
+    this.setState({ open: false });
+  }
+
   render() {
-    const { options, decorator, selected, triggerClass, color, colorName } = this.props;
+    const { options, selected, triggerClass, color, colorName } = this.props;
     const { open } = this.state;
     return (
       <Fragment >
-        <Button textColor={color} className={cx(styles.trigger, triggerClass)} onClick={this.toggle} withBorder waveColor={colorName} >
-          <span >{selected.display}</span >
-          <ChevronDown className={cx(styles.arrow, { [styles.flip]: open })} />
-        </Button >
-        {open && (
-          <div className={cx(styles.menu)} >
-            {options.map(decorator)}
-          </div >
-        )}
+        <Tooltip
+          open={open}
+          interactive
+          position="bottom"
+          animateFill={false}
+          onRequestClose={this.toggle}
+          html={(
+            <ul className={styles.menu}>
+              {options.map(opt => (
+                <li
+                  key={opt}
+                  onClick={this.onOptionClick}
+                >{opt}
+                </li >
+              ))}
+            </ul >
+          )}
+        >
+          <Button textColor={color} className={cx(styles.trigger, triggerClass)} onClick={this.toggle} withBorder waveColor={colorName} >
+            <span >{selected}</span >
+            <ChevronDown className={cx(styles.arrow, { [styles.flip]: open })} />
+          </Button >
+        </Tooltip >
       </Fragment >
     );
   }
 }
 
-const option = PropTypes.shape({
-  display: PropTypes.any.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-});
-
 DropMenu.propTypes = {
-  options: PropTypes.arrayOf(option).isRequired,
-  decorator: PropTypes.func,
-  selected: option,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
+  selected: PropTypes.string,
   triggerClass: PropTypes.string,
   color: PropTypes.string.isRequired,
   colorName: PropTypes.string.isRequired,
-};
-
-DropMenu.defaultProps = {
-  decorator: defaultDecorator,
 };
 
 const mapStateToProps = state => ({

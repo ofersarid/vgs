@@ -25,12 +25,15 @@ class Product extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    const { frame, color, name, data, isMobile, orientation, articles, carouselPics } = this.props;
+    const {
+      frame, color, name, data, isMobile, orientation, publications, carouselPics, education,
+    } = this.props;
     return (frame !== nextProps.frame ||
       color !== nextProps.color ||
       name !== nextProps.name ||
       !isEqual(data, nextProps.data) ||
-      !isEqual(articles, nextProps.articles) ||
+      !isEqual(publications, nextProps.publications) ||
+      !isEqual(education, nextProps.education) ||
       !isEqual(carouselPics, nextProps.carouselPics) ||
       isMobile !== nextProps.isMobile ||
       orientation !== nextProps.orientation
@@ -99,7 +102,10 @@ class Product extends Component {
   }
 
   render() {
-    const { color, data, name, orientation, isDesktop, articles, carouselPics, isMobile } = this.props;
+    const {
+      color, data, name, orientation, isDesktop,
+      publications, carouselPics, isMobile, education,
+    } = this.props;
     if (!data) {
       return null;
     }
@@ -201,7 +207,10 @@ class Product extends Component {
               art={this.resolveSummeryPic()}
               data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
           )}
-          {articles && articles.length && <Clinical themeColor={color} articles={articles} />}
+          <Clinical themeColor={color} articles={{
+            publications,
+            education,
+          }} />
         </SnapScroll >
       </Fragment >
     );
@@ -217,7 +226,8 @@ Product.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   orientation: PropTypes.oneOf(['portrait', 'landscape']),
   setColor: PropTypes.func.isRequired,
-  articles: PropTypes.arrayOf(PropTypes.object),
+  publications: PropTypes.arrayOf(PropTypes.object),
+  education: PropTypes.arrayOf(PropTypes.object),
   carouselPics: PropTypes.arrayOf(PropTypes.object),
 };
 
@@ -229,7 +239,8 @@ const mapStateToProps = state => ({
   isDesktop: services.device.selectors.type(state) === 'desktop',
   isMobile: services.device.selectors.type(state) === 'mobile',
   orientation: services.device.selectors.orientation(state),
-  articles: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
+  publications: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
+  education: services.reactor.selectors.collectionData(state, `education - ${services.products.selectors.name(state)}`),
   carouselPics: services.reactor.selectors.collectionData(state, `${services.products.selectors.name(state)} - carousel pics`),
 });
 

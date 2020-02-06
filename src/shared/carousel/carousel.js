@@ -35,7 +35,7 @@ class Carousel extends PureComponent {
 
   countGroups() {
     const { children, displayVolume } = this.props;
-    const count = Math.ceil(children.length / displayVolume);
+    const count = children.length ? Math.ceil(children.length / displayVolume) : 1;
     this.setState({ groupCount: count });
   }
 

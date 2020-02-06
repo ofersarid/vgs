@@ -9,6 +9,9 @@ import { SnapScroll, FadeIn, DropMenu, Button } from '/src/shared';
 import services from '/src/services';
 import utils from '/src/utils';
 import layout from '/src/shared/styles/layout.scss';
+import { PlayCircle as Play } from 'styled-icons/boxicons-regular/PlayCircle';
+import { DocumentText as PDF } from 'styled-icons/typicons/DocumentText';
+import { FilePaper2 as Publication } from 'styled-icons/remix-line/FilePaper2';
 import styles from './styles.scss';
 import Carousel from '../../../../shared/carousel/carousel';
 
@@ -16,27 +19,63 @@ class Clinical extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.state = {
+      type: 'publications',
+    };
   }
 
   renderData() {
     const { articles, color } = this.props;
-    const dom = _sortBy(articles, item => item.dateTime.toDate()).reverse().map(m => (
-      <div className={cx(styles.outerWrapper)} key={m.id} >
-        <Button
-          className={styles.innerWrapper}
-          tag="a"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={m.link}
-          waveColor={color === '#0272BA' ? 'blue' : 'purple'}
-        >
-          <h3 className={styles.date} >{moment(m.dateTime.toDate()).format('MMMM Do, YYYY')}</h3 >
-          <p className={cx('small', styles.header)} style={{ color }} >{m.description}</p >
-          <div className={styles.divider} />
-          <p className={cx('small', styles.source)} >{m.source}</p >
-        </Button >
-      </div >
-    ));
+    const { type } = this.state;
+    let dom = <div className={styles.empty} >No articles published yet</div >;
+    if (articles[type] && articles[type].length) {
+      switch (type) {
+        case 'publications':
+          dom = _sortBy(articles.publications, item => item.dateTime.toDate()).reverse().map(m => (
+            <div className={cx(styles.outerWrapper)} key={m.id} >
+              <Button
+                className={styles.innerWrapper}
+                tag="a"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={m.link}
+              >
+                <h3 className={styles.date} >
+                  <Publication />
+                  <span className={styles.txt} >{moment(m.dateTime.toDate()).format('MMMM Do, YYYY')}</span>
+                </h3 >
+                <p className={cx('small', styles.header)} style={{ color }} >{m.description}</p >
+                <div className={styles.divider} />
+                <p className={cx('small', styles.source)} >{m.source}</p >
+              </Button >
+            </div >
+          ));
+          break;
+        case 'education':
+          dom = _sortBy(articles.education, item => item.date.toDate()).reverse().map(item => (
+            <div className={cx(styles.outerWrapper)} key={item.id} >
+              <Button
+                className={styles.innerWrapper}
+                tag="a"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={item.youtube || item.pdf}
+              >
+                <h3 className={styles.date} >
+                  {item.youtube ? <Play /> : <PDF />}
+                  <span className={styles.txt}>{moment(item.date.toDate()).format('MMMM Do, YYYY')}</span>
+                </h3 >
+                <p className={cx('small', styles.header)} style={{ color }} >{item.title}</p >
+                <div className={styles.divider} />
+                <p className={cx('small', styles.source)} >{item.subtitle}</p >
+              </Button >
+            </div >
+          ));
+          break;
+        default:
+          break;
+      }
+    }
     return dom;
   }
 
@@ -51,13 +90,24 @@ class Clinical extends PureComponent {
     }
   }
 
+  changeType(type) {
+    this.setState({ type: type.toLowerCase() });
+  }
+
   render() {
     const { color } = this.props;
-    const menuOptions = [{ display: 'publications', value: 'publications' }];
+    const { type } = this.state;
+    const menuOptions = ['publications', 'education'];
     return (
       <FadeIn spread >
         <div className={cx(styles.clinical, layout.inner)} >
-          <DropMenu options={menuOptions} selected={menuOptions[0]} triggerClass={styles.menuTrigger} color={color} />
+          <DropMenu
+            options={menuOptions}
+            selected={type}
+            triggerClass={styles.menuTrigger}
+            color={color}
+            onChange={this.changeType}
+          />
           <Carousel
             displayVolume={this.resolveVolume()}
             className={styles.clinicalCarousel}
@@ -77,12 +127,10 @@ class Clinical extends PureComponent {
 Clinical.propTypes = {
   themeColor: PropTypes.string.isRequired,
   disableScrollSnap: PropTypes.func.isRequired,
-  articles: PropTypes.arrayOf(PropTypes.shape({
-    dateTime: PropTypes.object.isRequired,
-    description: PropTypes.string.isRequired,
-    source: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-  })).isRequired,
+  articles: PropTypes.shape({
+    publications: PropTypes.array,
+    education: PropTypes.array,
+  }).isRequired,
   color: PropTypes.string.isRequired,
 };
 
