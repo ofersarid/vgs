@@ -13,38 +13,13 @@ class VideoAsBg extends PureComponent {
     super(props);
     autoBind(this);
     this.video = React.createRef();
-    this.state = {
-      show: false
-    };
-  }
-
-  componentDidMount() {
-    this.video.current.addEventListener('ended', this.restart);
-    this.video.current.addEventListener('canplay', this.show);
-  }
-
-  componentWillUnmount() {
-    if (this.video.current) {
-      this.video.current.removeEventListener('ended', this.restart);
-      this.video.current.removeEventListener('canplay', this.show);
-    }
-  }
-
-  show() {
-    this.setState({ show: true });
-  }
-
-  restart() {
-    this.video.current.currentTime = 0;
-    this.video.current.play();
   }
 
   render() {
     const { src, blur, brightness, className } = this.props;
-    const { show } = this.state;
     return (
-      <FadeIn className={styles.video} spread suppress={!show} >
-        <video ref={this.video} className={cx(className)} autoPlay >
+      <FadeIn className={styles.video} spread >
+        <video ref={this.video} className={cx(className)} loop muted autoPlay >
           <source src={src} type="video/mp4" />
         </video >
         {blur && <div className={styles.blur} style={{ backdropFilter: `blur(${blur}px) brightness(${brightness}%)` }} />}
