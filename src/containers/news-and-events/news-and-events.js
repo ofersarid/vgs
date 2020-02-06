@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { SnapScroll, VideoAsBg } from '/src/shared';
+import { SnapScroll, VideoAsBg, FadeIn } from '/src/shared';
 import isEqual from 'lodash/isEqual';
 import services from '/src/services';
 import cx from 'classnames';
@@ -26,16 +26,18 @@ class NewsAndEvents extends Component {
   render() {
     const { data } = this.props; // eslint-disable-line
     return (
-      <Fragment>
-        <VideoAsBg src={video} className={styles.video} />
-        <img src={bgPic} className={styles.bgImg} alt="background image"/>
-        <div className={cx(layout.inner, styles.onePager)} >
-          {utils.isMobile() ? <h2 >NEWS & EVENTS</h2 > : <h1 >NEWS & EVENTS</h1 >}
-          <div className={styles.carouselWrapper} >
-            {data && <EventCarousel data={data} />}
+      <SnapScroll >
+        <FadeIn >
+          <VideoAsBg src={video} className={styles.video} />
+          <img src={bgPic} className={styles.bgImg} alt="background image" />
+          <div className={cx(layout.inner, styles.onePager)} >
+            {utils.isMobile() ? <h2 >NEWS & EVENTS</h2 > : <h1 >NEWS &<br />EVENTS</h1 >}
+            <div className={styles.carouselWrapper} >
+              {data && <EventCarousel data={data} />}
+            </div >
           </div >
-        </div >
-      </Fragment>
+        </FadeIn >
+      </SnapScroll >
     );
   }
 }

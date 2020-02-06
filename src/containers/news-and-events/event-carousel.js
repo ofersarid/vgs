@@ -5,11 +5,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import sortBy from 'lodash/sortBy';
-import layout from '/src/shared/styles/layout.scss';
-import { Carousel, FadeIn, Button } from '/src/shared';
+import { Carousel, Button } from '/src/shared';
 // import { CalendarEvent } from 'styled-icons/boxicons-regular/CalendarEvent';
-import { News } from 'styled-icons/boxicons-regular/News';
-import { EventSeat } from 'styled-icons/material/EventSeat';
+import { Megaphone } from 'styled-icons/octicons/Megaphone';
+import { GlassCheers } from 'styled-icons/fa-solid/GlassCheers';
 import services from '/src/services';
 import styles from './styles.scss';
 import utils from '../../utils';
@@ -28,39 +27,37 @@ const EventCarousel = ({ data, color }) => {
 
   const dataSorted = sortBy(data, d => d.date.toDate()).reverse();
   return (
-    <FadeIn className={cx(layout.inner)} >
-      <Carousel
-        displayVolume={resolveVolume()}
-        className={styles.carousel}
-        color={color}
-        navLocation="bottom"
-        prevBtnTxt={utils.isMobile() ? undefined : 'BACK'}
-        nextBtnTxt={utils.isMobile() ? undefined : 'MORE'}
-      >
-        {dataSorted.map(item => {
-          return (
-            <div className={cx(styles.outerWrapper)} key={item.id} >
-              <Button
-                className={styles.innerWrapper}
-                tag="a"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={item.link}
-                waveColor={color === '#0272BA' ? 'blue' : 'purple'}
-              >
-                <h3 className={styles.date} >
-                  {item.type === 'Event' ? <EventSeat /> : <News />}
-                  {moment(item.date.toDate()).format('MMMM Do, YYYY')}
-                </h3 >
-                <p className={cx('small', styles.header)} style={{ color }} >{item.body}</p >
-                <div className={styles.divider} />
-                <p className={cx('small', styles.source)} >{item.source}</p >
-              </Button >
-            </div >
-          );
-        })}
-      </Carousel >
-    </FadeIn >
+    <Carousel
+      displayVolume={resolveVolume()}
+      className={styles.carousel}
+      color={color}
+      navLocation="bottom"
+      prevBtnTxt={utils.isMobile() ? undefined : 'BACK'}
+      nextBtnTxt={utils.isMobile() ? undefined : 'MORE'}
+    >
+      {dataSorted.map(item => {
+        return (
+          <div className={cx(styles.outerWrapper)} key={item.id} >
+            <Button
+              className={styles.innerWrapper}
+              tag="a"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={item.link}
+              waveColor={color === '#0272BA' ? 'blue' : 'purple'}
+            >
+              <h3 className={styles.date} >
+                {item.type === 'Event' ? <GlassCheers /> : <Megaphone />}
+                {moment(item.date.toDate()).format('MMMM Do, YYYY')}
+              </h3 >
+              <p className={cx('small', styles.header)} style={{ color }} >{item.body}</p >
+              <div className={styles.divider} />
+              <p className={cx('small', styles.source)} >{item.source}</p >
+            </Button >
+          </div >
+        );
+      })}
+    </Carousel >
   );
 };
 
