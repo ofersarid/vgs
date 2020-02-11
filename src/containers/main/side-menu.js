@@ -2,12 +2,11 @@ import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spring } from 'react-spring/renderprops';
-import { logoGreen } from '/src/containers/main/assets';
 import { hashHistory } from 'react-router';
 import cx from 'classnames';
 import camelCase from 'lodash/camelCase';
 import autoBind from 'auto-bind';
-import { Button, ReadMoreSection } from '/src/shared';
+import { Button, Terms } from '/src/shared';
 import services from '/src/services';
 import styles from './styles.scss';
 
@@ -40,7 +39,7 @@ class SideMenu extends PureComponent {
   }
 
   render() {
-    const { color, colorName, data, logo } = this.props;
+    const { color, colorName, data } = this.props;
     const { openMenu, immediate } = this.state;
     return (
       <Fragment >
@@ -61,24 +60,7 @@ class SideMenu extends PureComponent {
             <Button onClick={this.navigate} tag="h1" waveColor="white" >ABOUT</Button >
             <div className={styles.divider} />
             <Button onClick={this.navigate} tag="h1" waveColor="white" >CONTACT</Button >
-            {data && (<ReadMoreSection
-              forceShowTrigger
-              more={(
-                <div className={styles.policyContainer} >
-                  <div className={styles.innerContent} >
-                    <h1 style={{ color }} >PRIVACY POLICY</h1 >
-                    <div dangerouslySetInnerHTML={{ __html: data.terms.replace(/\n\r?/g, '<br />') }} />
-                  </div >
-                  <div className={styles.leftCol}>
-                    <div style={{ color }} className={styles.header} >Privacy<br />Policy</div >
-                    <img className={styles.logoImg} src={logo} />
-                  </div>
-                </div >
-              )}
-              btnTxt="Privacy policy"
-              btnTxtColor="white"
-              btnClass={styles.policy}
-            />)}
+            {data && <Terms btnTxt="Privacy policy" txtColor="white" btnClass={styles.policy} />}
           </div >
         </div >
         <Button
@@ -114,19 +96,13 @@ SideMenu.propTypes = {
   color: PropTypes.string.isRequired,
   colorName: PropTypes.string.isRequired,
   data: PropTypes.object,
-  logo: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   color: services.vgs.selectors.color(state),
   colorName: services.vgs.selectors.colorName(state),
   data: services.reactor.selectors.pageData(state, 'privacy policy'),
-  logo: services.products.selectors.logo(state),
 });
-
-SideMenu.defaultProps = {
-  logo: logoGreen,
-};
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 

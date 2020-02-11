@@ -1,12 +1,13 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import ReadMoreSection from '../read-more-section/read-more-section';
 import PropTypes from 'prop-types';
 import services from '/src/services';
 import styles from './styles.scss';
 
-const Terms = ({ color, logo, data, btnTxt, txtColor }) => data ? (
+const Terms = ({ color, logo, data, btnTxt, txtColor, btnClass }) => data ? (
   <ReadMoreSection
     forceShowTrigger
     more={(
@@ -23,7 +24,7 @@ const Terms = ({ color, logo, data, btnTxt, txtColor }) => data ? (
     )}
     btnTxt={btnTxt}
     btnTxtColor={txtColor}
-    btnClass={styles.policy}
+    btnClass={cx(styles.policy, btnClass)}
   />
 ) : null;
 
@@ -32,6 +33,7 @@ Terms.propTypes = {
   logo: PropTypes.string.isRequired,
   data: PropTypes.object,
   btnTxt: PropTypes.string.isRequired,
+  btnClass: PropTypes.string,
   txtColor: PropTypes.string,
 };
 
