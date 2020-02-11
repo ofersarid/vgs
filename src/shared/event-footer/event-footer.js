@@ -37,7 +37,7 @@ class Cover extends PureComponent {
         href={footer.linkTo}
         target="_blank"
       >
-        <p className={cx('smaller', styles.text)} >
+        <p className={cx(styles.text)} >
           <span className={styles.title} >{footer.title}</span >
           <span className={styles.date} >
             {moment(footer.dateFrom.toDate()).format('MMMM Do')}

@@ -46,16 +46,16 @@
   }
 
 
-  @include media('>tablet') {
-    font-size: 18px;
-    line-height: 30px;
-    margin: 0 0 25px;
-  }
-
-  @include media('>desktop') {
-    font-size: 22px;
-    line-height: 37px;
-  }
+  //@include media('>tablet') {
+  //  font-size: 18px;
+  //  line-height: 30px;
+  //  margin: 0 0 25px;
+  //}
+  //
+  //@include media('>desktop') {
+  //  font-size: 22px;
+  //  line-height: 37px;
+  //}
 }
 
 .btn {

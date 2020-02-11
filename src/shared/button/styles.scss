@@ -17,12 +17,13 @@ a.button.color {
   cursor: pointer;
   transition: .2s ease-out;
   font-size: 14px;
-  line-height: 14px;
+  line-height: 1em;
   font-weight: 400;
   padding: 18px 20px 14px;
   letter-spacing: 0.08ch;
 
   @include media('>tablet') {
+    font-size: 18px;
   }
 
   &.disable {

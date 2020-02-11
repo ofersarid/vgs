@@ -65,7 +65,7 @@
 
 .date {
   color: #8F8F8F;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   line-height: 1em;
   display: inline-flex;
   align-items: center;
@@ -76,6 +76,7 @@
     height: 25px;
     flex-shrink: 0;
     margin-right: 10px;
+    transform: translateY(-1px);
   }
 
   .txt {
