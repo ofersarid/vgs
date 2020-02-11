@@ -30,6 +30,7 @@ class Carousel extends PureComponent {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.children.length !== this.props.children.length) {
       this.countGroups();
+      this.setState({ group: 0 });
     }
   }
 

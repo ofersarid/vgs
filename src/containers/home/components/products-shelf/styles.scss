@@ -34,21 +34,15 @@
 }
 
 .innerWrapper {
-  width: 90%;
+  width: 100%;
   height: 100%;
-  margin-right: 10%;
   padding: 0;
   box-sizing: border-box;
-  //border-bottom: 1px solid;
 
-  //.img {
-  //  transition: 1s $ease;
-  //  filter: brightness(0.98);
-  //
-  //  &:hover {
-  //    filter: brightness(1);
-  //  }
-  //}
+  @include media('>phone') {
+    margin-right: 10%;
+    width: 90%;
+  }
 }
 
 .header {
