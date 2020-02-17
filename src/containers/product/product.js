@@ -116,10 +116,10 @@ class Product extends Component {
           <Fragment >
             {data.screen1Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen1Title} />}
             {data.screen2Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen2Title} />}
+            {data.IFUVideoPublished === 'Publish' ? <IndexHeader index={countPublishedScreen++} header="IFU VIDEO" /> : null}
             {data.screen3Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen3Title} />}
             {data.screen4Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen4Title} />}
             {data.screen5Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen5Title} />}
-            {data.IFUVideoPublished === 'Publish' ? <IndexHeader index={countPublishedScreen++} header="IFU VIDEO" /> : null}
             {data.screen6Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen6Title} />}
             {data.screen7Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen7Title} />}
             <IndexHeader index={countPublishedScreen} header="Clinical" />
@@ -158,6 +158,15 @@ class Product extends Component {
               title={data.screen2Title}
             />
           )}
+          {data.IFUVideoPublished === 'Publish' && (
+            <ImgTxtBtn
+              youtube={data.IFUVideoLink}
+              txt={data.IFUVideoBody}
+              readeMoreTxt={data.IFUVideoBody}
+              themeColor={color}
+              title="IFU VIDEO"
+            />
+          )}
           {data.screen3Published === 'Publish' && (
             <ImgTxtBtn
               youtube={data.screen3Videolink}
@@ -179,15 +188,6 @@ class Product extends Component {
               pics={carouselPics}
               color={color}
               orientation={orientation}
-            />
-          )}
-          {data.IFUVideoPublished === 'Publish' && (
-            <ImgTxtBtn
-              youtube={data.IFUVideoLink}
-              txt={data.IFUVideoBody}
-              readeMoreTxt={data.IFUVideoBody}
-              themeColor={color}
-              title="IFU VIDEO"
             />
           )}
           {data.screen6Published === 'Publish' && (
