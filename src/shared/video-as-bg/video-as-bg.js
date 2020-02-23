@@ -19,7 +19,7 @@ class VideoAsBg extends PureComponent {
     const { src, blur, brightness, className } = this.props;
     return (
       <FadeIn className={styles.video} spread >
-        <video ref={this.video} className={cx(className)} loop muted autoPlay >
+        <video playsinline ref={this.video} className={cx(className)} loop muted autoPlay >
           <source src={src} type="video/mp4" />
         </video >
         {Boolean(blur) && <div className={styles.blur} style={{ backdropFilter: `blur(${blur}px) brightness(${brightness}%)` }} />}
