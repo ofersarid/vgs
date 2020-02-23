@@ -9,6 +9,7 @@ import cx from 'classnames';
 import layout from '/src/shared/styles/layout.scss';
 import bgPic from '/src/assets/news-events-bg.jpg';
 import video from '/src/assets/news-events-bg.mp4';
+import utils from '/src/utils';
 import EventCarousel from './event-carousel';
 import styles from './styles.scss';
 
@@ -27,7 +28,7 @@ class NewsAndEvents extends Component {
     return (
       <SnapScroll >
         <FadeIn >
-          <VideoAsBg src={video} className={styles.video} />
+          {!utils.isMobile() && <VideoAsBg src={video} className={styles.video} />}
           <img src={bgPic} className={styles.bgImg} alt="background image" />
           <div className={cx(layout.inner, styles.onePager)} >
             <h2 >NEWS & EVENTS</h2 >
