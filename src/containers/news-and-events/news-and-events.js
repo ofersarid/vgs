@@ -8,7 +8,7 @@ import services from '/src/services';
 import cx from 'classnames';
 import layout from '/src/shared/styles/layout.scss';
 import bgPic from '/src/assets/news-events-bg.jpg';
-import video from '/src/assets/news-and-events-bg-4.mp4';
+import video from '/src/assets/news-events-bg.mp4';
 import EventCarousel from './event-carousel';
 import styles from './styles.scss';
 
