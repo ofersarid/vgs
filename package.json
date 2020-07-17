@@ -10,7 +10,7 @@
     "immutable": "^4.0.0-rc.12",
     "is-touch-device": "^1.0.1",
     "json5": "^2.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.23.0",
     "node-waves": "^0.7.6",
     "prop-types": "^15.6.2",
