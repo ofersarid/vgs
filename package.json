@@ -82,5 +82,8 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "engines": {
+    "node": "12.x"
+  }
 }
