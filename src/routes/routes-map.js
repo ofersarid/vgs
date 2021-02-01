@@ -4,16 +4,17 @@ import Main from '/src/containers/main/main';
 import Pages from '/src/containers';
 
 export default (
-  <Route path="/" component={Main} >
-    <IndexRedirect to="home/0" />
-    <Route path="home/:frame" component={Pages.Home} />
-    <Route path="frame/:frame" component={Pages.Product} />
-    <Route path="viola/:frame" component={Pages.Product} />
-    <Route path="frameFr/:frame" component={Pages.Product} />
-    <Route path="vest/:frame" component={Pages.Product} />
-    <Route path="about/:frame" component={Pages.About} />
-    <Route path="contact/:frame" component={Pages.Contact} />
-    <Route path="newsEvents/:frame" component={Pages.NewsAndEvents} />
-    <Redirect from="*" to="home/0" />
-  </Route >
+  <Route path='/' component={Main}>
+    <IndexRedirect to='home/0' />
+    <Route path='home/:frame' component={Pages.Home} />
+    <Route path='frame/:frame' component={Pages.Product} />
+    <Route path='viola/:frame' component={Pages.Product} />
+    <Route path='frameFr/:frame' component={Pages.Product} />
+    <Route path='vest/:frame' component={Pages.Product} />
+    <Route path='vest2/:frame' component={Pages.Product} />
+    <Route path='about/:frame' component={Pages.About} />
+    <Route path='contact/:frame' component={Pages.Contact} />
+    <Route path='newsEvents/:frame' component={Pages.NewsAndEvents} />
+    <Redirect from='*' to='home/0' />
+  </Route>
 );

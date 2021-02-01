@@ -5,7 +5,14 @@ import isEqual from 'lodash/isEqual';
 import { compose } from 'redux';
 import { SnapScroll, IndexHeader } from '/src/shared';
 import {
-  TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
+  TwoColumnLayout,
+  ThreeColumnLayout,
+  Clinical,
+  Cover,
+  ImgTxtBtn,
+  Summary,
+  TwoImagesLayout,
+  Downloads
 } from './components';
 import services from '/src/services';
 import frameCoverPic from '/src/assets/frame_cover.png';
@@ -26,9 +33,18 @@ class Product extends Component {
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     const {
-      frame, color, name, data, isMobile, orientation, publications, carouselPics, education,
+      frame,
+      color,
+      name,
+      data,
+      isMobile,
+      orientation,
+      publications,
+      carouselPics,
+      education
     } = this.props;
-    return (frame !== nextProps.frame ||
+    return (
+      frame !== nextProps.frame ||
       color !== nextProps.color ||
       name !== nextProps.name ||
       !isEqual(data, nextProps.data) ||
@@ -61,6 +77,7 @@ class Product extends Component {
       case 'VIOLA':
         return violaSummeryPic;
       case 'VEST':
+      case 'VEST 2':
         return vestSummeryPic;
       case 'FRAME FR':
         return frameFrSummeryPic;
@@ -77,6 +94,7 @@ class Product extends Component {
       case 'VIOLA':
         return violaCoverPic;
       case 'VEST':
+      case 'VEST 2':
         return vestCoverPic;
       case 'FRAME FR':
         return frameFrCoverPic;
@@ -93,6 +111,7 @@ class Product extends Component {
       case 'VIOLA':
         return '#662D91';
       case 'VEST':
+      case 'VEST 2':
         return '#ED1C24';
       case 'FRAME FR':
         return '#22B0AF';
@@ -101,31 +120,93 @@ class Product extends Component {
     }
   }
 
+  getSummeryBullets() {
+    const { data } = this.props;
+    const bullets = [];
+    if (data.screen7Bullet1) {
+      bullets.push(data.screen7Bullet1);
+    }
+    if (data.screen7Bullet2) {
+      bullets.push(data.screen7Bullet2);
+    }
+    if (data.screen7Bullet3) {
+      bullets.push(data.screen7Bullet3);
+    }
+    if (data.screen7Bullet4) {
+      bullets.push(data.screen7Bullet4);
+    }
+    return bullets;
+  }
+
   render() {
     const {
-      color, data, name, orientation, isDesktop,
-      publications, carouselPics, isMobile, education,
+      color,
+      data,
+      name,
+      orientation,
+      isDesktop,
+      publications,
+      carouselPics,
+      isMobile,
+      education
     } = this.props;
     if (!data) {
       return null;
     }
     let countPublishedScreen = 1;
     return (
-      <Fragment >
-        {(orientation === 'landscape' && !isDesktop) ? null : (
-          <Fragment >
-            {data.screen1Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen1Title} />}
-            {data.screen2Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen2Title} />}
-            {data.IFUVideoPublished === 'Publish' ? <IndexHeader index={countPublishedScreen++} header="IFU VIDEO" /> : null}
-            {data.screen3Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen3Title} />}
-            {data.screen4Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen4Title} />}
-            {data.screen5Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen5Title} />}
-            {data.screen6Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen6Title} />}
-            {data.screen7Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen7Title} />}
-            <IndexHeader index={countPublishedScreen} header="Clinical" />
-          </Fragment >
+      <Fragment>
+        {orientation === 'landscape' && !isDesktop ? null : (
+          <Fragment>
+            {data.screen1Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={data.screen1Title}
+              />
+            )}
+            {data.screen2Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={data.screen2Title}
+              />
+            )}
+            {data.IFUVideoPublished === 'Publish' ? (
+              <IndexHeader index={countPublishedScreen++} header='IFU VIDEO' />
+            ) : null}
+            {data.screen3Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={data.screen3Title}
+              />
+            )}
+            {data.screen4Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={data.screen4Title}
+              />
+            )}
+            {data.screen5Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={data.screen5Title}
+              />
+            )}
+            {data.screen6Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={data.screen6Title}
+              />
+            )}
+            {data.screen7Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={data.screen7Title}
+              />
+            )}
+            <IndexHeader index={countPublishedScreen} header='Clinical' />
+          </Fragment>
         )}
-        <SnapScroll >
+        <SnapScroll>
           <Cover
             art={this.resolveCoverPic()}
             themeColor={color}
@@ -136,14 +217,18 @@ class Product extends Component {
               dateFrom: data.eventDateFrom,
               dateTo: data.eventDateTo,
               address: data.eventAddress,
-              linkTo: data.eventLinkTo,
+              linkTo: data.eventLinkTo
             }}
             footnote={data.coverFootnote}
           />
           {data.screen1Published === 'Publish' && (
             <TwoColumnLayout
               article={data.screen1Body}
-              footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
+              footNotes={[
+                data.screen1Footnote1,
+                data.screen1Footnote2,
+                data.screen1Footnote3
+              ]}
               title={data.screen1Title}
             />
           )}
@@ -152,7 +237,11 @@ class Product extends Component {
               img={data.screen2Image}
               txt={isMobile ? data.screen2BodyMobile : data.screen2Body}
               readeMoreTxt={data.screen2Body}
-              footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
+              footNotes={[
+                data.screen2Footnote1,
+                data.screen2Footnote2,
+                data.screen2Footnote3
+              ]}
               imgSubTitle={data.screen2ImageSubtitle}
               themeColor={color}
               title={data.screen2Title}
@@ -164,7 +253,7 @@ class Product extends Component {
               txt={data.IFUVideoBody}
               readeMoreTxt={data.IFUVideoBody}
               themeColor={color}
-              title="IFU VIDEO"
+              title='IFU VIDEO'
             />
           )}
           {data.screen3Published === 'Publish' && (
@@ -172,14 +261,25 @@ class Product extends Component {
               youtube={data.screen3Videolink}
               txt={data.screen3Body}
               readeMoreTxt={data.screen3Body}
-              footNotes={[data.screen3Footnote1, data.screen3Footnote2, data.screen3Footnote3]}
+              footNotes={[
+                data.screen3Footnote1,
+                data.screen3Footnote2,
+                data.screen3Footnote3
+              ]}
               themeColor={color}
               title={data.screen3Title}
             />
           )}
           {data.screen4Published === 'Publish' && (
             <ThreeColumnLayout
-              data={[data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6]}
+              data={[
+                data.screen4Bullet1,
+                data.screen4Bullet2,
+                data.screen4Bullet3,
+                data.screen4Bullet4,
+                data.screen4Bullet5,
+                data.screen4Bullet6
+              ]}
               title={data.screen4Title}
             />
           )}
@@ -199,20 +299,23 @@ class Product extends Component {
               patientCard={data.patientCard}
               instructions={data.instructions}
               themeColor={color}
-
             />
           )}
           {data.screen7Published === 'Publish' && (
             <Summary
               art={this.resolveSummeryPic()}
-              data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
+              data={this.getSummeryBullets()}
+            />
           )}
-          <Clinical themeColor={color} articles={{
-            publications,
-            education,
-          }} />
-        </SnapScroll >
-      </Fragment >
+          <Clinical
+            themeColor={color}
+            articles={{
+              publications,
+              education
+            }}
+          />
+        </SnapScroll>
+      </Fragment>
     );
   }
 }
@@ -228,26 +331,36 @@ Product.propTypes = {
   setColor: PropTypes.func.isRequired,
   publications: PropTypes.arrayOf(PropTypes.object),
   education: PropTypes.arrayOf(PropTypes.object),
-  carouselPics: PropTypes.arrayOf(PropTypes.object),
+  carouselPics: PropTypes.arrayOf(PropTypes.object)
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   frame: SnapScroll.selectors.frame(state),
   color: services.vgs.selectors.color(state),
-  data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
+  data: services.reactor.selectors.pageData(
+    state,
+    services.products.selectors.name(state)
+  ),
   name: services.products.selectors.name(state),
   isDesktop: services.device.selectors.type(state) === 'desktop',
   isMobile: services.device.selectors.type(state) === 'mobile',
   orientation: services.device.selectors.orientation(state),
-  publications: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
-  education: services.reactor.selectors.collectionData(state, `education - ${services.products.selectors.name(state)}`),
-  carouselPics: services.reactor.selectors.collectionData(state, `${services.products.selectors.name(state)} - carousel pics`),
+  publications: services.reactor.selectors.collectionData(
+    state,
+    `publications - ${services.products.selectors.name(state)}`
+  ),
+  education: services.reactor.selectors.collectionData(
+    state,
+    `education - ${services.products.selectors.name(state)}`
+  ),
+  carouselPics: services.reactor.selectors.collectionData(
+    state,
+    `${services.products.selectors.name(state)} - carousel pics`
+  )
 });
 
-const mapDispatch = dispatch => ({
-  setColor: color => dispatch(services.vgs.actions.setColor(color)),
+const mapDispatch = (dispatch) => ({
+  setColor: (color) => dispatch(services.vgs.actions.setColor(color))
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatch),
-)(Product);
+export default compose(connect(mapStateToProps, mapDispatch))(Product);

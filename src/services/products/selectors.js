@@ -6,25 +6,30 @@ import logoViola from './logo_viola.svg';
 import logoVest from './logo_vest.svg';
 import logoFrameFr from './logo_frame_fr.svg';
 
-const list = () => [{
-  category: 'Cardiac',
-  name: 'Viola',
-  color: '#0272BA',
-}, {
-  category: 'Cardiac',
-  name: 'Vest',
-  color: '#662D91',
-}, {
-  category: 'Vascular',
-  name: 'Frame',
-  color: '#ED1C24',
-}, {
-  category: 'Vascular',
-  name: 'Frame FR',
-  color: '#22B0AF',
-}];
+const list = () => [
+  {
+    category: 'Cardiac',
+    name: 'Viola',
+    color: '#0272BA'
+  },
+  {
+    category: 'Cardiac',
+    name: 'Vest',
+    color: '#662D91'
+  },
+  {
+    category: 'Vascular',
+    name: 'Frame',
+    color: '#ED1C24'
+  },
+  {
+    category: 'Vascular',
+    name: 'Frame FR',
+    color: '#22B0AF'
+  }
+];
 
-const categories = createSelector(list, products => {
+const categories = createSelector(list, (products) => {
   return products.reduce((categories, product) => {
     return categories.includes(product.category)
       ? categories
@@ -32,7 +37,7 @@ const categories = createSelector(list, products => {
   }, []);
 });
 
-const name = createSelector(Routes.selectors.pathname, pathname => {
+const name = createSelector(Routes.selectors.pathname, (pathname) => {
   switch (pathname.split('/')[0]) {
     case 'frame':
       return 'FRAME';
@@ -40,6 +45,8 @@ const name = createSelector(Routes.selectors.pathname, pathname => {
       return 'VIOLA';
     case 'vest':
       return 'VEST';
+    case 'vest2':
+      return 'VEST 2';
     case 'frameFr':
       return 'FRAME FR';
     default:
@@ -47,13 +54,14 @@ const name = createSelector(Routes.selectors.pathname, pathname => {
   }
 });
 
-const logo = createSelector(Routes.selectors.pathname, pathname => {
+const logo = createSelector(Routes.selectors.pathname, (pathname) => {
   switch (pathname.split('/')[0]) {
     case 'frame':
       return logoFrame;
     case 'viola':
       return logoViola;
     case 'vest':
+    case 'vest2':
       return logoVest;
     case 'frameFr':
       return logoFrameFr;
@@ -66,5 +74,5 @@ export default {
   list,
   categories,
   name,
-  logo,
+  logo
 };
