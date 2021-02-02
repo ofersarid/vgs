@@ -298,6 +298,8 @@ class Product extends Component {
               ifu={data.ifu}
               patientCard={data.patientCard}
               instructions={data.instructions}
+              poster={data.poster}
+              productPage={data.productPage}
               themeColor={color}
             />
           )}
