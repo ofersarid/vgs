@@ -14,7 +14,7 @@ const initialize = (userId) => {
     databaseURL: 'https://reactor-dam.firebaseio.com',
     projectId: 'reactor-dam',
     storageBucket: 'reactor-dam.appspot.com',
-    messagingSenderId: '198256799515',
+    messagingSenderId: '198256799515'
   });
   firebase.firestore();
   _userId = userId;
@@ -22,45 +22,56 @@ const initialize = (userId) => {
 
 const middleware = composeEnhancers(reduxFirestore(firebase));
 
-const connect = firestoreConnect(props => {
-  let aggregated = [{
-    collection: 'users',
-    doc: _userId,
-  }];
+const connect = firestoreConnect((props) => {
+  let aggregated = [
+    {
+      collection: 'users',
+      doc: _userId
+    }
+  ];
   if (props.resourceList) {
-    aggregated = aggregated.concat(props.resourceList.collections.reduce((list, id) => {
-      list.push({
-        collection: 'collections',
-        doc: id,
-      });
-      list.push({
-        collection: 'collections',
-        doc: id,
-        subcollections: [{
-          collection: 'data',
-        }],
-      });
-      return list;
-    }, []));
+    aggregated = aggregated.concat(
+      props.resourceList.collections.reduce((list, id) => {
+        list.push({
+          collection: 'collections',
+          doc: id
+        });
+        list.push({
+          collection: 'collections',
+          doc: id,
+          subcollections: [
+            {
+              collection: 'data'
+            }
+          ]
+        });
+        return list;
+      }, [])
+    );
 
-    aggregated = aggregated.concat(props.resourceList.pages.reduce((accumulator, id) => {
-      accumulator.push({
-        collection: 'pages',
-        doc: id,
-      });
-      return accumulator;
-    }, []));
+    aggregated = aggregated.concat(
+      props.resourceList.pages.reduce((accumulator, id) => {
+        accumulator.push({
+          collection: 'pages',
+          doc: id
+        });
+        return accumulator;
+      }, [])
+    );
   }
   return aggregated;
 });
 
 const preLoaded = [];
 
-const preloadImages = data => {
-  Object.keys(data).forEach(key => {
-    if (!preLoaded.includes(data[key]) &&
-    key.toLowerCase().match(/\b(\w*image\w*)\b|\b(\w*pic\w*)\b/) &&
-    data[key].match && data[key].toLowerCase().match(/^https?:\/\//)) {
+const preloadImages = (data) => {
+  Object.keys(data).forEach((key) => {
+    if (
+      !preLoaded.includes(data[key]) &&
+      key.toLowerCase().match(/\b(\w*image\w*)\b|\b(\w*pic\w*)\b/) &&
+      data[key].match &&
+      data[key].toLowerCase().match(/^https?:\/\//)
+    ) {
       const img = new Image();
       img.src = data[key];
       preLoaded.push(data[key]);
@@ -69,19 +80,23 @@ const preloadImages = data => {
 };
 
 const selectors = {
-  resourceList: state => {
+  resourceList: (state) => {
     const isLoaded = state.get('reactor').data.users;
-    return isLoaded && isLoaded[_userId] ? ({
-      collections: isLoaded[_userId].collections || [],
-      pages: isLoaded[_userId].pages || [],
-    }) : null;
+    return isLoaded && isLoaded[_userId]
+      ? {
+          collections: isLoaded[_userId].collections || [], // eslint-disable-line
+          pages: isLoaded[_userId].pages || [] // eslint-disable-line
+        } // eslint-disable-line
+      : null;
   },
-  collections: state => state.get('reactor').data.collections,
-  pages: state => state.get('reactor').data.pages,
+  collections: (state) => state.get('reactor').data.collections,
+  pages: (state) => state.get('reactor').data.pages,
   collectionData: (state, name) => {
     const collections = state.get('reactor').data.collections;
     if (collections) {
-      const collectionId = Object.keys(collections).find(id => collections[id].name.toLowerCase() === name.toLowerCase());
+      const collectionId = Object.keys(collections).find(
+        (id) => collections[id].name.toLowerCase() === name.toLowerCase()
+      );
       if (collectionId) {
         const order = collections[collectionId].order.split(' | ');
         const data = collections[collectionId].data;
@@ -98,14 +113,18 @@ const selectors = {
   pageData: (state, name) => {
     const pages = state.get('reactor').data.pages;
     if (pages) {
-      const pageId = Object.keys(pages).find(id => pages[id].name.toLowerCase() === name.toLowerCase());
+      const pageId = Object.keys(pages).find(
+        (id) =>
+          pages[id].name.toLowerCase() ===
+          name.toLowerCase().replace(/2\.0/g, '2')
+      );
       if (pageId) {
         const data = pages[pageId].data;
         preloadImages(data);
         return data;
       }
     }
-  },
+  }
 };
 
 export default {
@@ -113,5 +132,5 @@ export default {
   middleware,
   reducer,
   selectors,
-  connect,
+  connect
 };

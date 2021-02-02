@@ -34,7 +34,8 @@ class SideMenu extends PureComponent {
     e.stopPropagation();
     const txt = e.currentTarget.childNodes[0].nodeValue
       .toLowerCase()
-      .replace(/\s+/g, '-');
+      .replace(/\s+/g, '-')
+      .replace(/2\.0/g, '2');
     const CCtext = camelCase(txt);
     hashHistory.push(`${CCtext}/0`);
     this.toggleMenu();
@@ -56,7 +57,7 @@ class SideMenu extends PureComponent {
               VEST
             </Button>
             <Button onClick={this.navigate} tag='h1' waveColor='white'>
-              VEST2
+              VEST 2.0
             </Button>
             <Button onClick={this.navigate} tag='h1' waveColor='white'>
               VIOLA

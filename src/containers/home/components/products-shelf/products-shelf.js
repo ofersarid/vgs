@@ -70,7 +70,7 @@ const ProductsShelf = ({ color, data }) => {
           waveColor='red'
         >
           <section className={styles.header}>
-            <span className={cx(styles.name)}>VEST 2</span>
+            <span className={cx(styles.name)}>VEST 2.0</span>
             <span className={styles.headerRight}>
               <p>Cardiac</p>
               <Heart />

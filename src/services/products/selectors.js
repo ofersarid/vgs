@@ -46,7 +46,7 @@ const name = createSelector(Routes.selectors.pathname, (pathname) => {
     case 'vest':
       return 'VEST';
     case 'vest2':
-      return 'VEST 2';
+      return 'VEST 2.0';
     case 'frameFr':
       return 'FRAME FR';
     default:

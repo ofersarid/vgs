@@ -77,7 +77,7 @@ class Product extends Component {
       case 'VIOLA':
         return violaSummeryPic;
       case 'VEST':
-      case 'VEST 2':
+      case 'VEST 2.0':
         return vestSummeryPic;
       case 'FRAME FR':
         return frameFrSummeryPic;
@@ -94,7 +94,7 @@ class Product extends Component {
       case 'VIOLA':
         return violaCoverPic;
       case 'VEST':
-      case 'VEST 2':
+      case 'VEST 2.0':
         return vestCoverPic;
       case 'FRAME FR':
         return frameFrCoverPic;
@@ -111,7 +111,7 @@ class Product extends Component {
       case 'VIOLA':
         return '#662D91';
       case 'VEST':
-      case 'VEST 2':
+      case 'VEST 2.0':
         return '#ED1C24';
       case 'FRAME FR':
         return '#22B0AF';
@@ -153,6 +153,7 @@ class Product extends Component {
     if (!data) {
       return null;
     }
+    console.log(`name: ${name}`);
     let countPublishedScreen = 1;
     return (
       <Fragment>
