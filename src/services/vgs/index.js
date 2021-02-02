@@ -1,15 +1,19 @@
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
 import utils from '/src/utils';
+import ls from 'local-storage';
 
-const reducer = (state = fromJS({
-  bizCard: 'enabled',
-  orientation: 'portrait',
-  color: '#005728',
-  productsActiveTab: 'vascular',
-  splash: false,
-  termsAccepted: false,
-}), action) => {
+const reducer = (
+  state = fromJS({
+    bizCard: 'enabled',
+    orientation: 'portrait',
+    color: '#005728',
+    productsActiveTab: 'vascular',
+    splash: false,
+    termsAccepted: ls('accepted_terms')
+  }),
+  action
+) => {
   switch (action.type) {
     case 'DISABLE_BIZ_CARD':
       return state.set('bizCard', 'disabled');
@@ -26,6 +30,7 @@ const reducer = (state = fromJS({
     case 'HIDE_SPLASH':
       return state.set('splash', false);
     case 'ACCEPT_TERMS':
+      ls('accepted_terms', true);
       return state.set('termsAccepted', true);
     default:
       return state;
@@ -34,44 +39,44 @@ const reducer = (state = fromJS({
 
 const actions = {
   disableBizCard: () => ({
-    type: 'DISABLE_BIZ_CARD',
+    type: 'DISABLE_BIZ_CARD'
   }),
   showSplash: () => ({
-    type: 'SHOW_SPLASH',
+    type: 'SHOW_SPLASH'
   }),
   hideSplash: () => ({
-    type: 'HIDE_SPLASH',
+    type: 'HIDE_SPLASH'
   }),
   enableBizCard: () => ({
-    type: 'ENABLE_BIZ_CARD',
+    type: 'ENABLE_BIZ_CARD'
   }),
   acceptTerms: () => ({
-    type: 'ACCEPT_TERMS',
+    type: 'ACCEPT_TERMS'
   }),
-  setOrientation: orientation => ({
+  setOrientation: (orientation) => ({
     type: 'SET_ORIENTATION',
-    orientation,
+    orientation
   }),
-  setColor: color => ({
+  setColor: (color) => ({
     type: 'SET_COLOR',
-    color,
+    color
   }),
-  setProductsActiveTab: tab => ({
+  setProductsActiveTab: (tab) => ({
     type: 'SET_PRODUCTS_ACTIVE_TAB',
-    tab,
-  }),
+    tab
+  })
 };
 
 const selectors = {
-  bizCard: state => state.getIn(['vgs', 'bizCard']) === 'enabled',
-  orientation: state => state.getIn(['vgs', 'orientation']),
-  color: state => state.getIn(['vgs', 'color']),
-  productsActiveTab: state => state.getIn(['vgs', 'productsActiveTab']),
-  splash: state => state.getIn(['vgs', 'splash']),
-  termsAccepted: state => state.getIn(['vgs', 'termsAccepted']),
+  bizCard: (state) => state.getIn(['vgs', 'bizCard']) === 'enabled',
+  orientation: (state) => state.getIn(['vgs', 'orientation']),
+  color: (state) => state.getIn(['vgs', 'color']),
+  productsActiveTab: (state) => state.getIn(['vgs', 'productsActiveTab']),
+  splash: (state) => state.getIn(['vgs', 'splash']),
+  termsAccepted: (state) => state.getIn(['vgs', 'termsAccepted'])
 };
 
-selectors.colorName = createSelector(selectors.color, color => {
+selectors.colorName = createSelector(selectors.color, (color) => {
   switch (color.toUpperCase()) {
     case '#0272BA':
       return 'blue';
@@ -91,5 +96,5 @@ selectors.colorName = createSelector(selectors.color, color => {
 export default {
   reducer,
   selectors,
-  actions,
+  actions
 };
