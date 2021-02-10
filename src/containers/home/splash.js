@@ -52,25 +52,33 @@ class Splash extends PureComponent {
     const show = splash && !store.get('splash-got-it');
     return (
       <Spring
-        from={{ opacity: show ? 0 : 1, transform: `translateX(${show ? 100 : 0}%)` }}
-        to={{ opacity: show ? 1 : 0, transform: `translateX(${show ? 0 : 100}%)` }}
+        from={{
+          opacity: show ? 0 : 1,
+          transform: `translateX(${show ? 100 : 0}%)`
+        }}
+        to={{
+          opacity: show ? 1 : 0,
+          transform: `translateX(${show ? 0 : 100}%)`
+        }}
         delay={show ? 1500 : 0}
         reset={show}
         immediate={!this.didMount}
       >
-        {springs => <div className={cx(styles.splash)} style={springs} >
-          <RatioBox ratio={1.5} className={styles.art} >
-            <MediaLoader src={src} />
-          </RatioBox >
-          <Button
-            onClick={this.gotIt}
-            withBorder
-            className={styles.closeSplashBtn}
-          >
-            Got it!
-          </Button >
-        </div >}
-      </Spring >
+        {(springs) => (
+          <div className={cx(styles.splash)} style={springs}>
+            <RatioBox ratio={1.5} className={styles.art}>
+              <MediaLoader src={src} contained />
+            </RatioBox>
+            <Button
+              onClick={this.gotIt}
+              withBorder
+              className={styles.closeSplashBtn}
+            >
+              Got it!
+            </Button>
+          </div>
+        )}
+      </Spring>
     );
   }
 }
@@ -79,18 +87,16 @@ Splash.propTypes = {
   src: PropTypes.string,
   splash: PropTypes.bool.isRequired,
   showSplash: PropTypes.func.isRequired,
-  hideSplash: PropTypes.func.isRequired,
+  hideSplash: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  splash: services.vgs.selectors.splash(state),
+const mapStateToProps = (state) => ({
+  splash: services.vgs.selectors.splash(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   showSplash: () => dispatch(services.vgs.actions.showSplash()),
-  hideSplash: () => dispatch(services.vgs.actions.hideSplash()),
+  hideSplash: () => dispatch(services.vgs.actions.hideSplash())
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(Splash);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Splash);
