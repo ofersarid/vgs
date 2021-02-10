@@ -30,26 +30,28 @@ class Cover extends PureComponent {
     const justOneDay = _isEqual(footer.dateFrom, footer.dateTo);
     return (
       <Button
-        waveColor="white"
+        waveColor='white'
         className={cx(styles.footer)}
         style={{ background: color }}
-        tag="a"
+        tag='a'
         href={footer.linkTo}
-        target="_blank"
+        target='_blank'
       >
-        <p className={cx(styles.text)} >
-          <span className={styles.title} >{footer.title}</span >
-          <span className={styles.date} >
+        <p className={cx(styles.text)}>
+          <span className={styles.title}>{footer.title}</span>
+          <span className={styles.date}>
             {moment(footer.dateFrom.toDate()).format('MMMM Do')}
-            {!justOneDay && <span >&nbsp;&mdash;&nbsp;</span >}
+            {!justOneDay && <span>&nbsp;&mdash;&nbsp;</span>}
             {!justOneDay && moment(footer.dateTo.toDate()).format('MMMM Do')}
-          </span >
-          <span className={styles.address} >
-            <LocationOn />
-            <span className={styles.addressText} >{footer.address}</span >
-          </span >
-        </p >
-      </Button >
+          </span>
+          {footer.address.trim().length > 0 && (
+            <span className={styles.address}>
+              <LocationOn />
+              <span className={styles.addressText}>{footer.address}</span>
+            </span>
+          )}
+        </p>
+      </Button>
     );
   }
 }
@@ -61,14 +63,14 @@ Cover.propTypes = {
     dateFrom: PropTypes.object.isRequired,
     dateTo: PropTypes.object.isRequired,
     address: PropTypes.string.isRequired,
-    linkTo: PropTypes.string.isRequired,
-  }),
+    linkTo: PropTypes.string.isRequired
+  })
 };
 
-const mapStateToProps = state => ({
-  color: services.vgs.selectors.color(state),
+const mapStateToProps = (state) => ({
+  color: services.vgs.selectors.color(state)
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({}); // eslint-disable-line
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cover);

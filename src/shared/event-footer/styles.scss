@@ -1,4 +1,4 @@
-@import "/src/shared/styles";
+@import '/src/shared/styles';
 
 .footer {
   height: 100px;
@@ -14,7 +14,7 @@
   padding: 0;
   opacity: 0;
   @extend %fadeIn;
-  animation-delay: .5s;
+  animation-delay: 0.5s;
   letter-spacing: 0px;
 
   @include media('>phone') {
@@ -37,7 +37,7 @@
 .text {
   text-align: left;
   transform: translateY(3px);
-  width: calc(100% - #{2 * $gutter-phone});
+  width: 100%;
 
   @include media('>phone') {
     transform: translateY(5px);

@@ -25,30 +25,41 @@ class Home extends PureComponent {
 
   navigate(e) {
     e.stopPropagation();
-    const txt = e.currentTarget.childNodes[0].nodeValue.toLowerCase().replace(' ', '-');
+    const txt = e.currentTarget.childNodes[0].nodeValue
+      .toLowerCase()
+      .replace(' ', '-');
     hashHistory.push(`${camelCase(txt)}/0`);
   }
 
   render() {
     const { data, isMobile, productsData } = this.props;
     return data ? (
-      <Fragment >
+      <Fragment>
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}
-        <IndexHeader index={1} header="VISIONARY SURGICAL TECHNOLOGY" hideIndex />
-        <IndexHeader index={2} header={isMobile ? 'ABOUT OUR PRODUCTS' : 'OUR PRODUCTS'} hideIndex />
-        <IndexHeader index={3} header="OUR PRODUCTS" hideIndex />
-        <SnapScroll >
+        <IndexHeader
+          index={1}
+          header='VISIONARY SURGICAL TECHNOLOGY'
+          hideIndex
+        />
+        <IndexHeader
+          index={2}
+          header={isMobile ? 'ABOUT OUR PRODUCTS' : 'OUR PRODUCTS'}
+          hideIndex
+        />
+        <IndexHeader index={3} header='OUR PRODUCTS' hideIndex />
+        <SnapScroll>
           <Cover
             footer={{
               title: data.eventTitle,
               dateFrom: data.eventDateFrom,
               dateTo: data.eventDateTo,
               address: data.eventAddress,
-              linkTo: data.eventLinkTo,
+              linkTo: data.eventLinkTo
             }}
           />
           <SingleParagraph
-            text={isMobile ? data.synopsisMobile : data.synopsis} />
+            text={isMobile ? data.synopsisMobile : data.synopsis}
+          />
           {/*<GlobalImpact*/}
           {/*  regions={[{*/}
           {/*    pic: data.globalImpactImage1,*/}
@@ -65,25 +76,27 @@ class Home extends PureComponent {
           {/*  }]}*/}
           {/*  text={data.globalImpactBody} />*/}
           {isMobile && (
-            <FadeIn className={cx(layout.inner, styles.homeInner)} >
+            <FadeIn className={cx(layout.inner, styles.homeInner)}>
               <p
-                dangerouslySetInnerHTML={{ __html: data.ourProductsBodyMobile.replace(/\n\r?/g, '<br />') }}
+                dangerouslySetInnerHTML={{
+                  __html: data.ourProductsBodyMobile.replace(/\n\r?/g, '<br />')
+                }}
               />
-            </FadeIn >
+            </FadeIn>
           )}
           {isMobile && (
-            <FadeIn className={cx(layout.inner, styles.homeInner)} >
+            <FadeIn className={cx(layout.inner, styles.homeInner)}>
               <ProductsShelf data={productsData} />
-            </FadeIn >
+            </FadeIn>
           )}
           {!isMobile && (
-            <OurProducts text={data.ourProductsBody} >
+            <OurProducts text={data.ourProductsBody}>
               <ProductsShelf data={productsData} />
             </OurProducts>
           )}
-        </SnapScroll >
+        </SnapScroll>
         {data.splashPublished && <Splash src={data.splash} />}
-      </Fragment >
+      </Fragment>
     ) : null;
   }
 }
@@ -93,20 +106,18 @@ Home.propTypes = {
   data: PropTypes.object,
   productsData: PropTypes.object,
   setColor: PropTypes.func.isRequired,
-  isMobile: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   frame: SnapScroll.selectors.frame(state),
   data: services.reactor.selectors.pageData(state, 'home'),
   productsData: services.reactor.selectors.pageData(state, 'our products'),
-  isMobile: services.device.selectors.type(state) === 'mobile',
+  isMobile: services.device.selectors.type(state) === 'mobile'
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setColor: color => dispatch(services.vgs.actions.setColor(color)),
+  setColor: (color) => dispatch(services.vgs.actions.setColor(color))
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(Home);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Home);
