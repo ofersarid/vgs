@@ -109,7 +109,7 @@ class Downloads extends PureComponent {
                 waveColor='white'
                 className={cx(styles.btn)}
               >
-                REPROCESSING INSTRUCTIONS
+                POSTER
               </Button>
             )}
             {productPage && (
@@ -123,7 +123,7 @@ class Downloads extends PureComponent {
                 waveColor='white'
                 className={cx(styles.btn)}
               >
-                REPROCESSING INSTRUCTIONS
+                PRODUCT PAGE
               </Button>
             )}
           </div>
