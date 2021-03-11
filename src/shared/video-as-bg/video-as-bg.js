@@ -18,12 +18,26 @@ class VideoAsBg extends PureComponent {
   render() {
     const { src, blur, brightness, className } = this.props;
     return (
-      <FadeIn className={styles.video} spread >
-        <video playsinline ref={this.video} className={cx(className)} loop muted autoPlay >
-          <source src={src} type="video/mp4" />
-        </video >
-        {Boolean(blur) && <div className={styles.blur} style={{ backdropFilter: `blur(${blur}px) brightness(${brightness}%)` }} />}
-      </FadeIn >
+      <FadeIn className={styles.video} spread>
+        <video
+          playsInline
+          ref={this.video}
+          className={cx(className)}
+          loop
+          muted
+          autoPlay
+        >
+          <source src={src} type='video/mp4' />
+        </video>
+        {Boolean(blur) && (
+          <div
+            className={styles.blur}
+            style={{
+              backdropFilter: `blur(${blur}px) brightness(${brightness}%)`
+            }}
+          />
+        )}
+      </FadeIn>
     );
   }
 }
@@ -32,18 +46,16 @@ VideoAsBg.propTypes = {
   src: PropTypes.string.isRequired,
   blur: PropTypes.number,
   brightness: PropTypes.number,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 VideoAsBg.defaultProps = {
   blur: 0,
-  brightness: 100,
+  brightness: 100
 };
 
-const mapStateToProps = state => ({}); // eslint-disable-line
+const mapStateToProps = (state) => ({}); // eslint-disable-line
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({}); // eslint-disable-line
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
-)(VideoAsBg);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(VideoAsBg);

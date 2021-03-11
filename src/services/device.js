@@ -5,17 +5,24 @@ import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const reducer = (state = fromJS({
-  type: 'mobile',
-  orientation: 'portrait',
-}), action) => {
+const reducer = (
+  state = fromJS({
+    type: 'mobile',
+    orientation: 'portrait'
+  }),
+  action
+) => {
   switch (action.type) {
     case 'DEVICE:CHANGE':
+      // eslint-disable-next-line no-case-declarations
       const type = () => {
         switch (true) {
-          case window.innerWidth >= 768 && window.innerWidth <= 1024 && window.innerHeight <= 1024:
+          case window.innerWidth >= 768 &&
+            window.innerWidth <= 1024 &&
+            window.innerHeight <= 1024:
             return 'tablet';
-          case window.innerWidth > 1024 || (window.innerWidth === 1024 && window.innerHeight > 1024):
+          case window.innerWidth > 1024 ||
+            (window.innerWidth === 1024 && window.innerHeight > 1024):
             return 'desktop';
           default:
             return 'mobile';
@@ -23,7 +30,8 @@ const reducer = (state = fromJS({
       };
       return fromJS({
         type: type(),
-        orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
+        orientation:
+          window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
       });
     default:
       return state;
@@ -32,13 +40,13 @@ const reducer = (state = fromJS({
 
 const actions = {
   update: () => ({
-    type: 'DEVICE:CHANGE',
-  }),
+    type: 'DEVICE:CHANGE'
+  })
 };
 
 const selectors = {
-  type: state => state.getIn(['device', 'type']),
-  orientation: state => state.getIn(['device', 'orientation']),
+  type: (state) => state.getIn(['device', 'type']),
+  orientation: (state) => state.getIn(['device', 'orientation'])
 };
 
 const HOC = (WrappedComponent) => {
@@ -46,7 +54,10 @@ const HOC = (WrappedComponent) => {
     constructor(props) {
       super(props);
       autoBind(this);
-      this.updateDB = debounce(props.update, 300, { leading: false, trailing: true });
+      this.updateDB = debounce(props.update, 300, {
+        leading: false,
+        trailing: true
+      });
     }
 
     componentDidMount() {
@@ -69,11 +80,11 @@ const HOC = (WrappedComponent) => {
   }
 
   Wrapper.propTypes = {
-    update: PropTypes.func.isRequired,
+    update: PropTypes.func.isRequired
   };
 
-  const mapDispatchToProps = dispatch => ({
-    update: () => dispatch(actions.update()),
+  const mapDispatchToProps = (dispatch) => ({
+    update: () => dispatch(actions.update())
   });
 
   return connect(() => ({}), mapDispatchToProps)(Wrapper);
@@ -82,5 +93,5 @@ const HOC = (WrappedComponent) => {
 export default {
   reducer,
   selectors,
-  HOC,
+  HOC
 };

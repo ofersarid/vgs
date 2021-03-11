@@ -5,9 +5,18 @@ import { compose } from 'redux';
 import autoBind from 'auto-bind';
 import cx from 'classnames';
 import { hashHistory } from 'react-router';
-import { SnapScroll, FadeIn, IndexHeader } from '/src/shared';
+import {
+  SnapScroll,
+  FadeIn,
+  IndexHeader,
+  Button,
+  RatioBox,
+  MediaLoader
+} from '/src/shared';
 import services from '/src/services';
-import camelCase from 'lodash/camelCase';
+import LinesEllipsisLoose from 'react-lines-ellipsis/lib/loose';
+import { GitBranch } from 'styled-icons/feather/GitBranch';
+import { Heart } from 'styled-icons/evil/Heart';
 import layout from '/src/shared/styles/layout.scss';
 import Cover from './components/cover/cover';
 import SingleParagraph from './components/single-paragraph/single-paragraph';
@@ -16,6 +25,8 @@ import ProductsShelf from './components/products-shelf/products-shelf';
 import styles from './styles.scss';
 import Splash from './splash';
 
+const GOLDEN_RATIO = 1 / 1.6;
+
 class Home extends PureComponent {
   constructor(props) {
     super(props);
@@ -23,17 +34,13 @@ class Home extends PureComponent {
     autoBind(this);
   }
 
-  navigate(e) {
-    e.stopPropagation();
-    const txt = e.currentTarget.childNodes[0].nodeValue
-      .toLowerCase()
-      .replace(' ', '-');
-    hashHistory.push(`${camelCase(txt)}/0`);
+  navigate(to) {
+    hashHistory.push(to);
   }
 
   render() {
     const { data, isMobile, productsData } = this.props;
-    return data ? (
+    return data && productsData ? (
       <Fragment>
         {/*<Header index={2} text="GLOBAL IMPACT" />*/}
         <IndexHeader
@@ -47,6 +54,7 @@ class Home extends PureComponent {
           hideIndex
         />
         <IndexHeader index={3} header='OUR PRODUCTS' hideIndex />
+        <IndexHeader index={4} header='OUR PRODUCTS' hideIndex />
         <SnapScroll>
           <Cover
             footer={{
@@ -60,21 +68,6 @@ class Home extends PureComponent {
           <SingleParagraph
             text={isMobile ? data.synopsisMobile : data.synopsis}
           />
-          {/*<GlobalImpact*/}
-          {/*  regions={[{*/}
-          {/*    pic: data.globalImpactImage1,*/}
-          {/*    label: data.globalImpactImageSubtitle1,*/}
-          {/*  }, {*/}
-          {/*    pic: data.globalImpactImage2,*/}
-          {/*    label: data.globalImpactImageSubtitle2,*/}
-          {/*  }, {*/}
-          {/*    pic: data.globalImpactImage3,*/}
-          {/*    label: data.globalImpactImageSubtitle3,*/}
-          {/*  }, {*/}
-          {/*    pic: data.globalImpactImage4,*/}
-          {/*    label: data.globalImpactImageSubtitle4,*/}
-          {/*  }]}*/}
-          {/*  text={data.globalImpactBody} />*/}
           {isMobile && (
             <FadeIn className={cx(layout.inner, styles.homeInner)}>
               <p
@@ -86,12 +79,266 @@ class Home extends PureComponent {
           )}
           {isMobile && (
             <FadeIn className={cx(layout.inner, styles.homeInner)}>
-              <ProductsShelf data={productsData} />
+              <ProductsShelf>
+                <div key='item-vest' className={styles.outerWrapper}>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.vest)}
+                    onClick={() => this.navigate('/vest/0')}
+                    waveColor='red'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>VEST</span>
+                      <span className={styles.headerRight}>
+                        <p>Cardiac</p>
+                        <Heart />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['vestPic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.vestDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+                <div key='item-vest2' className={styles.outerWrapper}>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.vest2)}
+                    onClick={() => this.navigate('/vest2/0')}
+                    waveColor='red'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>VEST 2.0</span>
+                      <span className={styles.headerRight}>
+                        <p>Cardiac</p>
+                        <Heart />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['vest2Pic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.vest2Description}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+                <div className={cx(styles.outerWrapper)} key='item-viola'>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.viola)}
+                    onClick={() => this.navigate('/viola/0')}
+                    waveColor='purple'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>VIOLA</span>
+                      <span className={styles.headerRight}>
+                        <p>Cardiac</p>
+                        <Heart />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['violaPic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.violaDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+              </ProductsShelf>
+            </FadeIn>
+          )}
+          {isMobile && (
+            <FadeIn className={cx(layout.inner, styles.homeInner)}>
+              <ProductsShelf>
+                <div className={cx(styles.outerWrapper)} key='item-frame'>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.frame)}
+                    onClick={() => this.navigate('/frame/0')}
+                    waveColor='blue'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>FRAME</span>
+                      <span className={styles.headerRight}>
+                        <p>Vascular</p>
+                        <GitBranch />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['framePic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.frameDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+                <div className={cx(styles.outerWrapper)} key='item-frameFR'>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.frameFr)}
+                    onClick={() => this.navigate('/frameFr/0')}
+                    waveColor='lagoon'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>FRAME FR</span>
+                      <span className={styles.headerRight}>
+                        <p>Vascular</p>
+                        <GitBranch />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['frameFRPic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.frameFRDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+              </ProductsShelf>
             </FadeIn>
           )}
           {!isMobile && (
             <OurProducts text={data.ourProductsBody}>
-              <ProductsShelf data={productsData} />
+              <ProductsShelf>
+                <div key='item-vest' className={styles.outerWrapper}>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.vest)}
+                    onClick={() => this.navigate('/vest/0')}
+                    waveColor='red'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>VEST</span>
+                      <span className={styles.headerRight}>
+                        <p>Cardiac</p>
+                        <Heart />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['vestPic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.vestDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+                <div key='item-vest2' className={styles.outerWrapper}>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.vest2)}
+                    onClick={() => this.navigate('/vest2/0')}
+                    waveColor='red'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>VEST 2.0</span>
+                      <span className={styles.headerRight}>
+                        <p>Cardiac</p>
+                        <Heart />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['vest2Pic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.vest2Description}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+                <div className={cx(styles.outerWrapper)} key='item-viola'>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.viola)}
+                    onClick={() => this.navigate('/viola/0')}
+                    waveColor='purple'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>VIOLA</span>
+                      <span className={styles.headerRight}>
+                        <p>Cardiac</p>
+                        <Heart />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['violaPic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.violaDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+              </ProductsShelf>
+            </OurProducts>
+          )}
+          {!isMobile && (
+            <OurProducts text={data.ourProductsBody}>
+              <ProductsShelf>
+                <div className={cx(styles.outerWrapper)} key='item-frame'>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.frame)}
+                    onClick={() => this.navigate('/frame/0')}
+                    waveColor='blue'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>FRAME</span>
+                      <span className={styles.headerRight}>
+                        <p>Vascular</p>
+                        <GitBranch />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['framePic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.frameDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+                <div className={cx(styles.outerWrapper)} key='item-frameFR'>
+                  <Button
+                    className={cx(styles.innerWrapper, styles.frameFr)}
+                    onClick={() => this.navigate('/frameFr/0')}
+                    waveColor='lagoon'
+                  >
+                    <section className={styles.header}>
+                      <span className={cx(styles.name)}>FRAME FR</span>
+                      <span className={styles.headerRight}>
+                        <p>Vascular</p>
+                        <GitBranch />
+                      </span>
+                    </section>
+                    <RatioBox ratio={GOLDEN_RATIO} className={styles.img}>
+                      <MediaLoader src={productsData['frameFRPic--pic']} />
+                    </RatioBox>
+                    <LinesEllipsisLoose
+                      text={productsData.frameFRDescription}
+                      maxLine='2'
+                      lineHeight='1.5em'
+                      className={styles.p}
+                    />
+                  </Button>
+                </div>
+              </ProductsShelf>
             </OurProducts>
           )}
         </SnapScroll>

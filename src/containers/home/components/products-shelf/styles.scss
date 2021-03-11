@@ -1,7 +1,12 @@
 @import '/src/shared/styles';
 
 .shelf {
+  width: 100vw;
+  transform: translateX(-11vw);
+
   @include media('>phone') {
+    width: 100%;
+    transform: initial;
     height: 300px;
 
     :global {
@@ -18,6 +23,10 @@
       height: 65%;
     }
   }
+}
+
+.carouselNav {
+  width: 89vw;
 }
 
 .outerWrapper {
@@ -38,6 +47,8 @@
   // height: 100%;
   padding: 0;
   box-sizing: border-box;
+  margin: 0 11vw;
+  width: calc(100% - 22vw);
 
   @include media('>phone') {
     margin-right: 10%;

@@ -16,11 +16,17 @@ class Carousel extends PureComponent {
     super(props);
     this.state = {
       group: 0,
-      groupCount: 0,
+      groupCount: 0
     };
     autoBind(this);
-    this.nextThrottle = throttle(this.next, 500, { trailing: true, leading: true });
-    this.prevThrottle = throttle(this.prev, 500, { trailing: true, leading: true });
+    this.nextThrottle = throttle(this.next, 500, {
+      trailing: true,
+      leading: true
+    });
+    this.prevThrottle = throttle(this.prev, 500, {
+      trailing: true,
+      leading: true
+    });
   }
 
   componentDidMount() {
@@ -36,7 +42,9 @@ class Carousel extends PureComponent {
 
   countGroups() {
     const { children, displayVolume } = this.props;
-    const count = children.length ? Math.ceil(children.length / displayVolume) : 1;
+    const count = children.length
+      ? Math.ceil(children.length / displayVolume)
+      : 1;
     this.setState({ groupCount: count });
   }
 
@@ -59,11 +67,20 @@ class Carousel extends PureComponent {
   }
 
   render() {
-    const { children, className, color, colorName, navLocation, prevBtnTxt, nextBtnTxt } = this.props;
+    const {
+      children,
+      className,
+      navClassName,
+      color,
+      colorName,
+      navLocation,
+      prevBtnTxt,
+      nextBtnTxt
+    } = this.props;
     const { group, groupCount } = this.state;
     const isLastGroup = group === groupCount - 1;
     return (
-      <div className={cx(styles.carousel, className, styles[navLocation])} >
+      <div className={cx(styles.carousel, className, styles[navLocation])}>
         {navLocation === 'horizontal' && group !== 0 && (
           <Button
             className={cx('prev', styles.btn, styles.left)}
@@ -72,7 +89,7 @@ class Carousel extends PureComponent {
             onClick={this.prevThrottle}
           >
             <ChevronLeft />
-          </Button >
+          </Button>
         )}
         <div
           className={cx(styles.content, styles[`content-${navLocation}`])}
@@ -81,7 +98,7 @@ class Carousel extends PureComponent {
           }}
         >
           {children}
-        </div >
+        </div>
         {navLocation === 'horizontal' && group !== groupCount - 1 && (
           <Button
             className={cx('next', styles.btn, styles.right)}
@@ -90,31 +107,43 @@ class Carousel extends PureComponent {
             onClick={this.nextThrottle}
           >
             <ChevronRight />
-          </Button >
+          </Button>
         )}
         {navLocation === 'bottom' && (
-          <div className={styles.navWrapper} >
-            {group !== 0 && <Button
-              className={cx('prev', styles.btn, styles.left)}
-              waveColor={colorName}
-              textColor={color}
-              onClick={this.prevThrottle}
-            >
-              <div className={styles.clipIcon} ><ChevronLeft /></div >
-              {prevBtnTxt && <span className={styles.btnTxt} >{prevBtnTxt}</span >}
-            </Button >}
-            {!isLastGroup && <Button
-              className={cx('next', styles.btn, styles.right)}
-              waveColor={colorName}
-              textColor={color}
-              onClick={this.nextThrottle}
-            >
-              {nextBtnTxt && <span className={styles.btnTxt} >{nextBtnTxt}</span >}
-              <div className={styles.clipIcon} ><ChevronRight /></div >
-            </Button >}
-          </div >
+          <div className={cx(styles.navWrapper, navClassName)}>
+            {group !== 0 && (
+              <Button
+                className={cx('prev', styles.btn, styles.left)}
+                waveColor={colorName}
+                textColor={color}
+                onClick={this.prevThrottle}
+              >
+                <div className={styles.clipIcon}>
+                  <ChevronLeft />
+                </div>
+                {prevBtnTxt && (
+                  <span className={styles.btnTxt}>{prevBtnTxt}</span>
+                )}
+              </Button>
+            )}
+            {!isLastGroup && (
+              <Button
+                className={cx('next', styles.btn, styles.right)}
+                waveColor={colorName}
+                textColor={color}
+                onClick={this.nextThrottle}
+              >
+                {nextBtnTxt && (
+                  <span className={styles.btnTxt}>{nextBtnTxt}</span>
+                )}
+                <div className={styles.clipIcon}>
+                  <ChevronRight />
+                </div>
+              </Button>
+            )}
+          </div>
         )}
-      </div >
+      </div>
     );
   }
 }
@@ -127,21 +156,23 @@ Carousel.propTypes = {
   className: PropTypes.string,
   prevBtnTxt: PropTypes.string,
   nextBtnTxt: PropTypes.string,
-  navLocation: PropTypes.oneOf(['bottom', 'horizontal']),
+  navClassName: PropTypes.string,
+  navLocation: PropTypes.oneOf(['bottom', 'horizontal'])
 };
 
 Carousel.defaultProps = {
   navLocation: 'bottom',
   prevBtnTxt: 'BACK',
-  nextBtnTxt: 'MORE',
+  nextBtnTxt: 'MORE'
 };
 
-const mapStateToProps = state => ({
-  colorName: services.vgs.selectors.colorName(state),
+const mapStateToProps = (state) => ({
+  colorName: services.vgs.selectors.colorName(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  disableScrollSnap: (...props) => dispatch(SnapScroll.actions.disable(...props)),
+const mapDispatchToProps = (dispatch) => ({
+  disableScrollSnap: (...props) =>
+    dispatch(SnapScroll.actions.disable(...props))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Carousel);

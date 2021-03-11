@@ -14,24 +14,25 @@ import styles from './styles.scss';
 
 const DIRECTION = {
   FORWARD: 'forward',
-  REVERSE: 'reverse',
+  REVERSE: 'reverse'
 };
 
 const THRESHHOLD = 1;
 
 const Wrapper = ({ children, index, frame }) => (
-  <div className={cx(styles.wrapper)} style={{ zIndex: frame === index ? 1 : 0 }} >
-    <div className={styles.inner} >
-      {cloneElement(children, { index })}
-    </div >
-  </div >
+  <div
+    className={cx(styles.wrapper)}
+    style={{ zIndex: frame === index ? 1 : 0 }}
+  >
+    <div className={styles.inner}>{cloneElement(children, { index })}</div>
+  </div>
 );
 
 Wrapper.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   frame: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 class SnapScroll extends React.Component {
@@ -48,13 +49,13 @@ class SnapScroll extends React.Component {
       disablePrev: PropTypes.bool,
       count: PropTypes.func.isRequired,
       setIsLastFrame: PropTypes.func.isRequired,
-      pathname: PropTypes.string,
+      pathname: PropTypes.string
     };
   }
 
   static get defaultProps() {
     return {
-      orientation: 'vertical',
+      orientation: 'vertical'
     };
   }
 
@@ -66,24 +67,32 @@ class SnapScroll extends React.Component {
       index: 0,
       direction: DIRECTION.FORWARD,
       children: [],
-      lock: false,
+      lock: false
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const children = compact(Array.isArray(nextProps.children) ? flattenDeep(nextProps.children) : [nextProps.children]);
+    const children = compact(
+      Array.isArray(nextProps.children)
+        ? flattenDeep(nextProps.children)
+        : [nextProps.children]
+    );
     nextProps.count(children.length || 1);
     return {
       index: nextProps.frame,
-      prevPath: DIRECTION[nextProps.frame > prevState.index ? 'FORWARD' : 'REVERSE'],
-      children,
+      prevPath:
+        DIRECTION[nextProps.frame > prevState.index ? 'FORWARD' : 'REVERSE'],
+      children
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { frame, disableScrollSnap, setIsLastFrame } = this.props;
     const { children } = this.state;
-    if (frame !== prevProps.frame || children.length !== prevState.children.length) {
+    if (
+      frame !== prevProps.frame ||
+      children.length !== prevState.children.length
+    ) {
       if (frame > 0 && frame < children.length - 1) {
         disableScrollSnap(false, false);
       } else if (frame === 0) {
@@ -142,7 +151,7 @@ class SnapScroll extends React.Component {
 
   mouseScrollHandler(e) {
     clearTimeout(this.to);
-    const delta = e.wheelDelta || (e.deltaY * -1);
+    const delta = e.wheelDelta || e.deltaY * -1;
     this.isTouchDevice = false;
     if (Math.abs(delta) > THRESHHOLD) {
       this.snap(delta < 0 ? -1 : 1);
@@ -150,7 +159,7 @@ class SnapScroll extends React.Component {
     this.to = setTimeout(() => {
       this.setState({ lock: false });
     }, 100);
-  };
+  }
 
   touchStartHandler(e) {
     const { disableScrollSnap } = this.props;
@@ -158,19 +167,19 @@ class SnapScroll extends React.Component {
     this.yDown = e.touches[0].clientY;
     disableScrollSnap(false, false);
     this.isTouchDevice = true;
-  };
+  }
 
   touchEndHandler(e) {
     this.yDown = null;
   }
 
   touchMoveHandler(e) {
-    let yUp = e.touches[0].clientY;
-    let delta = (this.yDown - yUp);
+    const yUp = e.touches[0].clientY;
+    const delta = this.yDown - yUp;
     if (Math.abs(delta) > THRESHHOLD) {
       this.snap(delta > 0 ? -1 : 1);
     }
-  };
+  }
 
   navigateToFrame(frame) {
     const { pathname } = this.props;
@@ -185,14 +194,14 @@ class SnapScroll extends React.Component {
     if (disableNext) return;
     const index = Math.min(this.state.index + 1, children.length - 1);
     this.navigateToFrame(index);
-  };
+  }
 
   prev() {
     const { disablePrev } = this.props;
     if (disablePrev) return;
     const index = Math.max(0, this.state.index - 1);
     this.navigateToFrame(index);
-  };
+  }
 
   renderChildren() {
     const { frame } = this.props;
@@ -202,11 +211,14 @@ class SnapScroll extends React.Component {
 
   render() {
     return (
-      <div className={styles.snapScroll} ref={el => {
-        this.$node = el;
-      }} >
+      <div
+        className={styles.snapScroll}
+        ref={(el) => {
+          this.$node = el;
+        }}
+      >
         {this.renderChildren()}
-      </div >
+      </div>
     );
   }
 }
@@ -214,19 +226,19 @@ class SnapScroll extends React.Component {
 SnapScroll.selectors = selectors;
 SnapScroll.actions = actions;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   frame: selectors.frame(state),
   disableNext: selectors.disableNext(state),
   disablePrev: selectors.disablePrev(state),
-  pathname: Routes.selectors.pathname(state),
+  pathname: Routes.selectors.pathname(state)
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   disableScrollSnap: (...props) => dispatch(actions.disable(...props)),
   count: (...props) => dispatch(actions.count(...props)),
-  setIsLastFrame: bool => dispatch(actions.setIsLastFrame(bool)),
+  setIsLastFrame: (bool) => dispatch(actions.setIsLastFrame(bool))
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(SnapScroll);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  SnapScroll
+);
