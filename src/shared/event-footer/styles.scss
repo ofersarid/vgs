@@ -11,7 +11,7 @@
   align-items: center;
   box-sizing: border-box;
   background: $green;
-  padding: 0;
+  padding: 20;
   opacity: 0;
   @extend %fadeIn;
   animation-delay: 0.5s;

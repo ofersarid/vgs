@@ -86,7 +86,7 @@ class Main extends PureComponent {
                     target='_blank'
                   >
                     <img className={styles.logoImg} src={logo} />
-                    {!['viola', 'frame', 'vest', 'frameFr'].includes(
+                    {!['viola', 'frame', 'vest', 'vest2', 'frameFr'].includes(
                       pathname.split('/')[0]
                     ) &&
                       show && <img className={styles.logoText} src={vgs} />}
