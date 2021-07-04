@@ -81,9 +81,6 @@
     "push-empty": "git commit -m 'rebuild pages' --allow-empty && git push origin master",
     "depcheck": "depcheck"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "resolutions": {
     "@babel/preset-env": "7.13.8"
   },
