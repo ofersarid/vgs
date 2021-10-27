@@ -15,10 +15,6 @@ import {
   Downloads
 } from './components';
 import services from '/src/services';
-import frameSummeryPic from '/src/assets/frame_summery.png';
-import violaSummeryPic from '/src/assets/viola_summery.png';
-import vestSummeryPic from '/src/assets/vest_summery.png';
-import frameFrSummeryPic from '/src/assets/frame_fr_summery.png';
 import { compact } from 'lodash';
 
 class Product extends Component {
