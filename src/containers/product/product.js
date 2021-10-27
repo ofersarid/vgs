@@ -15,14 +15,11 @@ import {
   Downloads
 } from './components';
 import services from '/src/services';
-import frameCoverPic from '/src/assets/frame_cover.png';
-import violaCoverPic from '/src/assets/viola_cover.png';
-import vestCoverPic from '/src/assets/vest_cover.png';
-import frameFrCoverPic from '/src/assets/frame_fr_cover.png';
 import frameSummeryPic from '/src/assets/frame_summery.png';
 import violaSummeryPic from '/src/assets/viola_summery.png';
 import vestSummeryPic from '/src/assets/vest_summery.png';
 import frameFrSummeryPic from '/src/assets/frame_fr_summery.png';
+import { compact } from 'lodash';
 
 class Product extends Component {
   constructor(props) {
@@ -78,22 +75,6 @@ class Product extends Component {
     }
   }
 
-  resolveSummeryPic() {
-    const { name } = this.props;
-    switch (name) {
-      case 'FRAME':
-        return frameSummeryPic;
-      case 'VIOLA':
-        return violaSummeryPic;
-      case 'VEST':
-        return vestSummeryPic;
-      case 'FRAME FR':
-        return frameFrSummeryPic;
-      default:
-        return '';
-    }
-  }
-
   resolveColor() {
     const { name, products } = this.props;
     return products.find((itm) => itm.productName.toUpperCase() === name)
@@ -133,50 +114,59 @@ class Product extends Component {
       <Fragment>
         {orientation === 'landscape' && !isDesktop ? null : (
           <Fragment>
-            {data.screen1Published === 'Publish' && (
+            {product.screen1Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
-                header={data.screen1Title}
+                header={product.screen1Title}
               />
             )}
-            {data.screen2Published === 'Publish' && (
+            {product.screen2Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
-                header={data.screen2Title}
+                header={product.screen2Title}
               />
             )}
-            {data.IFUVideoPublished === 'Publish' ? (
-              <IndexHeader index={countPublishedScreen++} header='IFU VIDEO' />
-            ) : null}
-            {data.screen3Published === 'Publish' && (
+            {product.screen3Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
-                header={data.screen3Title}
+                header={product.screen3Title}
               />
             )}
-            {data.screen4Published === 'Publish' && (
+            {product.screen4Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
-                header={data.screen4Title}
+                header={product.screen4Title}
               />
             )}
-            {data.screen5Published === 'Publish' && (
+            {product.screen5Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
-                header={data.screen5Title}
+                header={product.screen5Title}
               />
             )}
-            {data.screen6Published === 'Publish' && (
+            {product.screen6Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
-                header={data.screen6Title}
+                header={product.screen6Title}
               />
             )}
-            {data.screen7Published === 'Publish' && (
+            {product.keyFeaturesPublished === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
-                header={data.screen7Title}
+                header='Key Features'
               />
+            )}
+            {product.imageGalleryPublished === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.imageGalleryTitle}
+              />
+            )}
+            {product.downloadsPublished === 'Publish' && (
+              <IndexHeader index={countPublishedScreen++} header='Downloads' />
+            )}
+            {product.summaryPublished === 'Publish' && (
+              <IndexHeader index={countPublishedScreen++} header='Summary' />
             )}
             <IndexHeader index={countPublishedScreen} header='Clinical' />
           </Fragment>
@@ -222,69 +212,107 @@ class Product extends Component {
               title={product.screen2Title}
             />
           )}
-          {data.IFUVideoPublished === 'Publish' && (
+          {[3, 4, 5, 6].map((i) => {
+            if (product[`screen${i}Published`] === 'Publish') {
+              return (
+                <ImgTxtBtn
+                  youtube={product[`screen${i}Videolink`]}
+                  txt={product[`screen${i}Body`]}
+                  readeMoreTxt={product[`screen${i}Body`]}
+                  themeColor={color}
+                  title={product[`screen${i}Title`]}
+                />
+              );
+            }
+            return null;
+          })}
+          {/* {product.screen3Published === 'Publish' && (
             <ImgTxtBtn
-              youtube={data.IFUVideoLink}
-              txt={data.IFUVideoBody}
-              readeMoreTxt={data.IFUVideoBody}
+              youtube={product.screen3Videolink}
+              txt={product.screen3Body}
+              readeMoreTxt={product.screen3Body}
               themeColor={color}
-              title='IFU VIDEO'
+              title={product.screen3Title}
             />
           )}
-          {data.screen3Published === 'Publish' && (
+          {product.screen4Published === 'Publish' && (
             <ImgTxtBtn
-              youtube={data.screen3Videolink}
-              txt={data.screen3Body}
-              readeMoreTxt={data.screen3Body}
+              youtube={product.screen4Videolink}
+              txt={product.screen4Body}
+              readeMoreTxt={product.screen4Body}
               footNotes={[
-                data.screen3Footnote1,
-                data.screen3Footnote2,
-                data.screen3Footnote3
+                product.screen4Footnote1,
+                product.screen4Footnote2,
+                product.screen4Footnote3
               ]}
               themeColor={color}
-              title={data.screen3Title}
+              title={product.screen4Title}
             />
-          )}
-          {data.screen4Published === 'Publish' && (
+          )} */}
+          {product.keyFeaturesPublished === 'Publish' && (
             <ThreeColumnLayout
-              data={[
-                data.screen4Bullet1,
-                data.screen4Bullet2,
-                data.screen4Bullet3,
-                data.screen4Bullet4,
-                data.screen4Bullet5,
-                data.screen4Bullet6
-              ]}
-              title={data.screen4Title}
+              data={compact([
+                product.keyFeature1,
+                product.keyFeature2,
+                product.keyFeature3,
+                product.keyFeature4,
+                product.keyFeature5,
+                product.keyFeature6
+              ])}
+              title='Key Features'
             />
           )}
-          {carouselPics && carouselPics.length && (
+          {product.imageGalleryPublished === 'Publish' && (
             <TwoImagesLayout
-              pics={carouselPics}
+              pics={compact([
+                {
+                  pic: product.imageGalleryPic1,
+                  desc: product.imageGalleryDescription1
+                },
+                {
+                  pic: product.imageGalleryPic2,
+                  desc: product.imageGalleryDescription2
+                },
+                {
+                  pic: product.imageGalleryPic3,
+                  desc: product.imageGalleryDescription3
+                },
+                {
+                  pic: product.imageGalleryPic4,
+                  desc: product.imageGalleryDescription4
+                },
+                {
+                  pic: product.imageGalleryPic5,
+                  desc: product.imageGalleryDescription5
+                },
+                {
+                  pic: product.imageGalleryPic6,
+                  desc: product.imageGalleryDescription6
+                }
+              ])}
               color={color}
               orientation={orientation}
             />
           )}
-          {data.screen6Published === 'Publish' && (
+          {product.downloadsPublished === 'Publish' && (
             <Downloads
-              image={data.screen6Image}
-              imageTitle={data.screen6ImageSubtitle}
-              brochure={data.brochure}
-              ifu={data.ifu}
-              patientCard={data.patientCard}
-              instructions={data.instructions}
+              image={product.downloadsPic}
+              brochure={product.downloadsBrochure}
+              ifu={product.downloadsIFU}
+              patientCard={product.downloadsPatientCard}
+              instructions={product.downloadsInstructions}
               themeColor={color}
             />
           )}
-          {data.screen7Published === 'Publish' && (
+          {product.summaryPublished === 'Publish' && (
             <Summary
-              art={this.resolveSummeryPic()}
-              data={[
-                data.screen7Bullet1,
-                data.screen7Bullet2,
-                data.screen7Bullet3,
-                data.screen7Bullet4
-              ]}
+              art={product.summaryPic}
+              data={compact([
+                product.summaryBullet1,
+                product.summaryBullet2,
+                product.summaryBullet3,
+                product.summaryBullet4
+              ])}
             />
           )}
           <Clinical

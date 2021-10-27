@@ -18,34 +18,36 @@ const TwoImagesLayout = ({ pics, color }) => {
   };
 
   return (
-    <FadeIn className={cx(layout.inner, styles.inner)} >
+    <FadeIn className={cx(layout.inner, styles.inner)}>
       <Carousel
         displayVolume={resolveVolume()}
         className={styles.carousel}
         color={color}
-        navLocation="bottom"
+        navLocation='bottom'
       >
-        {pics.map(pic => (
-          <div key={pic.id} className={styles.itemWrapper}>
-            <RatioBox ratio={2 / 3} className={styles.container} >
-              <MediaLoader src={pic.pic} />
-            </RatioBox >
-            <LinesEllipsisLoose
-              text={pic.description}
-              maxLine='4'
-              lineHeight='1.5em'
-              className={cx('caption', styles.caption)}
-            />
-          </div>
-        ))}
-      </Carousel >
-    </FadeIn >
+        {pics
+          .filter((pic) => pic.pic !== undefined)
+          .map((pic) => (
+            <div key={pic.pic} className={styles.itemWrapper}>
+              <RatioBox ratio={2 / 3} className={styles.container}>
+                <MediaLoader src={pic.pic} />
+              </RatioBox>
+              <LinesEllipsisLoose
+                text={pic.desc}
+                maxLine='4'
+                lineHeight='1.5em'
+                className={cx('caption', styles.caption)}
+              />
+            </div>
+          ))}
+      </Carousel>
+    </FadeIn>
   );
 };
 
 TwoImagesLayout.propTypes = {
   color: PropTypes.string.isRequired,
-  pics: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pics: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default TwoImagesLayout;

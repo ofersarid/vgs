@@ -18,87 +18,84 @@ class Downloads extends PureComponent {
   render() {
     const {
       image,
-      imageTitle,
       brochure,
       ifu,
       patientCard,
       instructions,
       themeColor,
-      isMobile,
+      isMobile
     } = this.props;
     return (
-      <FadeIn spread >
+      <FadeIn spread>
         <div
           // hideOverflow
           className={cx(styles.container, layout.inner)}
         >
           {!isMobile && (
-            <RatioBox ratio={2 / 3} className={cx(styles.img)} >
+            <RatioBox ratio={2 / 3} className={cx(styles.img)}>
               <MediaLoader src={image} />
-              {/*<img src={image} className={styles.inner} />*/}
-              <div className={cx(styles.title)} >{imageTitle}</div >
-            </RatioBox >
+            </RatioBox>
           )}
-          <div className={cx(styles.rightCol)} >
+          <div className={cx(styles.rightCol)}>
             {brochure && (
               <Button
-                tag="a"
+                tag='a'
                 withBorder
                 textColor={themeColor}
-                target="_blank"
-                rel="noopener noreferrer"
+                target='_blank'
+                rel='noopener noreferrer'
                 href={brochure}
-                waveColor="white"
+                waveColor='white'
                 className={cx(styles.btn)}
               >
                 BROCHURE
-              </Button >
+              </Button>
             )}
             {ifu && (
               <Button
-                tag="a"
+                tag='a'
                 withBorder
                 textColor={themeColor}
-                target="_blank"
-                rel="noopener noreferrer"
+                target='_blank'
+                rel='noopener noreferrer'
                 href={ifu}
-                waveColor="white"
+                waveColor='white'
                 className={cx(styles.btn)}
               >
                 IFU
-              </Button >
+              </Button>
             )}
             {patientCard && (
               <Button
-                tag="a"
+                tag='a'
                 withBorder
                 textColor={themeColor}
-                target="_blank"
-                rel="noopener noreferrer"
+                target='_blank'
+                rel='noopener noreferrer'
                 href={patientCard}
-                waveColor="white"
+                waveColor='white'
                 className={cx(styles.btn)}
               >
                 PATIENT CARD
-              </Button >
+              </Button>
             )}
             {instructions && (
               <Button
-                tag="a"
+                tag='a'
                 withBorder
                 textColor={themeColor}
-                target="_blank"
-                rel="noopener noreferrer"
+                target='_blank'
+                rel='noopener noreferrer'
                 href={instructions}
-                waveColor="white"
+                waveColor='white'
                 className={cx(styles.btn)}
               >
                 REPROCESSING PDF
-              </Button >
+              </Button>
             )}
-          </div >
-        </div >
-      </FadeIn >
+          </div>
+        </div>
+      </FadeIn>
     );
   }
 }
@@ -111,15 +108,13 @@ Downloads.propTypes = {
   patientCard: PropTypes.string,
   instructions: PropTypes.string,
   themeColor: PropTypes.string.isRequired,
-  isMobile: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = state => ({
-  isMobile: services.device.selectors.type(state) === 'mobile',
+const mapStateToProps = (state) => ({
+  isMobile: services.device.selectors.type(state) === 'mobile'
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({}); // eslint-disable-line
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(Downloads);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Downloads);
