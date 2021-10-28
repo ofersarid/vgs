@@ -217,7 +217,7 @@ class Product extends Component {
                 product.screen2Footnote2,
                 product.screen2Footnote3
               ]}
-              imgSubTitle={data.screen2ImageSubtitle}
+              imgSubTitle={product.screen2ImageSubtitle}
               themeColor={color}
               title={product.screen2Title}
             />
