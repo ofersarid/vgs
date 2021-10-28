@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spring } from 'react-spring/renderprops';
 import { hashHistory } from 'react-router';
+import isEqual from 'lodash/isEqual';
 import cx from 'classnames';
 import camelCase from 'lodash/camelCase';
 import autoBind from 'auto-bind';
@@ -20,6 +21,17 @@ class SideMenu extends PureComponent {
     autoBind(this);
 
     this.ref = React.createRef();
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    const { color, data, products } = this.props;
+
+    return (
+      !isEqual(data, nextProps.data) ||
+      !isEqual(this.state, nextState) ||
+      color !== nextProps.color ||
+      (!products && nextProps.products)
+    );
   }
 
   toggleMenu() {

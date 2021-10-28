@@ -38,7 +38,11 @@ class Product extends Component {
       carouselPics,
       education
     } = this.props;
+    const { product } = this.state;
+
     return (
+      (!product && nextState.product) ||
+      (product && product.productName !== nextState.product.productName) ||
       frame !== nextProps.frame ||
       color !== nextProps.color ||
       name !== nextProps.name ||
@@ -61,11 +65,12 @@ class Product extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { name, setColor, products } = this.props;
+    const { product } = this.state;
     if (prevProps.name !== name) {
       setColor(this.resolveColor());
       this.setState({ product: this.resolveProduct() });
     }
-    if (prevProps.products !== undefined && products) {
+    if (product === null && products) {
       setColor(this.resolveColor());
       this.setState({ product: this.resolveProduct() });
     }
@@ -159,7 +164,16 @@ class Product extends Component {
               />
             )}
             {product.downloadsPublished === 'Publish' && (
-              <IndexHeader index={countPublishedScreen++} header='Downloads' />
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.downloadsTitle}
+              />
+            )}
+            {product.downloads2Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.downloads2Title}
+              />
             )}
             {product.summaryPublished === 'Publish' && (
               <IndexHeader index={countPublishedScreen++} header='Summary' />
@@ -212,6 +226,7 @@ class Product extends Component {
             if (product[`screen${i}Published`] === 'Publish') {
               return (
                 <ImgTxtBtn
+                  key={i}
                   youtube={product[`screen${i}Videolink`]}
                   txt={product[`screen${i}Body`]}
                   readeMoreTxt={product[`screen${i}Body`]}
@@ -260,7 +275,7 @@ class Product extends Component {
           )}
           {product.imageGalleryPublished === 'Publish' && (
             <TwoImagesLayout
-              pics={compact([
+              pics={[
                 {
                   pic: product.imageGalleryPic1,
                   desc: product.imageGalleryDescription1
@@ -285,7 +300,7 @@ class Product extends Component {
                   pic: product.imageGalleryPic6,
                   desc: product.imageGalleryDescription6
                 }
-              ])}
+              ]}
               color={color}
               orientation={orientation}
             />
@@ -297,6 +312,16 @@ class Product extends Component {
               ifu={product.downloadsIFU}
               patientCard={product.downloadsPatientCard}
               instructions={product.downloadsInstructions}
+              themeColor={color}
+            />
+          )}
+          {product.downloads2Published === 'Publish' && (
+            <Downloads
+              image={product.downloads2Pic}
+              brochure={product.downloads2Brochure}
+              ifu={product.downloads2IFU}
+              patientCard={product.downloads2PatientCard}
+              instructions={product.downloads2Instructions}
               themeColor={color}
             />
           )}

@@ -10,7 +10,7 @@ const reducer = (
     color: '#005728',
     productsActiveTab: 'vascular',
     splash: false,
-    termsAccepted: ls('accepted_terms')
+    termsAccepted: ls('accepted_terms') || false
   }),
   action
 ) => {
