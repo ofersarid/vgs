@@ -5,30 +5,45 @@ import isEqual from 'lodash/isEqual';
 import { compose } from 'redux';
 import { SnapScroll, IndexHeader } from '/src/shared';
 import {
-  TwoColumnLayout, ThreeColumnLayout, Clinical, Cover, ImgTxtBtn, Summary, TwoImagesLayout, Downloads
+  TwoColumnLayout,
+  ThreeColumnLayout,
+  Clinical,
+  Cover,
+  ImgTxtBtn,
+  Summary,
+  TwoImagesLayout,
+  Downloads
 } from './components';
 import services from '/src/services';
-import frameCoverPic from '/src/assets/frame_cover.png';
-import violaCoverPic from '/src/assets/viola_cover.png';
-import vestCoverPic from '/src/assets/vest_cover.png';
-import frameFrCoverPic from '/src/assets/frame_fr_cover.png';
-import frameSummeryPic from '/src/assets/frame_summery.png';
-import violaSummeryPic from '/src/assets/viola_summery.png';
-import vestSummeryPic from '/src/assets/vest_summery.png';
-import frameFrSummeryPic from '/src/assets/frame_fr_summery.png';
+import { compact } from 'lodash';
 
 class Product extends Component {
   constructor(props) {
     super(props);
     this.didMount = false;
-    props.setColor(this.resolveColor());
+    this.state = {
+      product: null
+    };
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     const {
-      frame, color, name, data, isMobile, orientation, publications, carouselPics, education,
+      frame,
+      color,
+      name,
+      data,
+      isMobile,
+      orientation,
+      publications,
+      carouselPics,
+      education
     } = this.props;
-    return (frame !== nextProps.frame ||
+    const { product } = this.state;
+
+    return (
+      (!product && nextState.product) ||
+      (product && product.productName !== nextState.product.productName) ||
+      frame !== nextProps.frame ||
       color !== nextProps.color ||
       name !== nextProps.name ||
       !isEqual(data, nextProps.data) ||
@@ -41,178 +56,315 @@ class Product extends Component {
   }
 
   componentDidMount() {
-    const { setColor } = this.props;
+    const { setColor, products } = this.props;
     this.didMount = true;
-    setColor(this.resolveColor());
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    const { name, setColor } = this.props;
-    if (prevProps.name !== name) {
+    if (products) {
       setColor(this.resolveColor());
     }
   }
 
-  resolveSummeryPic() {
-    const { name } = this.props;
-    switch (name) {
-      case 'FRAME':
-        return frameSummeryPic;
-      case 'VIOLA':
-        return violaSummeryPic;
-      case 'VEST':
-        return vestSummeryPic;
-      case 'FRAME FR':
-        return frameFrSummeryPic;
-      default:
-        return '';
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { name, setColor, products } = this.props;
+    const { product } = this.state;
+    if (prevProps.name !== name) {
+      setColor(this.resolveColor());
+      this.setState({ product: this.resolveProduct() });
     }
-  }
-
-  resolveCoverPic() {
-    const { name } = this.props;
-    switch (name) {
-      case 'FRAME':
-        return frameCoverPic;
-      case 'VIOLA':
-        return violaCoverPic;
-      case 'VEST':
-        return vestCoverPic;
-      case 'FRAME FR':
-        return frameFrCoverPic;
-      default:
-        return '';
+    if (product === null && products) {
+      setColor(this.resolveColor());
+      this.setState({ product: this.resolveProduct() });
     }
   }
 
   resolveColor() {
-    const { name } = this.props;
-    switch (name) {
-      case 'FRAME':
-        return '#0272BA';
-      case 'VIOLA':
-        return '#662D91';
-      case 'VEST':
-        return '#ED1C24';
-      case 'FRAME FR':
-        return '#22B0AF';
-      default:
-        return '';
-    }
+    const { name, products } = this.props;
+    return products.find((itm) => itm.productName.toUpperCase() === name)
+      .producColor;
+  }
+
+  resolveProduct() {
+    const { name, products } = this.props;
+    return products.find((itm) => itm.productName.toUpperCase() === name);
   }
 
   render() {
     const {
-      color, data, name, orientation, isDesktop,
-      publications, carouselPics, isMobile, education,
+      color,
+      data,
+      name,
+      orientation,
+      isDesktop,
+      publications,
+      carouselPics,
+      isMobile,
+      education,
+      products
     } = this.props;
+
+    const { product } = this.state;
+
+    console.log(product);
+
     if (!data) {
       return null;
     }
+
     let countPublishedScreen = 1;
-    return (
-      <Fragment >
-        {(orientation === 'landscape' && !isDesktop) ? null : (
-          <Fragment >
-            {data.screen1Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen1Title} />}
-            {data.screen2Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen2Title} />}
-            {data.IFUVideoPublished === 'Publish' ? <IndexHeader index={countPublishedScreen++} header="IFU VIDEO" /> : null}
-            {data.screen3Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen3Title} />}
-            {data.screen4Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen4Title} />}
-            {data.screen5Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen5Title} />}
-            {data.screen6Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen6Title} />}
-            {data.screen7Published === 'Publish' && <IndexHeader index={countPublishedScreen++} header={data.screen7Title} />}
-            <IndexHeader index={countPublishedScreen} header="Clinical" />
-          </Fragment >
+
+    return !product ? null : (
+      <Fragment>
+        {orientation === 'landscape' && !isDesktop ? null : (
+          <Fragment>
+            {product.screen1Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.screen1Title}
+              />
+            )}
+            {product.screen2Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.screen2Title}
+              />
+            )}
+            {product.screen3Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.screen3Title}
+              />
+            )}
+            {product.imageGalleryPublished === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.imageGalleryTitle}
+              />
+            )}
+            {product.screen4Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.screen4Title}
+              />
+            )}
+
+            {product.screen5Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.screen5Title}
+              />
+            )}
+            {product.screen6Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.screen6Title}
+              />
+            )}
+            {product.keyFeaturesPublished === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header='Key Features'
+              />
+            )}
+            {product.downloadsPublished === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.downloadsTitle}
+              />
+            )}
+            {product.downloads2Published === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.downloads2Title}
+              />
+            )}
+            {product.summaryPublished === 'Publish' && (
+              <IndexHeader index={countPublishedScreen++} header='Summary' />
+            )}
+            <IndexHeader index={countPublishedScreen} header='Clinical' />
+          </Fragment>
         )}
-        <SnapScroll >
+        <SnapScroll>
           <Cover
-            art={this.resolveCoverPic()}
+            art={product.coverImage}
             themeColor={color}
-            name={name}
-            description={data.coverTagLine}
+            name={product.productName}
+            description={product.coverTagLine}
             footer={{
-              title: data.eventTitle,
-              dateFrom: data.eventDateFrom,
-              dateTo: data.eventDateTo,
-              address: data.eventAddress,
-              linkTo: data.eventLinkTo,
+              title: product.eventTitle,
+              dateFrom: product.eventDateFrom,
+              dateTo: product.eventDateTo,
+              address: product.eventAddress,
+              linkTo: product.eventLinkTo
             }}
-            footnote={data.coverFootnote}
+            footnote={product.coverFootnote}
           />
-          {data.screen1Published === 'Publish' && (
+          {product.screen1Published === 'Publish' && (
             <TwoColumnLayout
-              article={data.screen1Body}
-              footNotes={[data.screen1Footnote1, data.screen1Footnote2, data.screen1Footnote3]}
-              title={data.screen1Title}
+              article={product.screen1Body}
+              footNotes={[
+                product.screen1Footnote1,
+                product.screen1Footnote2,
+                product.screen1Footnote3
+              ]}
+              title={product.screen1Title}
             />
           )}
-          {data.screen2Published === 'Publish' && (
+          {product.screen2Published === 'Publish' && (
             <ImgTxtBtn
-              img={data.screen2Image}
-              txt={isMobile ? data.screen2BodyMobile : data.screen2Body}
-              readeMoreTxt={data.screen2Body}
-              footNotes={[data.screen2Footnote1, data.screen2Footnote2, data.screen2Footnote3]}
-              imgSubTitle={data.screen2ImageSubtitle}
+              img={product.screen2Image}
+              txt={isMobile ? product.screen2BodyMobile : product.screen2Body}
+              readeMoreTxt={product.screen2Body}
+              footNotes={[
+                product.screen2Footnote1,
+                product.screen2Footnote2,
+                product.screen2Footnote3
+              ]}
+              imgSubTitle={product.screen2ImageSubtitle}
               themeColor={color}
-              title={data.screen2Title}
+              title={product.screen2Title}
             />
           )}
-          {data.IFUVideoPublished === 'Publish' && (
-            <ImgTxtBtn
-              youtube={data.IFUVideoLink}
-              txt={data.IFUVideoBody}
-              readeMoreTxt={data.IFUVideoBody}
-              themeColor={color}
-              title="IFU VIDEO"
-            />
-          )}
-          {data.screen3Published === 'Publish' && (
-            <ImgTxtBtn
-              youtube={data.screen3Videolink}
-              txt={data.screen3Body}
-              readeMoreTxt={data.screen3Body}
-              footNotes={[data.screen3Footnote1, data.screen3Footnote2, data.screen3Footnote3]}
-              themeColor={color}
-              title={data.screen3Title}
-            />
-          )}
-          {data.screen4Published === 'Publish' && (
-            <ThreeColumnLayout
-              data={[data.screen4Bullet1, data.screen4Bullet2, data.screen4Bullet3, data.screen4Bullet4, data.screen4Bullet5, data.screen4Bullet6]}
-              title={data.screen4Title}
-            />
-          )}
-          {carouselPics && carouselPics.length && (
+          {[3].map((i) => {
+            if (product[`screen${i}Published`] === 'Publish') {
+              return (
+                <ImgTxtBtn
+                  key={i}
+                  youtube={product[`screen${i}Videolink`]}
+                  txt={product[`screen${i}Body`]}
+                  readeMoreTxt={product[`screen${i}Body`]}
+                  themeColor={color}
+                  title={product[`screen${i}Title`]}
+                />
+              );
+            }
+            return null;
+          })}
+          {product.imageGalleryPublished === 'Publish' && (
             <TwoImagesLayout
-              pics={carouselPics}
+              pics={[
+                {
+                  pic: product.imageGalleryPic1,
+                  desc: product.imageGalleryDescription1
+                },
+                {
+                  pic: product.imageGalleryPic2,
+                  desc: product.imageGalleryDescription2
+                },
+                {
+                  pic: product.imageGalleryPic3,
+                  desc: product.imageGalleryDescription3
+                },
+                {
+                  pic: product.imageGalleryPic4,
+                  desc: product.imageGalleryDescription4
+                },
+                {
+                  pic: product.imageGalleryPic5,
+                  desc: product.imageGalleryDescription5
+                },
+                {
+                  pic: product.imageGalleryPic6,
+                  desc: product.imageGalleryDescription6
+                }
+              ]}
               color={color}
               orientation={orientation}
             />
           )}
-          {data.screen6Published === 'Publish' && (
-            <Downloads
-              image={data.screen6Image}
-              imageTitle={data.screen6ImageSubtitle}
-              brochure={data.brochure}
-              ifu={data.ifu}
-              patientCard={data.patientCard}
-              instructions={data.instructions}
+          {[4, 5, 6].map((i) => {
+            if (product[`screen${i}Published`] === 'Publish') {
+              return (
+                <ImgTxtBtn
+                  key={i}
+                  youtube={product[`screen${i}Videolink`]}
+                  txt={product[`screen${i}Body`]}
+                  readeMoreTxt={product[`screen${i}Body`]}
+                  themeColor={color}
+                  title={product[`screen${i}Title`]}
+                />
+              );
+            }
+            return null;
+          })}
+          {/* {product.screen3Published === 'Publish' && (
+            <ImgTxtBtn
+              youtube={product.screen3Videolink}
+              txt={product.screen3Body}
+              readeMoreTxt={product.screen3Body}
               themeColor={color}
-
+              title={product.screen3Title}
             />
           )}
-          {data.screen7Published === 'Publish' && (
-            <Summary
-              art={this.resolveSummeryPic()}
-              data={[data.screen7Bullet1, data.screen7Bullet2, data.screen7Bullet3, data.screen7Bullet4]} />
+          {product.screen4Published === 'Publish' && (
+            <ImgTxtBtn
+              youtube={product.screen4Videolink}
+              txt={product.screen4Body}
+              readeMoreTxt={product.screen4Body}
+              footNotes={[
+                product.screen4Footnote1,
+                product.screen4Footnote2,
+                product.screen4Footnote3
+              ]}
+              themeColor={color}
+              title={product.screen4Title}
+            />
+          )} */}
+          {product.keyFeaturesPublished === 'Publish' && (
+            <ThreeColumnLayout
+              data={compact([
+                product.keyFeature1,
+                product.keyFeature2,
+                product.keyFeature3,
+                product.keyFeature4,
+                product.keyFeature5,
+                product.keyFeature6
+              ])}
+              title='Key Features'
+            />
           )}
-          <Clinical themeColor={color} articles={{
-            publications,
-            education,
-          }} />
-        </SnapScroll >
-      </Fragment >
+          {product.downloadsPublished === 'Publish' && (
+            <Downloads
+              image={product.downloadsPic}
+              brochure={product.downloadsBrochure}
+              ifu={product.downloadsIFU}
+              patientCard={product.downloadsPatientCard}
+              instructions={product.downloadsInstructions}
+              poster={product.downloadsPoster}
+              productPage={product.downloadsProductPage}
+              themeColor={color}
+            />
+          )}
+          {product.downloads2Published === 'Publish' && (
+            <Downloads
+              image={product.downloads2Pic}
+              brochure={product.downloads2Brochure}
+              ifu={product.downloads2IFU}
+              patientCard={product.downloads2PatientCard}
+              instructions={product.downloads2Instructions}
+              poster={product.downloads2Poster}
+              productPage={product.downloads2ProductPage}
+              themeColor={color}
+            />
+          )}
+          {product.summaryPublished === 'Publish' && (
+            <Summary
+              art={product.summaryPic}
+              data={compact([
+                product.summaryBullet1,
+                product.summaryBullet2,
+                product.summaryBullet3,
+                product.summaryBullet4
+              ])}
+            />
+          )}
+          <Clinical
+            themeColor={color}
+            articles={{
+              publications,
+              education
+            }}
+          />
+        </SnapScroll>
+      </Fragment>
     );
   }
 }
@@ -229,25 +381,37 @@ Product.propTypes = {
   publications: PropTypes.arrayOf(PropTypes.object),
   education: PropTypes.arrayOf(PropTypes.object),
   carouselPics: PropTypes.arrayOf(PropTypes.object),
+  products: PropTypes.any
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   frame: SnapScroll.selectors.frame(state),
   color: services.vgs.selectors.color(state),
-  data: services.reactor.selectors.pageData(state, services.products.selectors.name(state)),
+  data: services.reactor.selectors.pageData(
+    state,
+    services.products.selectors.name(state)
+  ),
   name: services.products.selectors.name(state),
   isDesktop: services.device.selectors.type(state) === 'desktop',
   isMobile: services.device.selectors.type(state) === 'mobile',
   orientation: services.device.selectors.orientation(state),
-  publications: services.reactor.selectors.collectionData(state, `publications - ${services.products.selectors.name(state)}`),
-  education: services.reactor.selectors.collectionData(state, `education - ${services.products.selectors.name(state)}`),
-  carouselPics: services.reactor.selectors.collectionData(state, `${services.products.selectors.name(state)} - carousel pics`),
+  publications: services.reactor.selectors.collectionData(
+    state,
+    `publications - ${services.products.selectors.name(state)}`
+  ),
+  education: services.reactor.selectors.collectionData(
+    state,
+    `education - ${services.products.selectors.name(state)}`
+  ),
+  carouselPics: services.reactor.selectors.collectionData(
+    state,
+    `${services.products.selectors.name(state)} - carousel pics`
+  ),
+  products: services.reactor.selectors.collectionData(state, 'products')
 });
 
-const mapDispatch = dispatch => ({
-  setColor: color => dispatch(services.vgs.actions.setColor(color)),
+const mapDispatch = (dispatch) => ({
+  setColor: (color) => dispatch(services.vgs.actions.setColor(color))
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatch),
-)(Product);
+export default compose(connect(mapStateToProps, mapDispatch))(Product);

@@ -10,34 +10,51 @@ const IndexHeader = ({ index, frame, header, isMobile, color }) => {
   const forward = frame >= index;
 
   const resolveSpring = () => {
-    return frame !== index ? useSpring({
-      x: forward ? 30 : -30,
-      o: 0,
-    }) : useSpring({
-      x: 0,
-      o: 1,
-    });
+    return frame !== index
+      ? useSpring({
+          x: forward ? 30 : -30,
+          o: 0
+        })
+      : useSpring({
+          x: 0,
+          o: 1
+        });
   };
 
   const { o, x } = resolveSpring();
 
   return (
     <h2 className={styles.header} style={{ color: color }}>
-      <animated.span className={styles.index} style={{
-        opacity: o,
-        transform: isMobile ? x.interpolate(x => `translateX(${x}px)`) : x.interpolate(x => `translateY(${-x}px)`),
-      }} >0{index + 1}</animated.span >
-      <div className={styles.divider} style={{
-        backgroundColor: color,
-        opacity: frame === index ? 1 : 0,
-      }} />
-      <animated.span className={styles.label} style={{
-        opacity: o,
-        transform: isMobile ? x.interpolate(x => `translateX(${-x}px)`) : x.interpolate(x => `translateY(${x}px)`),
-      }} >
+      <animated.span
+        className={styles.index}
+        style={{
+          opacity: o,
+          transform: isMobile
+            ? x.interpolate((x) => `translateX(${x}px)`)
+            : x.interpolate((x) => `translateY(${-x}px)`)
+        }}
+      >
+        0{index + 1}
+      </animated.span>
+      <div
+        className={styles.divider}
+        style={{
+          backgroundColor: color,
+          opacity: frame === index ? 1 : 0
+        }}
+      />
+      <animated.span
+        className={styles.label}
+        style={{
+          opacity: o,
+          transform: isMobile
+            ? x.interpolate((x) => `translateX(${-x}px)`)
+            : x.interpolate((x) => `translateY(${x}px)`)
+        }}
+      >
         {header}
-      </animated.span >
-    </h2 >
+      </animated.span>
+    </h2>
   );
 };
 
@@ -46,15 +63,15 @@ IndexHeader.propTypes = {
   index: PropTypes.number.isRequired,
   frame: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   frame: SnapScroll.selectors.frame(state),
   isMobile: services.device.selectors.type(state) === 'mobile',
-  color: services.vgs.selectors.color(state),
+  color: services.vgs.selectors.color(state)
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({}); // eslint-disable-line
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexHeader);

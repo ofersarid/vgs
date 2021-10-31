@@ -39,7 +39,7 @@
     "styled-icons": "^9.3.0"
   },
   "name": "reactor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "license": "MIT",
   "devDependencies": {
