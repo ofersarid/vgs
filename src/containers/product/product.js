@@ -133,12 +133,19 @@ class Product extends Component {
                 header={product.screen3Title}
               />
             )}
+            {product.imageGalleryPublished === 'Publish' && (
+              <IndexHeader
+                index={countPublishedScreen++}
+                header={product.imageGalleryTitle}
+              />
+            )}
             {product.screen4Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
                 header={product.screen4Title}
               />
             )}
+
             {product.screen5Published === 'Publish' && (
               <IndexHeader
                 index={countPublishedScreen++}
@@ -155,12 +162,6 @@ class Product extends Component {
               <IndexHeader
                 index={countPublishedScreen++}
                 header='Key Features'
-              />
-            )}
-            {product.imageGalleryPublished === 'Publish' && (
-              <IndexHeader
-                index={countPublishedScreen++}
-                header={product.imageGalleryTitle}
               />
             )}
             {product.downloadsPublished === 'Publish' && (
@@ -222,7 +223,54 @@ class Product extends Component {
               title={product.screen2Title}
             />
           )}
-          {[3, 4, 5, 6].map((i) => {
+          {[3].map((i) => {
+            if (product[`screen${i}Published`] === 'Publish') {
+              return (
+                <ImgTxtBtn
+                  key={i}
+                  youtube={product[`screen${i}Videolink`]}
+                  txt={product[`screen${i}Body`]}
+                  readeMoreTxt={product[`screen${i}Body`]}
+                  themeColor={color}
+                  title={product[`screen${i}Title`]}
+                />
+              );
+            }
+            return null;
+          })}
+          {product.imageGalleryPublished === 'Publish' && (
+            <TwoImagesLayout
+              pics={[
+                {
+                  pic: product.imageGalleryPic1,
+                  desc: product.imageGalleryDescription1
+                },
+                {
+                  pic: product.imageGalleryPic2,
+                  desc: product.imageGalleryDescription2
+                },
+                {
+                  pic: product.imageGalleryPic3,
+                  desc: product.imageGalleryDescription3
+                },
+                {
+                  pic: product.imageGalleryPic4,
+                  desc: product.imageGalleryDescription4
+                },
+                {
+                  pic: product.imageGalleryPic5,
+                  desc: product.imageGalleryDescription5
+                },
+                {
+                  pic: product.imageGalleryPic6,
+                  desc: product.imageGalleryDescription6
+                }
+              ]}
+              color={color}
+              orientation={orientation}
+            />
+          )}
+          {[4, 5, 6].map((i) => {
             if (product[`screen${i}Published`] === 'Publish') {
               return (
                 <ImgTxtBtn
@@ -273,38 +321,6 @@ class Product extends Component {
               title='Key Features'
             />
           )}
-          {product.imageGalleryPublished === 'Publish' && (
-            <TwoImagesLayout
-              pics={[
-                {
-                  pic: product.imageGalleryPic1,
-                  desc: product.imageGalleryDescription1
-                },
-                {
-                  pic: product.imageGalleryPic2,
-                  desc: product.imageGalleryDescription2
-                },
-                {
-                  pic: product.imageGalleryPic3,
-                  desc: product.imageGalleryDescription3
-                },
-                {
-                  pic: product.imageGalleryPic4,
-                  desc: product.imageGalleryDescription4
-                },
-                {
-                  pic: product.imageGalleryPic5,
-                  desc: product.imageGalleryDescription5
-                },
-                {
-                  pic: product.imageGalleryPic6,
-                  desc: product.imageGalleryDescription6
-                }
-              ]}
-              color={color}
-              orientation={orientation}
-            />
-          )}
           {product.downloadsPublished === 'Publish' && (
             <Downloads
               image={product.downloadsPic}
@@ -312,6 +328,8 @@ class Product extends Component {
               ifu={product.downloadsIFU}
               patientCard={product.downloadsPatientCard}
               instructions={product.downloadsInstructions}
+              poster={product.downloadsPoster}
+              productPage={product.downloadsProductPage}
               themeColor={color}
             />
           )}
@@ -322,6 +340,8 @@ class Product extends Component {
               ifu={product.downloads2IFU}
               patientCard={product.downloads2PatientCard}
               instructions={product.downloads2Instructions}
+              poster={product.downloads2Poster}
+              productPage={product.downloads2ProductPage}
               themeColor={color}
             />
           )}

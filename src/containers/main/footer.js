@@ -10,30 +10,31 @@ import R from '/src/assets/R.svg';
 import Rechter from '/src/assets/Rechter.svg';
 import styles from './styles.scss';
 
-const Footer = ({ isLastFrame, color }) => (
+const Footer = ({ isLastFrame, color, footerData }) => (
   <div
-    style={{ background: color, }}
+    style={{ background: color }}
     className={cx(styles.footer, { [styles.show]: isLastFrame })}
   >
-    <span >&copy;2019 VGS. Last update, Sep 2019.</span >
-    <span className={styles.right} >Produced by
+    <span>{footerData ? footerData.copyRight : ''}</span>
+    <span className={styles.right}>
+      Produced by
       <img src={utils.isMobile() ? R : Rechter} />
-    </span >
-  </div >
+    </span>
+  </div>
 );
 
 Footer.propTypes = {
   isLastFrame: PropTypes.bool.isRequired,
   color: PropTypes.string,
+  footerData: PropTypes.any
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLastFrame: SnapScroll.selectors.isLastFrame(state),
   color: services.vgs.selectors.color(state),
+  footerData: services.reactor.selectors.pageData(state, 'footer')
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({}); // eslint-disable-line
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(Footer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Footer);

@@ -23,7 +23,9 @@ class Downloads extends PureComponent {
       patientCard,
       instructions,
       themeColor,
-      isMobile
+      isMobile,
+      poster,
+      productPage
     } = this.props;
     return (
       <FadeIn spread>
@@ -33,7 +35,7 @@ class Downloads extends PureComponent {
         >
           {!isMobile && (
             <RatioBox ratio={2 / 3} className={cx(styles.img)}>
-              <MediaLoader src={image} />
+              <MediaLoader src={image} cover />
             </RatioBox>
           )}
           <div className={cx(styles.rightCol)}>
@@ -93,6 +95,34 @@ class Downloads extends PureComponent {
                 REPROCESSING PDF
               </Button>
             )}
+            {poster && (
+              <Button
+                tag='a'
+                withBorder
+                textColor={themeColor}
+                target='_blank'
+                rel='noopener noreferrer'
+                href={poster}
+                waveColor='white'
+                className={cx(styles.btn)}
+              >
+                POSTER
+              </Button>
+            )}
+            {productPage && (
+              <Button
+                tag='a'
+                withBorder
+                textColor={themeColor}
+                target='_blank'
+                rel='noopener noreferrer'
+                href={productPage}
+                waveColor='white'
+                className={cx(styles.btn)}
+              >
+                PRODUCT PAGE
+              </Button>
+            )}
           </div>
         </div>
       </FadeIn>
@@ -107,6 +137,8 @@ Downloads.propTypes = {
   ifu: PropTypes.string,
   patientCard: PropTypes.string,
   instructions: PropTypes.string,
+  poster: PropTypes.string,
+  productPage: PropTypes.string,
   themeColor: PropTypes.string.isRequired,
   isMobile: PropTypes.bool.isRequired
 };
