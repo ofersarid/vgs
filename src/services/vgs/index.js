@@ -53,30 +53,30 @@ const actions = {
   acceptTerms: () => ({
     type: 'ACCEPT_TERMS'
   }),
-  setOrientation: (orientation) => ({
+  setOrientation: orientation => ({
     type: 'SET_ORIENTATION',
     orientation
   }),
-  setColor: (color) => ({
+  setColor: color => ({
     type: 'SET_COLOR',
     color
   }),
-  setProductsActiveTab: (tab) => ({
+  setProductsActiveTab: tab => ({
     type: 'SET_PRODUCTS_ACTIVE_TAB',
     tab
   })
 };
 
 const selectors = {
-  bizCard: (state) => state.getIn(['vgs', 'bizCard']) === 'enabled',
-  orientation: (state) => state.getIn(['vgs', 'orientation']),
-  color: (state) => state.getIn(['vgs', 'color']),
-  productsActiveTab: (state) => state.getIn(['vgs', 'productsActiveTab']),
-  splash: (state) => state.getIn(['vgs', 'splash']),
-  termsAccepted: (state) => state.getIn(['vgs', 'termsAccepted'])
+  bizCard: state => state.getIn(['vgs', 'bizCard']) === 'enabled',
+  orientation: state => state.getIn(['vgs', 'orientation']),
+  color: state => state.getIn(['vgs', 'color']),
+  productsActiveTab: state => state.getIn(['vgs', 'productsActiveTab']),
+  splash: state => state.getIn(['vgs', 'splash']),
+  termsAccepted: state => state.getIn(['vgs', 'termsAccepted'])
 };
 
-selectors.colorName = createSelector(selectors.color, (color) => {
+selectors.colorName = createSelector(selectors.color, color => {
   switch (color.toUpperCase()) {
     case '#0272BA':
       return 'blue';

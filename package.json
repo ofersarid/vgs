@@ -45,7 +45,7 @@
   "devDependencies": {
     "@babel/runtime": "^7.9.2",
     "autoprefixer": "^9.5.1",
-    "babel-core": "^6.26.3",
+    "babel-core": "^7.0.0",
     "babel-loader": "^8.0.4",
     "babel-polyfill": "^6.26.0",
     "copyfiles": "^2.1.0",
@@ -82,9 +82,9 @@
     "depcheck": "depcheck"
   },
   "resolutions": {
-    "@babel/preset-env": "7.13.8"
+    "@babel/preset-env": "7.3.1"
   },
   "engines": {
-    "node": "10.x"
+    "node": "14.x"
   }
 }

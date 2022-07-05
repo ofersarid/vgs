@@ -78,13 +78,15 @@ class Product extends Component {
 
   resolveColor() {
     const { name, products } = this.props;
-    return products.find((itm) => itm.productName.toUpperCase() === name)
-      .producColor;
+    const product = products.find(
+      itm => itm.productName.toUpperCase() === name
+    );
+    return product.productColor;
   }
 
   resolveProduct() {
     const { name, products } = this.props;
-    return products.find((itm) => itm.productName.toUpperCase() === name);
+    return products.find(itm => itm.productName.toUpperCase() === name);
   }
 
   render() {
@@ -102,8 +104,6 @@ class Product extends Component {
     } = this.props;
 
     const { product } = this.state;
-
-    console.log(product);
 
     if (!data) {
       return null;
@@ -223,7 +223,7 @@ class Product extends Component {
               title={product.screen2Title}
             />
           )}
-          {[3].map((i) => {
+          {[3].map(i => {
             if (product[`screen${i}Published`] === 'Publish') {
               return (
                 <ImgTxtBtn
@@ -270,7 +270,7 @@ class Product extends Component {
               orientation={orientation}
             />
           )}
-          {[4, 5, 6].map((i) => {
+          {[4, 5, 6].map(i => {
             if (product[`screen${i}Published`] === 'Publish') {
               return (
                 <ImgTxtBtn
@@ -384,7 +384,7 @@ Product.propTypes = {
   products: PropTypes.any
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   frame: SnapScroll.selectors.frame(state),
   color: services.vgs.selectors.color(state),
   data: services.reactor.selectors.pageData(
@@ -410,8 +410,8 @@ const mapStateToProps = (state) => ({
   products: services.reactor.selectors.collectionData(state, 'products')
 });
 
-const mapDispatch = (dispatch) => ({
-  setColor: (color) => dispatch(services.vgs.actions.setColor(color))
+const mapDispatch = dispatch => ({
+  setColor: color => dispatch(services.vgs.actions.setColor(color))
 });
 
 export default compose(connect(mapStateToProps, mapDispatch))(Product);

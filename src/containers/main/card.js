@@ -13,7 +13,7 @@ class Card extends PureComponent {
     super(props);
     this.state = {
       reverseAnimation: false,
-      orientation: window.screen.orientation,
+      orientation: window.screen.orientation
     };
     autoBind(this);
   }
@@ -25,51 +25,78 @@ class Card extends PureComponent {
 
   render() {
     const { reverseAnimation } = this.state;
-    const { logo, underLogo, address, city, state, zip, phone, bizCard } = this.props;
+    const { logo, underLogo, address, city, state, zip, phone, bizCard } =
+      this.props;
     return bizCard ? (
       <Spring
-        from={{ opacity: 0, twist: 'rotate(90deg) scaleX(-1)', delayOpacity: 0 }}
+        from={{
+          opacity: 0,
+          twist: 'rotate(90deg) scaleX(-1)',
+          delayOpacity: 0
+        }}
         to={{ opacity: 1, twist: 'rotate(0deg) scaleX(1)', delayOpacity: 1 }}
         config={key => {
           switch (key) {
             case 'delayOpacity':
-              return Object.assign({}, config.default, { duration: 2000, delay: 300 });
+              return Object.assign({}, config.default, {
+                duration: 2000,
+                delay: 300
+              });
             default:
               return config.slow;
           }
         }}
       >
-        {cardSpring => <div className={styles.bizCard} >
-          <div className={styles.contentBox} >
-            <img src={logo} className={styles.cardLogo} style={{
-              transform: cardSpring.twist,
-              opacity: cardSpring.opacity,
-            }} />
-            {underLogo &&
-            <img src={underLogo} className={styles.cardLogoTxt} style={{ opacity: cardSpring.delayOpacity }} />}
-            <div className={styles.info} style={{ opacity: cardSpring.delayOpacity }} >
-              <div >{address}</div >
-              <div >{city}, {state} {zip}</div >
-              <div >{phone}</div >
-            </div >
-          </div >
-          <Spring
-            from={{ rotate: 'rotate(0deg)' }}
-            to={{ rotate: 'rotate(-90deg)' }}
-            reset
-            reverse={reverseAnimation}
-            onRest={this.reverseAnimation}
-          >
-            {imgSpring => <img
-              src={mobileIcon}
-              style={{
-                transform: `${imgSpring.rotate} translate(50%, 0%)`,
-                opacity: cardSpring.delayOpacity,
-              }}
-              className={styles.mobileIcon} />}
-          </Spring >
-        </div >}
-      </Spring >
+        {cardSpring => (
+          <div className={styles.bizCard}>
+            <div className={styles.contentBox}>
+              <img
+                src={logo}
+                className={styles.cardLogo}
+                style={{
+                  transform: cardSpring.twist,
+                  opacity: cardSpring.opacity
+                }}
+              />
+              {underLogo && (
+                <img
+                  src={underLogo}
+                  className={styles.cardLogoTxt}
+                  style={{ opacity: cardSpring.delayOpacity }}
+                />
+              )}
+              <div
+                className={styles.info}
+                style={{ opacity: cardSpring.delayOpacity }}
+              >
+                <div>{address}</div>
+                <div>
+                  {city}, {state} {zip}
+                </div>
+                <div>{phone}</div>
+              </div>
+            </div>
+            <Spring
+              from={{ rotate: 'rotate(0deg)' }}
+              to={{ rotate: 'rotate(-90deg)' }}
+              reset
+              reverse={reverseAnimation}
+              onRest={this.reverseAnimation}
+            >
+              {imgSpring => (
+                <img
+                  src={mobileIcon}
+                  style={{
+                    transform: `${imgSpring.rotate} translate(50%, 0%)`,
+                    opacity: cardSpring.delayOpacity
+                  }}
+                  className={styles.mobileIcon}
+                />
+              )}
+            </Spring>
+          </div>
+        )}
+      </Spring>
     ) : null;
   }
 }
@@ -82,11 +109,11 @@ Card.propTypes = {
   state: PropTypes.string.isRequired,
   zip: PropTypes.number.isRequired,
   phone: PropTypes.string.isRequired,
-  bizCard: PropTypes.bool.isRequired,
+  bizCard: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  bizCard: services.vgs.selectors.bizCard(state),
+  bizCard: services.vgs.selectors.bizCard(state)
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
