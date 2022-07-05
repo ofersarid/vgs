@@ -38,8 +38,8 @@
     "styled-components": "^4.2.0",
     "styled-icons": "^9.3.0"
   },
-  "name": "reactor",
-  "version": "1.0.1",
+  "name": "vgs-website",
+  "version": "1.0.2",
   "main": "src/index.js",
   "license": "MIT",
   "devDependencies": {
